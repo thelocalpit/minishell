@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/26 17:34:59 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:26:09 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,23 @@ g_value = 0; */
 
 int	main(int ac, char **av, char **envp)
 {
-	
+	char	*str;
+
 	(void)ac;
 	(void)av;
 	(void)envp;
 
-	//rl_clear_history();
+	rl_clear_history();
 	set_signals();
 	while (1)
 	{
-		prompt();
+		str = prompt();
+		if (str == NULL)
+		{
+			rl_clear_history();
+			break ;
+		}
+		add_history(str);
 	}
 	return (0);
 }
