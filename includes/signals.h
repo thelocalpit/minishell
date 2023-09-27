@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: asacchin <asacchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 12:50:41 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/26 14:59:57 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/09/27 19:49:53 by asacchin          #+#    #+#             */
+/*   Updated: 2023/09/27 20:03:25 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "minishell.h"
 
-void	handle_interrupt(int sig);
+void	sigin_handler(int sig);
 void	set_signals(void);
+char	*get_tokens(char *s, t_attr *att);
 #endif

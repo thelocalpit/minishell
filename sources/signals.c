@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: asacchin <asacchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/27 11:30:46 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/09/27 19:02:19 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 	faccio un redisplay del prompt
 	
 	 */
-void	handle_interrupt(int sig)
+void	sigin_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -42,6 +42,6 @@ void	handle_interrupt(int sig)
 
 void	set_signals(void)
 {
-	signal(SIGINT, handle_interrupt);
+	signal(SIGINT, sigin_handler);
 	signal(SIGQUIT, SIG_IGN);
 }

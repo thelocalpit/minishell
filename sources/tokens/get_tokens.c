@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   get_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asacchin <asacchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 19:49:45 by asacchin          #+#    #+#             */
-/*   Updated: 2023/09/27 19:49:48 by asacchin         ###   ########.fr       */
+/*   Created: 2023/09/27 19:34:54 by asacchin          #+#    #+#             */
+/*   Updated: 2023/09/27 19:48:27 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "../../includes/minishell.h"
 
-# include "macros.h"
-
-typedef struct s_attr
-{
-	int		i;
-	char	**commands_arr;
-	char	**token_arr;
-} t_attr;
-
-typedef struct s_token
+char	*get_tokens(char *s, t_attr *att)
 {
 	char	*token;
-	int		flag;
-	int		pos;
-	int		j;
 	int		i;
-}			t_token;
+	int		j;
 
-#endif
+	i = 0;
+	j = 0;
+	token = 0;
+	if (s[j] != '|' && s[j] != '>' && s[j] != '<')
+	{
+		while (s[j] != '|' && s[j] != '>' && s[j] != '<' && s[j] != '\0')
+			j++;
+		token = malloc(sizeof(char) * (j + 1));
+		if (!token)
+			return (NULL);
+		token[j] = '\0';
+		while (i < j)
+		{
+			token[i] = s[i];
+			i++;
+		}
+	}
+	else
+		check_redir();
+	return (token);
+}
