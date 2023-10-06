@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:19:35 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/06 10:40:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/06 10:59:41 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ typedef struct s_attr
 	int		i;
 	char	**commands_arr;
 	char	**token_arr;
+	//------- n di token -------------------
+	int		nb_tokens;
 	// ------ var per quotes ---------------
 	int		n_dquotes;
 	int		n_squotes;
