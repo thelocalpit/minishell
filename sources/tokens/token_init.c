@@ -6,18 +6,41 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:30:09 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/08 19:24:03 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:40:57 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* in questa funzione semplicemente proseguiamo fino alla fine della parola
+	ovvero quando troviamo il prossimo spazio */
+
+int	check_normal_char(char *s, int len, int i, t_attr *att)
+{
+	att->nb_tokens++;
+	while (i <= len && s[i] != ' ')
+		i++;
+	return (++i);
+}
+
 int	check_double_quotes(char *s, int len, int i, t_attr * att)
 {
-	int quotes;
+	int	d_quotes;
 
-	quotes = 0;
-	att->nb_tokens
+	d_quotes = 0;
+	att->nb_tokens++;
+	if (s[i + 1] && s[i + 1] == '"'
+		&& ((s[i +2] && s[i + 2] == ' ') || !s[i + 2]))
+		return (i + 2);
+	while (i <= len && d_quotes <= att->n_dquotes)
+	{
+		if (s[i] == '"')
+			d_quotes++;
+		if (d_quotes % 2 == 0 && s[i + 1] && s[i + 1] == ' ')
+			return (++i);
+		i++;
+	}
+	return (i);
 }
 /* questa funzione va a controllare le single quotes.
 	prima di tutto facciamo alcuni controlli:
@@ -39,25 +62,22 @@ int	check_double_quotes(char *s, int len, int i, t_attr * att)
 	è uguale a spazio, ovvero che contenuto all'intenro delle virgolette
 	è concluso. ritorniamo quindi i dopo aver aggiunto un carattere e aver
 	mosso il contatore allo spazio.   */
-	
-int	check_single_quotes(char *s, int len, int i, t_attr * att)
+
+int	check_single_quotes(char *s, int len, int i, t_attr *att)
 {
 	int	s_quotes;
 
 	s_quotes = 0;
 	att->nb_tokens++;
 	if (s[i + 1] && s[i + 1] == '\''
-		&& (s[i + 2] && s[i + 2] == ' ') || !s[i + 2])
+		&& ((s[i + 2] && s[i + 2] == ' ') || !s[i + 2]))
 		return (i + 2);
 	while (i <= len && s_quotes <= att->n_squotes)
 	{
 		if (s[i] == '\'')
 			s_quotes++;
 		if (s_quotes % 2 == 0 && s[i + 1] && s[i + 1] == ' ')
-		{
-			i++;
-			return (i);
-		}
+			return (++i);
 		i++;
 	}
 	return (i);
@@ -66,7 +86,7 @@ int	check_single_quotes(char *s, int len, int i, t_attr * att)
 	inoltre controlliamo se la prima virgoletta ad apparire è una singola. 
 	i servirà in seguito come signal booleano */
 
-int	count_quotes(char *s, t_attr *att)
+void	count_quotes(char *s, t_attr *att)
 {
 	int	i;
 	int	type;
@@ -119,6 +139,15 @@ int	count_tokens(char *s, t_attr *att)
 		// double quote
 		else if (s[i] == '"')
 			i = check_double_quotes(s, len, i, att);
+		//common token, solo caratteri senza tanti frenzoli
+		else /* if (s[i] != ' ') */
+			i = check_normal_char(s, len, i, att);
+		// token particolari, come pipe, redirect, 
+//		else if (s[i] != ' ' && s[i] != '|' && s[i] != '<' && s[i] != '>')
+//			i = check_special_char(s, len, i, att);
+//		else
+//			i++;
 	}
+	return (att->nb_tokens);
 }
 

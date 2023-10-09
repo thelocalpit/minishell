@@ -6,7 +6,7 @@
 #    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/09/27 11:05:28 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/10/09 18:54:51 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,10 @@ BOLD			:= \033[1;1m
 #MINISHELL
 NAME = minishell
 SRC =	sources/minishell.c \
-		sources/signals.c \
-		sources/utilities/prompt.c
+		sources/utilities/signals.c \
+		sources/utilities/prompt.c \
+		sources/tokens/token_init.c \
+		sources/initialize/init.c
 
 OBJSDIR = objects
 OBJ = $(addprefix $(OBJSDIR)/, $(SRC:.c=.o))
