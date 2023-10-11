@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/09 19:10:19 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:12:34 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	(void)envp;
-
 	rl_clear_history();
 	set_signals();
 	init_parameters(&att, envp);
@@ -36,13 +35,15 @@ int	main(int ac, char **av, char **envp)
 			rl_clear_history();
 			break ;
 		}
-		if (s)
+		if (s && !verify_readline(s))
 		{
 			add_history(s);
 			count_tokens(s, &att);
+			// verify_readline(s);
 			printf("questo è il numero di token: %d", att.nb_tokens);
 			reinit_parameters(&att, envp);
 		}
+		free(s);
 	}
 	return (0);
 }

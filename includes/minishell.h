@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/09 19:10:45 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:59:37 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ extern int	g_value;
 # define PATH_MAX 1024
 
 
+/* ------------------------  ERRORS   ---------------------------------- */
+
+# define ERROR_UNCLOSED "minishell : syntax error unclosed quotes\n"
+
+/* ------------------------  STRUCTS  ---------------------------------- */
+
 /* ------------------------  STRUCTS  ---------------------------------- */
 
 typedef struct s_attr
@@ -101,5 +107,12 @@ char	*prompt(void);
 	//signals.c
 void	set_signals(void);
 void	handle_interrupt(int sig);
+
+//error
+	
+	//error_01.c
+int		verify_readline(char *s);
+int		error_single_quote(char *s);
+int		error_double_quote(char *s);
 
 #endif
