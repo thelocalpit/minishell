@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:43:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/11 17:09:05 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/12 09:16:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	error_double_quote( char *s)
 	c = '"';
 	while (s[i])
 	{
-		if (s[i] == '\\' && s[i + 1] != '"')
+		if (s[i] == '\\' && s[i + 1] == '"')
 			i += 2;
 		if (s[i] == c && flag == 0)
 			flag = 1;

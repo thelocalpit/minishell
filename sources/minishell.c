@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/11 17:12:34 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/12 09:13:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av, char **envp)
 			printf("questo è il numero di token: %d", att.nb_tokens);
 			reinit_parameters(&att, envp);
 		}
-		free(s);
+		// free(s);
 	}
 	return (0);
 }
