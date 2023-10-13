@@ -6,7 +6,7 @@
 #    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/10/11 17:00:11 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/10/13 18:38:05 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ NAME = minishell
 SRC =	sources/minishell.c \
 		sources/utilities/signals.c \
 		sources/utilities/prompt.c \
-		sources/tokens/token_init.c \
+		sources/utilities/debugg.c \
+		sources/tokens/00_token_init_count.c \
+		sources/tokens/01_token_in_array.c \
 		sources/initialize/init.c \
 		sources/error/error_01.c 
 

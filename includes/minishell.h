@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/11 16:59:37 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:39:25 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_attr
 	int	i;
 	//------- n di token -------------------
 	int	nb_tokens;
+	char **split_arr;
+	char **cmd_arr;
 	// ------ var per quotes ---------------
 	int	n_dquotes;
 	int	n_squotes;
@@ -91,20 +93,24 @@ void	set_signals(void);
 
 //tokens_folder
 
-	// token_init.c
+	// 00_token_init_count.c
 
-int		check_normal_char(char *s, int len, int i, t_attr *att);
-int		check_double_quotes(char *s, int len, int i, t_attr *att);
-int		check_single_quotes(char *s, int len, int i, t_attr *att);
-void	count_quotes(char *s, t_attr *att);
-int		count_tokens(char *s, t_attr *att);
+char 	**split_init(char *s, t_attr *att);
+int count_tokens(char *s, t_attr *att);
+int process_special_token(t_attr *att, char *s, int i);
 
-//utilities_folder
+	// 01_token_in_array.c
 
-	//prompt.c 
-char	*prompt(void);
+void create_array(char *s, t_attr *att);
+char *get_token(char *s);
+void check_next_special_token(char *s, int i, char **token);
 
-	//signals.c
+// utilities_folder
+
+// prompt.c
+char *prompt(void);
+
+// signals.c
 void	set_signals(void);
 void	handle_interrupt(int sig);
 
@@ -114,5 +120,9 @@ void	handle_interrupt(int sig);
 int		verify_readline(char *s);
 int		error_single_quote(char *s);
 int		error_double_quote(char *s);
+
+// debugg.c
+
+void	ft_print_array(char **array);
 
 #endif

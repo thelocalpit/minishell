@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/12 09:13:58 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:42:35 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ int	main(int ac, char **av, char **envp)
 		if (s && !verify_readline(s))
 		{
 			add_history(s);
-			count_tokens(s, &att);
+			att.cmd_arr = split_init(s, &att);
 			// verify_readline(s);
-			printf("questo è il numero di token: %d", att.nb_tokens);
+		
+			printf("questo è il numero di token: %d\n", att.nb_tokens);
+			ft_print_array(att.cmd_arr);
 			reinit_parameters(&att, envp);
 		}
 		// free(s);

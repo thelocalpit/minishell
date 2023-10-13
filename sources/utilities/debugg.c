@@ -6,13 +6,13 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:49:02 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/25 13:47:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:39:59 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	see_flags_and_pipes(t_attr	att)
+/* void	see_flags_and_pipes(t_attr	att)
 {
 	printf("----------------------\n");
 	printf("nb of pipes: %d\n", att.number_of_pipes);
@@ -22,7 +22,7 @@ void	see_flags_and_pipes(t_attr	att)
 	printf("redir: %d\n", att.redir);
 	printf("read from file: %d\n", att.read_from_file);
 	printf("----------------------\n");
-}
+} */
 
 void	ft_print_array(char **array)
 {
