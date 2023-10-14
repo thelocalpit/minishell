@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"minishell.h": "c",
+		"initialize.h": "c",
+		"structs.h": "c",
+		"macros.h": "c"
+	}
+}
