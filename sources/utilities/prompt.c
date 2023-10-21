@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:49:58 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/26 17:04:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:46:39 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ char	*prompt(void)
 		printf("┏━" GREEN_BOLD " %s@:" GREEN_BOLD, user);
 		printf(CYAN_BOLD "%s\n" CYAN_BOLD, pwd);
 	}
-	str = readline(RESET "┗━" RED_BOLD " minihell" RED_BOLD " " RESET "");
+	str = readline("minishell");
 	return (str);
 }

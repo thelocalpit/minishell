@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/13 18:39:25 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:01:48 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,23 @@ typedef struct s_attr
 	int	nb_tokens;
 	char **split_arr;
 	char **cmd_arr;
-	// ------ var per quotes ---------------
-	int	n_dquotes;
-	int	n_squotes;
-	int	inside_single_quotes;
-} 		t_attr;
+	//------ n elements of cmds -------------
+	char **matrix_single_cmd;
+	int i_matrix_token;
+} t_attr;
 
-/* ------------------------  FUNCTIONS ---------------------------------- */
+typedef struct s_token
+{
+	char *token;
+	int nb_elements_toki;
+} t_token;
 
+	/* ------------------------  FUNCTIONS ---------------------------------- */
 
-//init_folder
+	// init_folder
 
-void	init_parameters(t_attr *att, char **envp);
+	void
+	init_parameters(t_attr *att, char **envp);
 void	init_attributes(t_attr *att);
 void	reinit_parameters(t_attr *att, char **envp);
 
