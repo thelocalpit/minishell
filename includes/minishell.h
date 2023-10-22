@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/19 19:01:48 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:45:41 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,14 @@ typedef struct s_attr
 	//------ n elements of cmds -------------
 	char **matrix_single_cmd;
 	int i_matrix_token;
+	int count;
+	//----- token variables ---------
+	char *token;
+	int nb_elements_token;
+	//------ errors -------------------
+	int flag_err_quote;
 } t_attr;
 
-typedef struct s_token
-{
-	char *token;
-	int nb_elements_toki;
-} t_token;
 
 	/* ------------------------  FUNCTIONS ---------------------------------- */
 
@@ -110,6 +111,14 @@ void create_array(char *s, t_attr *att);
 char *get_token(char *s);
 void check_next_special_token(char *s, int i, char **token);
 
+	//02_single_token_matrix.c
+void get_cmd_matrix(char *s, t_attr *att);
+void create_matrix_cmd(char *s, t_attr *att);
+void count_elements_cmd(char *s, t_attr *att);
+void get_single_token(char *s, t_attr *att);
+void get_first_cmd(char *s, t_attr *att);
+void ft_get_arg(char *s, t_attr *att);
+
 // utilities_folder
 
 // prompt.c
@@ -119,15 +128,19 @@ char *prompt(void);
 void	set_signals(void);
 void	handle_interrupt(int sig);
 
-//error
-	
-	//error_01.c
-int		verify_readline(char *s);
-int		error_single_quote(char *s);
-int		error_double_quote(char *s);
-
 // debugg.c
 
 void	ft_print_array(char **array);
+
+//	error_folder
+
+// error_01.c
+int verify_readline(char *s);
+
+//	free_folder
+
+// 00_free.c
+
+void free_tokens(char **tokens, t_attr *att);
 
 #endif

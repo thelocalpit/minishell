@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/22 13:12:56 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:33:08 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 
 //forse c'è da gestire il dollar sign per le doubleqoutes
 
-char	*get_arg(char *s, t_attr *att, t_token *toki)
+void ft_get_arg(char *s, t_attr *att)
 {
 	int i;
 	int j;
-	char *token_arg;
 
 	i = 0;
 	j = 0;
@@ -27,42 +26,33 @@ char	*get_arg(char *s, t_attr *att, t_token *toki)
 	{
 		i++;
 		if (s[i] == '"')
-			return (NULL);
+			return ;
 		while (s[i] != '"')
 		{
 			if (s[i] == '\\' && s[i + 1] == '"')
 				i++;
-			token_arg[j++] = s[i++];
-			if (s[i])
-				ft_error_unclosed_quotes;
+			att->matrix_single_cmd[att->count][j++] = s[i++];
 		}
-		return (token_arg);
 	}
 	else if (s[i] == '\'')
 	{
 		i++;
 		if (s[i + 1] == '\'')
-			return (NULL);
+			return ;
 		while (s[i] != '\'')
-		{
-				token_arg[j++] = s[i++];
-				if (s[i])
-					ft_error_unclosed_quotes;
-		}
-		return (token_arg);
+				att->matrix_single_cmd[att->count][j++] = s[i++];
 	}
 	else
 	{
 		while (s[i] == ' ' || s[i])
-			token_arg[j++] = s[i++];
-		return (token_arg);
+			att->matrix_single_cmd[att->count][j++] = s[i++];
 	}
+}
 
-char *get_first_cmd(char *s, t_attr *att, t_token *toki)
+void get_first_cmd(char *s, t_attr *att)
 {
 	int i;
 	int j;
-	char *token_cmd;
 
 	i = 0;
 	j = 0;
@@ -70,70 +60,78 @@ char *get_first_cmd(char *s, t_attr *att, t_token *toki)
 	{
 		i++;
 		if (s[i] == '"')
-			return (NULL);
+			return ;
 		while (s[i] != '"')
 		{
 			if (s[i] == '\\' && s[i + 1] == '"')
 				i++;
-			if ((s[i] >= 'a' && s[i] <= 'z') || s[i] <= 'A' && s[i] <= 'Z')
-				token_cmd[j++] = s[i++];
+			if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] <= 'A' && s[i] <= 'Z'))
+				att->matrix_single_cmd[att->count][j++] = s[i++];
 			else
-				return (NULL);
+				return ;
 		}
+		att->i_matrix_token = i;
 	}
 	else if (s[i] == '\'')
 	{
 		i++;
 		if (s[i + 1] == '\'')
-			return (NULL);
+			return ;
 		while (s[i] != '\'')
 		{
-			if ((s[i] >= 'a' && s[i] <= 'z') || s[i] <= 'A' && s[i] <= 'Z')
-				token_cmd[j++] = s[i++];
+			if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] <= 'A' && s[i] <= 'Z'))
+				att->matrix_single_cmd[att->count][j++] = s[i++];
 			else
-				return (NULL);
+				return ;
 		}
+		att->i_matrix_token = i;
 	}
 	else
 	{
 		while (s[i] != ' ' || s[i])
 		{
-			if ((s[i] >= 'a' && s[i] <= 'z') || s[i] <= 'A' && s[i] <= 'Z')
-				token_cmd[j++] = s[i++];
+			if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] <= 'A' && s[i] <= 'Z'))
+				att->matrix_single_cmd[att->count][j++] = s[i++];
 			else
-				return (NULL);
+				return ;
 		}
+		att->i_matrix_token = i;
 	}
-	return (token_cmd);
 }
 
-char *get_single_token(char *s, t_attr *att, t_token *toki, int count)
+void	get_single_token(char *s, t_attr *att)
 {
 	int i;
+
+	i = 0;
 	while (s[i] == ' ')
 		i++;
-	if (s[i] == '>')
+	/* if (s[i] == '>')
 	{
 		//add flag nel caso in cui prima parola della stringa sia una redirection
 		//che crea un file nuovo vuoto con il nome della parola successiva. 
 		//es: > ciao crea un file dal nome ciao
+	} */
+	if (s[i] != '|' && s[i] != '>' && s[i] != '<' && att->count == 0)
+	{
+		get_first_cmd(s, att);
+		att->i_matrix_token = i;
 	}
-	else if (s[i] != '|' && s[i] != '>' != '<' && count == 0)
-		return (get_first_cmd(s, att, toki));
-	else if (count > 0)
+	else if (att->count > 0)
 	{
 		while (s[i] == ' ')
 			i++;
-		return (get_arg(s, att, toki));
+		ft_get_arg(s, att);
+		att->i_matrix_token = i;
 	}
 }
 
-void count_elements_cmd(char *s, t_attr *att, t_token *toki)
+void count_elements_cmd(char *s, t_attr *att)
 {
 	int len;
 	int i;
 
-	toki->nb_elements_toki = 0;
+	att->nb_elements_token = 0;
 	len = ft_strlen(s) - 1;
 	i = 0;
 	while (i <= len)
@@ -145,7 +143,7 @@ void count_elements_cmd(char *s, t_attr *att, t_token *toki)
 			i++;
 			while (s[i] != '\'')
 				i++;
-			toki->nb_elements_toki++;
+			att->nb_elements_token++;
 		}
 		else if (s[i] == '"')
 		{
@@ -156,47 +154,41 @@ void count_elements_cmd(char *s, t_attr *att, t_token *toki)
 					i++;
 				i++;
 			}
-			toki->nb_elements_toki++;
+			att->nb_elements_token++;
 		}
 		else
 		{
 			while (s[i] != ' ' || s[i])
 				i++;
-			toki->nb_elements_toki++;
+			att->nb_elements_token++;
 		}
 	}
 }
-void	create_matrix_cmd(char *s, t_attr *att, t_token *toki)
+void	create_matrix_cmd(char *s, t_attr *att)
 {
-	int count;
-
 	att->i_matrix_token = 0;
-	att->matrix_single_cmd = malloc((toki->nb_elements_toki + 1) * sizeof(char *));
-	att->matrix_single_cmd[toki->nb_elements_toki] = NULL;
+	att->matrix_single_cmd = malloc((att->nb_elements_token + 1) * sizeof(char *));
+	att->matrix_single_cmd[att->nb_elements_token] = NULL;
 	if (!att->matrix_single_cmd)
-		return;
-	count = 0;
-	while (count < toki->nb_elements_toki)
+		return ;
+	att->count= 0;
+	while (att->count < att->nb_elements_token)
 	{
 		while (*s == ' ')
 			s++;
-		att->matrix_single_cmd[count] = get_single_token(s, att, toki, count);
-		if (att->matrix_single_cmd[count] == 0 && count < toki->nb_elements_toki)
-		{
-			s = NULL;
-			return;
-		}
+		get_single_token(s, att);
 		s += att->i_matrix_token;
-		count++;
+		att->count++;
 	}
 	/* quello che c'è da scorrere qua è la matrice, e capire cosa è cosa e effettivamente
 	tokenizzare.  */
 }
 
-void	get_cmd_matrix(char *s, t_attr *att, t_token *toki)
+void	get_cmd_matrix(char *s, t_attr *att)
 {
 	if (!s)
-		return (NULL);
-	count_elements_cmd(s, att, &toki);
-	create_matrix_cmd(s, &att, &toki);
+		return ;
+	count_elements_cmd(s, att);
+	printf("questo è il numero di token del cmd: %d\n", att->nb_elements_token);
+	create_matrix_cmd(s, att);
 }

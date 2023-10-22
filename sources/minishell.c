@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/19 18:57:29 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:36:26 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int ac, char **av, char **envp)
 {
 	char	*s;
 	t_attr	att;
-	t_token toki;
 
 	(void)ac;
 	(void)av;
@@ -44,7 +43,11 @@ int	main(int ac, char **av, char **envp)
 			ft_print_array(att.cmd_arr);
 			while (att.cmd_arr[att.i] && att.cmd_arr[att.i][0] != '\0')
 			{
-				att.matrix_single_cmd = get_cmd_matrix(att.cmd_arr[att.i], &att, &toki);
+				get_cmd_matrix(att.cmd_arr[att.i], &att);
+				printf("questo è la matrice post: \n");
+				ft_print_array(att.matrix_single_cmd);
+				free_tokens(att.matrix_single_cmd, &att);
+				att.i = att.i + 2;
 			}
 			reinit_parameters(&att, envp);
 		}

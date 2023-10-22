@@ -6,11 +6,17 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:43:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/12 09:16:58 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:49:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	ft_error_quotes(t_attr *att)
+{
+	att->flag_err_quote = 1;
+	printf(ERROR_UNCLOSED);
+}
 
 int	error_double_quote( char *s)
 {
