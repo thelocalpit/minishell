@@ -6,11 +6,57 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/21 12:52:28 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:12:56 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+
+//forse c'è da gestire il dollar sign per le doubleqoutes
+
+char	*get_arg(char *s, t_attr *att, t_token *toki)
+{
+	int i;
+	int j;
+	char *token_arg;
+
+	i = 0;
+	j = 0;
+	if (s[i] == '"')
+	{
+		i++;
+		if (s[i] == '"')
+			return (NULL);
+		while (s[i] != '"')
+		{
+			if (s[i] == '\\' && s[i + 1] == '"')
+				i++;
+			token_arg[j++] = s[i++];
+			if (s[i])
+				ft_error_unclosed_quotes;
+		}
+		return (token_arg);
+	}
+	else if (s[i] == '\'')
+	{
+		i++;
+		if (s[i + 1] == '\'')
+			return (NULL);
+		while (s[i] != '\'')
+		{
+				token_arg[j++] = s[i++];
+				if (s[i])
+					ft_error_unclosed_quotes;
+		}
+		return (token_arg);
+	}
+	else
+	{
+		while (s[i] == ' ' || s[i])
+			token_arg[j++] = s[i++];
+		return (token_arg);
+	}
 
 char *get_first_cmd(char *s, t_attr *att, t_token *toki)
 {
@@ -40,7 +86,7 @@ char *get_first_cmd(char *s, t_attr *att, t_token *toki)
 		i++;
 		if (s[i + 1] == '\'')
 			return (NULL);
-		while (s[i] != '"')
+		while (s[i] != '\'')
 		{
 			if ((s[i] >= 'a' && s[i] <= 'z') || s[i] <= 'A' && s[i] <= 'Z')
 				token_cmd[j++] = s[i++];
@@ -72,9 +118,13 @@ char *get_single_token(char *s, t_attr *att, t_token *toki, int count)
 		//che crea un file nuovo vuoto con il nome della parola successiva. 
 		//es: > ciao crea un file dal nome ciao
 	}
-	if (s[i] != '|' && s[i] != '>' != '<' && count == 0)
+	else if (s[i] != '|' && s[i] != '>' != '<' && count == 0)
+		return (get_first_cmd(s, att, toki));
+	else if (count > 0)
 	{
-		return(get_first_cmd(s, att, toki));
+		while (s[i] == ' ')
+			i++;
+		return (get_arg(s, att, toki));
 	}
 }
 
