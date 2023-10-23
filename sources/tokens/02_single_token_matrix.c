@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/22 19:33:08 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:12:46 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,14 @@ void	get_single_token(char *s, t_attr *att)
 
 void count_elements_cmd(char *s, t_attr *att)
 {
+	printf("ciao sono in count\n");
 	int len;
 	int i;
 
 	att->nb_elements_token = 0;
 	len = ft_strlen(s) - 1;
 	i = 0;
-	while (i <= len)
+	while (i < len)
 	{
 		if (s[i] == ' ')
 			i++;
@@ -162,6 +163,7 @@ void count_elements_cmd(char *s, t_attr *att)
 				i++;
 			att->nb_elements_token++;
 		}
+		printf("ciao sono in count alla fine\n");
 	}
 }
 void	create_matrix_cmd(char *s, t_attr *att)
@@ -186,9 +188,11 @@ void	create_matrix_cmd(char *s, t_attr *att)
 
 void	get_cmd_matrix(char *s, t_attr *att)
 {
+	printf("ciao sono in get_cmd_matrix\n");
 	if (!s)
 		return ;
 	count_elements_cmd(s, att);
+	printf("ciao sono in get_cmd_matrix\n");
 	printf("questo è il numero di token del cmd: %d\n", att->nb_elements_token);
 	create_matrix_cmd(s, att);
 }
