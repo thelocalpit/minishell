@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/22 19:45:41 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:24:23 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,20 @@ extern int	g_value;
 
 typedef struct s_attr
 {
-	int	i;
 	//------- n di token -------------------
 	int	nb_tokens;
 	char **split_arr;
 	char **cmd_arr;
-	//------ n elements of cmds -------------
-	char **matrix_single_cmd;
-	int i_matrix_token;
+	//------- single_line ------------------
+	char **s_line_arr;
+	//------ cmds -------------
 	int count;
 	//----- token variables ---------
-	char *token;
-	int nb_elements_token;
+	int count_words;
+	int flag_cmd_valid;
+	int flag_quote;
+	int y;
+	int x;
 	//------ errors -------------------
 	int flag_err_quote;
 } t_attr;
@@ -119,6 +121,12 @@ void get_single_token(char *s, t_attr *att);
 void get_first_cmd(char *s, t_attr *att);
 void ft_get_arg(char *s, t_attr *att);
 
+	//02_a_count_words.c
+int check_single_quotes(char *s, int len, int i, t_attr *att);
+int check_double_quotes(char *s, int len, int i, t_attr *att);
+int check_ascii(char *s, int len, int i, t_attr *att);
+void ft_count_words(char *s, t_attr *att);
+
 // utilities_folder
 
 // prompt.c
@@ -134,8 +142,9 @@ void	ft_print_array(char **array);
 
 //	error_folder
 
-// error_01.c
+// 00_verify_readline.c
 int verify_readline(char *s);
+int count_quotes(char *s);
 
 //	free_folder
 
