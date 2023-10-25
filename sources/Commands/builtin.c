@@ -6,30 +6,31 @@
 /*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/10/20 13:53:53 by alesac           ###   ########.fr       */
+/*   Updated: 2023/10/25 15:10:25 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	do_builtin(char **args)
+int	do_builtin(char **args, char **env)
 {
 	int i;
-
+	
 	i = 0;
 	while (args[i])
-		i++;
-	if (ft_strncmp(args[i], "echo\0", 5) == 0 || ft_strncmp(args[i], "pwd\0", 4) == 0 || ft_strncmp(args[i], "env\0", 4) == 0)
 	{
-		if (ft_strncmp(args[i], "echo\0", 5) == 0)
-			return (echo((char **) args));
-		if (ft_strncmp(args[i], "pwd\0", 4) == 0)
-			return (pwd((char **) env));
-		if (ft_strncmp(args[i], "env\0", 4) == 0)
-			return (env((char **) env));
-		return (0);
+		if (ft_strncmp(args[i], "echo\0", 5) == 0 || ft_strncmp(args[i], "pwd\0", 4) == 0 || ft_strncmp(args[i], "env\0", 4) == 0)
+		{
+			if (ft_strncmp(args[i], "echo\0", 5) == 0)
+				return (echo((char **) args));
+			if (ft_strncmp(args[i], "pwd\0", 4) == 0)
+				return (pwd((char **) env));
+			if (ft_strncmp(args[i], "env\0", 4) == 0)
+				return (envi((char **) env));
+		}
+		i++;
 	}
-	return (2);
+	return (0);
 }
 
 int	echo(char **args)
@@ -54,10 +55,13 @@ int	echo(char **args)
 	{
 		printf("\n");
 	}
+	return (0);
 }
 
 int	pwd(char **env)
 {
+	(void)env;
+	
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
@@ -69,7 +73,7 @@ int	pwd(char **env)
 	return (0);
 }
 
-int	env(char **env)
+int	envi(char **env)
 {
 	int	i;
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
+#    By: alesac <alesac@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/10/22 19:46:21 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/10/25 13:17:53 by alesac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRC =	sources/minishell.c \
 		sources/tokens/02_single_token_matrix.c \
 		sources/initialize/init.c \
 		sources/error/error_01.c \
-		sources/free/00_free.c
+		sources/free/00_free.c \
+		sources/Commands/builtin.c \
 		
 
 OBJSDIR = objects
