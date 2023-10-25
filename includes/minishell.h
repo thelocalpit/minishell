@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/22 19:45:41 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:08:20 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ extern int	g_value;
 
 // variables
 
-# define PATH_MAX 1024
+# define PATH_MAX 4096
 
 
 /* ------------------------  ERRORS   ---------------------------------- */
@@ -142,5 +142,12 @@ int verify_readline(char *s);
 // 00_free.c
 
 void free_tokens(char **tokens, t_attr *att);
+
+// commands->builtin.c
+
+int	do_builtin(char **args, char **envp);
+int	echo(char **args);
+int	pwd(char **env);
+int	envi(char **env);
 
 #endif
