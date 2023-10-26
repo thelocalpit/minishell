@@ -6,7 +6,7 @@
 /*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/10/26 16:11:28 by alesac           ###   ########.fr       */
+/*   Updated: 2023/10/26 16:20:47 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	do_builtin(char **args, char **env)
 					return 1;
 				} else if (child_pid == 0) {
 					// Questo è il processo figlio
-					char *ls_args[] = {"/bin/ls", "-l", NULL};
+					char *ls_args[] = {"/bin/ls", "-h", NULL};
 					execve("/bin/ls", ls_args, env);
 					perror("execve failed");
 					exit(1);
