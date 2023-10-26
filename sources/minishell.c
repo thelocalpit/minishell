@@ -6,7 +6,7 @@
 /*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/25 15:12:06 by alesac           ###   ########.fr       */
+/*   Updated: 2023/10/26 12:47:53 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	main(int ac, char **av, char **envp)
 		{
 			add_history(s);
 			att.cmd_arr = split_init(s, &att);
-			// printf("questo è il numero di token: %d\n", att.nb_tokens);
-			// ft_print_array(att.cmd_arr);
 			do_builtin(att.cmd_arr,(char **) envp);
 			// while (att.cmd_arr[att.i] && att.cmd_arr[att.i][0] != '\0')
 			// {
