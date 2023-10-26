@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/24 17:24:23 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:19:22 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,17 @@ typedef struct s_attr
 	//------- n di token -------------------
 	int	nb_tokens;
 	char **split_arr;
-	char **cmd_arr;
-	//------- single_line ------------------
-	char **s_line_arr;
+	int y;
+	int x;
+	char **arr2;
+	int y2;
+	int x2;
 	//------ cmds -------------
 	int count;
 	//----- token variables ---------
 	int count_words;
 	int flag_cmd_valid;
 	int flag_quote;
-	int y;
-	int x;
 	//------ errors -------------------
 	int flag_err_quote;
 } t_attr;
@@ -103,7 +103,7 @@ void	set_signals(void);
 
 	// 00_token_init_count.c
 
-char 	**split_init(char *s, t_attr *att);
+void split_init(char *s, t_attr *att);
 int count_tokens(char *s, t_attr *att);
 int process_special_token(t_attr *att, char *s, int i);
 
@@ -116,15 +116,12 @@ void check_next_special_token(char *s, int i, char **token);
 	//02_single_token_matrix.c
 void get_cmd_matrix(char *s, t_attr *att);
 void create_matrix_cmd(char *s, t_attr *att);
-void count_elements_cmd(char *s, t_attr *att);
-void get_single_token(char *s, t_attr *att);
-void get_first_cmd(char *s, t_attr *att);
-void ft_get_arg(char *s, t_attr *att);
+void get_cmd_token(char *s, t_attr *att);
 
 	//02_a_count_words.c
 int check_single_quotes(char *s, int len, int i, t_attr *att);
 int check_double_quotes(char *s, int len, int i, t_attr *att);
-int check_ascii(char *s, int len, int i, t_attr *att);
+int check_no_space(char *s, int len, int i, t_attr *att);
 void ft_count_words(char *s, t_attr *att);
 
 // utilities_folder
@@ -151,5 +148,6 @@ int count_quotes(char *s);
 // 00_free.c
 
 void free_tokens(char **tokens, t_attr *att);
+void free_arr(char **arr);
 
 #endif

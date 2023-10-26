@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/13 17:18:32 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/25 23:50:46 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int	process_special_token(t_attr *att, char *s, int i)
 	else
 		return (++i);
 }
-
+/* to count tokens we get the len of s. 
+	with those conditions we intend to count (cmd + args) and (|,>,<)
+	 */
 int	count_tokens(char *s, t_attr *att)
 {
 	int i;
@@ -56,14 +58,21 @@ int	count_tokens(char *s, t_attr *att)
 	}
 	return (att->nb_tokens);
 }
-
-char	**split_init(char *s, t_attr *att)
+/* this funciton is the start of the split of the line.
+	first of all, we'll count how many tokens we have.
+	with tokens I mean: (cmd + args) or a (|, >, <). 
+	this will be useful later when we'll split again each
+	(cmd + args) to actually the pass it to the exec.
+	In the meantime, we isolate also the (|, >, <). 
+	This way we'll later know where to redirect the output
+	and eventually get the input of all (cmd +args)
+	 */
+void	split_init(char *s, t_attr *att)
 {
 	if (!s)
-		return (NULL);
+		return ;
 	att->nb_tokens = 0;
 	att->split_arr = NULL;
 	count_tokens(s, att);
-	create_array(s, att);
-	return (att->split_arr);
+	create_array(s, att);;
 }

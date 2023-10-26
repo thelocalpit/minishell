@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_single_token_matrix.c                           :+:      :+:    :+:   */
+/*   02_single_token_matrix copy.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/23 17:58:44 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/26 17:40:20 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
+/* 
 
 //forse c'è da gestire il dollar sign per le doubleqoutes
 
@@ -112,7 +112,7 @@ void	get_single_token(char *s, t_attr *att)
 		//che crea un file nuovo vuoto con il nome della parola successiva. 
 		//es: > ciao crea un file dal nome ciao
 	} */
-	if (s[i] != '|' && s[i] != '>' && s[i] != '<' && att->count == 0)
+	/* if (s[i] != '|' && s[i] != '>' && s[i] != '<' && att->count == 0)
 	{
 		get_first_cmd(s, att);
 		att->i_matrix_token = i;
@@ -186,7 +186,7 @@ void	create_matrix_cmd(char *s, t_attr *att)
 	/* quello che c'è da scorrere qua è la matrice, e capire cosa è cosa e effettivamente
 	tokenizzare.  */
 }
-
+/* 
 void	get_cmd_matrix(char *s, t_attr *att)
 {
 	printf("ciao sono in get_cmd_matrix\n");
@@ -196,4 +196,4 @@ void	get_cmd_matrix(char *s, t_attr *att)
 	printf("ciao sono in get_cmd_matrix\n");
 	printf("questo è il numero di token del cmd: %d\n", att->nb_elements_token);
 	create_matrix_cmd(s, att);
-}
+} */ */

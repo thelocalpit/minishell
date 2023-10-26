@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:16:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/24 17:37:22 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:19:36 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	init_parameters(t_attr *att, char **envp)
 void	init_attributes(t_attr *att)
 {
 	att->y = 0;
+	att->x = 0;
+	att->y2 = 0;
+	att->x2 = 0;
+
 	att->nb_tokens = 0;
 }
 
@@ -28,4 +32,10 @@ void	reinit_parameters(t_attr *att, char **envp)
 {
 	(void)envp;
 	att->nb_tokens = 0;
+	att->split_arr = NULL;
+	att->arr2 = NULL;
+	att->y = 0;
+	att->x = 0;
+	att->y2 = 0;
+	att->x2 = 0;
 }
