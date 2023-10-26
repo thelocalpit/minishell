@@ -6,7 +6,7 @@
 /*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/10/26 16:20:47 by alesac           ###   ########.fr       */
+/*   Updated: 2023/10/26 19:02:34 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	do_builtin(char **args, char **env)
 	i = 0;
 	while (args[i])
 	{
-		if (ft_strncmp(args[i], "echo\0", 5) == 0 || ft_strncmp(args[i], "pwd\0", 4) == 0 || ft_strncmp(args[i], "env\0", 4) == 0 || ft_strncmp(args[i], "ls\0", 3) == 0)
+		if (ft_strncmp(args[i], "echo\0", 5) == 0 || ft_strncmp(args[i], "pwd\0", 4) == 0 || ft_strncmp(args[i], "env\0", 4) == 0 || ft_strncmp(args[i], "ls\0", 3) == 0 || ft_strncmp(args[i], "ls -l\0", 6) == 0)
 		{
 			if (ft_strncmp(args[i], "echo\0", 5) == 0)
 				return (echo((char **) args));
@@ -27,21 +27,10 @@ int	do_builtin(char **args, char **env)
 				return (pwd((char **) env));
 			if (ft_strncmp(args[i], "env\0", 4) == 0)
 				return (envi((char **) env));
+			if (ft_strncmp(args[i], "ls -l\0", 6) == 0)
+				return (ls_l((char **) env, 1));
 			if (ft_strncmp(args[i], "ls\0", 3) == 0)
-			{
-				pid_t child_pid = fork();
-
-				if (child_pid == -1) {
-					perror("fork failed");
-					return 1;
-				} else if (child_pid == 0) {
-					// Questo è il processo figlio
-					char *ls_args[] = {"/bin/ls", "-h", NULL};
-					execve("/bin/ls", ls_args, env);
-					perror("execve failed");
-					exit(1);
-				}
-			}
+				return (ls_l((char **) env, 0));
 		}
 		else
 			printf("Comando '%s' non trovato\n", args[i]);
@@ -86,7 +75,7 @@ int	pwd(char **env)
 		perror("getcwd error!");
 		return (1);
 	}
-	printf("%s\n", cwd);
+	printf(YELLOW_BOLD "%s\n", cwd);
 	return (0);
 }
 
@@ -98,4 +87,26 @@ int	envi(char **env)
 	while (env[++i] != NULL)
 		printf("%s\n", env[i]);
 	return(0);
+}
+
+int	ls_l(char **env, int j)
+{
+	pid_t child_pid = fork();
+	char *option;
+
+	if (j == 1)
+		option = "-l";
+	else if (j == 0)
+		option = "-h";
+	if (child_pid == -1) {
+		perror("fork failed");
+		return 1;
+	} else if (child_pid == 0) {
+		// Questo è il processo figlio
+		char *ls_args[] = {"/bin/ls", option, NULL};
+		execve("/bin/ls", ls_args, env);
+		perror("execve failed");
+		exit(1);
+	}
+	return (0);
 }

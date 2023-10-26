@@ -6,7 +6,7 @@
 /*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/25 15:08:20 by alesac           ###   ########.fr       */
+/*   Updated: 2023/10/26 18:56:47 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,6 @@ int	do_builtin(char **args, char **envp);
 int	echo(char **args);
 int	pwd(char **env);
 int	envi(char **env);
+int	ls_l(char **env, int j);
 
 #endif
