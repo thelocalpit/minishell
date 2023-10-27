@@ -6,7 +6,7 @@
 /*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/27 03:15:55 by alesac           ###   ########.fr       */
+/*   Updated: 2023/10/27 11:50:35 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,12 @@ void free_tokens(char **tokens, t_attr *att);
 
 // commands->builtin.c
 
-int	do_builtin(char **args, char **envp);
-int	echo(char **args);
-int	pwd(char **env);
-int	envi(char **env);
-int	ls_l(char **env, int j);
-int cd(char *directory);
+int		do_builtin(char **args, char **envp);
+int		echo(char **args);
+int		pwd(char **env);
+int		envi(char **env);
+int		ls_l(char **env, int j);
+int 	cd(char *directory);
+void	ft_exit();
 
 #endif
