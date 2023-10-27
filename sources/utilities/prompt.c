@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:49:58 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/22 17:14:21 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:44:03 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*prompt(void)
 	pwd = getenv("PWD");
 	if (pwd != NULL && user != NULL)
 	{
-		printf("┏━" GREEN_BOLD " %s@:" GREEN_BOLD, user);
+		printf(RESET"┏━" GREEN_BOLD " %s@:" GREEN_BOLD, user);
 		printf(CYAN_BOLD "%s\n" CYAN_BOLD, pwd);
 	}
 	str = readline(RESET "┗━" RED_BOLD " minihell" RED_BOLD " " RESET "");
