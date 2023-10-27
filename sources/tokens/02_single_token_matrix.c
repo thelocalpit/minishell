@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/26 18:25:45 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/27 17:04:15 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 
 //forse c'è da gestire il dollar sign per le doubleqoutes
-/* 
-void ft_get_arg(char *s, t_attr *att)
+
+void check_args_cmd(char *s, t_attr *att)
 {
 	int i;
 	int j;
@@ -48,21 +48,51 @@ void ft_get_arg(char *s, t_attr *att)
 			att->matrix_single_cmd[att->count][j++] = s[i++];
 	}
 }
-*/
+
+int ft_strlen_custom(char *s, int flag)
+{
+	int i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	if (flag == 0)
+	{
+		while (s[i] || s[i] == ' ')
+			i++;
+	}
+	if (flag == 1)
+	{
+		while (s[i] == '\'')
+			i++;
+	}
+	if (flag == 2)
+	{
+		while (s[i] == '"')
+			i++;
+	}
+	return (i);
+}
+
 void check_first_cmd(char *s, t_attr *att)
 {
 	int i;
+	int len;
+	int flag;
 
 	i = 0;
 	if (s[i] == '"')
 	{
 		i++;
+		flag = 2;
+		len = ft_strlen_custom(s, flag);
 		if (s[i] == '"')
+			return ;
+		att->arr2[att->y2] = malloc(len + 1);
+		if (!(att->arr2[att->y2]))
 			return ;
 		while (s[i] != '"')
 		{
-			// if (s[i])
-			// 	return (ft_error_unclosed_quotes());
 			if (s[i] == '\\' && s[i + 1] == '"')
 				i++;
 			att->arr2[att->y2][att->x2++] = s[i++];
@@ -71,23 +101,34 @@ void check_first_cmd(char *s, t_attr *att)
 	else if (s[i] == '\'')
 	{
 		i++;
+		flag = 1;
+		len = ft_strlen_custom(s, flag);
 		if (s[i] == '\'')
 			return ;
-		// if (s[i])
-		// 	return (ft_error_unclosed_quotes());
+		att->arr2[att->y2] = malloc(len + 1);
+		if (!(att->arr2[att->y2]))
+			return ;
 		while (s[i] != '\'')
 			att->arr2[att->y2][att->x2++] = s[i++];
 	}
 	else
 	{
-		while (s[i] != ' ' || s[i])
-				att->arr2[att->y2][att->x2++] = s[i++];
+		flag = 0;
+		len = ft_strlen_custom(s, flag);
+		att->arr2[att->y2] = malloc(len + 1);
+		if (!(att->arr2[att->y2]))
+			return ;
+		while (s[i] != ' ' && s[i])
+			att->arr2[att->y2][att->x2++] = s[i++];
 	}
+	att->arr2[att->y2][att->x2] = '\0';
 }
 
 void get_cmd_token(char *s, t_attr *att)
 {
+	
 	check_first_cmd(s, att);
+	check_args_cmd(s, att);
 }
 
 void create_matrix_cmd(char *s, t_attr *att)
@@ -117,5 +158,5 @@ void create_matrix_cmd(char *s, t_attr *att)
 	if (!s)
 		return ;
 	ft_count_words(s, att);
-	create_matrix_cmd(s, att); 
+	create_matrix_cmd(s, att);
 }

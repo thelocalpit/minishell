@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:09:43 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/25 16:10:49 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:57:17 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 int check_single_quotes(char *s, int len, int i, t_attr *att)
 {
 	att->count_words++;
-	if (s[i + 1] == '\'' && (s[i + 2] == ' ' || !s[i + 2]))
-		return (i + 2);
+	i++;
+	if (s[i] == '\'' && (s[i + 1] == ' ' || !s[i + 1]))
+		return (i + 1);
 	while (i <= len && s[i] != '\'')
 		i++;
-	if (s[i + 1] && s[i + 1] != ' ')
-		i++;
-	return (i);
+	return (++i);
 }
 
 int check_double_quotes(char *s, int len, int i, t_attr *att)
 {
 	att->count_words++;
-	if (s[i + 1] == '"' && (s[i + 2] == ' ' || !s[i + 2]))
-		return (i + 2);
+	i++;
+	if (s[i] == '"' && (s[i + 1] == ' ' || !s[i + 1]))
+		return (i + 1);
 	while (i <= len && s[i] != '"')
 	{
 		if (s[i] == '\\' && s[i + 1] == '"')
@@ -36,9 +36,7 @@ int check_double_quotes(char *s, int len, int i, t_attr *att)
 		else
 			i++;
 	}
-	if (s[i + 1] && s[i + 1] != ' ')
-		i++;
-	return (i);
+	return (++i);
 }
 
 int check_no_space(char *s, int len, int i, t_attr *att)
@@ -57,7 +55,6 @@ void ft_count_words(char *s, t_attr *att)
 	i = 0;
 	att->count_words = 0;
 	len = ft_strlen(s) - 1;
-	printf("questa è la line che viene contata %s\n", s);
 	while (i <= len)
 	{
 		if (s[i] == '\'')

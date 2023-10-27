@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/26 18:30:09 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:36:07 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	main(int ac, char **av, char **envp)
 			while (att.split_arr[att.y] && att.split_arr[att.y][0] != '\0' && !verify_readline(s))
 			{
 				get_cmd_matrix(att.split_arr[att.y], &att);
-				printf("numero dei token nella line singola: %d\n", att.count_words);
 				ft_print_array(att.arr2);
 				att.y = att.y + 2;
 			}
