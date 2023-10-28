@@ -6,7 +6,7 @@
 /*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/10/27 15:33:08 by alesac           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:20:42 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	do_builtin(char **args, char **env)
 				ft_exit();
 		}
 		else
-			printf("Comando '%s' non trovato\n", args[i]);
+			printf("Comando «%s» non trovato\n", args[i]);
 		i++;
 	}
 	return (0);
