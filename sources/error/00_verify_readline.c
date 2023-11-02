@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:43:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/24 18:28:11 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:49:22 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,38 @@ int	verify_readline(char *s)
 		return (1);
 	}
 	return (0);
+}
+
+int check_cmd_quotes(char *cmd, char *s, t_attr *att)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == ' ')
+		{
+			printf(ERROR_CMD);
+			free_arr2(att->arr2, att);
+			free_arr(att->split_arr);
+			free(s);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void check_readline_pipe_redi(char *word, char *s, t_attr *att)
+{
+	if (ft_strncmp(att->split_arr[att->nb_tokens - 1], "|", 1)
+		|| ft_strncmp(att->split_arr[att->nb_tokens - 1], ">", 1)
+		|| ft_strncmp(att->split_arr[att->nb_tokens - 1], "<", 1)
+		|| ft_strncmp(att->split_arr[att->nb_tokens - 1], ">>", 2)
+		|| ft_strncmp(att->split_arr[att->nb_tokens - 1], "<<", 2))
+	{
+		printf(ERROR_PIPE);
+		free_arr(att->split_arr);
+		free(s);
+	}
 }

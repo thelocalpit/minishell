@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/02 18:01:22 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:25:56 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,64 +101,6 @@ char *get_cmd_token(char *s, t_attr *att)
 	}
 }
 
-
-/* void check_first_cmd(char *s, t_attr *att)
-{
-	int i;
-	int len;
-	int flag;
-
-	i = 0;
-	if (s[i] == '"')
-	{
-		i++;
-		flag = 2;
-		len = ft_strlen_custom(s, flag);
-		if (s[i] == '"')
-			return ;
-		att->arr2[att->y2] = malloc(len + 1);
-		if (!(att->arr2[att->y2]))
-			return ;
-		while (s[i] != '"')
-		{
-			if (s[i] == '\\' && s[i + 1] == '"')
-				i++;
-			att->arr2[att->y2][att->x2++] = s[i++];
-		}
-	}
-	else if (s[i] == '\'')
-	{
-		i++;
-		flag = 1;
-		len = ft_strlen_custom(s, flag);
-		if (s[i] == '\'')
-			return ;
-		att->arr2[att->y2] = malloc(len + 1);
-		if (!(att->arr2[att->y2]))
-			return ;
-		while (s[i] != '\'')
-			att->arr2[att->y2][att->x2++] = s[i++];
-	}
-	else
-	{
-		flag = 0;
-		len = ft_strlen_custom(s, flag);
-		att->arr2[att->y2] = malloc(len + 1);
-		if (!(att->arr2[att->y2]))
-			return ;
-		while (s[i] != ' ' && s[i])
-			att->arr2[att->y2][att->x2++] = s[i++];
-	}
-	att->arr2[att->y2][att->x2] = '\0';
-}
-
-void get_cmd_token(char *s, t_attr *att)
-{
-	
-	check_first_cmd(s, att);
-	check_args_cmd(s, att);
-} */
-
 void create_matrix_cmd(char *s, t_attr *att)
 {
 	att->x2 = 0;
@@ -174,8 +116,6 @@ void create_matrix_cmd(char *s, t_attr *att)
 		while (*s == ' ')
 			s++;
 		s = get_cmd_token(s, att);
-		// printf("questo è y2: %d\n", att->y2);
-		// printf("questa dopo la funzione get_cmd_token: %s\n", att->arr2[att->y2]);
 		if (att->arr2[att->y2] == 0 && att->y2 < att->count_words)
 		{
 			s = NULL;
@@ -184,12 +124,12 @@ void create_matrix_cmd(char *s, t_attr *att)
 		att->y2++;
 	}
 }
-	/* This function is used for creating la matrice del (cmd + args) */
-	void get_cmd_matrix(char *s, t_attr *att)
+
+void	get_cmd_matrix(char *s, t_attr *att)
 {
 	if (!s)
 		return ;
 	ft_count_words(s, att);
-	// printf("count delle parole: %d\n", att->count_words);
 	create_matrix_cmd(s, att);
 }
+

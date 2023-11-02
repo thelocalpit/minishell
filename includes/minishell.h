@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/02 15:42:50 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:01:26 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int count_quotes(char *s);
 
 // 00_free.c
 
-void free_tokens(char **tokens, t_attr *att);
+void free_arr2(char **tokens, t_attr *att);
 void free_arr(char **arr);
 
 #endif

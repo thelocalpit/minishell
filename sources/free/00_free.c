@@ -6,18 +6,18 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:37:23 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/24 23:28:14 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:02:23 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void free_tokens(char **tokens, t_attr *att)
+void free_arr2(char **tokens, t_attr *att)
 {
 	int i;
 
 	i = 0;
-	while (i < att->nb_tokens)
+	while (i < att->count_words)
 		free(tokens[i++]);
 	free(tokens);
 }
