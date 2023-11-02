@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/26 18:19:22 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:42:50 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,12 @@ void check_next_special_token(char *s, int i, char **token);
 	//02_single_token_matrix.c
 void get_cmd_matrix(char *s, t_attr *att);
 void create_matrix_cmd(char *s, t_attr *att);
-void get_cmd_token(char *s, t_attr *att);
+char *get_cmd_token(char *s, t_attr *att);
+void check_cmd_tokens(char *s, t_attr *att);
+int ft_strlen_custom(char *s, int flag);
+char *ft_write_word(char *s, t_attr *att, int flag, int i);
 
-	//02_a_count_words.c
+// 02_a_count_words.c
 int check_single_quotes(char *s, int len, int i, t_attr *att);
 int check_double_quotes(char *s, int len, int i, t_attr *att);
 int check_no_space(char *s, int len, int i, t_attr *att);
