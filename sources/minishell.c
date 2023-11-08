@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/02 20:09:12 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:37:07 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,20 @@ int	main(int ac, char **av, char **envp)
 		{
 			add_history(s);
 			split_init(s, &att);
-			printf("numero di token: %d\n", att.nb_tokens);
 			ft_print_array(att.split_arr);
 			att.y = 0;
-			while (att.split_arr[att.y] && att.split_arr[att.y][0] != '\0' && !verify_readline(s))
+			while (att.split_arr[att.y] && !verify_readline(s))
 			{
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				ft_print_array(att.arr2);
-				// if (!(att.split_arr[att.y + 2]))
-				// 	break ;
 				free_arr2(att.arr2, &att);
-				if (att.split_arr[att.y + 1][0] == '\0')
-					break ;
+				if (!att.split_arr[att.y + 1])
+					break;
 				att.y += 2;
 			}
 			free_arr(att.split_arr);
 			free(s);
 		}
-		// free(s);
 	}
 	return (0);
 }

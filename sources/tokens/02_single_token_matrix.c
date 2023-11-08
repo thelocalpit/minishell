@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/02 18:25:56 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:30:37 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void create_matrix_cmd(char *s, t_attr *att)
 	while (att->y2 < att->count_words)
 	{
 		att->x2 = 0;
-		printf("questa è s prima della funzione: %s\n", s);
+		// printf("questa è s prima della funzione: %s\n", s);
 		while (*s == ' ')
 			s++;
 		s = get_cmd_token(s, att);

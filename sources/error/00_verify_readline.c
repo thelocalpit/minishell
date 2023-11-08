@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:43:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/02 20:49:22 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:11:00 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	verify_readline(char *s)
 	return (0);
 }
 
-int check_cmd_quotes(char *cmd, char *s, t_attr *att)
+/* int check_cmd_quotes(char *cmd, char *s, t_attr *att)
 {
 	int i;
 
@@ -70,8 +70,8 @@ int check_cmd_quotes(char *cmd, char *s, t_attr *att)
 		i++;
 	}
 	return (0);
-}
-
+} */
+/* 
 void check_readline_pipe_redi(char *word, char *s, t_attr *att)
 {
 	if (ft_strncmp(att->split_arr[att->nb_tokens - 1], "|", 1)
@@ -84,4 +84,4 @@ void check_readline_pipe_redi(char *word, char *s, t_attr *att)
 		free_arr(att->split_arr);
 		free(s);
 	}
-}
+} */
