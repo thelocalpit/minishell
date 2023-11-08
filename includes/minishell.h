@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/08 16:35:55 by alesac           ###   ########.fr       */
+/*   Updated: 2023/11/08 16:45:26 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ extern int	g_value;
 
 // variables
 
-# define PATH_MAX 4096
+# define PATH_MAX 1024
 
 
 /* ------------------------  ERRORS   ---------------------------------- */
@@ -89,8 +89,7 @@ typedef struct s_attr
 
 	// init_folder
 
-	void
-	init_parameters(t_attr *att, char **envp);
+void	init_parameters(t_attr *att);
 void	init_attributes(t_attr *att);
 void	reinit_parameters(t_attr *att, char **envp);
 
@@ -155,6 +154,7 @@ void free_arr(char **arr);
 
 // Commands
 
+int		do_builtin(char **args, char **env);
 int		pwd(char **env);
 int		envi(char **env);
 int		ls_l(char **env, int j);

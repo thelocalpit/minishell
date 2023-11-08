@@ -6,15 +6,14 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:16:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/26 18:19:36 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:44:21 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	init_parameters(t_attr *att, char **envp)
+void	init_parameters(t_attr *att)
 {
-	(void)envp;
 	init_attributes(att);
 }
 
