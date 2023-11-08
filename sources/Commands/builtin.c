@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/10/27 17:20:42 by alesac           ###   ########.fr       */
+/*   Updated: 2023/11/08 17:12:47 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	echo(char **args)
 		newline = 0;
 	while (args[i])
 	{
-		printf("%s\n", args[i]);
+		printf("%s ", args[i]);
 		i++;
 	}
 	if(!newline)
