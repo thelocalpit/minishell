@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/02 20:01:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:35:55 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ extern int	g_value;
 
 // variables
 
-# define PATH_MAX 1024
+# define PATH_MAX 4096
 
 
 /* ------------------------  ERRORS   ---------------------------------- */
@@ -152,5 +152,14 @@ int count_quotes(char *s);
 
 void free_arr2(char **tokens, t_attr *att);
 void free_arr(char **arr);
+
+// Commands
+
+int		pwd(char **env);
+int		envi(char **env);
+int		ls_l(char **env, int j);
+int		echo(char **args);
+void	ft_exit();
+
 
 #endif
