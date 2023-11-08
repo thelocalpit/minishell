@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/27 03:14:14 by alesac           ###   ########.fr       */
+/*   Updated: 2023/11/08 15:48:33 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,25 @@ int	main(int ac, char **av, char **envp)
 			rl_clear_history();
 			break ;
 		}
-		if (s && !verify_readline(s))
+		reinit_parameters(&att, envp);
+		if (s)
 		{
 			add_history(s);
-			att.cmd_arr = split_init(s, &att);
-			do_builtin(att.cmd_arr,(char **) envp);
-			// while (att.cmd_arr[att.i] && att.cmd_arr[att.i][0] != '\0')
-			// {
-			// 	printf("sono detro al loop");
-			// 	att.i++;
-			// 	get_cmd_matrix(att.cmd_arr[att.i], &att);
-			// 	printf("questo è la matrice post: \n");
-			// 	ft_print_array(att.matrix_single_cmd);
-			// 	free_tokens(att.matrix_single_cmd, &att);
-			// 	if (att.cmd_arr[att.i + 1])
-			// 		break ;
-			// 	att.i = att.i + 2; 
-			// }
-			reinit_parameters(&att, envp);
+			split_init(s, &att);
+			ft_print_array(att.split_arr);
+			att.y = 0;
+			while (att.split_arr[att.y] && !verify_readline(s))
+			{
+				get_cmd_matrix(att.split_arr[att.y], &att);
+				ft_print_array(att.arr2);
+				free_arr2(att.arr2, &att);
+				if (!att.split_arr[att.y + 1])
+					break;
+				att.y += 2;
+			}
+			free_arr(att.split_arr);
+			free(s);
 		}
-		// free(s);
 	}
 	return (0);
 }
