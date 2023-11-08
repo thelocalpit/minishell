@@ -6,7 +6,7 @@
 #    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/10/24 17:17:01 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/11/08 15:47:20 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,9 @@ SRC =	sources/minishell.c \
 		sources/tokens/02_single_token_matrix.c \
 		sources/tokens/02_a_count_words.c \
 		sources/initialize/init.c \
-		sources/error/00_verify_readline.c \
+		sources/error/error_01.c \
 		sources/free/00_free.c \
-		
+		sources/Commands/builtin.c \
 		
 
 OBJSDIR = objects

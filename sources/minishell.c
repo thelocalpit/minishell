@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/08 15:37:07 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:48:33 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	(void)envp;
 	rl_clear_history();
 	set_signals();
 	init_parameters(&att, envp);

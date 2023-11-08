@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/02 20:01:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:49:16 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ extern int	g_value;
 
 // variables
 
-# define PATH_MAX 1024
+# define PATH_MAX 4096
 
 
 /* ------------------------  ERRORS   ---------------------------------- */
@@ -150,7 +150,6 @@ int count_quotes(char *s);
 
 // 00_free.c
 
-void free_arr2(char **tokens, t_attr *att);
-void free_arr(char **arr);
+void free_tokens(char **tokens, t_attr *att);
 
 #endif
