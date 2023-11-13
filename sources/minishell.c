@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/08 17:14:11 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/10 20:36:33 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ int	main(int ac, char **av, char **envp)
 			split_init(s, &att);
 			// ft_print_array(att.split_arr);
 			att.y = 0;
+			count_pipes(s, &att);
+			pipe_init(&att);
 			while (att.split_arr[att.y] && !verify_readline(s))
 			{
+				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				do_builtin(att.arr2, (char **)envp);
 				// ft_print_array(att.arr2);

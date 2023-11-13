@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/08 16:45:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:58:00 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,21 @@ typedef struct s_attr
 	int flag_quote;
 	//------ errors -------------------
 	int flag_err_quote;
-} t_attr;
+	//-----pipe----------
+	int nb_pipes;
+	int **pipesfd;
+	int pipe_index;
+	//----- flag ----------
+	int write_to_pipe;
+	int read_from_pipe;
+	int read_from_file;
+	int redir;
+	int create_file;
+	int only_create;
+	int heredoc;
+	int skip;
 
+} t_attr;
 
 	/* ------------------------  FUNCTIONS ---------------------------------- */
 
@@ -139,6 +152,10 @@ void	handle_interrupt(int sig);
 
 void	ft_print_array(char **array);
 
+// 00_utils.c
+
+int ft_strcmp(const char *str1, const char *str2);
+
 //	error_folder
 
 // 00_verify_readline.c
@@ -159,7 +176,22 @@ int		pwd(char **env);
 int		envi(char **env);
 int		ls_l(char **env, int j);
 int		echo(char **args);
-void	ft_exit();
+void	ft_exit(void);
 
+// parser folder
+
+// parser.c
+
+void reset_flags(t_attr *att);
+void next_step_sub2(t_attr *att);
+void next_step_sub(t_attr *att);
+int check_next_step(t_attr *att);
+
+// Executer folder
+
+//	pipe.c
+
+void count_pipes(char *s, t_attr *att);
+void init_pipes(t_attr *att);
 
 #endif
