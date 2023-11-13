@@ -6,11 +6,37 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:45:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/10 20:26:34 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:09:35 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void write_to_pipe(t_attr *att)
+{
+	if (att->pipe_index >= att->nb_pipes)
+		return;
+	close(att->pipesfd[att->pipe_index][0]);
+	dup2(att->pipesfd[att->pipe_index][WRITE_END], STDOUT_FILENO);
+	if (att->pipesfd[att->pipe_index] < 0)
+		close(att->pipesfd[att->pipe_index][1]);
+}
+
+void read_from_pipe(t_attr *att)
+{
+	close(att->pipesfd[att->pipe_index][1]);
+	dup2(att->pipesfd[att->pipe_index][READ_END], STDIN_FILENO)
+	if (att->pipesfd[att->pipe_index] < 0)
+		close(att->pipesfd[att->pipe_index][0]);
+}
+
+void close_pipeline(t_attr *att)
+{
+	if (att->pipe_index > 0)
+		close(att->pipesfd[att->pipe_index - 1][READ_END]);
+	if (att->pipe_index < att->nb_pipes)
+		close(att->pipesfd[att->pipe_index][WRITE_END]);
+}
 
 void	count_pipes(char *s, t_attr *att)
 {

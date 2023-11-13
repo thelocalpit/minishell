@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/13 09:58:00 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:05:01 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,16 @@ extern int	g_value;
 
 # define PATH_MAX 1024
 
+// pipe
+
+#define READ_END 0
+#define WRITE_END 1
+
 
 /* ------------------------  ERRORS   ---------------------------------- */
 
 # define ERROR_UNCLOSED "minishell : syntax error unclosed quotes\n"
 
-/* ------------------------  STRUCTS  ---------------------------------- */
 
 /* ------------------------  STRUCTS  ---------------------------------- */
 
@@ -193,5 +197,6 @@ int check_next_step(t_attr *att);
 
 void count_pipes(char *s, t_attr *att);
 void init_pipes(t_attr *att);
+
 
 #endif
