@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/13 12:05:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:59:29 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ extern int	g_value;
 
 // pipe
 
-#define READ_END 0
-#define WRITE_END 1
+# define READ_END 0
+# define WRITE_END 1
 
 
 /* ------------------------  ERRORS   ---------------------------------- */
 
 # define ERROR_UNCLOSED "minishell : syntax error unclosed quotes\n"
-
+# define ERROR_PIPE "minishell : syntax error  near '|'\n"
 
 /* ------------------------  STRUCTS  ---------------------------------- */
 
@@ -86,6 +86,8 @@ typedef struct s_attr
 	int flag_quote;
 	//------ errors -------------------
 	int flag_err_quote;
+	int flag_err_type;
+	int flag_to_do;
 	//-----pipe----------
 	int nb_pipes;
 	int **pipesfd;
@@ -163,8 +165,29 @@ int ft_strcmp(const char *str1, const char *str2);
 //	error_folder
 
 // 00_verify_readline.c
-int verify_readline(char *s);
+int verify_readline(t_attr *att);
+int error_redir(t_attr *att);
+
+// 01_error_quotes.c
+
 int count_quotes(char *s);
+
+// 02_error_piepes.c
+
+int error_pipe(t_attr *att);
+int error_pipe_first(t_attr *att);
+int error_last_pipe(t_attr *att);
+
+// 03_error_redir.c
+
+int error_last_redir(t_attr *att);
+
+// 04_error_mixed.c
+
+void check_to_do(char *s, t_attr *att);
+int check_next_str_err(char *s2);
+int check_error_cmd(char *s1);
+int mixed_error(t_attr *att);
 
 //	free_folder
 
@@ -195,8 +218,10 @@ int check_next_step(t_attr *att);
 
 //	pipe.c
 
-void count_pipes(char *s, t_attr *att);
+void count_pipes(t_attr *att);
 void init_pipes(t_attr *att);
-
+void write_to_pipe(t_attr *att);
+void read_from_pipe(t_attr *att);
+void close_pipeline(t_attr *att);
 
 #endif

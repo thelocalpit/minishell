@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:45:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/13 12:09:35 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:22:38 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void write_to_pipe(t_attr *att)
 void read_from_pipe(t_attr *att)
 {
 	close(att->pipesfd[att->pipe_index][1]);
-	dup2(att->pipesfd[att->pipe_index][READ_END], STDIN_FILENO)
+	dup2(att->pipesfd[att->pipe_index][READ_END], STDIN_FILENO);
 	if (att->pipesfd[att->pipe_index] < 0)
 		close(att->pipesfd[att->pipe_index][0]);
 }
@@ -38,7 +38,7 @@ void close_pipeline(t_attr *att)
 		close(att->pipesfd[att->pipe_index][WRITE_END]);
 }
 
-void	count_pipes(char *s, t_attr *att)
+void	count_pipes(t_attr *att)
 {
 	int	i;
 

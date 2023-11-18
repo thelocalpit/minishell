@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:05:24 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/10 20:01:25 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:21:01 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,4 @@ int ft_strcmp(const char *str1, const char *str2)
 			return (-1);
 	}
 	return (0);
+}

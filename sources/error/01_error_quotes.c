@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_verify_readline.c                               :+:      :+:    :+:   */
+/*   01_error_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 15:43:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/18 19:48:52 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/11/16 16:01:14 by pfalasch          #+#    #+#             */
+/*   Updated: 2023/11/16 16:01:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* funzione di partenza degli errori. */
-
-
-int	verify_readline(t_attr *att)
+int count_quotes(char *s)
 {
-	if (error_pipe(att) != 0)
-		return (1);
-	if (error_last_redir(att) != 0)
-		return (1);
-	if (mixed_error(att) != 0)
-		return (1);
-	if (count_quotes(att->split_arr[att->y]) != 0)
+	int i;
+	int count_quotes;
+
+	count_quotes = 0;
+	i = 0;
+	while (s[i])
 	{
-		printf(ERROR_UNCLOSED);
-		return (1);
+		if (s[i] == '\'')
+			count_quotes++;
+		i++;
 	}
+	if (count_quotes % 2 != 0)
+		return (1);
+	i = 0;
+	count_quotes = 0;
+	while (s[i])
+	{
+		if (s[i] == '\\' && s[i + 1] == '"')
+			i += 2;
+		if (s[i] == '"')
+			count_quotes++;
+		i++;
+	}
+	if (count_quotes % 2 != 0)
+		return (1);
 	return (0);
 }
-
