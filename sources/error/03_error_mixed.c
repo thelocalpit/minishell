@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:02:39 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/20 17:03:25 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:32:45 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,17 @@ int check_extra_char(char *s, int i)
 	d = s[i - 1];
 	e = s[i];
 	if (c == '<' && d == '<' && e == '<')
-		return (return_not_required);
+		return (return_not_required());
 	else if ((c == '>' && d == '>') || (c == '<' && d == '<'))
 	{
 		if (e == '>')
-			return (return_gt_error);
+			return (return_gt_error());
 		else if (e == '<')
-			return (return_lt_error);
+			return (return_lt_error());
 		else if (e == '|')
-			return (return_pipe_error);
+			return (return_pipe_error());
 	}
-	else
-		return (0);
+	return (0);
 }
 
 /* questa funzione si assicura che non ci siano due redir
@@ -54,11 +53,11 @@ int check_next_arg(char *s, int i)
 	else
 	{
 		if (s[i] == '>')
-			return (return_gt_error);
+			return (return_gt_error());
 		else if (s[i] == '<')
-			return (return_lt_error);
+			return (return_lt_error());
 		else
-			return (return_pipe_error);
+			return (return_pipe_error());
 	}
 }
 
@@ -73,26 +72,25 @@ int check_2nd_char(char *s, int i)
 	if (c == '>')
 	{
 		if (d == '<')
-			return (return_lt_error);
+			return (return_lt_error());
 		else if (d == '|')
-			return (return_not_required);
+			return (return_not_required());
 	}
 	else if (c == '<')
 	{
 		if (d == '>')
-			return (return_not_required);
+			return (return_not_required());
 		else if (d == '|')
-			return (return_pipe_error);
+			return (return_pipe_error());
 	}
 	else if (c == '|' && (d == '>' || d == '<'))
-		return (return_not_required);
-	else
-		return (0);
+		return (return_not_required());
+	return (0);
 }
 
 int ft_scorri(char *s, int i)
 {
-	while (s[i] != '|' || s[i] != '>' || s[i] != '<')
+	while (s[i] != '|' && s[i] != '>' && s[i] != '<' && s[i])
 	{
 		if (s[i] == '"')
 		{
@@ -118,6 +116,7 @@ int error_mixed_start(char *s)
 	while (s[i])
 	{
 		i = ft_scorri(s, i);
+		// printf("sono qui8\n");
 		if (s[i] == '>' || s[i] == '<' || s[i] == '|')
 		{
 			if (!check_2nd_char(s, i))

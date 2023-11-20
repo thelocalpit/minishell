@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/18 22:59:29 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:48:40 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,29 +165,32 @@ int ft_strcmp(const char *str1, const char *str2);
 //	error_folder
 
 // 00_verify_readline.c
-int verify_readline(t_attr *att);
-int error_redir(t_attr *att);
+int verify_readline(char *s);
 
 // 01_error_quotes.c
 
 int count_quotes(char *s);
 
-// 02_error_piepes.c
+// 02_error_error_start_last.c
 
-int error_pipe(t_attr *att);
-int error_pipe_first(t_attr *att);
-int error_last_pipe(t_attr *att);
+int error_begin(char *s);
+int error_end(char *s, char c);
 
 // 03_error_redir.c
 
-int error_last_redir(t_attr *att);
+int check_extra_char(char *s, int i);
+int check_next_arg(char *s, int i);
+int check_2nd_char(char *s, int i);
+int ft_scorri(char *s, int i);
+int error_mixed_start(char *s);
 
 // 04_error_mixed.c
 
-void check_to_do(char *s, t_attr *att);
-int check_next_str_err(char *s2);
-int check_error_cmd(char *s1);
-int mixed_error(t_attr *att);
+int return_not_required(void);
+int return_pipe_error(void);
+int return_gt_error(void);
+int return_lt_error(void);
+int return_nl_error(void);
 
 //	free_folder
 

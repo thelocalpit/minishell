@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_error_messages.c                                :+:      :+:    :+:   */
+/*   04_error_messages.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:45:30 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/20 16:59:43 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:26:44 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int return_not_required(void)
 {
 	printf("command not required by subject\n");
+	return (1);
 }
 int return_pipe_error(void)
 {

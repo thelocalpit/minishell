@@ -6,7 +6,7 @@
 #    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/11/18 12:58:12 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/11/20 18:48:05 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,9 +45,9 @@ SRC =	sources/minishell.c \
 		sources/initialize/init.c \
 		sources/error/00_verify_readline.c \
 		sources/error/01_error_quotes.c \
-		sources/error/02_error_pipes.c \
-		sources/error/03_error_redir.c \
-		sources/error/04_error_mixed.c \
+		sources/error/02_error_start_last.c \
+		sources/error/03_error_mixed.c \
+		sources/error/04_error_messages.c \
 		sources/free/00_free.c \
 		sources/Commands/builtin.c \
 		sources/executer/pipe.c \
