@@ -3,6 +3,7 @@
 		"minishell.h": "c",
 		"initialize.h": "c",
 		"structs.h": "c",
-		"macros.h": "c"
+		"macros.h": "c",
+		"__locale": "c"
 	}
 }
