@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/08 15:30:37 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:01:42 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	{
 		while (s[i] != '"')
 		{
-			if (s[i] == '\\' && s[i + 1] == '"')
+			if ((s[i] == '\\' && s[i + 1] == '"') || (s[i] == '\\' && s[i +1] == '$'))
 				i++;
+			if (s[i] == '$' && s[i - 1] != '\\')
+				att->flag$[att->y2] = 1;
 			att->arr2[att->y2][att->x2++] = s[i++];
 		}
 	}
@@ -64,9 +66,14 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	else
 	{
 		while (s[i] != ' ' && s[i])
+		{
+			if (s[i] == '$')
+				att->flag$[att->y2] = 1;
 			att->arr2[att->y2][att->x2++] = s[i++];
+		}
 	}
 	att->arr2[att->y2][att->x2] = '\0';
+	printf("questa è la flag: %d\n", att->flag$[att->y2]);
 	return (&s[++i]);
 }
 
@@ -108,7 +115,10 @@ void create_matrix_cmd(char *s, t_attr *att)
 	att->arr2 = malloc((att->count_words + 1) * sizeof(char *));
 	att->arr2[att->count_words] = NULL;
 	if (!att->arr2)
-		return ;
+		return;
+	att->flag$ = malloc((att->count_words + 1) * sizeof(int));
+	if (!att->flag$)
+		return;
 	while (att->y2 < att->count_words)
 	{
 		att->x2 = 0;
@@ -125,7 +135,7 @@ void create_matrix_cmd(char *s, t_attr *att)
 	}
 }
 
-void	get_cmd_matrix(char *s, t_attr *att)
+void get_cmd_matrix(char *s, t_attr *att)
 {
 	if (!s)
 		return ;
