@@ -6,7 +6,7 @@
 #    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/11/20 18:48:05 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/11/22 14:13:31 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,9 @@ SRC =	sources/minishell.c \
 		sources/Commands/builtin.c \
 		sources/executer/pipe.c \
 		sources/parser/parser.c \
+		sources/parser/lexer.c \
+		sources/expander/00_expander.c \
+		
 		
 
 OBJSDIR = objects

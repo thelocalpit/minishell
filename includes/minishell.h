@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/21 18:16:10 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:18:22 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,16 @@ typedef struct s_attr
 	int only_create;
 	int heredoc;
 	int skip;
+	//---- expander --------
+	char *var_name;
+	char *value;
+	size_t expanded_length;
+	size_t token_length;
+	char *expanded_token;
+	int j;
+	int i;
+	int has_quote;
+	char **g_env;
 
 } t_attr;
 
@@ -162,6 +172,9 @@ void	ft_print_array(char **array);
 // 00_utils.c
 
 int ft_strcmp(const char *str1, const char *str2);
+char *ft_strcpy(char *destination, const char *source);
+char *ft_strcat(char *dest, const char *src);
+char *ft_strncpy(char *dest, const char *src, size_t n);
 
 //	error_folder
 
@@ -218,6 +231,10 @@ void next_step_sub2(t_attr *att);
 void next_step_sub(t_attr *att);
 int check_next_step(t_attr *att);
 
+// lexer.c
+
+void command(t_attr *att);
+
 // Executer folder
 
 //	pipe.c
@@ -227,5 +244,15 @@ void init_pipes(t_attr *att);
 void write_to_pipe(t_attr *att);
 void read_from_pipe(t_attr *att);
 void close_pipeline(t_attr *att);
+
+// expander
+
+// 00_expander.c
+
+char *custom_getenv(const char *var_name, t_attr *att);
+void init_var(t_attr *att);
+void expand_tokens2(char **tokens, t_attr *att, int j);
+char *correct_name(char *str);
+char **expand_tokens(char **tokens, t_attr *att);
 
 #endif

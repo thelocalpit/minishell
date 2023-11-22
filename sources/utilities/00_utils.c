@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:05:24 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/14 14:21:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:16:38 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,56 @@ int ft_strcmp(const char *str1, const char *str2)
 			return (-1);
 	}
 	return (0);
+}
+
+/*
+	counts the number of characters in a string and
+	returns the number of characters in the string and
+	append the null character at the end of the string.
+*/
+
+char *ft_strcpy(char *destination, const char *source)
+{
+	char *start;
+
+	start = destination;
+	while (*source != '\0')
+	{
+		*destination = *source;
+		destination++;
+		source++;
+	}
+	*destination = '\0';
+	return (start);
+}
+
+char *ft_strcat(char *dest, const char *src)
+{
+	char *ptr;
+
+	ptr = dest;
+	while (*ptr)
+		ptr++;
+	while (*src)
+		*ptr++ = *src++;
+	*ptr = '\0';
+	return (dest);
+}
+
+char *ft_strncpy(char *dest, const char *src, size_t n)
+{
+	size_t i;
+
+	i = 0;
+	while (i < n && src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
 }
