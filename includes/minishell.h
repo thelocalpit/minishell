@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 14:18:22 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:00:18 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,6 @@ void	init_parameters(t_attr *att);
 void	init_attributes(t_attr *att);
 void	reinit_parameters(t_attr *att, char **envp);
 
-// signals_folder
-
-void handle_interrupt(int sig);
-void	set_signals(void);
-
 //tokens_folder
 
 	// 00_token_init_count.c
@@ -163,7 +158,7 @@ char *prompt(void);
 
 // signals.c
 void	set_signals(void);
-void	handle_interrupt(int sig);
+void 	handle_interrupt(int sig);
 
 // debugg.c
 

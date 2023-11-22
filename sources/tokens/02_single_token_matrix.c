@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/21 19:20:15 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:17:26 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 		}
 	}
 	att->arr2[att->y2][att->x2] = '\0';
-	printf("questa è la flag: %d\n", att->flag$[att->y2]);
+	// printf("questa è la flag: %d\n", att->flag$[att->y2]);
 	return (&s[++i]);
 }
 
