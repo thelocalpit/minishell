@@ -4,6 +4,7 @@
 		"initialize.h": "c",
 		"structs.h": "c",
 		"macros.h": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"unistd.h": "c"
 	}
 }

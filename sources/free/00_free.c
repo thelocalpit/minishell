@@ -6,11 +6,13 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:37:23 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/02 20:02:23 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:38:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/* questa funzione serve a liberare l'arr2 */
 
 void free_arr2(char **tokens, t_attr *att)
 {
@@ -21,6 +23,8 @@ void free_arr2(char **tokens, t_attr *att)
 		free(tokens[i++]);
 	free(tokens);
 }
+
+/* questo è per liberare una matrix generica */
 
 void free_arr(char **arr)
 {
@@ -33,4 +37,31 @@ void free_arr(char **arr)
 		i++;
 	}
 	free(arr);
+}
+
+/* questa è stata fatta per liberare la matrice degli fd
+	delle pipes. per farlo castiamo la matrice a char ** */
+	
+void ft_delete_matrix(void *matrix)
+{
+	int i;
+
+	i = -1;
+	while (((char **)matrix)[++i])
+		free(((char **)matrix)[i]);
+	free(matrix);
+}
+
+/* questa f è per liberare la matrice di envp */
+void free_mx_envp(t_attr *att)
+{
+	int i;
+
+	i = 0;
+	while (att->mx_envp[i] != NULL)
+	{
+		free(att->mx_envp[i]);
+		i++;
+	}
+	free(att->mx_envp);
 }

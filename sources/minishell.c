@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 18:01:04 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:42:44 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	rl_clear_history();
 	set_signals();
-	init_parameters(&att);
+	init_parameters(&att, envp);
 	while (1)
 	{
 		s = prompt();
@@ -41,22 +41,29 @@ int	main(int ac, char **av, char **envp)
 			split_init(s, &att);
 			// ft_print_array(att.split_arr);
 			att.y = 0;
-			
-			count_pipes(&att);
-			init_pipes(&att);
+			if (count_pipes(&att))
+			{
+				init_pipes(&att);
+				// printf("count pipe: %d\n", att.nb_pipes);
+				// printf("questo è la matrice di array%d e %d. dovrebbero essere 0 e 1\n", att.pipesfd[0][0], att.pipesfd[0][1]);
+			}
 			while (att.split_arr[att.y] && !verify_readline(s))
 			{
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				do_builtin(att.arr2, (char **)envp);
 				// command(&att);
-				// ft_print_array(att.arr2);
+				ft_print_array(att.mx_envp);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
 					break;
 				att.y += 2;
 			}
 			free_arr(att.split_arr);
+			free(att.flag$);
+			if (att.nb_pipes != 0)
+				ft_delete_matrix(att.pipesfd);
+			
 			free(s);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:04:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/25 22:51:00 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:38:46 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ void check_next_special_token(char *s, int i, char **token)
 		(*token)[2] = 0;
 	}
 }
+
 /* in this function we, as the function say, get the token to put in the
 	matrix. to do so, we scan the str and check if it's a special char or if
 	it's a str of character. */
+	
 char *get_token(char *s)
 {
 	char *token;
@@ -87,6 +89,7 @@ char *get_token(char *s)
 	when we find something different from a ' ', we call the function
 	get_token that we'll return a str. we do this process for all the tokens 
 	we have.  */
+	
 void	create_array(char *s, t_attr *att)
 {
 	int i;

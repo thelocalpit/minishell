@@ -6,13 +6,13 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:45:03 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/21 10:33:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:40:57 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* controlla il primo elemento */
+/* controlla il primo elemento se è sbagliato */
 int error_begin(char *s)
 {
 	// printf("sono qui5\n");
@@ -45,7 +45,7 @@ int error_begin(char *s)
 	return (0);
 }
 
-/* controlla ultimo elemento */
+/* controlla ultimo elemento se è sbagliato */
 
 int error_end(char *s, char c)
 {

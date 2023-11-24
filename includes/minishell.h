@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 18:00:18 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:41:17 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ typedef struct s_attr
 	int only_create;
 	int heredoc;
 	int skip;
+	//---- envp custom matrix ---
+	char **mx_envp;
+	int y_mx_envp;
+	int x_mx_envp;
+
 	//---- expander --------
 	char *var_name;
 	char *value;
@@ -111,7 +116,7 @@ typedef struct s_attr
 	int j;
 	int i;
 	int has_quote;
-	char **g_env;
+	
 
 } t_attr;
 
@@ -119,13 +124,14 @@ typedef struct s_attr
 
 	// init_folder
 
-void	init_parameters(t_attr *att);
+void	init_parameters(t_attr *att, char **envp);
 void	init_attributes(t_attr *att);
 void	reinit_parameters(t_attr *att, char **envp);
+void 	start_env(char **envp, t_attr *att);
 
-//tokens_folder
+// tokens_folder
 
-	// 00_token_init_count.c
+// 00_token_init_count.c
 
 void split_init(char *s, t_attr *att);
 int count_tokens(char *s, t_attr *att);
@@ -207,10 +213,12 @@ int return_nl_error(void);
 
 void free_arr2(char **tokens, t_attr *att);
 void free_arr(char **arr);
+void ft_delete_matrix(void *matrix);
+void free_mx_envp(t_attr *att);
 
 // Commands
 
-int		do_builtin(char **args, char **env);
+int do_builtin(char **args, char **env);
 int		pwd(char **env);
 int		envi(char **env);
 int		ls_l(char **env, int j);
@@ -234,7 +242,7 @@ void command(t_attr *att);
 
 //	pipe.c
 
-void count_pipes(t_attr *att);
+int count_pipes(t_attr *att);
 void init_pipes(t_attr *att);
 void write_to_pipe(t_attr *att);
 void read_from_pipe(t_attr *att);

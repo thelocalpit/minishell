@@ -6,11 +6,13 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/25 23:50:46 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:38:28 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+
 
 int	process_special_token(t_attr *att, char *s, int i)
 {
@@ -65,7 +67,7 @@ int	count_tokens(char *s, t_attr *att)
 	(cmd + args) to actually the pass it to the exec.
 	In the meantime, we isolate also the (|, >, <). 
 	This way we'll later know where to redirect the output
-	and eventually get the input of all (cmd +args)
+	and eventually get the input of all (cmd + args)
 	 */
 void	split_init(char *s, t_attr *att)
 {

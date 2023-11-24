@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:09:43 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/27 16:57:17 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:39:05 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int check_no_space(char *s, int len, int i, t_attr *att)
 		i++;
 	return (++i);
 }
+
 
 void ft_count_words(char *s, t_attr *att)
 {
