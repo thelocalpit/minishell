@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 18:17:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:10:11 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,56 @@ int ft_strlen_custom(char *s, int flag)
 	}
 	return (i);
 }
+char *copy_expanded_str(t_attr *att, char *s, int start)
+{
+	char *exp_str;
+	int len;
+	int i;
 
+	i = 0;
+	len = ft_strlen(att->mx_envp[att->y_mx_envp] - start + 1);
+	exp_str = malloc(len * sizeof(char) + 1);
+	while (i < len)
+	{
+		exp_str[i] = att->mx_envp[att->y_mx_envp][i + start];
+		i++;
+	}
+	exp_str[i] = '\0';
+	return (exp_str);
+}
+
+	char *check_expanded_str(t_attr *att, char *s, int i)
+{
+	char *check_envp;
+	int count;
+	int len;
+
+	count = 0;
+	len = i;
+	while (s[i] != '"' || s[i] != ' ' || s[i] != '$')
+	{
+		count++;
+		i++;
+	}
+	check_envp = malloc(sizeof(char) * count + 2);
+	while (len < i)
+	{
+		check_envp[len] = s[len];
+		len++;
+	}
+	check_envp[len++] = '=';
+	check_envp[len] = '\0';
+	att->y_mx_envp = 0;
+	while (att->mx_envp[att->y_mx_envp])
+	{
+		if (ft_strncmp(check_envp, att->mx_envp[att->y_mx_envp], len))
+		{
+			return(copy_expanded_str(att, s, len));
+		}
+		att->y_mx_envp++;
+	}
+	return (NULL);
+}
 
 char *ft_write_word(char *s, t_attr *att, int flag, int i)
 {

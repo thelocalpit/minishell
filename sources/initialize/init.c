@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:16:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/24 18:40:20 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:00:00 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void start_env(char **envp, t_attr *att)
 void	init_parameters(t_attr *att, char **envp)
 {
 	init_attributes(att);
-	start_env(envp, att);
 }
 
 void	init_attributes(t_attr *att)

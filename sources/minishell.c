@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/24 18:42:44 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:01:08 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		}
 		reinit_parameters(&att, envp);
+		start_env(envp, &att);
 		if (s)
 		{
 			add_history(s);
