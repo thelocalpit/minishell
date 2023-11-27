@@ -6,93 +6,61 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/24 20:10:11 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:19:53 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int ft_strlen_custom(char *s, int flag)
+int ft_strlen_custom(char *s, int flag, t_attr *att)
 {
 	int i;
 
+	att->memory_space = 0;
 	i = 0;
 	if (!s)
 		return (0);
 	if (flag == 0)
 	{
 		while (s[i] != ' ' && s[i])
-			i++;
-		// printf("sono dentro strlen\n");
+		{
+			if (s[i] == '$')
+				i += count_expanded_token(s, att, flag);
+			else
+				att->memory_space++;
+				i++;
+		}
 	}
 	if (flag == 1)
 	{
 		while (s[i] != '\'')
+		{
+			att->memory_space++;
 			i++;
+		}
 	}
 	if (flag == 2)
 	{
 		while (s[i] != '"')
-			i++;
-	}
-	return (i);
-}
-char *copy_expanded_str(t_attr *att, char *s, int start)
-{
-	char *exp_str;
-	int len;
-	int i;
-
-	i = 0;
-	len = ft_strlen(att->mx_envp[att->y_mx_envp] - start + 1);
-	exp_str = malloc(len * sizeof(char) + 1);
-	while (i < len)
-	{
-		exp_str[i] = att->mx_envp[att->y_mx_envp][i + start];
-		i++;
-	}
-	exp_str[i] = '\0';
-	return (exp_str);
-}
-
-	char *check_expanded_str(t_attr *att, char *s, int i)
-{
-	char *check_envp;
-	int count;
-	int len;
-
-	count = 0;
-	len = i;
-	while (s[i] != '"' || s[i] != ' ' || s[i] != '$')
-	{
-		count++;
-		i++;
-	}
-	check_envp = malloc(sizeof(char) * count + 2);
-	while (len < i)
-	{
-		check_envp[len] = s[len];
-		len++;
-	}
-	check_envp[len++] = '=';
-	check_envp[len] = '\0';
-	att->y_mx_envp = 0;
-	while (att->mx_envp[att->y_mx_envp])
-	{
-		if (ft_strncmp(check_envp, att->mx_envp[att->y_mx_envp], len))
 		{
-			return(copy_expanded_str(att, s, len));
+			if (s[i] == '$')
+				i += count_expanded_token(s, att, flag);
+			else 
+			{
+				i++;
+				att->memory_space++;
+			}
 		}
-		att->y_mx_envp++;
 	}
-	return (NULL);
+	return (att->memory_space);
 }
+
 
 char *ft_write_word(char *s, t_attr *att, int flag, int i)
 {
 	int len;
 
-	len = ft_strlen_custom(s, flag);
+	len = ft_strlen_custom(s, flag, att);
 	att->arr2[att->y2] = malloc(len + 1);
 	if (!att->arr2[att->y2])
 		return (NULL);
@@ -102,9 +70,11 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 		{
 			// if ((s[i] == '\\' && s[i + 1] == '"') || (s[i] == '\\' && s[i +1] == '$'))
 			// 	i++;
-			if (s[i] == '$' /* && s[i - 1] != '\\' */)
-				att->flag$[att->y2] = 1;
-			att->arr2[att->y2][att->x2++] = s[i++];
+			if (s[i] == '$')
+				i += copy_expanded_str(att, s, i);
+			// att->flag$[att->y2] = 1;
+			else
+				att->arr2[att->y2][att->x2++] = s[i++];
 		}
 	}
 	else if (flag == 1)
@@ -117,16 +87,14 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 		while (s[i] != ' ' && s[i])
 		{
 			if (s[i] == '$')
-				att->flag$[att->y2] = 1;
-			att->arr2[att->y2][att->x2++] = s[i++];
+				i += copy_expanded_str(att, s, i);
+			else
+				att->arr2[att->y2][att->x2++] = s[i++];
 		}
 	}
 	att->arr2[att->y2][att->x2] = '\0';
-	// printf("questa è la flag: %d\n", att->flag$[att->y2]);
 	return (&s[++i]);
 }
-
-//forse c'è da gestire il dollar sign per le doubleqoutes
 
 char *get_cmd_token(char *s, t_attr *att)
 {
@@ -171,7 +139,6 @@ void create_matrix_cmd(char *s, t_attr *att)
 	while (att->y2 < att->count_words)
 	{
 		att->x2 = 0;
-		// printf("questa è s prima della funzione: %s\n", s);
 		while (*s == ' ')
 			s++;
 		s = get_cmd_token(s, att);

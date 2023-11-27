@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/24 18:41:17 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:16:35 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,9 @@ typedef struct s_attr
 	int x_mx_envp;
 
 	//---- expander --------
-	char *var_name;
-	char *value;
-	size_t expanded_length;
-	size_t token_length;
-	char *expanded_token;
-	int j;
-	int i;
-	int has_quote;
-	
+	size_t memory_space;
+	char *check_exp;
+	int len_call_exp;
 
 } t_attr;
 
@@ -148,7 +142,7 @@ void get_cmd_matrix(char *s, t_attr *att);
 void create_matrix_cmd(char *s, t_attr *att);
 char *get_cmd_token(char *s, t_attr *att);
 void check_cmd_tokens(char *s, t_attr *att);
-int ft_strlen_custom(char *s, int flag);
+int ft_strlen_custom(char *s, int flag, t_attr *att);
 char *ft_write_word(char *s, t_attr *att, int flag, int i);
 
 // 02_a_count_words.c
@@ -252,10 +246,5 @@ void close_pipeline(t_attr *att);
 
 // 00_expander.c
 
-char *custom_getenv(const char *var_name, t_attr *att);
-void init_var(t_attr *att);
-void expand_tokens2(char **tokens, t_attr *att, int j);
-char *correct_name(char *str);
-char **expand_tokens(char **tokens, t_attr *att);
 
 #endif
