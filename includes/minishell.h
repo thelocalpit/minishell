@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/27 17:16:35 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/27 18:42:00 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,16 @@ extern int	g_value;
 
 // variables
 
-# define PATH_MAX 1024
-
+/* # ifdef __linux__
+# define PATH_MAX 4096
+# elif __MACH__
+# include <sys/syslimits.h>
+# define PATH_MAX PATH_MAX
+# else
+# warning "Unknown or unsupported operating system. Assuming PATH_MAX is 4096."
+# define PATH_MAX 4096
+#endif
+ */
 // pipe
 
 # define READ_END 0
@@ -118,7 +126,7 @@ typedef struct s_attr
 
 	// init_folder
 
-void	init_parameters(t_attr *att, char **envp);
+void	init_parameters(t_attr *att);
 void	init_attributes(t_attr *att);
 void	reinit_parameters(t_attr *att, char **envp);
 void 	start_env(char **envp, t_attr *att);
@@ -145,11 +153,16 @@ void check_cmd_tokens(char *s, t_attr *att);
 int ft_strlen_custom(char *s, int flag, t_attr *att);
 char *ft_write_word(char *s, t_attr *att, int flag, int i);
 
-// 02_a_count_words.c
+// 03_count_words.c
 int check_single_quotes(char *s, int len, int i, t_attr *att);
 int check_double_quotes(char *s, int len, int i, t_attr *att);
 int check_no_space(char *s, int len, int i, t_attr *att);
 void ft_count_words(char *s, t_attr *att);
+
+// 04_expander.c
+
+int copy_expanded_str(t_attr *att, int start);
+int count_expanded_token(t_attr *att, char *s, int i);
 
 // utilities_folder
 

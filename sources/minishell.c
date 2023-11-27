@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/24 19:01:08 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:09:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	rl_clear_history();
 	set_signals();
-	init_parameters(&att, envp);
+	init_parameters(&att);
 	while (1)
 	{
 		s = prompt();
@@ -54,7 +54,7 @@ int	main(int ac, char **av, char **envp)
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				do_builtin(att.arr2, (char **)envp);
 				// command(&att);
-				ft_print_array(att.mx_envp);
+				// ft_print_array(att.mx_envp);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
 					break;

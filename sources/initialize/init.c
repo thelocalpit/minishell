@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:16:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/24 19:00:00 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/28 00:45:10 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void start_env(char **envp, t_attr *att)
 
 /* qui inizializziamo  tutti i valori di att. */
 
-void	init_parameters(t_attr *att, char **envp)
+void	init_parameters(t_attr *att)
 {
 	init_attributes(att);
 }
@@ -58,4 +58,8 @@ void	reinit_parameters(t_attr *att, char **envp)
 	att->x = 0;
 	att->y2 = 0;
 	att->x2 = 0;
+	att->check_exp = NULL;
+	att->y_mx_envp = 0;
+	att->x_mx_envp = 0;
+	
 }

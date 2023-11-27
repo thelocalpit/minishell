@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/27 17:19:53 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/28 00:44:00 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		while (s[i] != ' ' && s[i])
 		{
 			if (s[i] == '$')
-				i += count_expanded_token(s, att, flag);
+			{
+				// printf("sono qui\n");
+				i += count_expanded_token(att, s, i);
+			}
 			else
 				att->memory_space++;
 				i++;
@@ -44,7 +47,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		while (s[i] != '"')
 		{
 			if (s[i] == '$')
-				i += count_expanded_token(s, att, flag);
+				i += count_expanded_token(att, s, flag);
 			else 
 			{
 				i++;
@@ -60,6 +63,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 {
 	int len;
 
+	// printf("questa è s: %s\n", s);
 	len = ft_strlen_custom(s, flag, att);
 	att->arr2[att->y2] = malloc(len + 1);
 	if (!att->arr2[att->y2])
@@ -71,7 +75,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 			// if ((s[i] == '\\' && s[i + 1] == '"') || (s[i] == '\\' && s[i +1] == '$'))
 			// 	i++;
 			if (s[i] == '$')
-				i += copy_expanded_str(att, s, i);
+				i += copy_expanded_str(att, i);
 			// att->flag$[att->y2] = 1;
 			else
 				att->arr2[att->y2][att->x2++] = s[i++];
@@ -87,7 +91,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 		while (s[i] != ' ' && s[i])
 		{
 			if (s[i] == '$')
-				i += copy_expanded_str(att, s, i);
+				i += copy_expanded_str(att, i);
 			else
 				att->arr2[att->y2][att->x2++] = s[i++];
 		}
@@ -141,6 +145,7 @@ void create_matrix_cmd(char *s, t_attr *att)
 		att->x2 = 0;
 		while (*s == ' ')
 			s++;
+		// printf("sono qui\n");
 		s = get_cmd_token(s, att);
 		if (att->arr2[att->y2] == 0 && att->y2 < att->count_words)
 		{
@@ -156,6 +161,7 @@ void get_cmd_matrix(char *s, t_attr *att)
 	if (!s)
 		return ;
 	ft_count_words(s, att);
+	// printf("sono qui\n");
 	create_matrix_cmd(s, att);
 }
 
