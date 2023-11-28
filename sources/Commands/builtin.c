@@ -3,36 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/11/08 17:12:47 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:15:04 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+int ft_export( char **args, char **env )
+{
+	// (void)args;
+	(void)env;
+	while (*args)
+	{
+		printf("%s\n", *args);
+		args++;
+	}
+
+	return (0);
+}
+
 int	do_builtin(char **args, char **env)
 {
 	int 	i;
-	
 	i = 0;
 	while (args[i])
 	{
-		if (ft_strncmp(args[i], "echo\0", 5) == 0 || ft_strncmp(args[i], "pwd\0", 4) == 0 || ft_strncmp(args[i], "env\0", 4) == 0 || ft_strncmp(args[i], "ls\0", 3) == 0 || ft_strncmp(args[i], "ls -l\0", 6) == 0 || strstr(args[i], "echo") != NULL || ft_strncmp(args[i], "exit\0", 5) == 0)
+		if (ft_strncmp(args[i], "export\0", 7) == 0 || ft_strncmp(args[i], "echo\0", 5) == 0 || ft_strncmp(args[i], "pwd\0", 4) == 0 || ft_strncmp(args[i], "env\0", 4) == 0 || ft_strncmp(args[i], "ls\0", 3) == 0 || ft_strncmp(args[i], "ls -l\0", 6) == 0 || strstr(args[i], "echo") != NULL || ft_strncmp(args[i], "exit\0", 5) == 0)
 		{
 			// if (ft_strncmp(args[i], "echo\0", 5) == 0)
 			// 	return (echo((char **) args));
 			if (ft_strncmp(args[i], "pwd\0", 4) == 0)
 				return (pwd((char **) env));
+
+			if (ft_strncmp(args[i], "export\0", 4) == 0)
+				return (ft_export((char **) args, (char **) env));
+
 			if (ft_strncmp(args[i], "env\0", 4) == 0)
 				return (envi((char **) env));
+
 			if (ft_strncmp(args[i], "ls -l\0", 6) == 0)
 				return (ls_l((char **) env, 1));
+
 			if (ft_strncmp(args[i], "ls\0", 3) == 0)
 				return (ls_l((char **) env, 0));
+
 			if (strstr(args[i], "echo") != NULL)
 				return (echo((char **) args));
+
 			if (ft_strncmp(args[i], "exit\0", 5) == 0)
 				ft_exit();
 		}
@@ -42,6 +62,7 @@ int	do_builtin(char **args, char **env)
 	}
 	return (0);
 }
+
 
 int	echo(char **args)
 {
@@ -54,7 +75,7 @@ int	echo(char **args)
 		newline = 1;
 		i++;
 	}
-	else 
+	else
 		newline = 0;
 	while (args[i])
 	{
@@ -71,7 +92,7 @@ int	echo(char **args)
 int	pwd(char **env)
 {
 	(void)env;
-	
+
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)

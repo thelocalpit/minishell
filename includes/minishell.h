@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 18:00:18 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:55:36 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,15 @@ extern int	g_value;
 
 // variables
 
-# define PATH_MAX 1024
+#ifdef __linux__
+# define PATH_MAX 4096
+#elif __MACH__
+# include <sys/syslimits.h>
+# define PATH_MAX PATH_MAX
+#else
+# warning "Unknown or unsupported operating system. Assuming PATH_MAX is 4096."
+# define PATH_MAX 4096
+#endif
 
 // pipe
 

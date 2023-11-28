@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:45:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/14 14:22:38 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:47:46 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void write_to_pipe(t_attr *att)
 		return;
 	close(att->pipesfd[att->pipe_index][0]);
 	dup2(att->pipesfd[att->pipe_index][WRITE_END], STDOUT_FILENO);
-	if (att->pipesfd[att->pipe_index] < 0)
+	if (att->pipesfd[att->pipe_index] == NULL)
 		close(att->pipesfd[att->pipe_index][1]);
 }
 
@@ -26,7 +26,7 @@ void read_from_pipe(t_attr *att)
 {
 	close(att->pipesfd[att->pipe_index][1]);
 	dup2(att->pipesfd[att->pipe_index][READ_END], STDIN_FILENO);
-	if (att->pipesfd[att->pipe_index] < 0)
+	if (att->pipesfd[att->pipe_index] == NULL)
 		close(att->pipesfd[att->pipe_index][0]);
 }
 
