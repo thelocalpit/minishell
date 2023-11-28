@@ -6,36 +6,56 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 18:17:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/28 00:44:00 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int ft_strlen_custom(char *s, int flag)
+int ft_strlen_custom(char *s, int flag, t_attr *att)
 {
 	int i;
 
+	att->memory_space = 0;
 	i = 0;
 	if (!s)
 		return (0);
 	if (flag == 0)
 	{
 		while (s[i] != ' ' && s[i])
-			i++;
-		// printf("sono dentro strlen\n");
+		{
+			if (s[i] == '$')
+			{
+				// printf("sono qui\n");
+				i += count_expanded_token(att, s, i);
+			}
+			else
+				att->memory_space++;
+				i++;
+		}
 	}
 	if (flag == 1)
 	{
 		while (s[i] != '\'')
+		{
+			att->memory_space++;
 			i++;
+		}
 	}
 	if (flag == 2)
 	{
 		while (s[i] != '"')
-			i++;
+		{
+			if (s[i] == '$')
+				i += count_expanded_token(att, s, flag);
+			else 
+			{
+				i++;
+				att->memory_space++;
+			}
+		}
 	}
-	return (i);
+	return (att->memory_space);
 }
 
 
@@ -43,7 +63,8 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 {
 	int len;
 
-	len = ft_strlen_custom(s, flag);
+	// printf("questa è s: %s\n", s);
+	len = ft_strlen_custom(s, flag, att);
 	att->arr2[att->y2] = malloc(len + 1);
 	if (!att->arr2[att->y2])
 		return (NULL);
@@ -53,9 +74,11 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 		{
 			// if ((s[i] == '\\' && s[i + 1] == '"') || (s[i] == '\\' && s[i +1] == '$'))
 			// 	i++;
-			if (s[i] == '$' /* && s[i - 1] != '\\' */)
-				att->flag$[att->y2] = 1;
-			att->arr2[att->y2][att->x2++] = s[i++];
+			if (s[i] == '$')
+				i += copy_expanded_str(att, i);
+			// att->flag$[att->y2] = 1;
+			else
+				att->arr2[att->y2][att->x2++] = s[i++];
 		}
 	}
 	else if (flag == 1)
@@ -68,16 +91,14 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 		while (s[i] != ' ' && s[i])
 		{
 			if (s[i] == '$')
-				att->flag$[att->y2] = 1;
-			att->arr2[att->y2][att->x2++] = s[i++];
+				i += copy_expanded_str(att, i);
+			else
+				att->arr2[att->y2][att->x2++] = s[i++];
 		}
 	}
 	att->arr2[att->y2][att->x2] = '\0';
-	// printf("questa è la flag: %d\n", att->flag$[att->y2]);
 	return (&s[++i]);
 }
-
-//forse c'è da gestire il dollar sign per le doubleqoutes
 
 char *get_cmd_token(char *s, t_attr *att)
 {
@@ -122,9 +143,9 @@ void create_matrix_cmd(char *s, t_attr *att)
 	while (att->y2 < att->count_words)
 	{
 		att->x2 = 0;
-		// printf("questa è s prima della funzione: %s\n", s);
 		while (*s == ' ')
 			s++;
+		// printf("sono qui\n");
 		s = get_cmd_token(s, att);
 		if (att->arr2[att->y2] == 0 && att->y2 < att->count_words)
 		{
@@ -140,6 +161,7 @@ void get_cmd_matrix(char *s, t_attr *att)
 	if (!s)
 		return ;
 	ft_count_words(s, att);
+	// printf("sono qui\n");
 	create_matrix_cmd(s, att);
 }
 

@@ -6,11 +6,12 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:05:24 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 14:16:38 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:31:25 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
 
 int ft_strcmp(const char *str1, const char *str2)
 {

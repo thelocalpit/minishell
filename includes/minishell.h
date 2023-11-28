@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 18:55:36 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:32:25 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ extern int	g_value;
 #ifdef __linux__
 # define PATH_MAX 4096
 #elif __MACH__
-# include <sys/syslimits.h>
-# define PATH_MAX PATH_MAX
+# define PATH_MAX 1024
 #else
 # warning "Unknown or unsupported operating system. Assuming PATH_MAX is 4096."
 # define PATH_MAX 4096
@@ -110,16 +109,15 @@ typedef struct s_attr
 	int only_create;
 	int heredoc;
 	int skip;
+	//---- envp custom matrix ---
+	char **mx_envp;
+	int y_mx_envp;
+	int x_mx_envp;
+
 	//---- expander --------
-	char *var_name;
-	char *value;
-	size_t expanded_length;
-	size_t token_length;
-	char *expanded_token;
-	int j;
-	int i;
-	int has_quote;
-	char **g_env;
+	size_t memory_space;
+	char *check_exp;
+	int len_call_exp;
 
 } t_attr;
 
@@ -130,10 +128,11 @@ typedef struct s_attr
 void	init_parameters(t_attr *att);
 void	init_attributes(t_attr *att);
 void	reinit_parameters(t_attr *att, char **envp);
+void 	start_env(char **envp, t_attr *att);
 
-//tokens_folder
+// tokens_folder
 
-	// 00_token_init_count.c
+// 00_token_init_count.c
 
 void split_init(char *s, t_attr *att);
 int count_tokens(char *s, t_attr *att);
@@ -150,14 +149,19 @@ void get_cmd_matrix(char *s, t_attr *att);
 void create_matrix_cmd(char *s, t_attr *att);
 char *get_cmd_token(char *s, t_attr *att);
 void check_cmd_tokens(char *s, t_attr *att);
-int ft_strlen_custom(char *s, int flag);
+int ft_strlen_custom(char *s, int flag, t_attr *att);
 char *ft_write_word(char *s, t_attr *att, int flag, int i);
 
-// 02_a_count_words.c
+// 03_count_words.c
 int check_single_quotes(char *s, int len, int i, t_attr *att);
 int check_double_quotes(char *s, int len, int i, t_attr *att);
 int check_no_space(char *s, int len, int i, t_attr *att);
 void ft_count_words(char *s, t_attr *att);
+
+// 04_expander.c
+
+int copy_expanded_str(t_attr *att, int start);
+int count_expanded_token(t_attr *att, char *s, int i);
 
 // utilities_folder
 
@@ -182,7 +186,7 @@ char *ft_strncpy(char *dest, const char *src, size_t n);
 //	error_folder
 
 // 00_verify_readline.c
-int verify_readline(char *s);
+int verify_readline(char *s, t_attr *att);
 
 // 01_error_quotes.c
 
@@ -209,16 +213,24 @@ int return_gt_error(void);
 int return_lt_error(void);
 int return_nl_error(void);
 
+// 05_error_dollar.c
+
+int error_dollar(char *s, t_attr *att);
+int error_dollar_02(char *s, int i, t_attr *att);
+int error_dollar_03(char *check_envp, t_attr *att, int len);
+
 //	free_folder
 
 // 00_free.c
 
 void free_arr2(char **tokens, t_attr *att);
 void free_arr(char **arr);
+void ft_delete_matrix(void *matrix);
+void free_mx_envp(t_attr *att);
 
 // Commands
 
-int		do_builtin(char **args, char **env);
+int do_builtin(char **args, char **env);
 int		pwd(char **env);
 int		envi(char **env);
 int		ls_l(char **env, int j);
@@ -242,7 +254,7 @@ void command(t_attr *att);
 
 //	pipe.c
 
-void count_pipes(t_attr *att);
+int count_pipes(t_attr *att);
 void init_pipes(t_attr *att);
 void write_to_pipe(t_attr *att);
 void read_from_pipe(t_attr *att);
@@ -252,10 +264,5 @@ void close_pipeline(t_attr *att);
 
 // 00_expander.c
 
-char *custom_getenv(const char *var_name, t_attr *att);
-void init_var(t_attr *att);
-void expand_tokens2(char **tokens, t_attr *att, int j);
-char *correct_name(char *str);
-char **expand_tokens(char **tokens, t_attr *att);
 
 #endif

@@ -6,12 +6,16 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:45:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 18:47:46 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:34:33 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+
+/* questa funzione serve per scrivere dalla pipe. prima di tutto chiudiamo
+	la parte della pipe che non ci serve che in questo caso è la lettura.
+	poi utilizziamo la dup2 per reindirizzare il fd su stdout (==1). */
 void write_to_pipe(t_attr *att)
 {
 	if (att->pipe_index >= att->nb_pipes)
@@ -22,6 +26,12 @@ void write_to_pipe(t_attr *att)
 		close(att->pipesfd[att->pipe_index][1]);
 }
 
+/* questo serve per leggere dalla pipe. prima di tutto chiudiamo
+	la parte del write_end (che non serve).
+	poi utilizziamo la funzione dup2 che ci consente di
+	reinderizzare l'uscita di read con lo stdin (== 0).
+	*/
+
 void read_from_pipe(t_attr *att)
 {
 	close(att->pipesfd[att->pipe_index][1]);
@@ -29,6 +39,9 @@ void read_from_pipe(t_attr *att)
 	if (att->pipesfd[att->pipe_index] == NULL)
 		close(att->pipesfd[att->pipe_index][0]);
 }
+
+/* questa funzione è necessaria per chiudere i lati del read_end
+	e del write_end della pipe in questione.  */
 
 void close_pipeline(t_attr *att)
 {
@@ -38,7 +51,9 @@ void close_pipeline(t_attr *att)
 		close(att->pipesfd[att->pipe_index][WRITE_END]);
 }
 
-void	count_pipes(t_attr *att)
+/* questa funzione serve per contare il numero di pipe nella readline */
+
+int	count_pipes(t_attr *att)
 {
 	int	i;
 
@@ -46,13 +61,16 @@ void	count_pipes(t_attr *att)
 	i = 0;
 	while (att->split_arr[i])
 	{
-		if (ft_strcmp(att->split_arr[i], "|"))
+		if (!ft_strcmp(att->split_arr[i], "|"))
 			att->nb_pipes++;
 		i++;
 	}
+	if (att->nb_pipes == 0)
+		return (0);
+	return (1);
 }
 
-void init_pipes(t_attr *att)
+void  init_pipes(t_attr *att)
 {
 	int i;
 
