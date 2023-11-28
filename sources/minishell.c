@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/27 20:09:58 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:56:23 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int ac, char **av, char **envp)
 				// printf("count pipe: %d\n", att.nb_pipes);
 				// printf("questo è la matrice di array%d e %d. dovrebbero essere 0 e 1\n", att.pipesfd[0][0], att.pipesfd[0][1]);
 			}
-			while (att.split_arr[att.y] && !verify_readline(s))
+			while (att.split_arr[att.y] && !verify_readline(s, &att))
 			{
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);

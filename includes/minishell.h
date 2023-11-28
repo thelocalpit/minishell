@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/28 17:50:50 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:03:20 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ char *ft_strncpy(char *dest, const char *src, size_t n);
 //	error_folder
 
 // 00_verify_readline.c
-int verify_readline(char *s);
+int verify_readline(char *s, t_attr *att);
 
 // 01_error_quotes.c
 
@@ -218,7 +218,7 @@ int return_nl_error(void);
 
 int error_dollar(char *s, t_attr *att);
 int error_dollar_02(char *s, int i, t_attr *att);
-int error_dollar_03(char *s, char *check_envp, t_attr *att, int len);
+int error_dollar_03(char *check_envp, t_attr *att, int len);
 
 //	free_folder
 
