@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/27 18:42:00 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:50:50 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,12 @@ int return_pipe_error(void);
 int return_gt_error(void);
 int return_lt_error(void);
 int return_nl_error(void);
+
+// 05_error_dollar.c
+
+int error_dollar(char *s, t_attr *att);
+int error_dollar_02(char *s, int i, t_attr *att);
+int error_dollar_03(char *s, char *check_envp, t_attr *att, int len);
 
 //	free_folder
 

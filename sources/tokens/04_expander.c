@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/28 00:46:03 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:39:33 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ int count_expanded_token(t_attr *att, char *s, int i)
 		// printf("sono qui\n");
 		att->len_call_exp++;
 	}
-	att->len_call_exp--;
 	// printf("questo è il n di len_call_exp: %d\n", att->len_call_exp);
-	att->check_exp = malloc(sizeof(char) * att->len_call_exp + 2);
-	while (i <= att->len_call_exp)
+	att->check_exp = malloc(sizeof(char) * att->len_call_exp + 1);
+	while (i < att->len_call_exp)
 	{
 		// printf("sono qui\n");
 		// printf("questo è il n di i: %d\n", i);
@@ -45,7 +44,6 @@ int count_expanded_token(t_attr *att, char *s, int i)
 	att->check_exp[i] = '\0';
 	// printf("questo è check_exp: %s\n", att->check_exp);
 	att->y_mx_envp = 0;
-	att->len_call_exp++;
 	att->x_mx_envp = att->len_call_exp;
 	while (att->mx_envp[att->y_mx_envp])
 	{

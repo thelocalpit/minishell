@@ -6,7 +6,7 @@
 #    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/11/27 17:18:36 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/11/28 17:51:20 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRC =	sources/minishell.c \
 		sources/error/02_error_start_last.c \
 		sources/error/03_error_mixed.c \
 		sources/error/04_error_messages.c \
+		sources/error/05_wrong_dollar.c \
 		sources/free/00_free.c \
 		sources/Commands/builtin.c \
 		sources/executer/pipe.c \
