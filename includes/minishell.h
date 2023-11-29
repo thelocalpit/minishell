@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/28 19:03:20 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/29 20:24:57 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,14 @@ extern int	g_value;
 
 // variables
 
-/* # ifdef __linux__
-# define PATH_MAX 4096
-# elif __MACH__
-# include <sys/syslimits.h>
-# define PATH_MAX PATH_MAX
-# else
-# warning "Unknown or unsupported operating system. Assuming PATH_MAX is 4096."
-# define PATH_MAX 4096
+#ifdef __linux__
+#define PATH_MAX 4096
+#elif __MACH__
+#define PATH_MAX 1024
+#else
+#warning "Unknown or unsupported operating system. Assuming PATH_MAX is 4096."
+#define PATH_MAX 4096
 #endif
- */
 // pipe
 
 # define READ_END 0
@@ -116,11 +114,18 @@ typedef struct s_attr
 	int x_mx_envp;
 
 	//---- expander --------
-	size_t memory_space;
+	int index;
+	int mem_space;
 	char *check_exp;
 	int len_call_exp;
 
+
 } t_attr;
+
+
+/* ------------------------------ NODE -------------------------------------- */
+
+
 
 	/* ------------------------  FUNCTIONS ---------------------------------- */
 
@@ -161,8 +166,8 @@ void ft_count_words(char *s, t_attr *att);
 
 // 04_expander.c
 
-int copy_expanded_str(t_attr *att, int start);
-int count_expanded_token(t_attr *att, char *s, int i);
+void copy_expanded_str(t_attr *att, int start);
+void count_expanded_token(t_attr *att, char *s);
 
 // utilities_folder
 

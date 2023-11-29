@@ -5,6 +5,7 @@
 		"structs.h": "c",
 		"macros.h": "c",
 		"__locale": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"syslimits.h": "c"
 	}
 }

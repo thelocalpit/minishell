@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/28 00:44:00 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/29 20:29:40 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,69 @@
 
 int ft_strlen_custom(char *s, int flag, t_attr *att)
 {
-	int i;
 
-	att->memory_space = 0;
-	i = 0;
+	att->mem_space = 0;
+	att->index = 0;
 	if (!s)
 		return (0);
 	if (flag == 0)
 	{
-		while (s[i] != ' ' && s[i])
+		while (s[att->index] != ' ' && s[att->index])
 		{
-			if (s[i] == '$')
+			if (s[att->index] == '$')
 			{
-				// printf("sono qui\n");
-				i += count_expanded_token(att, s, i);
+				att->index++;
+				count_expanded_token(att, s);
+				printf("questa è s[i]: %s\n", &s[att->index]);
 			}
 			else
-				att->memory_space++;
-				i++;
+			{
+				att->mem_space++;
+				att->index++;
+			}
 		}
 	}
 	if (flag == 1)
 	{
-		while (s[i] != '\'')
+		att->index++;
+		while (s[att->index] != '\'')
 		{
-			att->memory_space++;
-			i++;
+			att->mem_space++;
+			att->index++;
 		}
 	}
 	if (flag == 2)
 	{
-		while (s[i] != '"')
+		att->index++;
+		while (s[att->index] != '"')
 		{
-			if (s[i] == '$')
-				i += count_expanded_token(att, s, flag);
-			else 
+			if (s[att->index] == '$')
 			{
-				i++;
-				att->memory_space++;
+				att->index++;
+				count_expanded_token(att, s);
+				printf("questa è s[i]: %s\n", &s[att->index]);
+			}
+			else
+			{
+				att->mem_space++;
+				att->index++;
+				
 			}
 		}
 	}
-	return (att->memory_space);
+	return (att->mem_space);
 }
 
 
 char *ft_write_word(char *s, t_attr *att, int flag, int i)
 {
 	int len;
+	int len_name_var;
 
 	// printf("questa è s: %s\n", s);
+	len_name_var = 0;
 	len = ft_strlen_custom(s, flag, att);
+	printf("questo è il numero di celle di memoria alloc: %d\n", len);
 	att->arr2[att->y2] = malloc(len + 1);
 	if (!att->arr2[att->y2])
 		return (NULL);
@@ -75,7 +87,16 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 			// if ((s[i] == '\\' && s[i + 1] == '"') || (s[i] == '\\' && s[i +1] == '$'))
 			// 	i++;
 			if (s[i] == '$')
-				i += copy_expanded_str(att, i);
+			{
+				i++;
+				len_name_var = i;
+				while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
+					i++;
+				len_name_var = i - len_name_var;
+				copy_expanded_str(att, len_name_var);
+				copy_expanded_str(att, i);
+				printf("questo s[i]: %s\n", &s[i]);
+			}
 			// att->flag$[att->y2] = 1;
 			else
 				att->arr2[att->y2][att->x2++] = s[i++];
@@ -91,7 +112,15 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 		while (s[i] != ' ' && s[i])
 		{
 			if (s[i] == '$')
-				i += copy_expanded_str(att, i);
+			{
+				i++;
+				len_name_var = i;
+				while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
+					i++;
+				len_name_var = i - len_name_var;
+				copy_expanded_str(att, len_name_var);
+				printf("questo s[i]: %s\n", &s[i]);	
+			}
 			else
 				att->arr2[att->y2][att->x2++] = s[i++];
 		}
