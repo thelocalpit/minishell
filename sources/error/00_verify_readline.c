@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:00:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/29 11:29:12 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:26:39 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int verify_readline(char *s, t_attr *att)
 	{
 		return (1);
 	}
-	// else if (error_dollar(s, att))
-	// {
-	// 	return (1);
-	// }
+	else if (error_dollar(s, att))
+	{
+		return (1);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/29 20:29:40 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:36:07 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 			{
 				att->index++;
 				count_expanded_token(att, s);
-				printf("questa è s[i]: %s\n", &s[att->index]);
+				// printf("questa è s[i]: %s\n", &s[att->index]);
 			}
 			else
 			{
@@ -54,7 +54,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 			{
 				att->index++;
 				count_expanded_token(att, s);
-				printf("questa è s[i]: %s\n", &s[att->index]);
+				// printf("questa è s[i]: %s\n", &s[att->index]);
 			}
 			else
 			{
@@ -76,7 +76,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	// printf("questa è s: %s\n", s);
 	len_name_var = 0;
 	len = ft_strlen_custom(s, flag, att);
-	printf("questo è il numero di celle di memoria alloc: %d\n", len);
+	// printf("questo è il numero di celle di memoria alloc: %d\n", len);
 	att->arr2[att->y2] = malloc(len + 1);
 	if (!att->arr2[att->y2])
 		return (NULL);
@@ -94,8 +94,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 					i++;
 				len_name_var = i - len_name_var;
 				copy_expanded_str(att, len_name_var);
-				copy_expanded_str(att, i);
-				printf("questo s[i]: %s\n", &s[i]);
+				// printf("questo s[i]: %s\n", &s[i]);
 			}
 			// att->flag$[att->y2] = 1;
 			else
@@ -119,7 +118,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 					i++;
 				len_name_var = i - len_name_var;
 				copy_expanded_str(att, len_name_var);
-				printf("questo s[i]: %s\n", &s[i]);	
+				// printf("questo s[i]: %s\n", &s[i]);	
 			}
 			else
 				att->arr2[att->y2][att->x2++] = s[i++];
