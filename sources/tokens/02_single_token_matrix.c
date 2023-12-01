@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_single_token_matrix.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: asacchin <asacchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/28 00:44:00 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:25:02 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				i += count_expanded_token(att, s, i);
 			}
 			else
+			{
 				att->memory_space++;
 				i++;
+			}
 		}
 	}
 	if (flag == 1)
