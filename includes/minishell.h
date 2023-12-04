@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/29 20:24:57 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:21:33 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_attr
 	char **arr2;
 	int y2;
 	int x2;
-	int *flag$;
+	// int *flag$;
 	//------ cmds -------------
 	int count;
 	//----- token variables ---------
@@ -118,7 +118,9 @@ typedef struct s_attr
 	int mem_space;
 	char *check_exp;
 	int len_call_exp;
-
+	int nb_$;
+	int *flag$;
+	int i_flag$;
 
 } t_attr;
 

@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:00:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/30 19:26:39 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:38:47 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,25 @@ int verify_readline(char *s, t_attr *att)
 	if (error_end(s, '>') || error_end(s, '<') || error_end(s, '|'))
 	{
 		// printf("sono qui2\n");
-		return (1);
+		return (-1);
 	}
 	else if (error_begin(s))
 	{
 		// printf("sono qui4\n");
-		return (1);
+		return (-1);
 	}
 	else if (error_mixed_start(s))
 	{
 		// printf("sono qui7\n");
-		return (1);
+		return (-1);
 	}
 	else if (count_quotes(s))
 	{
-		return (1);
+		return (-1);
 	}
 	else if (error_dollar(s, att))
 	{
-		return (1);
+		return (-1);
 	}
 	return (0);
 }

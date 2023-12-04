@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/30 18:28:58 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:33:17 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ void count_expanded_token(t_attr *att, char *s)
 	}
 	att->check_exp[j] = '=';
 	att->check_exp[j + 1] = '\0';
-	// printf("questo è check_exp: %s\n", att->check_exp);
+	printf("questo è check_exp: %s\n", att->check_exp);
 	att->y_mx_envp = 0;
 	att->x_mx_envp = att->len_call_exp;
-	// printf("index: %d\n", att->index);
+	// ft_print_array(att->mx_envp);
+	
 	while (att->mx_envp[att->y_mx_envp])
 	{
+		// printf("questo è y_mx: %d\n", att->y_mx_envp);
 		if (!ft_strncmp(att->check_exp, att->mx_envp[att->y_mx_envp], att->len_call_exp))
 		{
 			// printf("questa è la stringa che viene passata: %c\n", att->mx_envp[att->y_mx_envp][att->x_mx_envp]);
