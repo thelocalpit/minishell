@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_single_token_matrix.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/28 00:44:00 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:33:41 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				// printf("sono qui\n");
 				i += count_expanded_token(att, s, i);
 			}
-			else
+			else {
 				att->memory_space++;
 				i++;
+			}
 		}
 	}
 	if (flag == 1)
@@ -48,7 +49,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		{
 			if (s[i] == '$')
 				i += count_expanded_token(att, s, flag);
-			else 
+			else
 			{
 				i++;
 				att->memory_space++;
