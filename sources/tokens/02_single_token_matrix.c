@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/28 19:33:41 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:35:43 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				// printf("sono qui\n");
 				i += count_expanded_token(att, s, i);
 			}
-			else {
+			else
+			{
 				att->memory_space++;
 				i++;
 			}
