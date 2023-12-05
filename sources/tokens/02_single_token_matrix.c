@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 20:59:46 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:13:06 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,28 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 	att->mem_space = 0;
 	att->index = 0;
 	if (!s)
-		return (0);
-	if (flag == 0)
+		return (0);	
+	if (flag == 3)
 	{
-		save_$ = att->i_flag$;
+		if (att->flag$[att->i_flag$] == 0)
+		{
+			att->index++;
+			count_expanded_token(att, s);
+		}
+		else
+		{
+			while (s[att->index] != '"' && s[att->index] != ' ' && (s[att->index] != '$' && s[att->index + 1] != ' ' && s[att->index + 1]) && s[att->index])
+				att->index++;
+		}
+		att->i_flag$++;
+	}
+	else if (flag == 0)
+	{
 		while (s[att->index] != ' ' && s[att->index])
 		{
-			if (s[att->index] == '$')
-			{
-				if (att->flag$[att->i_flag$] == 0)
-				{
-					att->index++;
-					count_expanded_token(att, s);
-					// if (s[att->index] == '&')
-					// 	break;
-				}
-				else
-				{
-					while (s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
-						att->index++;
-				}
-				att->i_flag$++;
-			}
-			else
-			{
-				att->mem_space++;
-				att->index++;
-			}
-			
+			att->mem_space++;
+			att->index++;
 		}
-		att->i_flag$ = save_$;
 	}
 	if (flag == 1)
 	{
@@ -64,6 +56,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 	}
 	if (flag == 2)
 	{
+		save_$ = att->i_flag$;
 		att->index++;
 		while (s[att->index] != '"')
 		{
@@ -73,15 +66,13 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				{
 					att->index++;
 					count_expanded_token(att, s);
-					// att->i_flag$++;
+					att->i_flag$++;
 				}
 				else
 				{
-					while (s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
+					while (s[att->index] != '"' && s[att->index] != ' ' && (s[att->index] != '$' && s[att->index + 1] != ' ' && s[att->index + 1]) && s[att->index])
 						att->index++;
 				}
-				// att->i_flag$++;
-				// printf("questa è s[i]: %s\n", &s[att->index]);
 			}
 			else
 			{
@@ -89,6 +80,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				att->index++;
 			}
 		}
+		att->i_flag$ = save_$;
 	}
 	return (att->mem_space);
 }
@@ -106,7 +98,17 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	att->arr2[att->y2] = malloc(len + 1);
 	if (!att->arr2[att->y2])
 		return (NULL);
-	if (flag == 2)
+	if (flag == 3)
+	{
+		i++;
+		len_name_var = i;
+		while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
+			i++;
+		len_name_var = i - len_name_var;
+		copy_expanded_str(att, len_name_var);
+		att->i_flag$++;
+	}
+	else if (flag == 2)
 	{
 		while (s[i] != '"')
 		{
@@ -123,13 +125,13 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 					len_name_var = i - len_name_var;
 					copy_expanded_str(att, len_name_var);
 					// printf("questo s[i]: %s\n", &s[i]);
+					att->i_flag$++;
 				}
 				else
 				{
-					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
+					while (s[i] != '"' && s[i] != ' ' && (s[i] != '$' && s[i + 1] != ' ' && s[i + 1]) && s[i])
 						i++;
 				}
-				att->i_flag$++;
 			}
 			else
 				att->arr2[att->y2][att->x2++] = s[i++];
@@ -144,27 +146,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	{
 		while (s[i] != ' ' && s[i])
 		{
-			if (s[i] == '$')
-			{
-				if (att->flag$[att->i_flag$] == 0)
-				{
-					i++;
-					len_name_var = i;
-					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
-						i++;
-					len_name_var = i - len_name_var;
-					copy_expanded_str(att, len_name_var);
-					// printf("questo s[i]: %s\n", &s[i]);
-				}
-				else
-				{
-					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
-						i++;
-				}
-				att->i_flag$++;
-			}
-			else
-				att->arr2[att->y2][att->x2++] = s[i++];
+			att->arr2[att->y2][att->x2++] = s[i++];
 		}
 	}
 	att->arr2[att->y2][att->x2] = '\0';
@@ -193,6 +175,17 @@ char *get_cmd_token(char *s, t_attr *att)
 		flag = 1;
 		return (ft_write_word(s, att, flag, i));
 	}
+	else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
+	{
+		i++;
+		if (att->flag$[att->i_flag$] == -1)
+		{
+			att->i_flag$++;
+			return (NULL);
+		}
+		flag = 3;
+		return (ft_write_word(s, att, flag, i));
+	}
 	else
 	{
 		flag = 0;
@@ -202,7 +195,7 @@ char *get_cmd_token(char *s, t_attr *att)
 
 void create_matrix_cmd(char *s, t_attr *att)
 {
-	att->i_flag$ = 0;
+	att->j_flag$ = att->i_flag$;
 	att->x2 = 0;
 	att->y2 = 0;
 	att->arr2 = malloc((att->count_words + 1) * sizeof(char *));

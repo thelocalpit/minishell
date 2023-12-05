@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 19:33:17 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:38:33 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void count_expanded_token(t_attr *att, char *s)
 	}
 	att->check_exp[j] = '=';
 	att->check_exp[j + 1] = '\0';
-	printf("questo è check_exp: %s\n", att->check_exp);
+	// printf("questo è check_exp: %s\n", att->check_exp);
 	att->y_mx_envp = 0;
 	att->x_mx_envp = att->len_call_exp;
 	// ft_print_array(att->mx_envp);

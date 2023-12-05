@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 17:21:33 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:07:07 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_attr
 	int nb_$;
 	int *flag$;
 	int i_flag$;
+	int j_flag$;
 
 } t_attr;
 

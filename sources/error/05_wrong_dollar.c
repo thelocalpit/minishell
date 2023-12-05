@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 18:35:06 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:28:19 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int count_dollar_sign(char *s, t_attr *att)
 	att->nb_$ = 0;
 	while (s[i])
 	{
-		if (s[i] == '$')
+		if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
 			att->nb_$++;
 		i++;
 	}
@@ -52,7 +52,7 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	j = 0;
 	i++;
 	start = i;
-	while (s[i] != '"' && s[i] != '\'' && s[i] != ' ' && s[i] != '$' && s[i])
+	while (s[i] != '"' && s[i] != '\'' && s[i] != ' ' && (s[att->index] != '$' && s[att->index + 1] != ' ' && s[att->index + 1]) && s[i])
 	{
 		i++;
 		len++;

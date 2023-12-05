@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:09:43 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 16:40:02 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:47:48 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ int check_no_space(char *s, int len, int i, t_attr *att)
 	return (++i);
 }
 
+int check_dollar(char *s, int len, int i, t_attr *att)
+{
+	att->count_words++;
+	i++;
+	while (i <= len && s[i] != '$' && s[i] !=  ' ' && s[i] != '\'' && s[i] != '"')
+		i++;
+	return (++i);
+}
+
 
 void ft_count_words(char *s, t_attr *att)
 {
@@ -56,15 +65,19 @@ void ft_count_words(char *s, t_attr *att)
 	i = 0;
 	att->count_words = 0;
 	len = ft_strlen(s) - 1;
+	att->j_flag$ = att->i_flag$;
 	while (i <= len)
 	{
 		if (s[i] == '\'')
 			i = check_single_quotes(s, len, i, att);
 		else if (s[i] == '"')
 			i = check_double_quotes(s, len, i, att);
+		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
+			i = check_dollar(s, len, i, att);
 		else if (s[i] != ' ')
 			i = check_no_space(s, len, i, att);
 		else
 			i++;
 	}
+	att->i_flag$ = att->j_flag$;
 }
