@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/06 17:38:15 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:20:32 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,10 @@ int		envi(char **env);
 int		ls_l(char **env, int j);
 int		echo(char **args);
 void	ft_exit(void);
+
+// 01_export
+
+int ft_export(char **args, char **env);
 
 // parser folder
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
+#    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/11/28 17:51:20 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/12/05 16:22:28 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,12 +52,13 @@ SRC =	sources/minishell.c \
 		sources/error/05_wrong_dollar.c \
 		sources/free/00_free.c \
 		sources/Commands/builtin.c \
+		sources/Commands/export.c \
 		sources/executer/pipe.c \
 		sources/parser/parser.c \
 		#sources/parser/lexer.c \
 		#sources/expander/00_expander.c \
-		
-		
+
+
 
 OBJSDIR = objects
 OBJ = $(addprefix $(OBJSDIR)/, $(SRC:.c=.o))
@@ -69,7 +70,7 @@ $(NAME): $(OBJ)
 	$(MAKE) -C ./libft
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(RLFLAG) -o $(NAME)
 	echo "Everything Done!"
- 
+
 sani: re $(OBJ)
 	$(MAKE) -C ./libft
 	$(CSANI) $(CFLAGS) $(OBJ) $(LIBFT) $(RLFLAG) -o $(NAME)
