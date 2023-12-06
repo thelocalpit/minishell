@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 17:21:33 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:38:15 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_attr
 	int nb_$;
 	int *flag$;
 	int i_flag$;
+	int *save_y_mx_envp;
 
 } t_attr;
 
@@ -168,7 +169,7 @@ void ft_count_words(char *s, t_attr *att);
 
 // 04_expander.c
 
-void copy_expanded_str(t_attr *att, int start);
+void copy_expanded_str(t_attr *att, int start, int flag);
 void count_expanded_token(t_attr *att, char *s);
 
 // utilities_folder

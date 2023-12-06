@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 17:48:17 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:33:41 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	main(int ac, char **av, char **envp)
 				if (!att.split_arr[att.y + 1])
 					break;
 				att.y += 2;
+				free(att.flag$);
+				free(att.save_y_mx_envp);
 			}
 			free_arr(att.split_arr);
 			// free(att.flag$);
@@ -66,7 +68,6 @@ int	main(int ac, char **av, char **envp)
 				ft_delete_matrix(att.pipesfd);
 			
 			free(s);
-			free(att.flag$);
 		}
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 18:35:06 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:54:57 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int count_dollar_sign(char *s, t_attr *att)
 	att->nb_$ = 0;
 	while (s[i])
 	{
-		if (s[i] == '$')
+		if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
 			att->nb_$++;
 		i++;
 	}
@@ -52,10 +52,12 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	j = 0;
 	i++;
 	start = i;
-	while (s[i] != '"' && s[i] != '\'' && s[i] != ' ' && s[i] != '$' && s[i])
+	while (s[i] != '"' && s[i] != '\'' && s[i] != ' ' && s[i])
 	{
 		i++;
 		len++;
+		if (s[i] == '$'/*  && s[i + 1] != ' ' && s[i + 1] */)
+			break;
 	}
 	check_envp = malloc(sizeof(char) * len + 2);
 	i = start;
@@ -66,17 +68,17 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	check_envp[j] = '=';
 	check_envp[j + 1] = '\0';
 	len += 1;
-	// printf("questa è envp: %s\n", check_envp);
+	printf("questa è in wrong error 2 envp: %s\n", check_envp);
 	att->y_mx_envp = 0;
 	att->x_mx_envp = len;
 	if (error_dollar_03(check_envp, att, len) == -1)
 	{
-		// printf("sono qui in error_03\n");
+		printf("sono qui in error_03\n");
 		free(check_envp);
 		return (-1);
 	}
 	free(check_envp);
-	return (len);
+	return (len - 1);
 }
 
 int error_dollar(char *s, t_attr *att)
@@ -86,13 +88,14 @@ int error_dollar(char *s, t_attr *att)
 	// printf("sono qui\n");
 	if (count_dollar_sign(s, att) != 0)
 	{
+		att->save_y_mx_envp = malloc(sizeof(int) * att->nb_$);
 		att->flag$ = malloc(sizeof(int) * att->nb_$);
 		if (!att->flag$)
 			return (-1);
 		att->i_flag$ = 0;
 	}
 	i = 0;
-	while (s[i])
+	while (s[i] && att->i_flag$ < att->nb_$)
 	{
 		if (s[i] == '\'')
 		{
@@ -100,8 +103,9 @@ int error_dollar(char *s, t_attr *att)
 			while (s[i] != '\'')
 				i++;
 		}
-		else if (s[i] == '$')
+		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i +1] != '"')
 		{
+			// printf("questa è la s di $dollar: %s\n", &s[i]);
 			if (error_dollar_02(s, i, att) == -1)
 				att->flag$[att->i_flag$] = -1;
 			else

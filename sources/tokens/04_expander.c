@@ -6,14 +6,16 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 19:33:17 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:37:46 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void copy_expanded_str(t_attr *att, int len_name_var)
+void copy_expanded_str(t_attr *att, int len_name_var, int flag)
 {
+	if (flag == 2)
+		att->y_mx_envp = att->save_y_mx_envp[att->i_flag$];
 	att->x_mx_envp = len_name_var + 1;
 	while (att->mx_envp[att->y_mx_envp][att->x_mx_envp])
 		att->arr2[att->y2][att->x2++] = att->mx_envp[att->y_mx_envp][att->x_mx_envp++];
@@ -44,7 +46,6 @@ void count_expanded_token(t_attr *att, char *s)
 	att->y_mx_envp = 0;
 	att->x_mx_envp = att->len_call_exp;
 	// ft_print_array(att->mx_envp);
-	
 	while (att->mx_envp[att->y_mx_envp])
 	{
 		// printf("questo è y_mx: %d\n", att->y_mx_envp);

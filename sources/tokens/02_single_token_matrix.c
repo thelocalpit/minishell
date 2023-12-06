@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/04 20:59:46 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:38:34 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,22 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		save_$ = att->i_flag$;
 		while (s[att->index] != ' ' && s[att->index])
 		{
-			if (s[att->index] == '$')
+			if (s[att->index] == '$' && s[att->index + 1] != ' ' && s[att->index + 1])
 			{
+				printf("questa è kla cazzo di flag: %d\n", att->flag$[att->i_flag$]);
 				if (att->flag$[att->i_flag$] == 0)
 				{
 					att->index++;
 					count_expanded_token(att, s);
-					// if (s[att->index] == '&')
-					// 	break;
 				}
 				else
 				{
+					att->index++;
 					while (s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
+					{
+						printf("sono qui\n");
 						att->index++;
+					}
 				}
 				att->i_flag$++;
 			}
@@ -64,10 +67,13 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 	}
 	if (flag == 2)
 	{
+		
+		
+		save_$ = att->i_flag$;
 		att->index++;
 		while (s[att->index] != '"')
 		{
-			if (s[att->index] == '$')
+			if (s[att->index] == '$' && s[att->index + 1] != ' ' && s[att->index + 1])
 			{
 				if (att->flag$[att->i_flag$] == 0)
 				{
@@ -77,11 +83,13 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				}
 				else
 				{
+					att->index++;
+					printf("QUESTO è S[ATT->INDEX] = %c\n", s[att->index]);
 					while (s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
 						att->index++;
 				}
-				// att->i_flag$++;
-				// printf("questa è s[i]: %s\n", &s[att->index]);
+				att->save_y_mx_envp[att->i_flag$] = att->y_mx_envp;
+				att->i_flag$++;
 			}
 			else
 			{
@@ -89,7 +97,10 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				att->index++;
 			}
 		}
+		att->i_flag$ = save_$;
 	}
+	printf("questa è s: %s\n", s);
+	printf("att->mem_space: %d\n", att->mem_space);
 	return (att->mem_space);
 }
 
@@ -99,10 +110,8 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	int len;
 	int len_name_var;
 
-	// printf("questa è s: %s\n", s);
 	len_name_var = 0;
 	len = ft_strlen_custom(s, flag, att);
-	// printf("questo è il numero di celle di memoria alloc: %d\n", len);
 	att->arr2[att->y2] = malloc(len + 1);
 	if (!att->arr2[att->y2])
 		return (NULL);
@@ -110,9 +119,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	{
 		while (s[i] != '"')
 		{
-			// if ((s[i] == '\\' && s[i + 1] == '"') || (s[i] == '\\' && s[i +1] == '$'))
-			// 	i++;
-			if (s[i] == '$')
+			if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
 			{
 				if (att->flag$[att->i_flag$] == 0)
 				{
@@ -121,11 +128,11 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
 						i++;
 					len_name_var = i - len_name_var;
-					copy_expanded_str(att, len_name_var);
-					// printf("questo s[i]: %s\n", &s[i]);
+					copy_expanded_str(att, len_name_var, flag);
 				}
 				else
 				{
+					i++;
 					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
 						i++;
 				}
@@ -144,7 +151,8 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	{
 		while (s[i] != ' ' && s[i])
 		{
-			if (s[i] == '$')
+			printf("questo è att_y_mx_envp: %d\n", att->y_mx_envp);
+			if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
 			{
 				if (att->flag$[att->i_flag$] == 0)
 				{
@@ -153,11 +161,12 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
 						i++;
 					len_name_var = i - len_name_var;
-					copy_expanded_str(att, len_name_var);
+					copy_expanded_str(att, len_name_var, flag);
 					// printf("questo s[i]: %s\n", &s[i]);
 				}
 				else
 				{
+					i++;
 					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
 						i++;
 				}
