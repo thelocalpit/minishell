@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/05 16:19:22 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:51:31 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,10 @@ char *ft_strcpy(char *destination, const char *source);
 char *ft_strcat(char *dest, const char *src);
 char *ft_strncpy(char *dest, const char *src, size_t n);
 
+// 01_utils.c
+
+t_list *copy_env_in_list(char **env);
+
 //	error_folder
 
 // 00_verify_readline.c
@@ -230,7 +234,7 @@ void free_mx_envp(t_attr *att);
 
 // Commands
 
-int do_builtin(char **args, char **env);
+int do_builtin(char **args, char **env, t_list env_list);
 int		pwd(char **env);
 int		envi(char **env);
 int		ls_l(char **env, int j);
@@ -239,7 +243,7 @@ void	ft_exit(void);
 
 // 01_export
 
-int ft_export(char **args, char **env);
+int ft_export(char **args, t_list env_list);
 
 // parser folder
 

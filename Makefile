@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/12/05 16:22:28 by mcoppola         ###   ########.fr        #
+#    Updated: 2023/12/05 18:25:10 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC =	sources/minishell.c \
 		sources/utilities/prompt.c \
 		sources/utilities/debugg.c \
 		sources/utilities/00_utils.c \
+		sources/utilities/01_utils.c \
 		sources/tokens/00_token_init_count.c \
 		sources/tokens/01_token_in_array.c \
 		sources/tokens/02_single_token_matrix.c \
@@ -67,7 +68,7 @@ OBJ = $(addprefix $(OBJSDIR)/, $(SRC:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(MAKE) -C ./libft
+	$(MAKE) bonus -C ./libft
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(RLFLAG) -o $(NAME)
 	echo "Everything Done!"
 
