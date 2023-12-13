@@ -6,13 +6,13 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/05 16:15:58 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:55:37 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	do_builtin(char **args, char **env)
+int	do_builtin(char **args, char **env, t_list env_list)
 {
 	int 	i;
 	i = 0;
@@ -26,7 +26,7 @@ int	do_builtin(char **args, char **env)
 				return (pwd((char **) env));
 
 			if (ft_strncmp(args[i], "export\0", 4) == 0)
-				return (ft_export((char **) args, (char **) env));
+				return (ft_export((char **) args, env_list));
 
 			if (ft_strncmp(args[i], "env\0", 4) == 0)
 				return (envi((char **) env));

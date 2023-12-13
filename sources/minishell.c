@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/06 17:33:41 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:54:01 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,18 @@ int	main(int ac, char **av, char **envp)
 {
 	char	*s;
 	t_attr	att;
+	t_list *env_list;
 
 	(void)ac;
 	(void)av;
 	rl_clear_history();
 	set_signals();
 	init_parameters(&att);
+	// questo è l'init del env per il momento fatto cosi, poi va sistemato dove volete voi
+	// e va sostituito ovunque, per il momento lo aggiungo come parametro in piu dove
+	// serve a me e ricordiamoci di freearlo (Marco)
+	env_list = copy_env_in_list(envp);
+
 	while (1)
 	{
 		s = prompt();
@@ -52,7 +58,7 @@ int	main(int ac, char **av, char **envp)
 			{
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);
-				do_builtin(att.arr2, (char **)envp);
+				do_builtin(att.arr2, (char **)envp, *env_list);
 				// command(&att);
 				// ft_print_array(att.mx_envp);
 				free_arr2(att.arr2, &att);
@@ -66,7 +72,7 @@ int	main(int ac, char **av, char **envp)
 			// free(att.flag$);
 			if (att.nb_pipes != 0)
 				ft_delete_matrix(att.pipesfd);
-			
+
 			free(s);
 		}
 	}
