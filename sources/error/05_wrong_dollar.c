@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/06 17:54:57 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:25:29 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int count_dollar_sign(char *s, t_attr *att)
 	att->nb_$ = 0;
 	while (s[i])
 	{
-		if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
+		if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
 			att->nb_$++;
 		i++;
 	}
+	// printf("ATT.NB_$: %d\n", att->nb_$);
 	return (att->nb_$);
 }
 
@@ -68,12 +69,10 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	check_envp[j] = '=';
 	check_envp[j + 1] = '\0';
 	len += 1;
-	printf("questa è in wrong error 2 envp: %s\n", check_envp);
 	att->y_mx_envp = 0;
 	att->x_mx_envp = len;
 	if (error_dollar_03(check_envp, att, len) == -1)
 	{
-		printf("sono qui in error_03\n");
 		free(check_envp);
 		return (-1);
 	}
@@ -85,7 +84,6 @@ int error_dollar(char *s, t_attr *att)
 {
 	int i;
 
-	// printf("sono qui\n");
 	if (count_dollar_sign(s, att) != 0)
 	{
 		att->save_y_mx_envp = malloc(sizeof(int) * att->nb_$);
@@ -105,7 +103,6 @@ int error_dollar(char *s, t_attr *att)
 		}
 		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i +1] != '"')
 		{
-			// printf("questa è la s di $dollar: %s\n", &s[i]);
 			if (error_dollar_02(s, i, att) == -1)
 				att->flag$[att->i_flag$] = -1;
 			else
@@ -114,15 +111,13 @@ int error_dollar(char *s, t_attr *att)
 		}
 		if (s[i] == '\0')
 		{
-			printf("att->nb_flag == %d\n", att->nb_$);
-			printf("questo sono le flag: [0]%d, [1]%d, [2]%d\n", att->flag$[0], att->flag$[1], att->flag$[2]);
+			// printf("att->nb_flag == %d\n", att->nb_$);
+			// printf("questo sono le flag: [0]%d, [1]%d, [2]%d\n", att->flag$[0], att->flag$[1], att->flag$[2]);
 			return (0);
 		}
-		// printf("questo è i: %d\n", i);
-		// printf("questo è il carattere analizzato: %s\n", &s[i]);
 		i++;
 	}
-	printf("att->nb_flag == %d\n", att->nb_$);
-	printf("questo sono le flag: [0]%d, [1]%d, [2]%d\n", att->flag$[0], att->flag$[1], att->flag$[2]);
+	// printf("att->nb_flag == %d\n", att->nb_$);
+	// printf("questo sono le flag: [0]%d, [1]%d, [2]%d\n", att->flag$[0], att->flag$[1], att->flag$[2]);
 	return (0);
 }

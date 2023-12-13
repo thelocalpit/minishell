@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/06 18:21:06 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:25:14 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		{
 			if (s[att->index] == '$' && s[att->index + 1] != ' ' && s[att->index + 1])
 			{
-				printf("questa è kla cazzo di flag: %d\n", att->flag$[att->i_flag$]);
+				// printf("questa è kla cazzo di flag: %d\n", att->flag$[att->i_flag$]);
 				if (att->flag$[att->i_flag$] == 0)
 				{
 					att->index++;
@@ -39,7 +39,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 					att->index++;
 					while (s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
 					{
-						printf("sono qui\n");
+						// printf("sono qui\n");
 						att->index++;
 					}
 				}
@@ -73,7 +73,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		att->index++;
 		while (s[att->index] != '"')
 		{
-			if (s[att->index] == '$' && s[att->index + 1] != ' ' && s[att->index + 1])
+			if (s[att->index] == '$' && s[att->index + 1] != ' ' && s[att->index + 1] && s[att->index + 1] != '"')
 			{
 				if (att->flag$[att->i_flag$] == 0)
 				{
@@ -84,7 +84,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				else
 				{
 					att->index++;
-					printf("QUESTO è S[ATT->INDEX] = %c\n", s[att->index]);
+					// printf("QUESTO è S[ATT->INDEX] = %c\n", s[att->index]);
 					while (s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
 						att->index++;
 				}
@@ -93,14 +93,15 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 			}
 			else
 			{
+				// printf("sono qui e questo è l'else e dovrebbe essere un $: %c\n", s[att->index]);
 				att->mem_space++;
 				att->index++;
 			}
 		}
 		att->i_flag$ = save_$;
 	}
-	printf("questa è s: %s\n", s);
-	printf("att->mem_space: %d\n", att->mem_space);
+	// printf("questa è s: %s\n", s);
+	// printf("att->mem_space: %d\n", att->mem_space);
 	return (att->mem_space);
 }
 
@@ -119,7 +120,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	{
 		while (s[i] != '"')
 		{
-			if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
+			if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
 			{
 				if (att->flag$[att->i_flag$] == 0)
 				{
@@ -151,7 +152,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	{
 		while (s[i] != ' ' && s[i])
 		{
-			printf("questo è att_y_mx_envp: %d\n", att->y_mx_envp);
+			// printf("questo è att_y_mx_envp: %d\n", att->y_mx_envp);
 			if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
 			{
 				if (att->flag$[att->i_flag$] == 0)
