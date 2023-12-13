@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/05 18:51:31 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/13 14:50:09 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,9 @@ char *ft_strncpy(char *dest, const char *src, size_t n);
 // 01_utils.c
 
 t_list *copy_env_in_list(char **env);
+t_list *sort_list(t_list *list);
+void insert_between_node(t_list *prev, char *content);
+char    *get_var_name(char *full_var);
 
 //	error_folder
 
