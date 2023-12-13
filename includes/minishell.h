@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/13 16:53:54 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:02:49 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,9 @@ char *ft_strncpy(char *dest, const char *src, size_t n);
 // 01_utils.c
 
 t_list *copy_env_in_list(char **env);
+t_list *sort_list(t_list *list);
+void insert_between_node(t_list *prev, char *content);
+char    *get_var_name(char *full_var);
 
 //	error_folder
 
