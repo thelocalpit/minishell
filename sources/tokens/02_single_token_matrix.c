@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/14 10:12:56 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:37:41 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,14 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				att->index += 2;
 				att->i_flag$++;
 			}
+			if (s[att->index] == '$' && s[att->index + 1] == '?')
+			{
+				att->mem_space = ft_intsize(g_value);
+				att->index += 2;
+				att->i_flag$++;
+			}
 			if (s[att->index] == '$' && s[att->index + 1] != ' ' && s[att->index + 1])
 			{
-				// printf("questa è kla cazzo di flag: %d\n", att->flag$[att->i_flag$]);
 				if (att->flag$[att->i_flag$] == 0)
 				{
 					att->index++;
@@ -96,10 +101,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 				{
 					att->index++;
 					while (s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
-					{
-						// printf("sono qui\n");
 						att->index++;
-					}
 				}
 				att->i_flag$++;
 			}
@@ -117,8 +119,6 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		att->index++;
 		while (s[att->index] != '\'')
 		{
-			// if (att->index == '$')
-			// 	att->i_flag$++;
 			att->mem_space++;
 			att->index++;
 		}
@@ -130,18 +130,22 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		att->index++;
 		while (s[att->index] != '"')
 		{
+			if (s[att->index] == '$' && s[att->index + 1] == '?')
+			{
+				att->mem_space = ft_intsize(g_value);
+				att->index += 2;
+				att->i_flag$++;
+			}
 			if (s[att->index] == '$' && s[att->index + 1] != ' ' && s[att->index + 1] && s[att->index + 1] != '"')
 			{
 				if (att->flag$[att->i_flag$] == 0)
 				{
 					att->index++;
 					count_expanded_token(att, s);
-					// att->i_flag$++;
 				}
 				else
 				{
 					att->index++;
-					// printf("QUESTO è S[ATT->INDEX] = %c\n", s[att->index]);
 					while (s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
 						att->index++;
 				}
@@ -150,15 +154,12 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 			}
 			else
 			{
-				// printf("sono qui e questo è l'else e dovrebbe essere un $: %c\n", s[att->index]);
 				att->mem_space++;
 				att->index++;
 			}
 		}
 		att->i_flag$ = save_$;
 	}
-	// printf("questa è s: %s\n", s);
-	// printf("att->mem_space: %d\n", att->mem_space);
 	return (att->mem_space);
 }
 
@@ -177,7 +178,12 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	{
 		while (s[i] != '"')
 		{
-			if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
+			if (s[i] == '$' && s[i + 1] == '?')
+			{
+				ft_itoa_custom(g_value, att);
+				i += 2;
+			}
+			else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
 			{
 				if (att->flag$[att->i_flag$] == 0)
 				{
@@ -214,8 +220,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 				ft_itoa_custom(g_value, att);
 				i += 2;
 			}
-			// printf("questo è att_y_mx_envp: %d\n", att->y_mx_envp);
-			if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
+			else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
 			{
 				if (att->flag$[att->i_flag$] == 0)
 				{
@@ -225,7 +230,6 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 						i++;
 					len_name_var = i - len_name_var;
 					copy_expanded_str(att, len_name_var, flag);
-					// printf("questo s[i]: %s\n", &s[i]);
 				}
 				else
 				{
@@ -281,15 +285,11 @@ void create_matrix_cmd(char *s, t_attr *att)
 	att->arr2[att->count_words] = NULL;
 	if (!att->arr2)
 		return;
-	// att->flag$ = malloc((att->count_words + 1) * sizeof(int));
-	// if (!att->flag$)
-	// 	return;
 	while (att->y2 < att->count_words)
 	{
 		att->x2 = 0;
 		while (*s == ' ')
 			s++;
-		// printf("sono qui\n");
 		s = get_cmd_token(s, att);
 		if (att->arr2[att->y2] == 0 && att->y2 < att->count_words)
 		{
