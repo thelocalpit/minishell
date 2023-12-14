@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/23 15:38:28 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:49:01 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	process_special_token(t_attr *att, char *s, int i)
 			return (++i);
 		else if (s[i] == '<' && s[i + 1] == '<')
 			return (i + 2);
-		else /* if (s[i] == '<' && s[i + 1] != '<') */
+		else
 			return (++i);
 	}
 	else

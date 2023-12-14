@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/07 17:25:29 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:44:30 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ int count_dollar_sign(char *s, t_attr *att)
 
 int error_dollar_03(char *check_envp, t_attr *att, int len)
 {
-	// printf("questa è la stringa che viene passata: %c\n", att->mx_envp[att->y_mx_envp][att->x_mx_envp]);
 	att->y_mx_envp = 0;
 	while (att->mx_envp[att->y_mx_envp])
 	{
 		// printf("QUESTO è LEN: %d. QUESTO CONFRONTO DELLE STR: %s == %s\n", len, check_envp, att->mx_envp[att->y_mx_envp]);
 		if (!ft_strncmp(check_envp, att->mx_envp[att->y_mx_envp], len))
+			return (0);
+		if (!ft_strncmp(check_envp, "?", 1))
 			return (0);
 		att->y_mx_envp++;
 	}
@@ -53,11 +54,13 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	j = 0;
 	i++;
 	start = i;
+	if (s[i] == '?')
+		return (1);
 	while (s[i] != '"' && s[i] != '\'' && s[i] != ' ' && s[i])
 	{
 		i++;
 		len++;
-		if (s[i] == '$'/*  && s[i + 1] != ' ' && s[i + 1] */)
+		if (s[i] == '$')
 			break;
 	}
 	check_envp = malloc(sizeof(char) * len + 2);
@@ -110,14 +113,8 @@ int error_dollar(char *s, t_attr *att)
 			att->i_flag$++;
 		}
 		if (s[i] == '\0')
-		{
-			// printf("att->nb_flag == %d\n", att->nb_$);
-			// printf("questo sono le flag: [0]%d, [1]%d, [2]%d\n", att->flag$[0], att->flag$[1], att->flag$[2]);
 			return (0);
-		}
 		i++;
 	}
-	// printf("att->nb_flag == %d\n", att->nb_$);
-	// printf("questo sono le flag: [0]%d, [1]%d, [2]%d\n", att->flag$[0], att->flag$[1], att->flag$[2]);
 	return (0);
 }

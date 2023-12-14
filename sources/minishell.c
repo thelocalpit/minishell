@@ -6,15 +6,13 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/13 16:54:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/14 09:42:35 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* int	g_value;
-
-g_value = 0; */
+int g_value = 0;
 
 int	main(int ac, char **av, char **envp)
 {
@@ -60,7 +58,7 @@ int	main(int ac, char **av, char **envp)
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				do_builtin(att.arr2, (char **)envp, *env_list);
 				// command(&att);
-				// ft_print_array(att.mx_envp);
+				ft_print_array(att.arr2);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
 					break;

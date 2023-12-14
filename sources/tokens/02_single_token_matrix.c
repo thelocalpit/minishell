@@ -6,11 +6,63 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/07 17:25:14 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/14 10:12:56 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int ft_intsize(int n)
+{
+	int count;
+
+	count = 0;
+	if (n <= 0)
+		count++;
+	while (n != 0)
+	{
+		count++;
+		n = n / 10;
+	}
+	return (count);
+}
+
+static int ft_ispositive(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
+
+void ft_itoa_custom(int n, t_attr *att)
+{
+	char *str;
+	int i;
+
+	i = ft_intsize(n);
+	str = malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return ;
+	str[i] = '\0';
+	if (n < 0)
+		str[0] = '-';
+	else if (n == 0)
+		str[0] = '0';
+	while (n != 0)
+	{
+		i--;
+		str[i] = ft_ispositive(n % 10) + '0';
+		n = n / 10;
+	}
+	i = 0;
+	while (str[i])
+	{
+		att->arr2[att->y2][att->x2++] = str[i++];
+	}
+	free(str);
+	return ;
+}
+
 
 int ft_strlen_custom(char *s, int flag, t_attr *att)
 {
@@ -22,10 +74,16 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 	if (!s)
 		return (0);
 	if (flag == 0)
-	{
+	{		
 		save_$ = att->i_flag$;
 		while (s[att->index] != ' ' && s[att->index])
 		{
+			if (s[att->index] == '$' && s[att->index + 1] == '?')
+			{
+				att->mem_space = ft_intsize(g_value);
+				att->index += 2;
+				att->i_flag$++;
+			}
 			if (s[att->index] == '$' && s[att->index + 1] != ' ' && s[att->index + 1])
 			{
 				// printf("questa è kla cazzo di flag: %d\n", att->flag$[att->i_flag$]);
@@ -67,7 +125,6 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 	}
 	if (flag == 2)
 	{
-		
 		
 		save_$ = att->i_flag$;
 		att->index++;
@@ -152,6 +209,11 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	{
 		while (s[i] != ' ' && s[i])
 		{
+			if (s[i] == '$' && s[i + 1] == '?')
+			{
+				ft_itoa_custom(g_value, att);
+				i += 2;
+			}
 			// printf("questo è att_y_mx_envp: %d\n", att->y_mx_envp);
 			if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
 			{
