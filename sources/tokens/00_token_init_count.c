@@ -6,13 +6,13 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/13 17:49:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/15 21:22:17 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
+/* questa funzione serve per contare i token ¨speciali¨. */
 
 int	process_special_token(t_attr *att, char *s, int i)
 {
@@ -76,5 +76,5 @@ void	split_init(char *s, t_attr *att)
 	att->nb_tokens = 0;
 	att->split_arr = NULL;
 	count_tokens(s, att);
-	create_array(s, att);;
+	create_array(s, att);
 }

@@ -6,13 +6,14 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:04:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/23 15:38:46 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/15 21:24:35 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* in this ft we check every single options that can occur with (|,<,>) */
+/* in this ft we check every single options that can occur with (|,<,>).
+	allochiamo la memoria. */
 
 void check_next_special_token(char *s, int i, char **token)
 {
@@ -89,6 +90,7 @@ char *get_token(char *s)
 	when we find something different from a ' ', we call the function
 	get_token that we'll return a str. we do this process for all the tokens 
 	we have.  */
+/* questo e'il primo array che creiamo. */
 	
 void	create_array(char *s, t_attr *att)
 {
