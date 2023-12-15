@@ -6,60 +6,64 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/28 16:39:33 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:47:15 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int copy_expanded_str(t_attr *att, int start)
+void copy_expanded_str(t_attr *att, int len_name_var, int flag)
 {
-	att->x_mx_envp = start + att->len_call_exp;
+	if (flag == 2)
+		att->y_mx_envp = att->save_y_mx_envp[att->i_flag$];
+	att->x_mx_envp = len_name_var + 1;
 	while (att->mx_envp[att->y_mx_envp][att->x_mx_envp])
 		att->arr2[att->y2][att->x2++] = att->mx_envp[att->y_mx_envp][att->x_mx_envp++];
-	return (att->len_call_exp + 1);
+	return ;
 }
 
-int count_expanded_token(t_attr *att, char *s, int i)
+void count_expanded_token(t_attr *att, char *s)
 {
-	i++;
-	att->len_call_exp = i;
-	// printf("questo è il n di i: %d\n", i);
-	while (s[att->len_call_exp] != '"' && s[att->len_call_exp] != ' ' && s[att->len_call_exp] != '$' && s[att->len_call_exp])
+	int start;
+	int j;
+
+	j = 0;
+	start = att->index; // mi salvo il valore iniziale.
+	while (s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
 	{
-		// printf("sono qui\n");
-		att->len_call_exp++;
+		att->index++;
 	}
-	// printf("questo è il n di len_call_exp: %d\n", att->len_call_exp);
+	att->len_call_exp = att->index - start + 1; // +1 perchè c'è anche l'uguale
 	att->check_exp = malloc(sizeof(char) * att->len_call_exp + 1);
-	while (i < att->len_call_exp)
+	att->index = start;
+	while (j < att->len_call_exp && s[att->index] != '"' && s[att->index] != ' ' && s[att->index] != '$' && s[att->index])
 	{
-		// printf("sono qui\n");
-		// printf("questo è il n di i: %d\n", i);
-		att->check_exp[i -1] = s[i];
-		// write(1, &s[i], 1);
-		i++;
+		att->check_exp[j++] = s[att->index++];
 	}
-	att->check_exp[i - 1] = '=';
-	att->check_exp[i] = '\0';
+	att->check_exp[j] = '=';
+	att->check_exp[j + 1] = '\0';
 	// printf("questo è check_exp: %s\n", att->check_exp);
 	att->y_mx_envp = 0;
 	att->x_mx_envp = att->len_call_exp;
+	// ft_print_array(att->mx_envp);
 	while (att->mx_envp[att->y_mx_envp])
 	{
+		// printf("questo è y_mx: %d\n", att->y_mx_envp);
 		if (!ft_strncmp(att->check_exp, att->mx_envp[att->y_mx_envp], att->len_call_exp))
 		{
 			// printf("questa è la stringa che viene passata: %c\n", att->mx_envp[att->y_mx_envp][att->x_mx_envp]);
 			while (att->mx_envp[att->y_mx_envp][att->x_mx_envp])
 			{
-				att->memory_space++;
+				att->mem_space++;
 				att->x_mx_envp++;
 			}
 			free(att->check_exp);
-			return (att->len_call_exp + 1);
+			// printf("dentro exp. questo è il numero di celle di memoria alloc: %zu\n", att->mem_space);
+			return ;
 		}
 		att->y_mx_envp++;
 	}
-	att->memory_space++;
-	return (1);
+	att->mem_space++;
+	printf("ERRORE CONTROLLA COUNT_EXPANDED_TOKEN\n");
+	return ;
 }

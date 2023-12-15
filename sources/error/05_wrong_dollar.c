@@ -6,41 +6,72 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/28 19:10:02 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:44:30 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int error_dollar_03(char *check_envp, t_attr *att, int len) 
+int count_dollar_sign(char *s, t_attr *att)
 {
+	int i;
+
+	i = 0;
+	att->nb_$ = 0;
+	while (s[i])
+	{
+		if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
+			att->nb_$++;
+		i++;
+	}
+	// printf("ATT.NB_$: %d\n", att->nb_$);
+	return (att->nb_$);
+}
+
+int error_dollar_03(char *check_envp, t_attr *att, int len)
+{
+	att->y_mx_envp = 0;
 	while (att->mx_envp[att->y_mx_envp])
 	{
+		// printf("QUESTO è LEN: %d. QUESTO CONFRONTO DELLE STR: %s == %s\n", len, check_envp, att->mx_envp[att->y_mx_envp]);
 		if (!ft_strncmp(check_envp, att->mx_envp[att->y_mx_envp], len))
-			return (len);
+			return (0);
+		if (!ft_strncmp(check_envp, "?", 1))
+			return (0);
 		att->y_mx_envp++;
 	}
 	return (-1);
 }
 
-
 int error_dollar_02(char *s, int i, t_attr *att)
 {
 	int len;
 	char *check_envp;
+	int j;
+	int start;
 
+	len = 0;
+	j = 0;
 	i++;
-	len = i;
-	while (s[len] != '"' && s[len] != '\'' && s[len] != ' ' && s[len] != '$' && s[len])
-		len++;
-	check_envp = malloc(sizeof(char) * len + 1);
-	while(i < len)
+	start = i;
+	if (s[i] == '?')
+		return (1);
+	while (s[i] != '"' && s[i] != '\'' && s[i] != ' ' && s[i])
 	{
-		check_envp[i - 1] = s[i];
 		i++;
+		len++;
+		if (s[i] == '$')
+			break;
 	}
-	check_envp[i - 1] = '=';
-	check_envp[i] = '\0';
+	check_envp = malloc(sizeof(char) * len + 2);
+	i = start;
+	while (j < len)
+	{
+		check_envp[j++] = s[i++];
+	}
+	check_envp[j] = '=';
+	check_envp[j + 1] = '\0';
+	len += 1;
 	att->y_mx_envp = 0;
 	att->x_mx_envp = len;
 	if (error_dollar_03(check_envp, att, len) == -1)
@@ -49,15 +80,23 @@ int error_dollar_02(char *s, int i, t_attr *att)
 		return (-1);
 	}
 	free(check_envp);
-	return (error_dollar_03(check_envp, att, len));
+	return (len - 1);
 }
 
 int error_dollar(char *s, t_attr *att)
 {
 	int i;
 
+	if (count_dollar_sign(s, att) != 0)
+	{
+		att->save_y_mx_envp = malloc(sizeof(int) * att->nb_$);
+		att->flag$ = malloc(sizeof(int) * att->nb_$);
+		if (!att->flag$)
+			return (-1);
+		att->i_flag$ = 0;
+	}
 	i = 0;
-	while (s[i])
+	while (s[i] && att->i_flag$ < att->nb_$)
 	{
 		if (s[i] == '\'')
 		{
@@ -65,17 +104,16 @@ int error_dollar(char *s, t_attr *att)
 			while (s[i] != '\'')
 				i++;
 		}
-		
-		else if (s[i] == '$')
+		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i +1] != '"')
 		{
 			if (error_dollar_02(s, i, att) == -1)
-			{
-				printf("ERROR: check close to '$'\n");
-				return (-1);
-			}
+				att->flag$[att->i_flag$] = -1;
 			else
 				i += error_dollar_02(s, i, att);
+			att->i_flag$++;
 		}
+		if (s[i] == '\0')
+			return (0);
 		i++;
 	}
 	return (0);

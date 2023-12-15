@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_a_count_words.c                                 :+:      :+:    :+:   */
+/*   03_count_words.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:09:43 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/23 15:39:05 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/14 09:46:30 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ int check_double_quotes(char *s, int len, int i, t_attr *att)
 	}
 	return (++i);
 }
+int check_special(int i, t_attr *att)
+{
+	att->count_words++;
+	i += 2;
+	return (i);
+}
 
 int check_no_space(char *s, int len, int i, t_attr *att)
 {
@@ -62,6 +68,8 @@ void ft_count_words(char *s, t_attr *att)
 			i = check_single_quotes(s, len, i, att);
 		else if (s[i] == '"')
 			i = check_double_quotes(s, len, i, att);
+		// else if (s[i] == '$' && s[i + 1] == '?')
+		// 	i = check_special(i, att);
 		else if (s[i] != ' ')
 			i = check_no_space(s, len, i, att);
 		else
