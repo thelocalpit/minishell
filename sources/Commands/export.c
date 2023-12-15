@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2023/12/12 23:42:55 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/15 11:36:12 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 #include <stdlib.h>
 #include "../../includes/minishell.h"
 
-int basic_export(t_list env_list)
+int basic_export(t_list *env_list)
 {
-    t_list *env;
+    t_list *export;
 
-    env = &env_list;
-    while (env)
+    export = sort_list(env_list);
+    while (export)
     {
-        printf("declare -x %s\n", (char *)env->content);
-        env=env->next;
+        printf("declare -x %s\n", (char *)export->content);
+        export=export->next;
     }
     return (0);
 }
@@ -59,11 +59,11 @@ int ft_export(char **args, t_list env_list)
     i = 0;
     while (args[i])
     {
-        printf("Args: %s\n", args[i]);
+        // printf("Args: %s\n", args[i]);
         i++;
     }
     if (i == 1)
-        return (basic_export(env_list));
+        return (basic_export(&env_list));
     else
     {
         args++;

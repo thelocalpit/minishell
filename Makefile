@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/12/05 18:25:10 by mcoppola         ###   ########.fr        #
+#    Updated: 2023/12/15 13:36:52 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC =	sources/minishell.c \
 		sources/free/00_free.c \
 		sources/Commands/builtin.c \
 		sources/Commands/export.c \
+		sources/Commands/unset.c \
 		sources/executer/pipe.c \
 		sources/parser/parser.c \
 		#sources/parser/lexer.c \

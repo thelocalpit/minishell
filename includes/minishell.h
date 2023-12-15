@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/13 14:50:09 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/15 13:49:08 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,11 @@ void	ft_exit(void);
 // 01_export
 
 int ft_export(char **args, t_list env_list);
+
+// 01_unset
+
+int ft_unset(char **args, t_list *env_list);
+void    ft_remove_node(t_list **env_list, char *arg);
 
 // parser folder
 
