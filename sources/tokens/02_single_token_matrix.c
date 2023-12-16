@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/15 21:37:30 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:35:19 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ void get_cmd_matrix(char *s, t_attr *att)
 	if (!s)
 		return ;
 	ft_count_words(s, att);
-	// printf("sono qui\n");
 	create_matrix_cmd(s, att);
 }
 

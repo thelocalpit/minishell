@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/15 14:13:03 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:47:41 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,19 @@ char *get_cmd_token(char *s, t_attr *att);
 void check_cmd_tokens(char *s, t_attr *att);
 int ft_strlen_custom(char *s, int flag, t_attr *att);
 char *ft_write_word(char *s, t_attr *att, int flag, int i);
+
+// 02a_utils.c
+
+int ft_intsize(int n);
+int ft_ispositive(int n);
+void ft_itoa_custom(int n, t_attr *att);
+
+// 02b_ft_strlen_custom.c
+
+void ft_count_exp_print_error(t_attr *att);
+void ft_strlen_double_quotes(char *s, t_attr *att);
+void ft_strlen_no_quotes(char *s, t_attr *att);
+int ft_strlen_custom(char *s, int flag, t_attr *att);
 
 // 03_count_words.c
 int check_single_quotes(char *s, int len, int i, t_attr *att);

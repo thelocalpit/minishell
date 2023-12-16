@@ -6,9 +6,11 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:37:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/15 22:12:07 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:48:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/minishell.h"
 
 void ft_count_exp_print_error(t_attr *att)
 {
@@ -16,7 +18,7 @@ void ft_count_exp_print_error(t_attr *att)
 	att->index += 2;
 	att->i_flag$++;
 }
-void ft_strlen_double_quotes(char *s, int flag, t_attr *att, int save_$)
+void ft_strlen_double_quotes(char *s, t_attr *att)
 {
 	att->index++;
 	while (s[att->index] != '"')
@@ -44,7 +46,7 @@ void ft_strlen_double_quotes(char *s, int flag, t_attr *att, int save_$)
 	}
 }
 
-void ft_strlen_no_quotes(char *s, int flag, t_attr *att, int save_$)
+void ft_strlen_no_quotes(char *s, t_attr *att)
 {
 	while (s[att->index] != ' ' && s[att->index])
 	{
@@ -81,7 +83,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		return (0);
 	save_$ = att->i_flag$;
 	if (flag == 0)
-		ft_strlen_no_quotes(s, flag, att, save_$);
+		ft_strlen_no_quotes(s, att);
 	if (flag == 1)
 	{
 		att->index++;
@@ -92,7 +94,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 		}
 	}
 	if (flag == 2)
-		ft_strlen_double_quotes(s, flag, att, save_$);
+		ft_strlen_double_quotes(s, att);
 	att->i_flag$ = save_$;
 	return (att->mem_space);
 }

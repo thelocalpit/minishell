@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/12/15 13:36:52 by mcoppola         ###   ########.fr        #
+#    Updated: 2023/12/16 12:36:54 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ SRC =	sources/minishell.c \
 		sources/tokens/00_token_init_count.c \
 		sources/tokens/01_token_in_array.c \
 		sources/tokens/02_single_token_matrix.c \
+		sources/tokens/02a_utils.c \
+		sources/tokens/02b_ft_strlen_custom.c \
 		sources/tokens/03_count_words.c \
 		sources/tokens/04_expander.c \
 		sources/initialize/init.c \

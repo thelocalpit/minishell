@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_utils.c                                         :+:      :+:    :+:   */
+/*   02a_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:26:11 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/15 21:27:19 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:40:46 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int ft_intsize(int n)
 	return (count);
 }
 
-static int ft_ispositive(int n)
+int ft_ispositive(int n)
 {
 	if (n < 0)
 		return (-n);
@@ -56,9 +56,7 @@ void ft_itoa_custom(int n, t_attr *att)
 	}
 	i = 0;
 	while (str[i])
-	{
 		att->arr2[att->y2][att->x2++] = str[i++];
-	}
 	free(str);
 	return ;
 }
