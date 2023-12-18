@@ -6,7 +6,7 @@
 #    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/12/16 12:36:54 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/12/18 11:50:29 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,9 @@ SRC =	sources/minishell.c \
 		sources/tokens/00_token_init_count.c \
 		sources/tokens/01_token_in_array.c \
 		sources/tokens/02_single_token_matrix.c \
-		sources/tokens/02a_utils.c \
+		sources/tokens/02a_itoa_custom.c \
 		sources/tokens/02b_ft_strlen_custom.c \
+		sources/tokens/02c_copy_word.c \
 		sources/tokens/03_count_words.c \
 		sources/tokens/04_expander.c \
 		sources/initialize/init.c \

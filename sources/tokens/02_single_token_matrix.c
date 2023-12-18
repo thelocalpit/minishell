@@ -6,99 +6,11 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/16 12:35:19 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:04:12 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-
-
-
-
-
-char *ft_write_word(char *s, t_attr *att, int flag, int i)
-{
-	int len;
-	int len_name_var;
-
-	len_name_var = 0;
-	len = ft_strlen_custom(s, flag, att);
-	att->arr2[att->y2] = malloc(len + 1);
-	if (!att->arr2[att->y2])
-		return (NULL);
-	if (flag == 2)
-	{
-		while (s[i] != '"')
-		{
-			if (s[i] == '$' && s[i + 1] == '?')
-			{
-				ft_itoa_custom(g_value, att);
-				i += 2;
-			}
-			else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
-			{
-				if (att->flag$[att->i_flag$] == 0)
-				{
-					i++;
-					len_name_var = i;
-					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
-						i++;
-					len_name_var = i - len_name_var;
-					copy_expanded_str(att, len_name_var, flag);
-				}
-				else
-				{
-					i++;
-					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
-						i++;
-				}
-				att->i_flag$++;
-			}
-			else
-				att->arr2[att->y2][att->x2++] = s[i++];
-		}
-	}
-	else if (flag == 1)
-	{
-		while (s[i] != '\'')
-			att->arr2[att->y2][att->x2++] = s[i++];
-	}
-	else
-	{
-		while (s[i] != ' ' && s[i])
-		{
-			if (s[i] == '$' && s[i + 1] == '?')
-			{
-				ft_itoa_custom(g_value, att);
-				i += 2;
-			}
-			else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
-			{
-				if (att->flag$[att->i_flag$] == 0)
-				{
-					i++;
-					len_name_var = i;
-					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
-						i++;
-					len_name_var = i - len_name_var;
-					copy_expanded_str(att, len_name_var, flag);
-				}
-				else
-				{
-					i++;
-					while (s[i] != '"' && s[i] != ' ' && s[i] != '$' && s[i])
-						i++;
-				}
-				att->i_flag$++;
-			}
-			else
-				att->arr2[att->y2][att->x2++] = s[i++];
-		}
-	}
-	att->arr2[att->y2][att->x2] = '\0';
-	return (&s[++i]);
-}
 
 char *get_cmd_token(char *s, t_attr *att)
 {

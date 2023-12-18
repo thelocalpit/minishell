@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/16 12:47:41 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:59:33 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,13 @@ void ft_count_exp_print_error(t_attr *att);
 void ft_strlen_double_quotes(char *s, t_attr *att);
 void ft_strlen_no_quotes(char *s, t_attr *att);
 int ft_strlen_custom(char *s, int flag, t_attr *att);
+
+// 02c_copy_word.c
+
+int copy_g_value(t_attr *att, int i);
+int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var);
+int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var);
+char *ft_write_word(char *s, t_attr *att, int flag, int i);
 
 // 03_count_words.c
 int check_single_quotes(char *s, int len, int i, t_attr *att);
