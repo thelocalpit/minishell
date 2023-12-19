@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/18 12:59:33 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:05:57 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_attr
 	int x_mx_envp;
 
 	//---- expander --------
-	int index;
+	int i;
 	int mem_space;
 	char *check_exp;
 	int len_call_exp;
@@ -122,6 +122,10 @@ typedef struct s_attr
 	int *flag$;
 	int i_flag$;
 	int *save_y_mx_envp;
+
+	//--- lista ----
+	
+	t_list *env_list;
 
 } t_attr;
 

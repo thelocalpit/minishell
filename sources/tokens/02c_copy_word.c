@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:16:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/18 13:01:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/18 18:51:27 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 	{
 		if (s[i] == '$' && s[i + 1] == '?')
 			i = copy_g_value(att, i);
-		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
+		else if (s[i] == '$' && s[i + 1] != ' '
+				&& s[i + 1] && s[i + 1] != '"')
 		{
 			i++;
 			if (att->flag$[att->i_flag$] == 0)
