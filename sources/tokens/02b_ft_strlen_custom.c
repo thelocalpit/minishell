@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:37:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/18 18:49:42 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/19 22:43:33 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ void ft_strlen_double_quotes(char *s, t_attr *att)
 			{
 				while (s[att->i] != '"' && s[att->i] != ' ' && s[att->i] != '$' && s[att->i])
 					att->i++;
+				att->save_y_mx_envp[att->i_flag$] = -1;
 			}
-			att->save_y_mx_envp[att->i_flag$] = att->y_mx_envp;
+			// att->save_y_mx_envp[att->i_flag$] = att->env_list->$flag;
+			// att->env_list->$flag = att->save_y_mx_envp[att->i_flag$];
 			att->i_flag$++;
+			// att->env_list = 
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/19 17:58:21 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:34:23 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,44 @@
 
 void copy_expanded_str(t_attr *att, int len_name_var, int flag)
 {
+	t_list *current = att->env_list;
+	printf("questa è il content della prima exp: %s\n", att->env_list->content);
+	printf("numero del nodo: %d\n", att->env_list->$flag);
 	if (flag == 2)
-		att->y_mx_envp = att->save_y_mx_envp[att->i_flag$];
-	att->x_mx_envp = len_name_var + 1;
-	while (att->mx_envp[att->y_mx_envp][att->x_mx_envp])
 	{
-		att->arr2[att->y2][att->x2++] = 
-			att->mx_envp[att->y_mx_envp][att->x_mx_envp++];
+		while (att->env_list->$flag != att->save_y_mx_envp[att->i_flag$])
+			att->env_list = att->env_list->next;
 	}
-	return ;
+	att->y_mx_envp = att->save_y_mx_envp[att->i_flag$];
+	att->x_mx_envp = len_name_var + 1;
+	while (att->env_list->content[att->x_mx_envp])
+	{
+		att->arr2[att->y2][att->x2++] = att->env_list->content[att->x_mx_envp++];
+	}
+	att->env_list = current;
+	return;
 }
 
 /* questa è da aggiornare con la lista */
 
 void count_expanded_token_02(t_attr *att)
 {
-	while (att->mx_envp[att->y_mx_envp])
+	t_list *current = att->env_list;
+	while (att->env_list != NULL)
 	{
-		if (!ft_strncmp(att->check_exp, att->mx_envp[att->y_mx_envp], att->len_call_exp))
+		if (!ft_strncmp(att->check_exp, att->env_list->content, att->len_call_exp))
 		{
-			while (att->mx_envp[att->y_mx_envp][att->x_mx_envp])
+			while (att->env_list->content[att->x_mx_envp])
 			{
 				att->mem_space++;
 				att->x_mx_envp++;
 			}
 			free(att->check_exp);
+			att->save_y_mx_envp[att->i_flag$] = att->env_list->$flag;
+			att->env_list = current;
 			return;
 		}
+		att->env_list = att->env_list->next;
 		att->y_mx_envp++;
 	}
 }
@@ -68,6 +79,6 @@ void count_expanded_token(t_attr *att, char *s)
 	att->x_mx_envp = att->len_call_exp;
 	count_expanded_token_02(att);
 	att->mem_space++;
-	printf("ERRORE CONTROLLA COUNT_EXPANDED_TOKEN\n");
+	// printf("ERRORE CONTROLLA COUNT_EXPANDED_TOKEN\n");
 	return ;
 }

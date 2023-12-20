@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/19 19:05:57 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/19 23:20:38 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct s_attr
 	//--- lista ----
 	
 	t_list *env_list;
+	int index_list;
 
 } t_attr;
 
@@ -208,6 +209,7 @@ void 	handle_interrupt(int sig);
 // debugg.c
 
 void	ft_print_array(char **array);
+void printlist(t_attr *att);
 
 // 00_utils.c
 
@@ -222,6 +224,7 @@ t_list *copy_env_in_list(char **env);
 t_list *sort_list(t_list *list);
 void insert_between_node(t_list *prev, char *content);
 char    *get_var_name(char *full_var);
+void add_index_to_list(t_attr *att);
 
 //	error_folder
 
