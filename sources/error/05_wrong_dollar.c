@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/13 20:44:30 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:31:25 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int count_dollar_sign(char *s, t_attr *att)
 			att->nb_$++;
 		i++;
 	}
-	// printf("ATT.NB_$: %d\n", att->nb_$);
 	return (att->nb_$);
 }
 
@@ -33,7 +32,6 @@ int error_dollar_03(char *check_envp, t_attr *att, int len)
 	att->y_mx_envp = 0;
 	while (att->mx_envp[att->y_mx_envp])
 	{
-		// printf("QUESTO è LEN: %d. QUESTO CONFRONTO DELLE STR: %s == %s\n", len, check_envp, att->mx_envp[att->y_mx_envp]);
 		if (!ft_strncmp(check_envp, att->mx_envp[att->y_mx_envp], len))
 			return (0);
 		if (!ft_strncmp(check_envp, "?", 1))

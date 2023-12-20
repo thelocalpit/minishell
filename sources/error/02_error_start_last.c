@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:45:03 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/22 18:40:57 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:31:01 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /* controlla il primo elemento se è sbagliato */
 int error_begin(char *s)
 {
-	// printf("sono qui5\n");
 	int i;
 
 	i = 0;
@@ -41,7 +40,6 @@ int error_begin(char *s)
 		return (return_not_required());
 	else if (s[i] == '>' && s[i + 1] == '>' && s[i + 2] == '>')
 		return (return_gt_error());
-	// printf("sono qui6\n");
 	return (0);
 }
 
@@ -61,6 +59,5 @@ int error_end(char *s, char c)
 		else
 			return (return_not_required());
 	}
-	// printf("sono qui3\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:16:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 17:26:35 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:15:45 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int copy_g_value(t_attr *att, int i)
 	i += 2;
 	return (i);
 }
-
+/* vedi funzione sotto ma senza "" */
 int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var)
 {
 	while (s[i] != ' ' && s[i])
@@ -55,6 +55,13 @@ int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var)
 	return (i);
 }
 
+/* questa funzione si occupa delle "".
+	copy_g_value copia l'errore del global value.
+	se c'è da espandere, facciamo riferimento alla flag$ che ci dice
+	se è un elemento corretto da espandere o se deve ritornare il vuoto
+	nel caso lo sia, calcoliamo la lunghezza del nome della variabile
+	e ritorniamo il suo valore con copy_expanded_str. 
+	Se non è da espandere facciamo un normale copia. */
 int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 {
 	while (s[i] != '"')
@@ -83,6 +90,9 @@ int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 	return (i);
 }
 
+/* questa funzione calcola lo spazio di ciascuna str della matrice arr2
+	con ft_strlen_custom -> alloca la memoria -> a seconda della flag
+	chiamiamo la funzione di copy. */
 char *ft_write_word(char *s, t_attr *att, int flag, int i)
 {
 	int len;
@@ -94,9 +104,7 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 	if (!att->arr2[att->y2])
 		return (NULL);
 	if (flag == 2)
-	{
 		i = copy_double_quotes(s, i, att, len_name_var);
-	}
 	else if (flag == 1)
 	{
 		while (s[i] != '\'')

@@ -6,12 +6,14 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/18 13:04:12 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:07:27 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* chiamiamo la funzione ft_write_word a seconda di che elemento abbiamo
+	davanti. può essere "" '' o niente. */
 char *get_cmd_token(char *s, t_attr *att)
 {
 	int i;
@@ -40,7 +42,11 @@ char *get_cmd_token(char *s, t_attr *att)
 		return (ft_write_word(s, att, flag, i));
 	}
 }
-
+/* creiamo una nuova matrice ("arr2"). allochiamo la memoria e andiamo a
+	copiare ogni elemento all'interno della matrice. 
+	NB: con elemento intendiamo solo separati da spazi 
+		(quindi una doppia "" sarà 1 solo argomento anche se all'interno
+			contiene degli spazi) */
 void create_matrix_cmd(char *s, t_attr *att)
 {
 	att->i_flag$ = 0;
@@ -64,7 +70,8 @@ void create_matrix_cmd(char *s, t_attr *att)
 		att->y2++;
 	}
 }
-
+/* questa funzione si occupa di spezzare ciascun str della split_arr
+	in comandi e args. */
 void get_cmd_matrix(char *s, t_attr *att)
 {
 	if (!s)

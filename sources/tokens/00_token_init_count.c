@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/15 21:22:17 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:57:06 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,9 @@ int	count_tokens(char *s, t_attr *att)
 	}
 	return (att->nb_tokens);
 }
-/* this funciton is the start of the split of the line.
-	first of all, we'll count how many tokens we have.
-	with tokens I mean: (cmd + args) or a (|, >, <). 
-	this will be useful later when we'll split again each
-	(cmd + args) to actually the pass it to the exec.
-	In the meantime, we isolate also the (|, >, <). 
-	This way we'll later know where to redirect the output
-	and eventually get the input of all (cmd + args)
-	 */
+/* questa funzione si occupa di splittare fra comandi (con argomenti)
+	e redirections */
+	
 void	split_init(char *s, t_attr *att)
 {
 	if (!s)

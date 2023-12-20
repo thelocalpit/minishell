@@ -6,13 +6,17 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 17:28:54 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:28:48 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* questo è da aggiornare con la lista */
+/* questa funzione copia dalla lista delle variabili d'abiente nella
+	nostra matrice arr2. 
+	potevo scriverla meglio? SI.
+	Funziona? SI.
+	la riscriverò? COL CAZZO IMPANATO CON LE PATATE. */
 
 void copy_expanded_str(t_attr *att, int len_name_var)
 {
@@ -28,7 +32,6 @@ void copy_expanded_str(t_attr *att, int len_name_var)
 	return;
 }
 
-/* questa è da aggiornare con la lista */
 
 void count_expanded_token_02(t_attr *att)
 {
@@ -54,6 +57,11 @@ void count_expanded_token_02(t_attr *att)
 	}
 }
 
+/* questa funzione conta quanta memoria devo allocare per l'exp.
+	mi devo calcolare la lunghezza del nome ed escluderla (check_exp)
+	poi in ft:strncmp faccio un strncmp e trovo la variabile 
+	d'ambiente giusta per calcolo quanto necessario per allocare la
+	memoria. */
 void count_expanded_token(t_attr *att, char *s)
 {
 	int start;
