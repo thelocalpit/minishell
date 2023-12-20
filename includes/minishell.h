@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/19 23:20:38 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:25:48 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void ft_count_words(char *s, t_attr *att);
 
 // 04_expander.c
 
-void copy_expanded_str(t_attr *att, int start, int flag);
+void copy_expanded_str(t_attr *att, int start);
 void count_expanded_token(t_attr *att, char *s);
 
 // utilities_folder

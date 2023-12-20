@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:16:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/18 18:51:27 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:26:35 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var)
 			if (att->flag$[att->i_flag$] == 0)
 			{
 				len_name_var = ft_strlen_name_var(s, &i, len_name_var);
-				copy_expanded_str(att, len_name_var, 0);
+				copy_expanded_str(att, len_name_var);
 			}
 			else
 			{
@@ -68,7 +68,7 @@ int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 			if (att->flag$[att->i_flag$] == 0)
 			{
 				len_name_var = ft_strlen_name_var(s, &i, len_name_var);
-				copy_expanded_str(att, len_name_var, 2);
+				copy_expanded_str(att, len_name_var);
 			}
 			else
 			{
