@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   01_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2023/12/13 16:45:12 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:55:49 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/* questa funzione aggiunge un id ad ogni nooo. necessaria quando lavoriamo 
+    con l'expander. */
+
+void add_index_to_list(t_attr *att)
+{
+    int i;
+
+    t_list *current = att->env_list;
+    i = 0;
+    while (att->env_list != NULL)
+    {
+        att->env_list->$flag = i;
+        i++;
+        att->env_list = att->env_list->next;
+    }
+    att->env_list = current;
+}
 
 void insert_between_node(t_list *prev, char *content)
 {

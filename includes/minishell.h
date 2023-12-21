@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/15 15:06:30 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:12:50 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,22 @@ typedef struct s_attr
     int     y_mx_envp;
     int     x_mx_envp;
 
-    //---- expander --------
-    int     index;
-    int     mem_space;
-    char    *check_exp;
-    int     len_call_exp;
-    int     nb_$;
-    int     *flag$;
-    int     i_flag$;
-    int     *save_y_mx_envp;
+	//---- expander --------
+	int i;
+	int mem_space;
+	char *check_exp;
+	int len_call_exp;
+	int nb_$;
+	int *flag$;
+	int i_flag$;
+	int *save_y_mx_envp;
 
-}           t_attr;
+	//--- lista ----
+
+	t_list *env_list;
+	int index_list;
+
+} t_attr;
 
 
 /* ------------------------------ NODE -------------------------------------- */
@@ -158,6 +163,26 @@ void    check_cmd_tokens(char *s, t_attr *att);
 int     ft_strlen_custom(char *s, int flag, t_attr *att);
 char    *ft_write_word(char *s, t_attr *att, int flag, int i);
 
+// 02a_utils.c
+
+int ft_intsize(int n);
+int ft_ispositive(int n);
+void ft_itoa_custom(int n, t_attr *att);
+
+// 02b_ft_strlen_custom.c
+
+void ft_count_exp_print_error(t_attr *att);
+void ft_strlen_double_quotes(char *s, t_attr *att);
+void ft_strlen_no_quotes(char *s, t_attr *att);
+int ft_strlen_custom(char *s, int flag, t_attr *att);
+
+// 02c_copy_word.c
+
+int copy_g_value(t_attr *att, int i);
+int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var);
+int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var);
+char *ft_write_word(char *s, t_attr *att, int flag, int i);
+
 // 03_count_words.c
 int     check_single_quotes(char *s, int len, int i, t_attr *att);
 int     check_double_quotes(char *s, int len, int i, t_attr *att);
@@ -166,8 +191,8 @@ void    ft_count_words(char *s, t_attr *att);
 
 // 04_expander.c
 
-void    copy_expanded_str(t_attr *att, int start, int flag);
-void    count_expanded_token(t_attr *att, char *s);
+void copy_expanded_str(t_attr *att, int start);
+void count_expanded_token(t_attr *att, char *s);
 
 // utilities_folder
 
@@ -180,7 +205,8 @@ void    handle_interrupt(int sig);
 
 // debugg.c
 
-void    ft_print_array(char **array);
+void	ft_print_array(char **array);
+void printlist(t_attr *att);
 
 // 00_utils.c
 
@@ -195,6 +221,7 @@ t_list  *copy_env_in_list(char **env);
 t_list  *sort_list(t_list *list);
 void    insert_between_node(t_list *prev, char *content);
 char    *get_var_name(char *full_var);
+void add_index_to_list(t_attr *att);
 
 //	error_folder
 

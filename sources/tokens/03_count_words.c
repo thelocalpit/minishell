@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:09:43 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/14 09:46:30 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:59:29 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ int check_no_space(char *s, int len, int i, t_attr *att)
 	return (++i);
 }
 
-
+/* questa ft serve per il conto di elementi. necessaria per allocare
+	la giusta quantità di memoria */
+	
 void ft_count_words(char *s, t_attr *att)
 {
 	int len;

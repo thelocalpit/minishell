@@ -6,13 +6,13 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/13 17:49:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:57:06 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
+/* questa funzione serve per contare i token ¨speciali¨. */
 
 int	process_special_token(t_attr *att, char *s, int i)
 {
@@ -60,15 +60,9 @@ int	count_tokens(char *s, t_attr *att)
 	}
 	return (att->nb_tokens);
 }
-/* this funciton is the start of the split of the line.
-	first of all, we'll count how many tokens we have.
-	with tokens I mean: (cmd + args) or a (|, >, <). 
-	this will be useful later when we'll split again each
-	(cmd + args) to actually the pass it to the exec.
-	In the meantime, we isolate also the (|, >, <). 
-	This way we'll later know where to redirect the output
-	and eventually get the input of all (cmd + args)
-	 */
+/* questa funzione si occupa di splittare fra comandi (con argomenti)
+	e redirections */
+	
 void	split_init(char *s, t_attr *att)
 {
 	if (!s)
@@ -76,5 +70,5 @@ void	split_init(char *s, t_attr *att)
 	att->nb_tokens = 0;
 	att->split_arr = NULL;
 	count_tokens(s, att);
-	create_array(s, att);;
+	create_array(s, att);
 }
