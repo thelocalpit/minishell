@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/19 23:14:34 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/22 05:38:14 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	do_builtin(char **args, char **env, t_list env_list)
 	i = 0;
 	while (args[i])
 	{
-		if (ft_strncmp(args[i], "export\0", 7) == 0 || ft_strncmp(args[i], "unset\0", 6) == 0 || ft_strncmp(args[i], "echo\0", 5) == 0 || ft_strncmp(args[i], "pwd\0", 4) == 0 || ft_strncmp(args[i], "env\0", 4) == 0 || ft_strncmp(args[i], "ls\0", 3) == 0 || ft_strncmp(args[i], "ls -l\0", 6) == 0 || strstr(args[i], "echo") != NULL || ft_strncmp(args[i], "exit\0", 5) == 0)
+		if (ft_strncmp(args[i], "export\0", 7) == 0 || ft_strncmp(args[i], "unset\0", 6) == 0 || ft_strncmp(args[i], "echo\0", 5) == 0 || ft_strncmp(args[i], "pwd\0", 4) == 0 || ft_strncmp(args[i], "env\0", 4) == 0 || ft_strncmp(args[i], "ls\0", 3) == 0 || ft_strncmp(args[i], "ls -l\0", 6) == 0 || strstr(args[i], "echo\0") != NULL || ft_strncmp(args[i], "exit\0", 5) == 0 || ft_strncmp(args[i], "cd\0", 3) == 0)
 		{
 			// if (ft_strncmp(args[i], "echo\0", 5) == 0)
 			// 	return (echo((char **) args));
@@ -45,9 +45,11 @@ int	do_builtin(char **args, char **env, t_list env_list)
 
 			if (ft_strncmp(args[i], "exit\0", 5) == 0)
 				ft_exit();
+			if (ft_strncmp(args[i], "cd\0", 3) == 0)
+				ft_cd((char **) args);
 		}
-		else
-			printf("Comando «%s» non trovato\n", args[i]);
+		//else
+			//printf("Comando «%s» non trovato\n", args[i]);
 		i++;
 	}
 	return (0);
@@ -124,6 +126,25 @@ int	ls_l(char **env, int j)
 		exit(1);
 	}
 	return (0);
+}
+
+void	ft_cd(char **args)
+{
+	char	*tmp;
+
+	if (args[1] == NULL)
+	{
+		tmp = getenv("HOME");
+		chdir(tmp);
+		//cd_path(main);
+	}
+	else if (chdir(args[1]) == -1)
+	{
+		printf(RED"cd : diocane non ce sta la cartella");
+		printf("\n");
+	}
+	//else
+		//cd_path(main);
 }
 
 void	ft_exit()

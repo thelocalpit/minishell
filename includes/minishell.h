@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 17:25:48 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/22 05:30:19 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,6 +279,7 @@ int		envi(char **env);
 int		ls_l(char **env, int j);
 int		echo(char **args);
 void	ft_exit(void);
+void	ft_cd(char **args);
 
 // 01_export
 
