@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debugg.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:49:02 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 17:50:36 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:12:04 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,21 @@ void printlist(t_attr *att)
 		att->env_list = att->env_list->next;
 	}
 	att->env_list = head;
+}
+
+
+void printvar(t_list *var)
+{
+	t_list *head;
+
+	head = var;
+	printf("questa è la lista:\n");
+	// Attraversa la lista e stampa i dati dei nodi
+	while (var != NULL)
+	{
+		printf("content: %s\n", var->content);
+		printf("number: %d\n\n", var->$flag);
+		var = var->next;
+	}
+	var = head;
 }

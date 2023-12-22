@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/19 23:14:34 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:12:36 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	do_builtin(char **args, char **env, t_list env_list)
+int	do_builtin(char **args, char **env, t_list env_list, t_list *var_list)
 {
 	int 	i;
 	i = 0;
@@ -45,6 +45,11 @@ int	do_builtin(char **args, char **env, t_list env_list)
 
 			if (ft_strncmp(args[i], "exit\0", 5) == 0)
 				ft_exit();
+		}
+		//else if 		// dichiarazioni variabili, (gatto = diocane) cercare '=' usare ft_lstadd_back
+		else if (ft_strchr(args[i], '=') != NULL)
+		{
+			return (add_var(args[i], var_list));
 		}
 		else
 			printf("Comando «%s» non trovato\n", args[i]);
@@ -129,4 +134,19 @@ int	ls_l(char **env, int j)
 void	ft_exit()
 {
 	exit(1);
+}
+
+int	add_var(char *str, t_list *var_list)
+{
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+		perror("malloc");
+	new->content = ft_strdup(str);
+	new->$flag = 0;
+	new->next = NULL;
+	ft_lstadd_back(&var_list, new);
+	printvar(var_list);
+	return (0);
 }
