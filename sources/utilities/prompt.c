@@ -6,7 +6,7 @@
 /*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:49:58 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/10/26 20:44:03 by alesac           ###   ########.fr       */
+/*   Updated: 2023/12/22 11:18:16 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ char	*prompt(void)
 {
 	char	*str;
 	char	*user;
-	char	*pwd;
+	char	cwd[PATH_MAX];
 
 	user = getenv("USER");
-	pwd = getenv("PWD");
-	if (pwd != NULL && user != NULL)
+	getcwd(cwd, sizeof(cwd));
+	if (cwd != NULL && user != NULL)
 	{
 		printf(RESET"┏━" GREEN_BOLD " %s@:" GREEN_BOLD, user);
-		printf(CYAN_BOLD "%s\n" CYAN_BOLD, pwd);
+		printf(CYAN_BOLD "%s\n" CYAN_BOLD, cwd);
 	}
 	str = readline(RESET "┗━" RED_BOLD " minihell" RED_BOLD " " RESET "");
 	return (str);
