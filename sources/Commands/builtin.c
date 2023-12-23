@@ -6,7 +6,7 @@
 /*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/23 03:32:16 by alesac           ###   ########.fr       */
+/*   Updated: 2023/12/23 03:36:35 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	envi(char **env)
 int	ls_l(char **env, int j)
 {
 	pid_t child_pid = fork();
-	char *option;
+	char	*option;
+	int		status;
 
 	if (j == 1)
 		option = "-l";
@@ -82,11 +83,7 @@ int	ls_l(char **env, int j)
 		exit(1);
 	}
 	else
-	{
-		int	status;
-		
 		waitpid(child_pid, &status, 0);
-	}
 	return (0);
 }
 
