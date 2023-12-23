@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
+#    By: alesac <alesac@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/12/18 11:50:29 by pfalasch         ###   ########.fr        #
+#    Updated: 2023/12/22 14:46:30 by alesac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC =	sources/minishell.c \
 		sources/error/05_wrong_dollar.c \
 		sources/free/00_free.c \
 		sources/Commands/builtin.c \
+		sources/Commands/do_builtin.c \
 		sources/Commands/export.c \
 		sources/Commands/unset.c \
 		sources/executer/pipe.c \
