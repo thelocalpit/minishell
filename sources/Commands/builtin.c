@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/22 17:12:36 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/23 01:02:32 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,6 @@ int	add_var(char *str, t_list *var_list)
 	new->$flag = 0;
 	new->next = NULL;
 	ft_lstadd_back(&var_list, new);
-	printvar(var_list);
+	//printvar(var_list);
 	return (0);
 }
