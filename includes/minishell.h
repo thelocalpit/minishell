@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/22 17:12:28 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/27 01:17:26 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,6 +281,7 @@ int		envi(char **env);
 int		ls_l(char **env, int j);
 int		echo(char **args);
 void	ft_exit(void);
+void	ft_cd(char **args);
 int		add_var(char *str, t_list *var_list);
 
 // 01_export

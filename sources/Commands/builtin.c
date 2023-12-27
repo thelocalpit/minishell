@@ -6,9 +6,10 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/27 01:00:48 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/27 01:31:53 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
@@ -112,7 +113,8 @@ int	envi(char **env)
 int	ls_l(char **env, int j)
 {
 	pid_t child_pid = fork();
-	char *option;
+	char	*option;
+	int		status;
 
 	if (j == 1)
 		option = "-l";
@@ -128,12 +130,25 @@ int	ls_l(char **env, int j)
 		perror("execve failed");
 		exit(1);
 	}
+	else
+		waitpid(child_pid, &status, 0);
 	return (0);
 }
 
-void	ft_exit()
+void	ft_cd(char **args)
 {
-	exit(1);
+	char	*tmp;
+
+	if (args[1] == NULL)
+	{
+		tmp = getenv("HOME");
+		chdir(tmp);
+	}
+	else if (chdir(args[1]) == -1)
+	{
+		printf(RED"cd : diocane non ce sta la cartella");
+		printf("\n");
+	}
 }
 
 int	add_var(char *str, t_list *var_list)
@@ -149,4 +164,9 @@ int	add_var(char *str, t_list *var_list)
 	ft_lstadd_back(&var_list, new);
 	//printvar(var_list);
 	return (0);
+}
+
+void	ft_exit()
+{
+	exit(1);
 }
