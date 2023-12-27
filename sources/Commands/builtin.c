@@ -6,59 +6,12 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/27 01:31:53 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/27 02:51:44 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../includes/minishell.h"
-
-int	do_builtin(char **args, char **env, t_list env_list, t_list *var_list)
-{
-	int 	i;
-	i = 0;
-	while (args[i])
-	{
-		if (ft_strncmp(args[i], "export\0", 7) == 0 || ft_strncmp(args[i], "unset\0", 6) == 0 || ft_strncmp(args[i], "echo\0", 5) == 0 || ft_strncmp(args[i], "pwd\0", 4) == 0 || ft_strncmp(args[i], "env\0", 4) == 0 || ft_strncmp(args[i], "ls\0", 3) == 0 || ft_strncmp(args[i], "ls -l\0", 6) == 0 || strstr(args[i], "echo") != NULL || ft_strncmp(args[i], "exit\0", 5) == 0)
-		{
-			// if (ft_strncmp(args[i], "echo\0", 5) == 0)
-			// 	return (echo((char **) args));
-			if (ft_strncmp(args[i], "pwd\0", 4) == 0)
-				return (pwd((char **) env));
-
-			if (ft_strncmp(args[i], "export\0", 7) == 0)
-				return (ft_export((char **) args, env_list));
-
-			if (ft_strncmp(args[i], "unset\0", 6) == 0)
-				return (ft_unset((char **) args, &env_list));
-
-			if (ft_strncmp(args[i], "env\0", 4) == 0)
-				return (envi((char **) env));
-
-			if (ft_strncmp(args[i], "ls -l\0", 6) == 0)
-				return (ls_l((char **) env, 1));
-
-			if (ft_strncmp(args[i], "ls\0", 3) == 0)
-				return (ls_l((char **) env, 0));
-
-			if (strstr(args[i], "echo") != NULL)
-				return (echo((char **) args));
-
-			if (ft_strncmp(args[i], "exit\0", 5) == 0)
-				ft_exit();
-		}
-		//else if 		// dichiarazioni variabili, (gatto = diocane) cercare '=' usare ft_lstadd_back
-		else if (ft_strchr(args[i], '=') != NULL)
-		{
-			return (add_var(args[i], var_list));
-		}
-		else
-			printf("Comando «%s» non trovato\n", args[i]);
-		i++;
-	}
-	return (0);
-}
-
 
 int	echo(char **args)
 {
@@ -164,9 +117,4 @@ int	add_var(char *str, t_list *var_list)
 	ft_lstadd_back(&var_list, new);
 	//printvar(var_list);
 	return (0);
-}
-
-void	ft_exit()
-{
-	exit(1);
 }
