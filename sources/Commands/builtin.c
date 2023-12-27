@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/27 02:51:44 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/27 04:00:15 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,27 @@ void	ft_cd(char **args)
 	}
 }
 
-int	add_var(char *str, t_list *var_list)
+int	add_var(char *str, t_list *local_var)
 {
-	t_list	*new;
+	t_list	*tmp;
 
-	new = malloc(sizeof(t_list));
-	if (!new)
+	tmp = local_var;
+	if (local_var)
+	{
+		while (tmp->next)
+		{
+			if (!ft_strcmp(get_var_name(str), get_var_name(tmp->content)))
+			{
+				ft_lstdelone(tmp, free);
+				break ;
+			}
+			tmp = tmp->next;
+		}
+	}
+	tmp = ft_lstnew(str);
+	if (!tmp)
 		perror("malloc");
-	new->content = ft_strdup(str);
-	new->$flag = 0;
-	new->next = NULL;
-	ft_lstadd_back(&var_list, new);
-	//printvar(var_list);
+	ft_lstadd_back(&local_var, tmp);
+	//printvar(local_var);
 	return (0);
 }

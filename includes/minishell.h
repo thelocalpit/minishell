@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/27 01:17:26 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/27 04:06:21 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_attr
 	
 	t_list *env_list;
 	int index_list;
-	t_list *var;
+	t_list *local_var;
 
 } t_attr;
 

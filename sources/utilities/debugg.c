@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:49:02 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/27 01:17:35 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/27 04:06:07 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ void printlist(t_attr *att)
 }
 
 
-void printvar(t_list *var)
+void printvar(t_list *local_var)
 {
 	t_list *head;
 
-	head = var;
+	head = local_var;
 	printf("questa è la lista:\n");
 	// Attraversa la lista e stampa i dati dei nodi
-	while (var != NULL)
+	while (local_var != NULL)
 	{
-		printf("content: %s\n", var->content);
-		printf("number: %d\n\n", var->$flag);
-		var = var->next;
+		printf("content: %s\n", local_var->content);
+		printf("number: %d\n\n", local_var->$flag);
+		local_var = local_var->next;
 	}
-	var = head;
+	local_var = head;
 }
