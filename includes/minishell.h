@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/27 04:06:21 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/28 01:34:06 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,14 +275,14 @@ void free_mx_envp(t_attr *att);
 
 // Commands
 
-int do_builtin(char **args, char **env, t_list env_list, t_list *var_list);
+int do_builtin(char **args, char **env, t_list env_list, t_attr *att);
 int		pwd(char **env);
 int		envi(char **env);
 int		ls_l(char **env, int j);
 int		echo(char **args);
 void	ft_exit(void);
 void	ft_cd(char **args);
-int		add_var(char *str, t_list *var_list);
+int		add_var(char *str, t_list **var_list);
 
 // 01_export
 

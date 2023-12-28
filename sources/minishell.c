@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/27 04:06:40 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/28 01:51:41 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av, char **envp)
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				// ft_print_array(att.arr2);
-				do_builtin(att.arr2, (char **)envp, (*att.env_list), att.local_var);
+				do_builtin(att.arr2, (char **)envp, (*att.env_list), &att);
 				// printvar(att.local_var);                                                 //test
 				// command(&att);
 				free_arr2(att.arr2, &att);

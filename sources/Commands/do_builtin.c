@@ -6,13 +6,13 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/27 03:01:20 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/28 01:44:26 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	do_builtin(char **args, char **env, t_list env_list, t_list *local_var)
+int	do_builtin(char **args, char **env, t_list env_list, t_attr *att)
 {
 	int 	i;
 	i = 0;
@@ -49,7 +49,8 @@ int	do_builtin(char **args, char **env, t_list env_list, t_list *local_var)
 		//else if 		// dichiarazioni variabili, (gatto = diocane) cercare '=' usare ft_lstadd_back
 		else if (ft_strchr(args[i], '=') != NULL)
 		{
-			return (add_var(args[i], local_var));
+			printf("Aggiungo la variabile %s\n", args[i]);
+			return (add_var(args[i], &(att->local_var)));
 		}
 		else
 			printf("Comando «%s» non trovato\n", args[i]);

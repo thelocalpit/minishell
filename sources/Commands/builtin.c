@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/27 04:00:15 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/28 01:51:28 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,27 +104,34 @@ void	ft_cd(char **args)
 	}
 }
 
-int	add_var(char *str, t_list *local_var)
+int	add_var(char *str, t_list **local_var)
 {
 	t_list	*tmp;
 
-	tmp = local_var;
-	if (local_var)
+	//printf("1 add_var PORCO DIOOOOOOOOOO\n");
+	tmp = *local_var;
+	//printf("2 add_var PORCO DIOOOOOOOOOO\n");
+	if (tmp)
 	{
+	//printf("3 DENTRO IF               add_var PORCO DIOOOOOOOOOO\n");
 		while (tmp->next)
 		{
+			//printf("4 DENTRO WHILE               add_var PORCO DIOOOOOOOOOO\n");
 			if (!ft_strcmp(get_var_name(str), get_var_name(tmp->content)))
 			{
-				ft_lstdelone(tmp, free);
-				break ;
+				tmp->content = ft_strdup(str);
+				return (0);
 			}
 			tmp = tmp->next;
 		}
 	}
+	//printf("5  dopo if  PORCO DIOOOOOOOOOO\n");
 	tmp = ft_lstnew(str);
+	//printf("6  dopo tmp  PORCO DIOOOOOOOOOO\n");
 	if (!tmp)
 		perror("malloc");
-	ft_lstadd_back(&local_var, tmp);
+	ft_lstadd_back(local_var, tmp);
+	//printf("7  dopo addback  PORCO DIOOOOOOOOOO\n");
 	//printvar(local_var);
 	return (0);
 }
