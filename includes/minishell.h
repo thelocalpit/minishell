@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/23 16:35:43 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:49:35 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_attr
 
 	t_list *env_list;
 	int index_list;
+	t_list *local_var;
 
 } t_attr;
 
@@ -207,6 +208,7 @@ void    handle_interrupt(int sig);
 
 void	ft_print_array(char **array);
 void printlist(t_attr *att);
+void printvar(t_list *var);
 
 // 00_utils.c
 
@@ -270,13 +272,14 @@ void    free_mx_envp(t_attr *att);
 
 // Commands
 
-int do_builtin(char **args, char **env, t_list env_list);
+int do_builtin(char **args, char **env, t_list env_list, t_attr *att);
 int		pwd(char **env);
 int		envi(char **env);
 int		ls_l(char **env, int j);
 int		echo(char **args);
 void	ft_exit(void);
 void	ft_cd(char **args);
+int		add_var(char *str, t_list **var_list);
 
 // 01_export
 

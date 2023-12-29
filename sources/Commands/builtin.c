@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/23 16:26:21 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:49:28 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,27 @@ void	ft_cd(char **args)
 		printf(RED"cd : diocane non ce sta la cartella");
 		printf("\n");
 	}
+}
+
+int	add_var(char *str, t_list **local_var)
+{
+	t_list	*tmp;
+
+	tmp = *local_var;
+	while (tmp)
+	{
+		if (!ft_strcmp(get_var_name(str), get_var_name(tmp->content)))
+		{
+			free(tmp->content);
+			tmp->content = ft_strdup(str);
+			return (0);
+		}
+		tmp = tmp->next;
+	}
+	tmp = ft_lstnew(ft_strdup(str));
+	if (!tmp)
+		perror("malloc");
+	ft_lstadd_back(local_var, tmp);
+	//printvar(local_var);
+	return (0);
 }

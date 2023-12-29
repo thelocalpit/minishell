@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 17:55:13 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/29 05:16:11 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int	main(int ac, char **av, char **envp)
 	// serve a me e ricordiamoci di freearlo (Marco)
 	att.env_list = copy_env_in_list(envp);
 	add_index_to_list(&att); 
-	printlist(&att);
+	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
+	att.local_var = NULL;
+	printlist(&att); 
 	while (1)
 	{
 		s = prompt();
@@ -56,7 +58,7 @@ int	main(int ac, char **av, char **envp)
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				// ft_print_array(att.arr2);
-				do_builtin(att.arr2, (char **)envp, (*att.env_list));
+				do_builtin(att.arr2, (char **)envp, (*att.env_list), &att);
 				// command(&att);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
