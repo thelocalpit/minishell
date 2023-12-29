@@ -116,11 +116,11 @@ int	add_var(char *str, t_list **local_var)
 		free(str);
 		str = ft_strjoin(name, "=\"\"");
 	}
+		free(name);
 	while (tmp)
 	{
-		if (!ft_strcmp(name, get_var_name(tmp->content)))
+		if (!ft_strcmp(get_var_name(str), get_var_name(tmp->content)))
 		{
-			free(name);
 			free(tmp->content);
 			tmp->content = ft_strdup(str);
 			return (0);
