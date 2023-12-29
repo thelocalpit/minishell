@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/29 05:13:07 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/29 17:37:04 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,18 @@ void	ft_cd(char **args)
 int	add_var(char *str, t_list **local_var)
 {
 	t_list	*tmp;
+	char	*name;
 
 	tmp = *local_var;
+	name = get_var_name(str);
+	if (!str[ft_strlen(name) + 1])
+	{
+		free(str);
+		str = ft_strjoin(name, "=\"\"");
+	}
 	while (tmp)
 	{
-		if (!ft_strcmp(get_var_name(str), get_var_name(tmp->content)))
+		if (!ft_strcmp(name, get_var_name(tmp->content)))
 		{
 			free(tmp->content);
 			tmp->content = ft_strdup(str);
@@ -123,6 +130,5 @@ int	add_var(char *str, t_list **local_var)
 	if (!tmp)
 		perror("malloc");
 	ft_lstadd_back(local_var, tmp);
-	//printvar(local_var);
 	return (0);
 }
