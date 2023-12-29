@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/28 01:44:26 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/29 05:08:15 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	do_builtin(char **args, char **env, t_list env_list, t_attr *att)
 			if (ft_strncmp(args[i], "exit\0", 5) == 0)
 				ft_exit();
 		}
-		//else if 		// dichiarazioni variabili, (gatto = diocane) cercare '=' usare ft_lstadd_back
-		else if (ft_strchr(args[i], '=') != NULL)
+		else if (ft_strchr(args[i], '=') != NULL
+			&& ((args[i][0] >= 65 && args[i][0] <= 90)
+				|| (args[i][0] >= 97 && args[i][0] <= 122)))
 		{
-			printf("Aggiungo la variabile %s\n", args[i]);
 			return (add_var(args[i], &(att->local_var)));
 		}
 		else
