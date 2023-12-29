@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/29 05:16:11 by deggio           ###   ########.fr       */
+/*   Updated: 2023/12/29 17:06:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	main(int ac, char **av, char **envp)
 	// e va sostituito ovunque, per il momento lo aggiungo come parametro in piu dove
 	// serve a me e ricordiamoci di freearlo (Marco)
 	att.env_list = copy_env_in_list(envp);
-	add_index_to_list(&att); 
+	add_index_to_list(&att);
 	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
 	att.local_var = NULL;
-	printlist(&att); 
+	printlist(&att);
 	while (1)
 	{
 		s = prompt();
@@ -44,7 +44,7 @@ int	main(int ac, char **av, char **envp)
 		}
 		reinit_parameters(&att, envp);
 		start_env(envp, &att);
-		
+
 		if (s)
 		{
 			add_history(s);
@@ -58,7 +58,7 @@ int	main(int ac, char **av, char **envp)
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				// ft_print_array(att.arr2);
-				do_builtin(att.arr2, (char **)envp, (*att.env_list), &att);
+				do_builtin(att.arr2, (char **)envp, &att);
 				// command(&att);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])

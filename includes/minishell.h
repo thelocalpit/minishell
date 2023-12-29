@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/29 14:01:03 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:06:02 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,7 +272,7 @@ void    free_mx_envp(t_attr *att);
 
 // Commands
 
-int do_builtin(char **args, char **env, t_list env_list, t_attr *att);
+int do_builtin(char **args, char **env, t_attr *att);
 int		pwd(char **env);
 int		envi(char **env);
 int		ls_l(char **env, int j);
@@ -287,7 +287,7 @@ int     ft_export(char **args, t_attr *att);
 
 // 01_unset
 
-int     ft_unset(char **args, t_list *env_list);
+int     ft_unset(char **args, t_attr *att);
 void    ft_remove_node(t_list **env_list, char *arg);
 
 // parser folder
