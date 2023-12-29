@@ -120,6 +120,7 @@ int	add_var(char *str, t_list **local_var)
 	{
 		if (!ft_strcmp(name, get_var_name(tmp->content)))
 		{
+			free(name);
 			free(tmp->content);
 			tmp->content = ft_strdup(str);
 			return (0);
