@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/29 13:49:35 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:01:03 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ int		add_var(char *str, t_list **var_list);
 
 // 01_export
 
-int     ft_export(char **args, t_list env_list);
+int     ft_export(char **args, t_attr *att);
 
 // 01_unset
 

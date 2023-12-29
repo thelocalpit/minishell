@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/29 13:49:28 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:43:44 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,6 @@ int	add_var(char *str, t_list **local_var)
 	if (!tmp)
 		perror("malloc");
 	ft_lstadd_back(local_var, tmp);
-	//printvar(local_var);
+	// printvar(*local_var);
 	return (0);
 }
