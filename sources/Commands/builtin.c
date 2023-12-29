@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/23 03:36:35 by alesac           ###   ########.fr       */
+/*   Updated: 2023/12/23 16:26:21 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	echo(char **args)
 {
 	int	i;
-	int newline;
+	int	newline;
 
 	i = 1;
-	if(args[1] && !strcmp(args[1], "-n"))
+	if (args[1] && !strcmp(args[1], "-n"))
 	{
 		newline = 1;
 		i++;
@@ -30,7 +30,7 @@ int	echo(char **args)
 		printf("%s ", args[i]);
 		i++;
 	}
-	if(!newline)
+	if (!newline)
 	{
 		printf("\n");
 	}
@@ -40,7 +40,6 @@ int	echo(char **args)
 int	pwd(char **env)
 {
 	(void)env;
-
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
@@ -59,12 +58,12 @@ int	envi(char **env)
 	i = -1;
 	while (env[++i] != NULL)
 		printf("%s\n", env[i]);
-	return(0);
+	return (0);
 }
 
 int	ls_l(char **env, int j)
 {
-	pid_t child_pid = fork();
+	pid_t	child_pid = fork();
 	char	*option;
 	int		status;
 
@@ -72,10 +71,13 @@ int	ls_l(char **env, int j)
 		option = "-l";
 	else if (j == 0)
 		option = "-h";
-	if (child_pid == -1) {
+	if (child_pid == -1)
+	{
 		perror("fork failed");
-		return 1;
-	} else if (child_pid == 0) {
+		return (1);
+	}
+	else if (child_pid == 0)
+	{
 		// Questo è il processo figlio
 		char *ls_args[] = {"/bin/ls", option, NULL};
 		execve("/bin/ls", ls_args, env);

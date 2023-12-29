@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2023/12/23 16:40:42 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/23 17:18:56 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	do_builtin(char **args, char **env, t_list env_list)
 	return (0);
 }
 
-void	ft_exit()
+void	ft_exit(void)
 {
 	exit(1);
 }

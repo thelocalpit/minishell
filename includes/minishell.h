@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/23 15:54:27 by mcoppola         ###   ########.fr       */
+/*   Updated: 2023/12/23 16:35:43 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void printlist(t_attr *att);
 
 // 00_utils.c
 
-int     t_strcmp(const char *str1, const char *str2);
+int     ft_strcmp(const char *str1, const char *str2);
 char    *ft_strcpy(char *destination, const char *source);
 char    *ft_strcat(char *dest, const char *src);
 char    *ft_strncpy(char *dest, const char *src, size_t n);
