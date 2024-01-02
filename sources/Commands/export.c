@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2023/12/19 19:26:06 by pfalasch         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:39:43 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,37 @@
 #include <stdlib.h>
 #include "../../includes/minishell.h"
 
-int basic_export(t_list *env_list)
+int	basic_export(t_attr *att)
 {
-    t_list *export;
+	t_list	*export;
 
-    export = sort_list(env_list);
-    while (export)
-    {
-        printf("declare -x %s\n", (char *)export->content);
-        export=export->next;
-    }
-    return (0);
+	export = sort_list(att->env_list);
+	while (export)
+	{
+		printf("declare -x %s\n", (char *)export->content);
+		export = export->next;
+	}
+	return (0);
 }
 
-int add_on_env(char *arg, t_list env_list)
+void	check_duplicate(t_attr *att, char *content)
+{
+	t_list	*list;
+
+	list = att->env_list;
+	while (list)
+	{
+		if (!ft_strcmp(get_var_name(content), get_var_name((char *)list->content)))
+		{
+			list->content = ft_strdup(content);
+			return ;
+		}
+		list = list->next;
+	}
+	ft_lstadd_back(&(att->env_list), ft_lstnew(ft_strdup(content)));
+}
+
+int	add_on_env(char *arg, t_attr *att)
 {
     // appena hai la lista di env, devi cercare se la variabile esiste già o meno (con ft_strncmp)
     // e se esiste devi aggiornarla (con ft_strjoin)
@@ -40,42 +57,38 @@ int add_on_env(char *arg, t_list env_list)
     // e come "next" della stringa da aggiungere il "next" del nodo precedente
     // --Fermarsi quando la lista è finita e aggiungere alla fine
     // SE PERO tutti i caratteri sono uguali allora sostituisci tutto il content con la stringa attuale
-    t_list  *env;
+	t_list	*list;
 
-    env = &env_list;
-
-    while (env)
-    {
-        printf("sss %d", ft_strcmp(arg, (char *)env->content));
-        env = env->next;
-    }
-    return (0);
+	list = att->local_var;
+	printf("arg: %s\n", arg);
+	while (list)
+	{
+		if (ft_strcmp(arg, get_var_name((char *)list->content)) == 0)
+			check_duplicate(att, list->content);
+		list = list->next;
+	}
+	return (0);
 }
 
-int ft_export(char **args, t_list env_list)
+int	ft_export(char **args, t_attr *att)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (args[i])
-    {
-        // printf("Args: %s\n", args[i]);
-        i++;
-    }
-    if (i == 1)
-        return (basic_export(&env_list));
-    else
-    {
-        args++;
-        while (*args)
-        {
-            if(!add_on_env(*args, env_list))
-                args++;
-            else
-                return (1);
-        }
-    }
-
-    return (0);
+	i = 0;
+	while (args[i])
+		i++;
+	if (i == 1)
+		return (basic_export(att));
+	else
+	{
+		args++;
+		while (*args)
+		{
+			if (!add_on_env(*args, att))
+				args++;
+			else
+				return (1);
+		}
+	}
+	return (0);
 }
-
