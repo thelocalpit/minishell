@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/03 14:12:04 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:20:14 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,16 @@ void	ft_cd(char **args)
 int	add_var(char *str, t_list **local_var)
 {
 	t_list	*tmp;
+	char	*name;
 
 	tmp = *local_var;
+	name = get_var_name(str);
+	if (!str[ft_strlen(name) + 1])
+	{
+		free(str);
+		str = ft_strjoin(name, "=\"\"");
+	}
+	free(name);
 	while (tmp)
 	{
 		if (!ft_strcmp(get_var_name(str), get_var_name(tmp->content)))
