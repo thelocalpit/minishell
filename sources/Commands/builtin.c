@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/02 23:12:42 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/03 15:00:58 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,9 @@ int	add_var(char *str, t_list **local_var)
 	tmp = *local_var;
 	name = get_var_name(str);
 	if (!str[ft_strlen(name) + 1])
-	{
 		free(str);
+	if (!str)
 		str = ft_strjoin(name, "=\"\"");
-	}
 	free(name);
 	while (tmp)
 	{
@@ -132,9 +131,5 @@ int	add_var(char *str, t_list **local_var)
 	if (!tmp)
 		perror("malloc");
 	ft_lstadd_back(local_var, tmp);
-<<<<<<< HEAD
-=======
-	// printvar(*local_var);
->>>>>>> origin
 	return (0);
 }
