@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/01/03 15:00:58 by deggio           ###   ########.fr       */
+=======
+/*   Updated: 2024/01/03 14:20:14 by mcoppola         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +55,16 @@ int	pwd(char **env)
 	return (0);
 }
 
-int	envi(char **env)
+int	envi(t_attr *att)
 {
-	int	i;
+	t_list	*env;
 
-	i = -1;
-	while (env[++i] != NULL)
-		printf("%s\n", env[i]);
+	env = att->env_list;
+	while (env)
+	{
+		printf("%s\n", (char *)env->content);
+		env = env->next;
+	}
 	return (0);
 }
 

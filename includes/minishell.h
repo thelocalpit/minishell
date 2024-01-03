@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/29 17:06:02 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:12:48 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ void    free_mx_envp(t_attr *att);
 
 int do_builtin(char **args, char **env, t_attr *att);
 int		pwd(char **env);
-int		envi(char **env);
+int		envi(t_attr *att);
 int		ls_l(char **env, int j);
 int		echo(char **args);
 void	ft_exit(void);
