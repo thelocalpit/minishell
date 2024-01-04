@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   00_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:05:24 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/23 15:31:25 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:50:34 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-int ft_strcmp(const char *str1, const char *str2)
+int	ft_strcmp(const char *str1, const char *str2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str1[i] || !str2[i])
@@ -37,10 +36,9 @@ int ft_strcmp(const char *str1, const char *str2)
 	returns the number of characters in the string and
 	append the null character at the end of the string.
 */
-
-char *ft_strcpy(char *destination, const char *source)
+char	*ft_strcpy(char *destination, const char *source)
 {
-	char *start;
+	char	*start;
 
 	start = destination;
 	while (*source != '\0')
@@ -53,9 +51,9 @@ char *ft_strcpy(char *destination, const char *source)
 	return (start);
 }
 
-char *ft_strcat(char *dest, const char *src)
+char	*ft_strcat(char *dest, const char *src)
 {
-	char *ptr;
+	char	*ptr;
 
 	ptr = dest;
 	while (*ptr)
@@ -66,9 +64,9 @@ char *ft_strcat(char *dest, const char *src)
 	return (dest);
 }
 
-char *ft_strncpy(char *dest, const char *src, size_t n)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < n && src[i] != '\0')
