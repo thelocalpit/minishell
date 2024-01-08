@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/08 19:46:02 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/08 20:23:26 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int heredoc(t_attr *att)
 {
 	char	*eof;
 	char	*input;
+	int		fd;
 
 	eof = ft_strdup(att->split_arr[att->y + 2]);
+	fd = open("objects/heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	while (1)
 	{
 		input = readline(RED_BOLD "> " RESET);
@@ -26,6 +28,9 @@ int heredoc(t_attr *att)
 			free(input);
 			break ;
 		}
+		write(fd, input, ft_strlen(input));
+		write(fd, "\n", 1);
+		free(input);
 	}
 	free(eof);
 	return (0);
