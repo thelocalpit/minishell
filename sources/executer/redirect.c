@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_verify_readline.c                               :+:      :+:    :+:   */
+/*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/19 11:00:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/08 17:33:22 by deggio           ###   ########.fr       */
+/*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
+/*   Updated: 2024/01/08 19:46:02 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* controlla la linea di comando inserita con tutte le varie casistiche */
-
-int verify_readline(char *s, t_attr *att)
+int heredoc(t_attr *att)
 {
-	if (error_end(s, '>') || error_end(s, '<') || error_end(s, '|'))
-		return (-1);
-	else if (error_begin(s))
-		return (-1);
-	//else if (error_mixed_start(s))
-	//	return (-1);
-	else if (count_quotes(s))
-		return (-1);
-	else if (error_dollar(s, att))
-		return (-1);
+	char	*eof;
+	char	*input;
+
+	eof = ft_strdup(att->split_arr[att->y + 2]);
+	while (1)
+	{
+		input = readline(RED_BOLD "> " RESET);
+		if (ft_strcmp(input, eof) == 0)
+		{
+			free(input);
+			break ;
+		}
+	}
+	free(eof);
+	return (0);
+}
+
+int do_red(t_attr *att)
+{
+	if (att->heredoc)
+		heredoc(att);
 	return (0);
 }

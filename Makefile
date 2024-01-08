@@ -6,7 +6,7 @@
 #    By: deggio <deggio@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2023/12/27 02:50:49 by deggio           ###   ########.fr        #
+#    Updated: 2024/01/08 19:49:09 by deggio           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC =	sources/minishell.c \
 		sources/Commands/export.c \
 		sources/Commands/unset.c \
 		sources/executer/pipe.c \
+		sources/executer/redirect.c \
 		sources/parser/parser.c \
 		#sources/parser/lexer.c \
 		#sources/expander/00_expander.c \

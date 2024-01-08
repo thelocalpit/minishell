@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/03 14:19:36 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:41:49 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int ac, char **av, char **envp)
 	// serve a me e ricordiamoci di freearlo (Marco)
 	att.env_list = copy_env_in_list(envp);
 	add_index_to_list(&att);
-	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
 	att.local_var = NULL;
 	printlist(&att);
 	while (1)
@@ -49,7 +48,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			add_history(s);
 			split_init(s, &att);
-			// ft_print_array(att.split_arr);
+			//ft_print_array(att.split_arr);
 			att.y = 0;
 			if (count_pipes(&att))
 				init_pipes(&att);
@@ -57,7 +56,8 @@ int	main(int ac, char **av, char **envp)
 			{
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);
-				// ft_print_array(att.arr2);
+				do_red(&att);
+				//ft_print_array(att.arr2);
 				do_builtin(att.arr2, (char **)envp, &att);
 				// command(&att);
 				free_arr2(att.arr2, &att);

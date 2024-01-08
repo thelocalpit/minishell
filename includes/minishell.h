@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/03 14:12:48 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:49:49 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,7 @@ void    command(t_attr *att);
 
 // Executer folder
 
+
 //	pipe.c
 
 int     count_pipes(t_attr *att);
@@ -312,6 +313,10 @@ void    init_pipes(t_attr *att);
 void    write_to_pipe(t_attr *att);
 void    read_from_pipe(t_attr *att);
 void    close_pipeline(t_attr *att);
+
+// redirect.c
+int    heredoc(t_attr *att);
+int    do_red(t_attr *att);
 
 // expander
 
