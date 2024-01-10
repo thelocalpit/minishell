@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/03 14:12:48 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:21:26 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,11 @@ void    start_env(char **envp, t_attr *att);
 void    split_init(char *s, t_attr *att);
 int     count_tokens(char *s, t_attr *att);
 int     process_special_token(t_attr *att, char *s, int i);
+int check_s_d_quotes(char *s, int i);
 
-	// 01_token_in_array.c
+// 01_token_in_array.c
 
-void    create_array(char *s, t_attr *att);
+void create_array(char *s, t_attr *att);
 char    *get_token(char *s);
 void    check_next_special_token(char *s, int i, char **token);
 
