@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/10 17:21:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:50:33 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,12 +261,13 @@ int     return_nl_error(void);
 int     error_dollar(char *s, t_attr *att);
 int     error_dollar_02(char *s, int i, t_attr *att);
 int     error_dollar_03(char *check_envp, t_attr *att, int len);
+int count_dollar_sign(char *s, t_attr *att);
 
 //	free_folder
 
 // 00_free.c
 
-void    free_arr2(char **tokens, t_attr *att);
+void free_arr2(char **tokens, t_attr *att);
 void    free_arr(char **arr);
 void    ft_delete_matrix(void *matrix);
 void    free_mx_envp(t_attr *att);
