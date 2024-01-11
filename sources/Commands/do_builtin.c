@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/08 19:51:16 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 06:04:49 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	do_builtin(char **args, char **env, t_attr *att)
 	int	i;
 
 	i = 0;
+	if (att->skip)
+		return (0);
 	while (args[i])
 	{
 		if (ft_strncmp(args[i], "pwd\0", 4) == 0)

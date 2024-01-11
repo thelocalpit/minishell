@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/11 04:38:20 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 06:02:01 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,8 +318,11 @@ void    read_from_pipe(t_attr *att);
 void    close_pipeline(t_attr *att);
 
 // redirect.c
+int    red_input(t_attr *att, char *path);
 int    heredoc(t_attr *att);
+int    read_from_file(t_attr *att);
 int    do_red(t_attr *att);
+
 
 // expander
 
