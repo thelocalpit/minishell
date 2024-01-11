@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/11 06:38:29 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 17:17:41 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,12 +263,13 @@ int     return_nl_error(void);
 int     error_dollar(char *s, t_attr *att);
 int     error_dollar_02(char *s, int i, t_attr *att);
 int     error_dollar_03(char *check_envp, t_attr *att, int len);
+int count_dollar_sign(char *s, t_attr *att);
 
 //	free_folder
 
 // 00_free.c
 
-void    free_arr2(char **tokens, t_attr *att);
+void free_arr2(char **tokens, t_attr *att);
 void    free_arr(char **arr);
 void    ft_delete_matrix(void *matrix);
 void    free_mx_envp(t_attr *att);

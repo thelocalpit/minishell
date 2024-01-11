@@ -6,7 +6,7 @@
 #    By: deggio <deggio@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/01/11 06:39:23 by deggio           ###   ########.fr        #
+#    Updated: 2024/01/11 17:17:59 by deggio           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC =	sources/minishell.c \
 		sources/error/03_error_mixed.c \
 		sources/error/04_error_messages.c \
 		sources/error/05_wrong_dollar.c \
+		sources/error/06_wrong_dollar_02.c \
 		sources/free/00_free.c \
 		sources/Commands/builtin.c \
 		sources/Commands/do_builtin.c \
