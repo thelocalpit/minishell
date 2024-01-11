@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/11 17:17:41 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 18:06:27 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,44 +73,45 @@ extern int  g_value;
 
 typedef struct s_attr
 {
-    //------- n di token -------------------
-    int     nb_tokens;
-    char    **split_arr;
-    int     y;
-    int     x;
-    char    **arr2;
-    int     y2;
-    int     x2;
-    // int *flag$;
-    //------ cmds -------------
-    int     count;
-    //----- token variables ---------
-    int     count_words;
-    int     flag_cmd_valid;
-    int     flag_quote;
-    //------ errors -------------------
-    int     flag_err_quote;
-    int     flag_err_type;
-    int     flag_to_do;
-    //-----pipe----------
-    int     nb_pipes;
-    int     **pipesfd;
-    int     pipe_index;
-    //----- redir ---------
-    int     red_fd;
-    //----- flag ----------
-    int     write_to_pipe;
-    int     read_from_pipe;
-    int     read_from_file;
-    int     redir;
-    int     create_file;
-    int     only_create;
-    int     heredoc;
-    int     skip;
-    //---- envp custom matrix ---
-    char    **mx_envp;
-    int     y_mx_envp;
-    int     x_mx_envp;
+	//------- n di token -------------------
+	int     nb_tokens;
+	char    **split_arr;
+	int     y;
+	int     x;
+	char    **arr2;
+	int     y2;
+	int     x2;
+	// int *flag$;
+	//------ cmds -------------
+	int     count;
+	//----- token variables ---------
+	int     count_words;
+	int     flag_cmd_valid;
+	int     flag_quote;
+	//------ errors -------------------
+	int     flag_err_quote;
+	int     flag_err_type;
+	int     flag_to_do;
+	//-----pipe----------
+	int     nb_pipes;
+	int     **pipesfd;
+	int     pipe_index;
+	//----- exec ---------
+	int     red_fd;
+	pid_t   pid;
+	//----- flag ----------
+	int     write_to_pipe;
+	int     read_from_pipe;
+	int     read_from_file;
+	int     redir;
+	int     create_file;
+	int     only_create;
+	int     heredoc;
+	int     skip;
+	//---- envp custom matrix ---
+	char    **mx_envp;
+	int     y_mx_envp;
+	int     x_mx_envp;
 
 	//---- expander --------
 	int i;
@@ -276,13 +277,14 @@ void    free_mx_envp(t_attr *att);
 
 // Commands
 
-int do_builtin(char **args, char **env, t_attr *att);
-int		pwd(char **env);
+int do_builtin(t_attr *att);
+int do_child_cmd(t_attr *att);
+int		pwd(t_attr *att);
 int		envi(t_attr *att);
-int		ls_l(char **env, int j);
+//int		ls_l(char **env, int j);
 int		echo(char **args);
 void	ft_exit(void);
-void	ft_cd(char **args);
+int		ft_cd(char **args);
 int		add_var(char *str, t_list **var_list);
 
 // 01_export
@@ -309,6 +311,9 @@ void    command(t_attr *att);
 
 // Executer folder
 
+// exec.c
+
+int    exec(t_attr *att);
 
 //	pipe.c
 

@@ -6,51 +6,44 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/11 06:04:49 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 18:06:41 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	do_builtin(char **args, char **env, t_attr *att)
+int	do_builtin(t_attr *att)
 {
-	int	i;
-
-	i = 0;
-	if (att->skip)
-		return (0);
-	while (args[i])
+	if (ft_strncmp(att->arr2[0], "export\0", 7) == 0)
+		return (ft_export(att->arr2, att));
+	else if (ft_strncmp(att->arr2[0], "unset\0", 6) == 0)
+		return (ft_unset(att->arr2, att));
+	else if (ft_strncmp(att->arr2[0], "exit\0", 5) == 0)
 	{
-		if (ft_strncmp(args[i], "pwd\0", 4) == 0)
-			return (pwd((char **) env));
-		else if (ft_strncmp(args[i], "export\0", 7) == 0)
-			return (ft_export((char **) args, att));
-		else if (ft_strncmp(args[i], "unset\0", 6) == 0)
-			return (ft_unset((char **) args, att));
-		else if (ft_strncmp(args[i], "env\0", 4) == 0)
-			return (envi(att));
-		else if (ft_strncmp(args[i], "ls\0", 3) == 0)
-			return (ls_l((char **) env, 0));
-		else if (strstr(args[i], "echo") != NULL)
-			return (echo((char **) args));
-		else if (ft_strncmp(args[i], "exit\0", 5) == 0)
-		{
-			ft_exit();
-			return (0);
-		}
-		else if (ft_strncmp(args[i], "cd\0", 3) == 0)
-		{
-			ft_cd((char **) args);
-			return (0);
-		}
-		else if (ft_strchr(args[i], '=') != NULL
-			&& ((args[i][0] >= 65 && args[i][0] <= 90)
-				|| (args[i][0] >= 97 && args[i][0] <= 122)))
-			return (add_var(args[i], &(att->local_var)));
-		else
-			printf("%s: command not found\n", args[i]);
-		i++;
+		ft_exit();
+		return (0);
 	}
+	else if (ft_strncmp(att->arr2[0], "cd\0", 3) == 0)
+		return (ft_cd(att->arr2));
+	else if (ft_strchr(att->arr2[0], '=') != NULL
+		&& ((att->arr2[0][0] >= 65 && att->arr2[0][0] <= 90)
+		|| (att->arr2[0][0] >= 97 && att->arr2[0][0] <= 122)))
+		return (add_var(att->arr2[0], &(att->local_var)));
+	else
+		exec(att);
+	return (0);
+}
+
+int	do_child_cmd(t_attr *att)
+{
+	if (ft_strncmp(att->arr2[0], "pwd\0", 4) == 0)
+		return (pwd(att));
+	else if (ft_strncmp(att->arr2[0], "env\0", 4) == 0)
+		return (envi(att));
+	else if (strstr(att->arr2[0], "echo") != NULL)
+		return (echo(att->arr2));
+	else
+		printf("%s: command not found\n", att->arr2[0]); // aggiungere execve
 	return (0);
 }
 

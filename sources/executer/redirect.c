@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/11 06:50:27 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 18:04:15 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,17 @@ int	redir(t_attr *att)
 
 	check_redir(att);
 	name = ft_strtrim(att->split_arr[att->y + 2], " ");
-	printf("name: %s\n", name);
 	if (att->redir == 1)
 		att->red_fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else if (att->redir == 2)
 		att->red_fd = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	printf("red_fd: %d\n", att->red_fd);
-	printf("att->redir: %d\n", att->redir);
 	if (att->red_fd < 0)
 	{
 		perror("cannot create the file");
 		return (-1);
 	}
-	printf(" DOPO if \n");
 	dup2(att->red_fd, 1);
-	printf(" DOPO dup2 \n");
 	close(att->red_fd);
-	printf(" DOPO CLOSE \n");
 	free(name);
 	return (0);
 }

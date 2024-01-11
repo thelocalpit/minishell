@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/11 06:56:55 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 17:59:02 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ int	main(int ac, char **av, char **envp)
 			{
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);
-				do_red(&att);
 				//ft_print_array(att.arr2);
-				do_builtin(att.arr2, (char **)envp, &att);
+				do_builtin(&att);
 				// command(&att);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
@@ -66,9 +65,9 @@ int	main(int ac, char **av, char **envp)
 				att.y += 2;
 				if (att.i_flag$ > 0)
 					free(att.flag$);
-				free(att.save_y_mx_envp);
+				//free(att.save_y_mx_envp);
 			}
-			free_arr(att.split_arr);
+			//free_arr(att.split_arr);
 			// free(att.flag$);
 			if (att.nb_pipes != 0)
 				ft_delete_matrix(att.pipesfd);
