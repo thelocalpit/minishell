@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/11 02:24:10 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 04:38:20 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ typedef struct s_attr
     int     nb_pipes;
     int     **pipesfd;
     int     pipe_index;
+    //----- redir ---------
+    int     red_fd;
     //----- flag ----------
     int     write_to_pipe;
     int     read_from_pipe;

@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/08 20:23:26 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 04:40:28 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int heredoc(t_attr *att)
 		free(input);
 	}
 	free(eof);
+	close(fd);
+	att->red_fd = open("objects/heredoc", O_RDONLY);
+	dup2(att->red_fd, 0);
+	close(att->red_fd);
+	unlink("objects/heredoc");
 	return (0);
 }
 
