@@ -6,15 +6,45 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/11 18:01:30 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 20:18:23 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+int	find_paths(t_attr *att)
+{
+	while (att->env_list)
+	{
+		if (ft_strncmp(att->env_list->content, "PATH=", 5) == 0)
+		{
+			att->paths = ft_split(att->env_list->content + 5, ':');
+			return (1);
+		}
+		att->env_list = att->env_list->next;
+	}
+	return (0);
+}
+
+int	do_execve(t_attr *att)
+{
+	if (att->arr2[0][0] == '/')
+		absolute_exec(att);
+	else if (att->arr2[0][0] == '.')
+		binary_exec(att);
+	else
+		relative_exec(att);
+	return (0);
+}
+
 int	exec(t_attr *att)
 {
 	att->pid = fork();
+	if (!find_paths(att))
+	{
+		perror("PATH not found");
+		return (1);
+	}
 	if (att->pid == -1)
 	{
 		perror("fork failed");
@@ -29,5 +59,6 @@ int	exec(t_attr *att)
 	}
 	else
 		waitpid(att->pid, &g_value, 0);
+	free(att->paths);
 	return (0);
 }

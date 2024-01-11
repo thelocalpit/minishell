@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/11 18:06:41 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 20:15:04 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	do_child_cmd(t_attr *att)
 	else if (strstr(att->arr2[0], "echo") != NULL)
 		return (echo(att->arr2));
 	else
-		printf("%s: command not found\n", att->arr2[0]); // aggiungere execve
+		do_execve(att);
 	return (0);
 }
 

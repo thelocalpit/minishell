@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/11 18:06:27 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 20:25:59 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_attr
 	//----- exec ---------
 	int     red_fd;
 	pid_t   pid;
+	char	**paths;
 	//----- flag ----------
 	int     write_to_pipe;
 	int     read_from_pipe;
@@ -311,9 +312,18 @@ void    command(t_attr *att);
 
 // Executer folder
 
+// ecxeve.c
+
+int	absolute_exec(t_attr *att);
+int	binary_exec(t_attr *att);
+int	relative_exec(t_attr *att);
+
+
 // exec.c
 
-int    exec(t_attr *att);
+int		find_paths(t_attr *att);
+int		do_execve(t_attr *att);
+int		exec(t_attr *att);
 
 //	pipe.c
 
