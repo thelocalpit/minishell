@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/08 19:41:49 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 02:25:13 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int	main(int ac, char **av, char **envp)
 				if (!att.split_arr[att.y + 1])
 					break;
 				att.y += 2;
-				free(att.flag$);
+				if (att.i_flag$ > 0)
+					free(att.flag$);
 				free(att.save_y_mx_envp);
 			}
 			free_arr(att.split_arr);

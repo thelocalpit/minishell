@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/08 17:17:51 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/11 02:24:17 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void next_step_sub(t_attr *att)
 	int check_next_step(t_attr *att)
 {
 	reset_flags(att);
-	if (!ft_strcmp(att->split_arr[0], ">")
-		|| !ft_strcmp(att->split_arr[0], ">>"))
-	{
-		att->only_create = 1;
-		att->skip = 1;
-	}
-	else if (att->split_arr[att->y] && att->split_arr[att->y + 1])
+	// if (!ft_strcmp(att->split_arr[0], ">")
+	// 	|| !ft_strcmp(att->split_arr[0], ">>"))
+	// {
+	// 	att->only_create = 1;
+	// 	att->skip = 1;
+	// }
+	if (att->split_arr[att->y] && att->split_arr[att->y + 1])
 		next_step_sub(att);
 	if (att->y > 1)
 		next_step_sub2(att);
