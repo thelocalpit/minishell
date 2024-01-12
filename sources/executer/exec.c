@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/12 01:43:48 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/12 05:02:47 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ int	do_execve(t_attr *att)
 	free_arr(att->env);
 	return (0);
 }
+
+// VANNO GESTITI I SEGNALI PER QUITTARE I PROCESSI FIGLI
+
+//controllare la gestione di g_value 
 
 int	exec(t_attr *att)
 {

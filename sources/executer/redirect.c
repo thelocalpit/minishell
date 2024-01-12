@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/11 18:04:15 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/12 05:07:05 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ int	redir(t_attr *att)
 	return (0);
 }
 
+// Da gestire:
+//  FIXARE "code ignetion" nell'heredoc, e creazione di file chiamati come parti di codice per le redir
+//  se bisogna solo creare il file vuoto
+//  le redir nelle built in prima dell'exec, tanto devono solo creare file vuoti
+//  controllari segnali per here doc
+//	dare un occhiata alle pipe
+
 int	do_red(t_attr *att)
 {
 	if (att->heredoc)
@@ -62,5 +69,11 @@ int	do_red(t_attr *att)
 		read_from_file(att);
 	if (att->redir)
 		redir(att);
+	if (att->read_from_pipe)
+		read_from_pipe(att);
+	if (att->write_to_pipe && att->read_from_pipe)
+		att->pipe_index++;
+	if (att->write_to_pipe)
+		write_to_pipe(att);
 	return (0);
 }
