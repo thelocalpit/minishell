@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/11 20:25:59 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/12 01:53:22 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_attr
 	int     red_fd;
 	pid_t   pid;
 	char	**paths;
+	char	**env;
 	//----- flag ----------
 	int     write_to_pipe;
 	int     read_from_pipe;
@@ -230,6 +231,11 @@ void    insert_between_node(t_list *prev, char *content);
 char    *get_var_name(char *full_var);
 void add_index_to_list(t_attr *att);
 
+// 03_utils.c
+
+void	envp_to_matrix(t_attr *att);
+int	matrix_len(char **matrix);
+
 //	error_folder
 
 // 00_verify_readline.c
@@ -316,7 +322,7 @@ void    command(t_attr *att);
 
 int	absolute_exec(t_attr *att);
 int	binary_exec(t_attr *att);
-int	relative_exec(t_attr *att);
+int	bin_exec(t_attr *att);
 
 
 // exec.c

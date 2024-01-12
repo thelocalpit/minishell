@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/11 20:18:23 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/12 01:43:48 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ int	find_paths(t_attr *att)
 
 int	do_execve(t_attr *att)
 {
+	envp_to_matrix(att);
 	if (att->arr2[0][0] == '/')
 		absolute_exec(att);
 	else if (att->arr2[0][0] == '.')
 		binary_exec(att);
 	else
-		relative_exec(att);
+		bin_exec(att);
+	free_arr(att->env);
 	return (0);
 }
 

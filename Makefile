@@ -6,7 +6,7 @@
 #    By: deggio <deggio@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/01/11 20:20:18 by deggio           ###   ########.fr        #
+#    Updated: 2024/01/11 23:36:20 by deggio           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC =	sources/minishell.c \
 		sources/utilities/debugg.c \
 		sources/utilities/00_utils.c \
 		sources/utilities/01_utils.c \
+		sources/utilities/03_utils.c \
 		sources/tokens/00_token_init_count.c \
 		sources/tokens/01_token_in_array.c \
 		sources/tokens/02_single_token_matrix.c \
