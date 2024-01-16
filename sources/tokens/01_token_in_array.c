@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:04:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/15 21:24:35 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:20:29 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ char *get_token(char *s)
 	if (s[j] != '|' && s[j] != '>' && s[j] != '<')
 	{
 		while (s[j] != '|' && s[j] != '>' && s[j] != '<' && s[j] != '\0')
+		{
+			if (s[j] == '\'' || s[j] == '"')
+				j = check_s_d_quotes(s, j);
 			j++;
+		}
 		token = malloc(sizeof(char) * (j + 1));
 		if (!token)
 			return (NULL);

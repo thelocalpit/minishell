@@ -6,39 +6,30 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 18:31:25 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:01:03 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int count_dollar_sign(char *s, t_attr *att)
+/* queste due funzioni servono solamente a ridurre il numero di righe */
+void error_dollar_02_b(char *check_envp, int *j, int *len, t_attr *att)
 {
-	int i;
-
-	i = 0;
-	att->nb_$ = 0;
-	while (s[i])
-	{
-		if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
-			att->nb_$++;
-		i++;
-	}
-	return (att->nb_$);
-}
-
-int error_dollar_03(char *check_envp, t_attr *att, int len)
-{
+	check_envp[*j] = '=';
+	check_envp[*j + 1] = '\0';
+	len += 1;
 	att->y_mx_envp = 0;
-	while (att->mx_envp[att->y_mx_envp])
+	att->x_mx_envp = *len;
+}
+void error_dollar_02_a(char *s, int *i, int *len)
+{
+	while (s[*i] != '"' && s[*i] != '\'' && s[*i] != ' ' && s[*i])
 	{
-		if (!ft_strncmp(check_envp, att->mx_envp[att->y_mx_envp], len))
-			return (0);
-		if (!ft_strncmp(check_envp, "?", 1))
-			return (0);
-		att->y_mx_envp++;
+		(*i)++;
+		(*len)++;
+		if (s[*i] == '$')
+			break;
 	}
-	return (-1);
 }
 
 int error_dollar_02(char *s, int i, t_attr *att)
@@ -54,24 +45,12 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	start = i;
 	if (s[i] == '?')
 		return (1);
-	while (s[i] != '"' && s[i] != '\'' && s[i] != ' ' && s[i])
-	{
-		i++;
-		len++;
-		if (s[i] == '$')
-			break;
-	}
+	error_dollar_02_a(s, &i, &len);
 	check_envp = malloc(sizeof(char) * len + 2);
 	i = start;
 	while (j < len)
-	{
 		check_envp[j++] = s[i++];
-	}
-	check_envp[j] = '=';
-	check_envp[j + 1] = '\0';
-	len += 1;
-	att->y_mx_envp = 0;
-	att->x_mx_envp = len;
+	error_dollar_02_b(check_envp, &j, &len, att);
 	if (error_dollar_03(check_envp, att, len) == -1)
 	{
 		free(check_envp);
@@ -80,11 +59,8 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	free(check_envp);
 	return (len - 1);
 }
-
-int error_dollar(char *s, t_attr *att)
+int error_dollar_01(char *s, t_attr *att)
 {
-	int i;
-
 	if (count_dollar_sign(s, att) != 0)
 	{
 		att->save_y_mx_envp = malloc(sizeof(int) * att->nb_$);
@@ -93,6 +69,14 @@ int error_dollar(char *s, t_attr *att)
 			return (-1);
 		att->i_flag$ = 0;
 	}
+	return (0);
+}
+int error_dollar(char *s, t_attr *att)
+{
+	int i;
+
+	if (error_dollar_01(s, att))
+		return (-1);
 	i = 0;
 	while (s[i] && att->i_flag$ < att->nb_$)
 	{
@@ -110,8 +94,6 @@ int error_dollar(char *s, t_attr *att)
 				i += error_dollar_02(s, i, att);
 			att->i_flag$++;
 		}
-		if (s[i] == '\0')
-			return (0);
 		i++;
 	}
 	return (0);

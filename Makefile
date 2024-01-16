@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/01/10 13:21:04 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/01/16 18:29:22 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC =	sources/minishell.c \
 		sources/error/03_error_mixed.c \
 		sources/error/04_error_messages.c \
 		sources/error/05_wrong_dollar.c \
+		sources/error/06_wrong_dollar_02.c \
 		sources/free/00_free.c \
 		sources/Commands/builtin.c \
 		sources/Commands/do_builtin.c \

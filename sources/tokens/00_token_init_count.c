@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/10 12:53:59 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:30:19 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,31 @@ int	process_special_token(t_attr *att, char *s, int i)
 	else
 		return (++i);
 }
+
+int check_s_d_quotes(char *s, int i)
+{
+	if (s[i] == '\'')
+	{
+		i++;
+		while (s[i] != '\'')
+			i++;
+	}
+	else if (s[i] == '"')
+	{
+		i++;
+		while (s[i] != '"')
+			i++;
+	}
+	return (i);
+}
+
 /* to count tokens we get the len of s.
 	with those conditions we intend to count (cmd + args) and (|,>,<)
 	 */
 int	count_tokens(char *s, t_attr *att)
 {
 	int i;
-	int len; 
+	int len;
 
 	if (!s)
 		return (0);
@@ -51,7 +69,11 @@ int	count_tokens(char *s, t_attr *att)
 		{
 			att->nb_tokens++;
 			while (i <= len && (s[i] != '|' && s[i] != '<' && s[i] != '>'))
+			{
+				if (s[i] == '\'' || s[i] == '"')
+					i = check_s_d_quotes(s, i);
 				i++;
+			}
 		}
 		if (s[i] == ' ')
 			i++;

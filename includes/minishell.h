@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/09 19:39:54 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:29:33 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,11 @@ void    start_env(char **envp, t_attr *att);
 void    split_init(char *s, t_attr *att);
 int     count_tokens(char *s, t_attr *att);
 int     process_special_token(t_attr *att, char *s, int i);
+int check_s_d_quotes(char *s, int i);
 
-	// 01_token_in_array.c
+// 01_token_in_array.c
 
-void    create_array(char *s, t_attr *att);
+void create_array(char *s, t_attr *att);
 char    *get_token(char *s);
 void    check_next_special_token(char *s, int i, char **token);
 
@@ -260,12 +261,13 @@ int     return_nl_error(void);
 int     error_dollar(char *s, t_attr *att);
 int     error_dollar_02(char *s, int i, t_attr *att);
 int     error_dollar_03(char *check_envp, t_attr *att, int len);
+int count_dollar_sign(char *s, t_attr *att);
 
 //	free_folder
 
 // 00_free.c
 
-void    free_arr2(char **tokens, t_attr *att);
+void free_arr2(char **tokens, t_attr *att);
 void    free_arr(char **arr);
 void    ft_delete_matrix(void *matrix);
 void    free_mx_envp(t_attr *att);

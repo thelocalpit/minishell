@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:45:03 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 18:31:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:21:19 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,20 @@ int error_begin(char *s)
 		return (0);
 	while (s[i] == ' ')
 		i++;
-	if (s[i] == '|')
+	if (s[i] == '|' || (s[i] == '<' && s[i + 1] == '|'))
 		return (return_pipe_error());
-	else if (s[i] == '<' && s[i + 1] == '|')
-		return (return_pipe_error());
-	else if (s[i] == '>' && s[i + 1] == '|')
-		return (return_not_required());
 	else if (s[i] == '>' && s[i + 1] == '>' && s[i + 2] == '|')
 		return (return_pipe_error());
 	else if (s[i] == '<' && s[i + 1] == '<' && s[i + 2] == '|')
 		return (return_pipe_error());
 	else if (s[i] == '<' && s[i + 1] == '>' && s[i + 2] == '|')
 		return (return_pipe_error());
-	else if (s[i] == '>' && s[i + 1] == '<' && s[i + 2] == '|')
-		return (return_lt_error());
+	else if (s[i] == '>' && s[i + 1] == '|')
+		return (return_not_required());
 	else if (s[i] == '<' && s[i + 1] == '<' && s[i + 2] == '<')
 		return (return_not_required());
+	else if (s[i] == '>' && s[i + 1] == '<' && s[i + 2] == '|')
+		return (return_lt_error());
 	else if (s[i] == '>' && s[i + 1] == '>' && s[i + 2] == '>')
 		return (return_gt_error());
 	return (0);
