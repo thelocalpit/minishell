@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_token_init_count.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 17:57:06 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:53:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	process_special_token(t_attr *att, char *s, int i)
 	else
 		return (++i);
 }
-/* to count tokens we get the len of s. 
+/* to count tokens we get the len of s.
 	with those conditions we intend to count (cmd + args) and (|,>,<)
 	 */
 int	count_tokens(char *s, t_attr *att)
 {
 	int i;
-	int len;
+	int len; 
 
 	if (!s)
 		return (0);
@@ -62,7 +62,7 @@ int	count_tokens(char *s, t_attr *att)
 }
 /* questa funzione si occupa di splittare fra comandi (con argomenti)
 	e redirections */
-	
+
 void	split_init(char *s, t_attr *att)
 {
 	if (!s)

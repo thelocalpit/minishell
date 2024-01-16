@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/03 14:12:48 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:39:54 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,6 +269,7 @@ void    free_arr2(char **tokens, t_attr *att);
 void    free_arr(char **arr);
 void    ft_delete_matrix(void *matrix);
 void    free_mx_envp(t_attr *att);
+void    free_env_list(t_attr *att);
 
 // Commands
 
