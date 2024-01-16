@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/16 19:46:32 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:57:17 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
  * basic_export - print all the env variables in the format "declare -x VAR"
  * sorted
  *
- * @param {t_attr *} att: the struct of attributes
- * @return {int} 0 if success
+ * @param t_attr* att: the struct of attributes
+ * @return 0 if success
 */
 int	basic_export(t_attr *att)
 {
