@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/04 18:23:41 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:46:32 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	basic_export(t_attr *att)
 	export = sort_list(att->env_list);
 	while (export)
 	{
-		printf("declare -x %s\n", (char *)export->content);
+		printf("declare -x %s=\"%s\"\n",
+			get_var_name((char *)export->content),
+			get_var_content((char *)export->content));
 		export = export->next;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/01/16 18:29:22 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/01/16 19:38:18 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC =	sources/minishell.c \
 		sources/utilities/debugg.c \
 		sources/utilities/00_utils.c \
 		sources/utilities/01_utils.c \
+		sources/utilities/02_utils.c \
 		sources/tokens/00_token_init_count.c \
 		sources/tokens/01_token_in_array.c \
 		sources/tokens/02_single_token_matrix.c \

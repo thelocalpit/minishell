@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/16 18:29:33 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:47:57 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,12 +165,6 @@ void    check_cmd_tokens(char *s, t_attr *att);
 int     ft_strlen_custom(char *s, int flag, t_attr *att);
 char    *ft_write_word(char *s, t_attr *att, int flag, int i);
 
-// 02a_utils.c
-
-int ft_intsize(int n);
-int ft_ispositive(int n);
-void ft_itoa_custom(int n, t_attr *att);
-
 // 02b_ft_strlen_custom.c
 
 void ft_count_exp_print_error(t_attr *att);
@@ -225,6 +219,13 @@ t_list  *sort_list(t_list *list);
 void    insert_between_node(t_list *prev, char *content);
 char    *get_var_name(char *full_var);
 void add_index_to_list(t_attr *att);
+
+// 02_utils.c
+
+int ft_intsize(int n);
+int ft_ispositive(int n);
+void ft_itoa_custom(int n, t_attr *att);
+char    *get_var_content(char *full_var);
 
 //	error_folder
 
