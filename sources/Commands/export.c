@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/16 19:57:17 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:40:25 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	basic_export(t_attr *att)
 	export = sort_list(att->env_list);
 	while (export)
 	{
+		if (get_var_content((char *)export->content)[0] == '"')
+			printf("declare -x %s\n", export->content);
+		else
 		printf("declare -x %s=\"%s\"\n",
 			get_var_name((char *)export->content),
 			get_var_content((char *)export->content));
@@ -66,21 +69,36 @@ void	check_duplicate(t_attr *att, char *content)
 /**
  * add_on_env - add the variable VAR to the env variables
  *
- * @param {char *} arg: the argument to add
- * @param {t_attr *} att: the struct of attributes
- * @return {int} 0 if success
+ * @param char* arg: the argument to add
+ * @param t_attr* att: the struct of attributes
+ * @return 0 if success
 */
 int	add_on_env(char *arg, t_attr *att)
 {
-	t_list	*list;
+	t_list	*env_list;
+	t_list	*local_list;
+	char	*content;
 
-	list = att->local_var;
-	while (list)
+	env_list = att->env_list;
+	local_list = att->local_var;
+	content = arg;
+	if (ft_strchr(arg, '=') == NULL)
+		while (local_list)
+		{
+			if (ft_strcmp(get_var_name(arg), get_var_name((char *)local_list->content)) == 0)
+			{
+				content = local_list->content;
+				break ;
+			}
+			local_list = local_list->next;
+		}
+	while (env_list)
 	{
-		if (ft_strcmp(arg, get_var_name((char *)list->content)) == 0)
-			check_duplicate(att, list->content);
-		list = list->next;
+		if (ft_strcmp(get_var_name(content), get_var_name((char *)env_list->content)) == 0)
+			return (env_list->content = ft_strdup(content), 0);
+		env_list = env_list->next;
 	}
+	ft_lstadd_back(&(att->env_list), ft_lstnew(ft_strdup(content)));
 	return (0);
 }
 
