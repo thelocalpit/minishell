@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/17 19:40:25 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/17 22:25:12 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	basic_export(t_attr *att)
 		if (get_var_content((char *)export->content)[0] == '"')
 			printf("declare -x %s\n", export->content);
 		else
-		printf("declare -x %s=\"%s\"\n",
-			get_var_name((char *)export->content),
-			get_var_content((char *)export->content));
+			printf("declare -x %s=\"%s\"\n",
+				get_var_name((char *)export->content),
+				get_var_content((char *)export->content));
 		export = export->next;
 	}
 	return (0);
