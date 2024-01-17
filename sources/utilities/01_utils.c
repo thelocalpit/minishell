@@ -6,13 +6,13 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2023/12/20 17:55:49 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:35:18 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* questa funzione aggiunge un id ad ogni nooo. necessaria quando lavoriamo 
+/* questa funzione aggiunge un id ad ogni nodo. necessaria quando lavoriamo 
     con l'expander. */
 
 void add_index_to_list(t_attr *att)
