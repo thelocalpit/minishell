@@ -6,16 +6,30 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/17 15:35:18 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:15:16 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void add_index_to_local_var(t_attr *att)
+{
+    int i;
+
+    t_list *current = att->local_var;
+    i = 0;
+    while (att->local_var != NULL)
+    {
+        att->local_var->$flag = i;
+        i++;
+        att->local_var = att->local_var->next;
+    }
+    att->local_var = current;
+}
+
 /* questa funzione aggiunge un id ad ogni nodo. necessaria quando lavoriamo 
     con l'expander. */
-
-void add_index_to_list(t_attr *att)
+void add_index_to_env_list(t_attr *att)
 {
     int i;
 

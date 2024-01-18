@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:01:14 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/10 18:47:54 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:22:09 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ int count_single_quotes(char *s)
 	i = 0;
 	while (s[i])
 	{
+		if (s[i] == '"')
+		{
+			i++;
+			while (s[i] != '"' && s[i])
+				i++;
+			if (s[i])
+				return (1);
+		}
+		if (s[i] == '\\' && s[i + 1] == '\'')
+			i += 2;
 		if (s[i] == '\'')
 			count_quotes++;
 		i++;
@@ -30,17 +40,31 @@ int count_single_quotes(char *s)
 	return (0);
 }
 
+/* se le quotes sono dispari */
 int count_double_quotes(char *s)
 {
 	int i;
 	int count_quotes;
-	
+	int flag;
+
+	flag = 0;
 	i = 0;
 	count_quotes = 0;
 	while (s[i])
 	{
+		if (s[i] == '\'')
+			flag = 1;
+		if (flag == 1 && s[i] == '\'')
 		if (s[i] == '\\' && s[i + 1] == '"')
 			i += 2;
+		// if (s[i] == '\'')
+		// {
+		// 	i++;
+		// 	while (s[i] != '\'' && s[i])
+		// 		i++;
+		// 	if (s[i])
+		// 		return (1);
+		// }
 		if (s[i] == '"')
 			count_quotes++;
 		i++;
@@ -50,6 +74,7 @@ int count_double_quotes(char *s)
 	return (0);
 }
 
+/* controllo delle quotes */
 int count_quotes(char *s)
 {
 	if (count_single_quotes(s))

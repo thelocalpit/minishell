@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/16 18:47:57 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:44:10 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef struct s_attr
     int     heredoc;
     int     skip;
     //---- envp custom matrix ---
-    char    **mx_envp;
+    // char    **mx_envp;
     int     y_mx_envp;
     int     x_mx_envp;
 
@@ -119,8 +119,9 @@ typedef struct s_attr
 	int *flag$;
 	int i_flag$;
 	int *save_y_mx_envp;
+    int flag_list;
 
-	//--- lista ----
+    //--- lista ----
 
 	t_list *env_list;
 	int index_list;
@@ -189,11 +190,12 @@ void    ft_count_words(char *s, t_attr *att);
 
 void copy_expanded_str(t_attr *att, int start);
 void count_expanded_token(t_attr *att, char *s);
+void count_expanded_token_local_var(t_attr *att);
 
 // utilities_folder
 
 // prompt.c
-char    *prompt(void);
+char *prompt(void);
 
 // signals.c
 void    set_signals(void);
@@ -218,7 +220,8 @@ t_list  *copy_env_in_list(char **env);
 t_list  *sort_list(t_list *list);
 void    insert_between_node(t_list *prev, char *content);
 char    *get_var_name(char *full_var);
-void add_index_to_list(t_attr *att);
+void add_index_to_env_list(t_attr *att);
+void add_index_to_local_var(t_attr *att);
 
 // 02_utils.c
 

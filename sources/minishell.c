@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/17 16:31:24 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:18:41 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av, char **envp)
 	// e va sostituito ovunque, per il momento lo aggiungo come parametro in piu dove
 	// serve a me e ricordiamoci di freearlo (Marco)
 	att.env_list = copy_env_in_list(envp);
-	add_index_to_list(&att);
+	add_index_to_env_list(&att);
 	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
 	att.local_var = NULL;
 	printlist(&att);
@@ -59,6 +59,8 @@ int	main(int ac, char **av, char **envp)
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				// ft_print_array(att.arr2);
 				do_builtin(att.arr2, (char **)envp, &att);
+				if (att.local_var != NULL)
+					add_index_to_local_var(&att);
 				// command(&att);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
