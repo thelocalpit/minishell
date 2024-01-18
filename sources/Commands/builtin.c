@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/03 14:20:14 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:07:31 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ int	echo(char **args)
 	return (0);
 }
 
-int	pwd(char **env)
+int	pwd(t_attr *att)
 {
-	(void)env;
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
@@ -47,7 +46,10 @@ int	pwd(char **env)
 		perror("getcwd error!");
 		return (1);
 	}
-	printf(YELLOW_BOLD "%s\n", cwd);
+	if (att->redir > 0)
+		printf("%s", cwd);
+	else
+		printf(YELLOW_BOLD "%s\n", cwd);
 	return (0);
 }
 
@@ -92,7 +94,7 @@ int	ls_l(char **env, int j)
 	return (0);
 }
 
-void	ft_cd(char **args)
+int	ft_cd(char **args)
 {
 	char	*tmp;
 
@@ -106,6 +108,7 @@ void	ft_cd(char **args)
 		printf(RED"cd : diocane non ce sta la cartella");
 		printf("\n");
 	}
+	return (0);
 }
 
 int	add_var(char *str, t_list **local_var)
@@ -116,10 +119,9 @@ int	add_var(char *str, t_list **local_var)
 	tmp = *local_var;
 	name = get_var_name(str);
 	if (!str[ft_strlen(name) + 1])
-	{
 		free(str);
+	if (!str)
 		str = ft_strjoin(name, "=\"\"");
-	}
 	free(name);
 	while (tmp)
 	{
@@ -135,6 +137,5 @@ int	add_var(char *str, t_list **local_var)
 	if (!tmp)
 		perror("malloc");
 	ft_lstadd_back(local_var, tmp);
-	// printvar(*local_var);
 	return (0);
 }

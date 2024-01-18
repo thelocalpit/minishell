@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: deggio <deggio@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/01/16 19:38:18 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/01/11 23:36:20 by deggio           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC =	sources/minishell.c \
 		sources/utilities/00_utils.c \
 		sources/utilities/01_utils.c \
 		sources/utilities/02_utils.c \
+		sources/utilities/03_utils.c \
 		sources/tokens/00_token_init_count.c \
 		sources/tokens/01_token_in_array.c \
 		sources/tokens/02_single_token_matrix.c \
@@ -61,7 +62,11 @@ SRC =	sources/minishell.c \
 		sources/Commands/do_builtin.c \
 		sources/Commands/export.c \
 		sources/Commands/unset.c \
+		sources/executer/ecxeve.c \
+		sources/executer/exec.c \
 		sources/executer/pipe.c \
+		sources/executer/read_file.c \
+		sources/executer/redirect.c \
 		sources/parser/parser.c \
 		#sources/parser/lexer.c \
 		#sources/expander/00_expander.c \
