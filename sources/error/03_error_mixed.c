@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:02:39 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/10 18:21:31 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:43:38 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,13 @@ int ft_scorri(char *s, int i)
 		if (s[i] == '"')
 		{
 			i++;
-			while (s[i] != '"')
+			while (s[i] != '"' && s[i])
 				i++;
 		}
 		else if (s[i] == '\'')
 		{
 			i++;
-			while (s[i] != '\'')
+			while (s[i] != '\'' && s[i])
 				i++;
 		}
 		i++;

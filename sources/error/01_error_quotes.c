@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:01:14 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/17 20:22:09 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:40:30 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@ int count_single_quotes(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '"')
+		if (s[i] == '"' && count_quotes % 2 == 0)
 		{
 			i++;
 			while (s[i] != '"' && s[i])
 				i++;
-			if (s[i])
-				return (1);
 		}
 		if (s[i] == '\\' && s[i + 1] == '\'')
 			i += 2;
@@ -45,26 +43,19 @@ int count_double_quotes(char *s)
 {
 	int i;
 	int count_quotes;
-	int flag;
 
-	flag = 0;
 	i = 0;
 	count_quotes = 0;
 	while (s[i])
 	{
-		if (s[i] == '\'')
-			flag = 1;
-		if (flag == 1 && s[i] == '\'')
-		if (s[i] == '\\' && s[i + 1] == '"')
+		if (s[i] == '\'' && (count_quotes % 2 == 0))
+		{
+			i++;
+			while (s[i] != '\'' && s[i])
+				i++;
+		}
+		else if (s[i] == '\\' && s[i + 1] == '"')
 			i += 2;
-		// if (s[i] == '\'')
-		// {
-		// 	i++;
-		// 	while (s[i] != '\'' && s[i])
-		// 		i++;
-		// 	if (s[i])
-		// 		return (1);
-		// }
 		if (s[i] == '"')
 			count_quotes++;
 		i++;

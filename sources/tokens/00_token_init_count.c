@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_token_init_count.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/16 18:30:19 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:38:38 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int check_s_d_quotes(char *s, int i)
 	if (s[i] == '\'')
 	{
 		i++;
-		while (s[i] != '\'')
+		while (s[i] != '\'' && s[i])
 			i++;
 	}
 	else if (s[i] == '"')
 	{
 		i++;
-		while (s[i] != '"')
+		while (s[i] != '"' && s[i])
 			i++;
 	}
 	return (i);
