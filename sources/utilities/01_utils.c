@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/18 12:15:16 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:03:52 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void add_index_to_local_var(t_attr *att)
     att->local_var = current;
 }
 
-/* questa funzione aggiunge un id ad ogni nodo. necessaria quando lavoriamo 
+/* questa funzione aggiunge un id ad ogni nodo. necessaria quando lavoriamo
     con l'expander. */
 void add_index_to_env_list(t_attr *att)
 {
