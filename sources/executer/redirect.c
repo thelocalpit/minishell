@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/12 05:07:05 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/18 13:02:04 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ int	do_red(t_attr *att)
 		att->pipe_index++;
 	if (att->write_to_pipe)
 		write_to_pipe(att);
+	if (att->write_to_pipe && att->read_from_pipe && att->pipe_index <= att->nb_pipes)
+		close_pipeline(att);
 	return (0);
 }
