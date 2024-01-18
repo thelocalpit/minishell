@@ -170,12 +170,6 @@ void    check_cmd_tokens(char *s, t_attr *att);
 int     ft_strlen_custom(char *s, int flag, t_attr *att);
 char    *ft_write_word(char *s, t_attr *att, int flag, int i);
 
-// 02a_utils.c
-
-int ft_intsize(int n);
-int ft_ispositive(int n);
-void ft_itoa_custom(int n, t_attr *att);
-
 // 02b_ft_strlen_custom.c
 
 void ft_count_exp_print_error(t_attr *att);
@@ -236,6 +230,13 @@ void add_index_to_list(t_attr *att);
 void	envp_to_matrix(t_attr *att);
 int	matrix_len(char **matrix);
 
+// 02_utils.c
+
+int ft_intsize(int n);
+int ft_ispositive(int n);
+void ft_itoa_custom(int n, t_attr *att);
+char    *get_var_content(char *full_var);
+
 //	error_folder
 
 // 00_verify_readline.c
@@ -281,6 +282,7 @@ void free_arr2(char **tokens, t_attr *att);
 void    free_arr(char **arr);
 void    ft_delete_matrix(void *matrix);
 void    free_mx_envp(t_attr *att);
+void    free_env_list(t_attr *att);
 
 // Commands
 

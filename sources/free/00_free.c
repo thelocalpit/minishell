@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:37:23 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/11/24 18:38:58 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:40:41 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void free_arr(char **arr)
 
 /* questa è stata fatta per liberare la matrice degli fd
 	delle pipes. per farlo castiamo la matrice a char ** */
-	
+
 void ft_delete_matrix(void *matrix)
 {
 	int i;

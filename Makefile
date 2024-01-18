@@ -39,6 +39,7 @@ SRC =	sources/minishell.c \
 		sources/utilities/debugg.c \
 		sources/utilities/00_utils.c \
 		sources/utilities/01_utils.c \
+		sources/utilities/02_utils.c \
 		sources/utilities/03_utils.c \
 		sources/tokens/00_token_init_count.c \
 		sources/tokens/01_token_in_array.c \
