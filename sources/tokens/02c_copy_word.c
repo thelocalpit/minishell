@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:16:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 18:15:45 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:26:24 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var)
 	Se non è da espandere facciamo un normale copia. */
 int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 {
+	// qui da capire come gestire anche le virgolette
+	att->arr2[att->y2][att->x2++] = '"';
 	while (s[i] != '"')
 	{
 		if (s[i] == '$' && s[i + 1] == '?')
@@ -87,6 +89,7 @@ int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 		else
 			att->arr2[att->y2][att->x2++] = s[i++];
 	}
+	att->arr2[att->y2][att->x2++] = '"';
 	return (i);
 }
 
@@ -107,8 +110,10 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 		i = copy_double_quotes(s, i, att, len_name_var);
 	else if (flag == 1)
 	{
+		att->arr2[att->y2][att->x2++] = '\'';
 		while (s[i] != '\'')
 			att->arr2[att->y2][att->x2++] = s[i++];
+		att->arr2[att->y2][att->x2++] = '\'';
 	}
 	else
 	{

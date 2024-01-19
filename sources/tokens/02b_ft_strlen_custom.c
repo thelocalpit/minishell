@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:37:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 17:29:23 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:43:31 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void ft_count_exp_print_error(t_attr *att)
 void ft_strlen_double_quotes(char *s, t_attr *att)
 {
 	att->i++;
+	att->mem_space++; // questo per aggiungere un char delle quotes
 	while (s[att->i] != '"')
 	{
 		if (s[att->i] == '$' && s[att->i + 1] == '?')
@@ -43,6 +44,7 @@ void ft_strlen_double_quotes(char *s, t_attr *att)
 			att->mem_space++;
 			att->i++;
 		}
+		att->mem_space++; //questo per aggiungere un char delle quotes
 	}
 }
 
@@ -87,11 +89,13 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 	if (flag == 1)
 	{
 		att->i++;
+		att->mem_space++;
 		while (s[att->i] != '\'')
 		{
 			att->mem_space++;
 			att->i++;
 		}
+		att->mem_space++;
 	}
 	if (flag == 2)
 		ft_strlen_double_quotes(s, att);
