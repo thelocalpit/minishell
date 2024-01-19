@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/19 16:29:56 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:44:20 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av, char **envp)
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				// ft_print_array(att.arr2);
-				do_builtin(att.arr2, (char **)envp, &att);
+				do_builtin(&att);
 				if (att.local_var != NULL)
 					add_index_to_local_var(&att);
 				// command(&att);
