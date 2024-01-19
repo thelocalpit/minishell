@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:37:23 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 12:45:12 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:49:16 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,3 @@ void ft_delete_matrix(void *matrix)
 		free(((char **)matrix)[i]);
 	free(matrix);
 }
-
-/* questa f è per liberare la matrice di envp */
-// void free_mx_envp(t_attr *att)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (att->mx_envp[i] != NULL)
-// 	{
-// 		free(att->mx_envp[i]);
-// 		i++;
-// 	}
-// 	free(att->mx_envp);
-// }

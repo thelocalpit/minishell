@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:09:43 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 17:59:29 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:53:52 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void ft_count_words(char *s, t_attr *att)
 			i = check_single_quotes(s, len, i, att);
 		else if (s[i] == '"')
 			i = check_double_quotes(s, len, i, att);
-		// else if (s[i] == '$' && s[i + 1] == '?')
-		// 	i = check_special(i, att);
 		else if (s[i] != ' ')
 			i = check_no_space(s, len, i, att);
 		else

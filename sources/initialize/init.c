@@ -6,29 +6,11 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:16:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/17 16:31:20 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:51:55 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/* questa funzione serve per creare una matrice custom con tutte le variabili di 
-	ambiente. */
-// void start_env(char **envp, t_attr *att)
-// {
-// 	att->y_mx_envp = 0;
-// 	while (envp[att->y_mx_envp])
-// 		att->y_mx_envp++;
-// 	att->mx_envp = malloc(sizeof(char *) * (att->y_mx_envp + 1));
-// 	if (!att->mx_envp)
-// 		return;
-// 	while (att->x_mx_envp < att->y_mx_envp)
-// 	{
-// 		att->mx_envp[att->x_mx_envp] = ft_strdup(envp[att->x_mx_envp]);
-// 		att->x_mx_envp++;
-// 	}
-// 	att->mx_envp[att->x_mx_envp] = 0;
-// }
 
 /* qui inizializziamo  tutti i valori di att. */
 
@@ -57,8 +39,8 @@ void	reinit_parameters(t_attr *att, char **envp)
 	att->x = 0;
 	att->y2 = 0;
 	att->x2 = 0;
-	att->check_exp = NULL;
-	att->y_mx_envp = 0;
-	att->x_mx_envp = 0;
+	att->str = NULL;
+	att->i_env = 0;
+	att->j_env = 0;
 	
 }

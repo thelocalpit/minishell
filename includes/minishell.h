@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/19 16:24:04 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:52:51 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,12 @@ typedef struct s_attr
 {
 	//------- n di token -------------------
 	int     nb_tokens;
-	char    **split_arr;
-	int     y;
-	int     x;
-	char    **arr2;
-	int     y2;
-	int     x2;
-	// int *flag$;
+	char    **split_arr; //matrice nella quale dividiamo (cmd + args) e (|, <, >)
+	int     y; //immaginando una matrice, questa var serve a muoversi sull'asse Y
+	int 	x;	   // immaginando una matrice, questa var serve a muoversi sull'asse X
+	char    **arr2; //matrice nella quale dividiamo (cmd) e (args)
+	int     y2;		//immaginando una matrice, questa var serve a muoversi sull'asse Y
+	int		x2;		// immaginando una matrice, questa var serve a muoversi sull'asse X
 	//------ cmds -------------
 	int     count;
 	//----- token variables ---------
@@ -114,20 +113,20 @@ typedef struct s_attr
 	int     heredoc;
 	int     skip;
 	//---- envp custom matrix ---
-	char    **mx_envp;
-	int     y_mx_envp;
-	int     x_mx_envp;
+	// char    **mx_envp;
+	int     i_env; //semplice indice
+	int     j_env; //semplice indice nella gestione dell'expander
 
 	//---- expander --------
 	int i;
 	int mem_space;
-	char *check_exp;
-	int len_call_exp;
-	int nb_$;
-	int *flag$;
-	int i_flag$;
-	int *save_y_mx_envp;
-    int flag_list;
+	char *str; //semplice str da utilizzare per la gestione del exp
+	int len; //
+	int nb_$; //count di $ nella readline
+	int *save_id_node; //questo è un'array di int (che vengono usate come flag) per capire quale è il nodo giusto da copiare. Se non capisci chiedi a @thelocalpit
+	int *flag$; //array di int (flag) che serve per segnare quante $ sono effettivamente corretti e vanno espansi
+	int i_flag$; //index per flag$
+    int flag_list; //se == 0, la env da copiare si trova nella env_list, se == 1 si trova nella local_var
 
     //--- lista ----
 

@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/10 19:01:03 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:18:03 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void error_dollar_02_b(char *check_envp, int *j, int *len, t_attr *att)
 	check_envp[*j] = '=';
 	check_envp[*j + 1] = '\0';
 	len += 1;
-	att->y_mx_envp = 0;
-	att->x_mx_envp = *len;
+	att->i_env = 0;
+	att->j_env = *len;
 }
 void error_dollar_02_a(char *s, int *i, int *len)
 {
@@ -63,7 +63,7 @@ int error_dollar_01(char *s, t_attr *att)
 {
 	if (count_dollar_sign(s, att) != 0)
 	{
-		att->save_y_mx_envp = malloc(sizeof(int) * att->nb_$);
+		att->save_id_node = malloc(sizeof(int) * att->nb_$);
 		att->flag$ = malloc(sizeof(int) * att->nb_$);
 		if (!att->flag$)
 			return (-1);

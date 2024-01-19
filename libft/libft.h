@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:25:40 by lde-sous          #+#    #+#             */
-/*   Updated: 2023/12/19 20:15:57 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:17:07 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 typedef struct s_list
 {
 	char			*content;
-	int 			$flag;
+	int 			id;
 	struct s_list *next;
 }			t_list;
 

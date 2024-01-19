@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:16:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/19 13:26:24 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:53:22 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var)
 	Se non è da espandere facciamo un normale copia. */
 int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 {
-	// qui da capire come gestire anche le virgolette
 	att->arr2[att->y2][att->x2++] = '"';
 	while (s[i] != '"')
 	{

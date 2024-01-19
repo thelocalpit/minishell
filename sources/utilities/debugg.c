@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debugg.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:49:02 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/27 04:06:07 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/19 17:17:52 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void printlist(t_attr *att)
 	while (att->env_list != NULL)
 	{
 		// printf("content: %s\n", att->env_list->content);
-		// printf("number: %d\n\n", att->env_list->$flag);
+		// printf("number: %d\n\n", att->env_list->id);
 		att->env_list = att->env_list->next;
 	}
 	att->env_list = head;
@@ -52,7 +52,7 @@ void printvar(t_list *local_var)
 	while (local_var != NULL)
 	{
 		printf("content: %s\n", local_var->content);
-		printf("number: %d\n\n", local_var->$flag);
+		printf("number: %d\n\n", local_var->id);
 		local_var = local_var->next;
 	}
 	local_var = head;

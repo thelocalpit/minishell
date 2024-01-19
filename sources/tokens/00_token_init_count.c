@@ -6,14 +6,14 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 17:38:38 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:37:20 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* questa funzione serve per contare i token ¨speciali¨. */
-
+/* questa funzione serve per contare i token ¨speciali¨.
+	@param:nb_tokens conta il numero dei tokens (cmd + args || special)*/
 int	process_special_token(t_attr *att, char *s, int i)
 {
 	if (s[i] == '|' || s[i] == '>' || s[i] == '<')
@@ -82,9 +82,9 @@ int	count_tokens(char *s, t_attr *att)
 	}
 	return (att->nb_tokens);
 }
+
 /* questa funzione si occupa di splittare fra comandi (con argomenti)
 	e redirections */
-
 void	split_init(char *s, t_attr *att)
 {
 	if (!s)

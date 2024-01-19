@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/18 13:03:52 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:17:52 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void add_index_to_local_var(t_attr *att)
     i = 0;
     while (att->local_var != NULL)
     {
-        att->local_var->$flag = i;
+        att->local_var->id = i;
         i++;
         att->local_var = att->local_var->next;
     }
@@ -37,7 +37,7 @@ void add_index_to_env_list(t_attr *att)
     i = 0;
     while (att->env_list != NULL)
     {
-        att->env_list->$flag = i;
+        att->env_list->id = i;
         i++;
         att->env_list = att->env_list->next;
     }

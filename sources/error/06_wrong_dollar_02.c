@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:46:01 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 11:24:44 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:08:59 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int check_local_list(char *check_envp, t_attr *att, int len)
 		if (!ft_strncmp(check_envp, att->local_var->content, len))
 			return (0);
 		att->local_var = att->local_var->next;
-		att->y_mx_envp++;
+		att->i_env++;
 	}
 	att->local_var = current;
 	return (-1);
@@ -48,7 +48,7 @@ int error_dollar_03(char *check_envp, t_attr *att, int len)
 	t_list *current;
 
 	current = att->env_list;
-	att->y_mx_envp = 0;
+	att->i_env = 0;
 	while (att->env_list != NULL)
 	{
 		if (!ft_strncmp(check_envp, att->env_list->content, len))
@@ -56,7 +56,7 @@ int error_dollar_03(char *check_envp, t_attr *att, int len)
 		if (!ft_strncmp(check_envp, "?", 1))
 			return (0);
 		att->env_list = att->env_list->next;
-		att->y_mx_envp++;
+		att->i_env++;
 	}
 	att->env_list = current;
 	if (!check_local_list(check_envp, att, len))
