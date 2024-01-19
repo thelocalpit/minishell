@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 12:18:41 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:25:43 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int ac, char **av, char **envp)
 	att.env_list = copy_env_in_list(envp);
 	add_index_to_env_list(&att);
 	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
+	add_index_to_list(&att);
 	att.local_var = NULL;
 	printlist(&att);
 	while (1)
@@ -49,7 +50,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			add_history(s);
 			split_init(s, &att);
-			// ft_print_array(att.split_arr);
+			//ft_print_array(att.split_arr);
 			att.y = 0;
 			if (count_pipes(&att))
 				init_pipes(&att);
@@ -68,9 +69,9 @@ int	main(int ac, char **av, char **envp)
 				att.y += 2;
 				if (att.i_flag$ > 0)
 					free(att.flag$);
-				free(att.save_y_mx_envp);
+				//free(att.save_y_mx_envp);						// DA RISOLVERE
 			}
-			free_arr(att.split_arr);
+			//free_arr(att.split_arr);
 			// free(att.flag$);
 			if (att.nb_pipes != 0)
 				ft_delete_matrix(att.pipesfd);

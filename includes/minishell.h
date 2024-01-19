@@ -5,10 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 18:16:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 12:44:10 by pfalasch         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/19 16:24:04 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+
 
 
 #ifndef MINISHELL_H
@@ -73,42 +76,47 @@ extern int  g_value;
 
 typedef struct s_attr
 {
-    //------- n di token -------------------
-    int     nb_tokens;
-    char    **split_arr;
-    int     y;
-    int     x;
-    char    **arr2;
-    int     y2;
-    int     x2;
-    // int *flag$;
-    //------ cmds -------------
-    int     count;
-    //----- token variables ---------
-    int     count_words;
-    int     flag_cmd_valid;
-    int     flag_quote;
-    //------ errors -------------------
-    int     flag_err_quote;
-    int     flag_err_type;
-    int     flag_to_do;
-    //-----pipe----------
-    int     nb_pipes;
-    int     **pipesfd;
-    int     pipe_index;
-    //----- flag ----------
-    int     write_to_pipe;
-    int     read_from_pipe;
-    int     read_from_file;
-    int     redir;
-    int     create_file;
-    int     only_create;
-    int     heredoc;
-    int     skip;
-    //---- envp custom matrix ---
-    // char    **mx_envp;
-    int     y_mx_envp;
-    int     x_mx_envp;
+	//------- n di token -------------------
+	int     nb_tokens;
+	char    **split_arr;
+	int     y;
+	int     x;
+	char    **arr2;
+	int     y2;
+	int     x2;
+	// int *flag$;
+	//------ cmds -------------
+	int     count;
+	//----- token variables ---------
+	int     count_words;
+	int     flag_cmd_valid;
+	int     flag_quote;
+	//------ errors -------------------
+	int     flag_err_quote;
+	int     flag_err_type;
+	int     flag_to_do;
+	//-----pipe----------
+	int     nb_pipes;
+	int     **pipesfd;
+	int     pipe_index;
+	//----- exec ---------
+	int     red_fd;
+	pid_t   pid;
+	char	**paths;
+	char	**env;
+	//----- flag ----------
+	int     write_to_pipe;
+	int     read_from_pipe;
+	int     read_from_file;
+	int     redir;
+	int     create_file;
+	int     only_create;
+	int     heredoc;
+	int     skip;
+	//---- envp custom matrix ---
+	char    **mx_envp;
+	int     y_mx_envp;
+	int     x_mx_envp;
 
 	//---- expander --------
 	int i;
@@ -221,6 +229,11 @@ t_list  *sort_list(t_list *list);
 void    insert_between_node(t_list *prev, char *content);
 char    *get_var_name(char *full_var);
 void add_index_to_env_list(t_attr *att);
+
+// 03_utils.c
+
+void	envp_to_matrix(t_attr *att);
+int	matrix_len(char **matrix);
 void add_index_to_local_var(t_attr *att);
 
 // 02_utils.c
@@ -279,13 +292,14 @@ void    free_env_list(t_attr *att);
 
 // Commands
 
-int do_builtin(char **args, char **env, t_attr *att);
-int		pwd(char **env);
+int do_builtin(t_attr *att);
+int do_child_cmd(t_attr *att);
+int		pwd(t_attr *att);
 int		envi(t_attr *att);
-int		ls_l(char **env, int j);
+//int		ls_l(char **env, int j);
 int		echo(char **args);
 void	ft_exit(void);
-void	ft_cd(char **args);
+int		ft_cd(char **args);
 int		add_var(char *str, t_list **var_list);
 
 // 01_export
@@ -312,6 +326,19 @@ void    command(t_attr *att);
 
 // Executer folder
 
+// ecxeve.c
+
+int	absolute_exec(t_attr *att);
+int	binary_exec(t_attr *att);
+int	bin_exec(t_attr *att);
+
+
+// exec.c
+
+int		find_paths(t_attr *att);
+int		do_execve(t_attr *att);
+int		exec(t_attr *att);
+
 //	pipe.c
 
 int     count_pipes(t_attr *att);
@@ -319,6 +346,17 @@ void    init_pipes(t_attr *att);
 void    write_to_pipe(t_attr *att);
 void    read_from_pipe(t_attr *att);
 void    close_pipeline(t_attr *att);
+
+// read_file.c
+int    red_input(t_attr *att, char *path);
+int    heredoc(t_attr *att);
+int    read_from_file(t_attr *att);
+
+// redirect.c
+int    check_redir(t_attr *att);
+int    redir(t_attr *att);
+int    do_red(t_attr *att);
+
 
 // expander
 

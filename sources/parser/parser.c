@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/09 13:40:57 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/11 06:13:16 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ void next_step_sub(t_attr *att)
 {
 	if (!ft_strcmp(att->split_arr[att->y + 1], "|"))
 		att->write_to_pipe = 1;
-	else if (!ft_strcmp(att->split_arr[att->y + 1], ">")
-		|| !ft_strcmp(att->split_arr[att->y + 1], ">>"))
+	else if (!ft_strcmp(att->split_arr[att->y + 1], ">"))
 		att->redir = 1;
+	else if (!ft_strcmp(att->split_arr[att->y + 1], ">>"))
+		att->redir = 2;
 	else if (!ft_strcmp(att->split_arr[att->y + 1], "<"))
 	{
 		att->read_from_file = 1;
