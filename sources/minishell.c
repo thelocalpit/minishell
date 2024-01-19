@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/19 16:25:43 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:29:56 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(int ac, char **av, char **envp)
 	att.env_list = copy_env_in_list(envp);
 	add_index_to_env_list(&att);
 	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
-	add_index_to_list(&att);
 	att.local_var = NULL;
 	printlist(&att);
 	while (1)
