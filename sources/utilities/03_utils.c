@@ -14,16 +14,26 @@
 
 void	envp_to_matrix(t_attr *att)
 {
+	t_list *tmp_list;
 	int	i;
 
+	tmp_list = att->env_list;
 	i = 0;
-	att->env = malloc(sizeof(char *) * (ft_lstsize(att->env_list) + 1));
-	while (att->env_list)
+	att->env = malloc(sizeof(char *) * (ft_lstsize(tmp_list) + 1));
+	tmp_list = att->env_list;
+	printf("envp_to_matrix\n");
+	while (tmp_list)
 	{
-		att->env[i] = ft_strdup(att->env_list->content);
-		att->env_list = att->env_list->next;
+		att->env[i] = ft_strdup(tmp_list->content);
+		tmp_list = tmp_list->next;
 		i++;
 	}
+	// i = 0;
+	// while(att->env[i])
+	// {
+	// 	printf("%s\n", att->env[i]);
+	// 	i++;
+	// }
 	att->env[i] = NULL;
 }
 

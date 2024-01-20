@@ -29,36 +29,42 @@ int count_dollar_sign(char *s, t_attr *att)
 
 int check_local_list(char *check_envp, t_attr *att, int len)
 {
-	t_list *current;
+	t_list *tmp_list;
 
-	current = att->local_var;
-	while (att->local_var != NULL)
+	tmp_list = att->local_var;
+	while (tmp_list != NULL)
 	{
-		if (!ft_strncmp(check_envp, att->local_var->content, len))
+		if (!ft_strncmp(check_envp, tmp_list->content, len))
 			return (0);
-		att->local_var = att->local_var->next;
+		tmp_list = tmp_list->next;
 		att->y_mx_envp++;
 	}
-	att->local_var = current;
 	return (-1);
 }
 
 int error_dollar_03(char *check_envp, t_attr *att, int len)
 {
-	t_list *current;
+	t_list *tmp_list;
 
-	current = att->env_list;
+	tmp_list = att->env_list;
 	att->y_mx_envp = 0;
-	while (att->env_list != NULL)
+	printf("111111111111111111111111111111111111111111111111\n");
+	while (tmp_list != NULL)
 	{
-		if (!ft_strncmp(check_envp, att->env_list->content, len))
+		if (!ft_strncmp(check_envp, tmp_list->content, len))
+		{
+			printf("PRIMO IF\n");
 			return (0);
+		}
 		if (!ft_strncmp(check_envp, "?", 1))
+		{
+			printf("SECONDO IF\n");
 			return (0);
-		att->env_list = att->env_list->next;
+		}
+		tmp_list = tmp_list->next;
 		att->y_mx_envp++;
 	}
-	att->env_list = current;
+	printf("SIAMO QUI CHE CAZZ ONNE SSO PORCO DIO\n");
 	if (!check_local_list(check_envp, att, len))
 		return (0);
 	return (-1);

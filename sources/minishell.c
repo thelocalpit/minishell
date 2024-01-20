@@ -43,7 +43,7 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		}
 		reinit_parameters(&att, envp);
-		// start_env(envp, &att);
+		//start_env(envp, &att);
 
 		if (s)
 		{

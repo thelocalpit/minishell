@@ -14,14 +14,17 @@
 
 int	find_paths(t_attr *att)
 {
-	while (att->env_list)
+	t_list *tmp_list;
+
+	tmp_list = att->env_list;
+	while (tmp_list)
 	{
-		if (ft_strncmp(att->env_list->content, "PATH=", 5) == 0)
+		if (ft_strncmp(tmp_list->content, "PATH=", 5) == 0)
 		{
-			att->paths = ft_split(att->env_list->content + 5, ':');
+			att->paths = ft_split(tmp_list->content + 5, ':');
 			return (1);
 		}
-		att->env_list = att->env_list->next;
+		tmp_list = tmp_list->next;
 	}
 	return (0);
 }
@@ -58,9 +61,12 @@ int	exec(t_attr *att)
 	}
 	if (att->pid == 0)
 	{
-		do_red(att);
+		//do_red(att);
 		if (!att->skip)
+		{
+			printf("pippo\n");
 			do_child_cmd(att);
+		}
 		exit(g_value);
 	}
 	else

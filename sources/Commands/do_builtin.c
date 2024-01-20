@@ -40,10 +40,13 @@ int	do_child_cmd(t_attr *att)
 		return (pwd(att));
 	else if (ft_strncmp(att->arr2[0], "env\0", 4) == 0)
 		return (envi(att));
-	else if (strstr(att->arr2[0], "echo") != NULL)
-		return (echo(att->arr2));
+	//else if (strstr(att->arr2[0], "echo") != NULL)
+	//	return (echo(att->arr2));
 	else
+	{
+		printf("do_child_cmd_here\n");
 		do_execve(att);
+	}
 	return (0);
 }
 
