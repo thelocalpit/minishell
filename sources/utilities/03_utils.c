@@ -21,7 +21,7 @@ void	envp_to_matrix(t_attr *att)
 	i = 0;
 	att->env = malloc(sizeof(char *) * (ft_lstsize(tmp_list) + 1));
 	tmp_list = att->env_list;
-	printf("envp_to_matrix\n");
+	//printf("envp_to_matrix\n");
 	while (tmp_list)
 	{
 		att->env[i] = ft_strdup(tmp_list->content);

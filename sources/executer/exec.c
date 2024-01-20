@@ -61,10 +61,10 @@ int	exec(t_attr *att)
 	}
 	if (att->pid == 0)
 	{
-		//do_red(att);
+		do_red(att);
 		if (!att->skip)
 		{
-			printf("pippo\n");
+			//printf("pippo\n");
 			do_child_cmd(att);
 		}
 		exit(g_value);

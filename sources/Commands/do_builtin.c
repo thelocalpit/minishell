@@ -44,7 +44,7 @@ int	do_child_cmd(t_attr *att)
 	//	return (echo(att->arr2));
 	else
 	{
-		printf("do_child_cmd_here\n");
+		//printf("do_child_cmd_here\n");
 		do_execve(att);
 	}
 	return (0);
