@@ -33,15 +33,14 @@ void add_index_to_env_list(t_attr *att)
 {
     int i;
 
-    t_list *current = att->env_list;
+    t_list *tmp_list = att->env_list;
     i = 0;
-    while (att->env_list != NULL)
+    while (tmp_list != NULL)
     {
-        att->env_list->$flag = i;
+        tmp_list->$flag = i;
         i++;
-        att->env_list = att->env_list->next;
+        tmp_list = tmp_list->next;
     }
-    att->env_list = current;
 }
 
 void insert_between_node(t_list *prev, char *content)

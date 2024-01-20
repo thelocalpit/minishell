@@ -27,18 +27,17 @@ void	ft_print_array(char **array)
 
 void printlist(t_attr *att)
 {
-	t_list *head;
+	t_list *tmp_list;
 
-	head = att->env_list;
+	tmp_list = att->env_list;
 	// printf("questa è la lista:\n");
 	// Attraversa la lista e stampa i dati dei nodi
-	while (att->env_list != NULL)
+	while (tmp_list != NULL)
 	{
-		// printf("content: %s\n", att->env_list->content);
-		// printf("number: %d\n\n", att->env_list->$flag);
-		att->env_list = att->env_list->next;
+		// printf("content: %s\n", tmp_list->content);
+		// printf("number: %d\n\n", tmp_list->$flag);
+		tmp_list = tmp_list->next;
 	}
-	att->env_list = head;
 }
 
 
