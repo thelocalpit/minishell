@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/21 12:53:24 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:05:36 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	if (s[i] == '?')
 		return (1);
 	error_dollar_02_a(s, &i, &len);
-	check_envp = malloc(sizeof(char) * len + 2);
+	check_envp = malloc(sizeof(char) * len + 2); 
 	i = start;
 	while (j < len)
 		check_envp[j++] = s[i++];
@@ -66,7 +66,7 @@ int error_dollar_01(char *s, t_attr *att)
 	{
 		att->save_y_mx_envp = malloc(sizeof(int) * att->nb_$);
 		att->flag$ = malloc(sizeof(int) * att->nb_$);
-		if (!att->flag$)
+		if (!att->flag$ && !att->save_y_mx_envp)
 			return (-1);
 		att->i_flag$ = 0;
 	}
