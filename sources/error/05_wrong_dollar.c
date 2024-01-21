@@ -62,10 +62,15 @@ int error_dollar_02(char *s, int i, t_attr *att)
 }
 int error_dollar_01(char *s, t_attr *att)
 {
+	int i;
+
+	i = 0;
 	if (count_dollar_sign(s, att) != 0)
 	{
 		att->save_y_mx_envp = malloc(sizeof(int) * att->nb_$);
 		att->flag$ = malloc(sizeof(int) * att->nb_$);
+		while(i < att->nb_$)
+			att->flag$[i++] = 0;
 		if (!att->flag$ && !att->save_y_mx_envp)
 			return (-1);
 		att->i_flag$ = 0;

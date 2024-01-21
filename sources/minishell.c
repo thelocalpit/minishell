@@ -23,6 +23,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	att.index_list = 0;
+	att.i_flag$ = 0;
 	rl_clear_history();
 	set_signals();
 	init_parameters(&att);
@@ -56,8 +57,8 @@ int	main(int ac, char **av, char **envp)
 			while (att.split_arr[att.y] && !verify_readline(s, &att))
 			{
 				check_next_step(&att);
-				get_cmd_matrix(att.split_arr[att.y], &att);
-				// ft_print_array(att.arr2);
+				get_cmd_matrix(att.split_arr[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
+				ft_print_array(att.arr2);
 				do_builtin(&att);
 				add_index_to_custom_env(&att);
 				if (att.local_var != NULL)
@@ -69,10 +70,9 @@ int	main(int ac, char **av, char **envp)
 					break;
 				att.y += 2;
 				if (att.i_flag$ > 0)
-				{
 					free(att.flag$);
-					free(att.save_y_mx_envp);						// DA RISOLVERE
-				}
+				free(att.save_y_mx_envp);						// DA RISOLVERE
+				
 			}
 			free_arr(att.split_arr);
 			if (att.nb_pipes != 0)

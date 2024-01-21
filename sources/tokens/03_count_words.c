@@ -71,7 +71,7 @@ void ft_count_words(char *s, t_attr *att)
 		else if (s[i] == '"')
 			i = check_double_quotes(s, len, i, att);
 		// else if (s[i] == '$' && s[i + 1] == '?')
-		// 	i = check_special(i, att);
+		//  	i = check_special(i, att);
 		else if (s[i] != ' ')
 			i = check_no_space(s, len, i, att);
 		else

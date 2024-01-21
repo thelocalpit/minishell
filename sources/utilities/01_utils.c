@@ -101,11 +101,12 @@ t_list *sort_list(t_list *list)
     t_list *prev;
     t_list *new_node;
     char *tempA;
+    t_list *tmp_list = list;
 
     sorted_list = NULL;
-    while (list)
+    while (tmp_list)
     {
-        tempA = get_var_name(list->content);
+        tempA = get_var_name(tmp_list->content);
         sorted_list_temp = &sorted_list;
         prev = NULL;
         while (*sorted_list_temp &&
@@ -114,7 +115,7 @@ t_list *sort_list(t_list *list)
             prev = *sorted_list_temp;
             sorted_list_temp = &(*sorted_list_temp)->next;
         }
-        new_node = ft_lstnew(list->content);
+        new_node = ft_lstnew(tmp_list->content);
         if (prev == NULL) {
             new_node->next = sorted_list;
             sorted_list = new_node;
@@ -122,7 +123,7 @@ t_list *sort_list(t_list *list)
             new_node->next = prev->next;
             prev->next = new_node;
         }
-        list = list->next;
+        tmp_list = tmp_list->next;
     }
     return sorted_list;
 }
