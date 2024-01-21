@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/21 00:47:02 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 13:16:55 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_attr
 	int     heredoc;
 	int     skip;
 	//---- envp custom matrix ---
-	char    **mx_envp;
+	// char    **mx_envp;
 	int     y_mx_envp;
 	int     x_mx_envp;
 
