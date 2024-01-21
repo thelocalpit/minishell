@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/19 16:24:04 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 00:47:02 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,10 +229,11 @@ t_list  *sort_list(t_list *list);
 void    insert_between_node(t_list *prev, char *content);
 char    *get_var_name(char *full_var);
 void add_index_to_env_list(t_attr *att);
+void add_index_to_custom_env(t_attr *att);
 
 // 03_utils.c
 
-void	envp_to_matrix(t_attr *att);
+void envp_to_matrix(t_attr *att);
 int	matrix_len(char **matrix);
 void add_index_to_local_var(t_attr *att);
 

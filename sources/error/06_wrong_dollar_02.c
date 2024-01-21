@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:46:01 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 11:24:44 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 01:00:05 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int check_local_list(char *check_envp, t_attr *att, int len)
 {
 	t_list *tmp_list;
 
+	// printf("entro nel check del wrong dollar della local list anche con PATH?\n");
 	tmp_list = att->local_var;
 	while (tmp_list != NULL)
 	{
@@ -53,7 +54,7 @@ int error_dollar_03(char *check_envp, t_attr *att, int len)
 	{
 		if (!ft_strncmp(check_envp, tmp_list->content, len))
 		{
-			//printf("PRIMO IF\n");
+			// printf("STO CONFRONTANDO CON PATH\n");
 			return (0);
 		}
 		if (!ft_strncmp(check_envp, "?", 1))
@@ -64,6 +65,7 @@ int error_dollar_03(char *check_envp, t_attr *att, int len)
 		tmp_list = tmp_list->next;
 		att->y_mx_envp++;
 	}
+	att->y_mx_envp = 0;
 	//printf("SIAMO QUI CHE CAZZ ONNE SSO PORCO DIO\n");
 	if (!check_local_list(check_envp, att, len))
 		return (0);

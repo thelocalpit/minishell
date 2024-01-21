@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/19 16:44:20 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 00:53:06 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av, char **envp)
 	add_index_to_env_list(&att);
 	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
 	att.local_var = NULL;
-	printlist(&att);
+	// printlist(&att);
 	while (1)
 	{
 		s = prompt();
@@ -59,9 +59,11 @@ int	main(int ac, char **av, char **envp)
 				get_cmd_matrix(att.split_arr[att.y], &att);
 				// ft_print_array(att.arr2);
 				do_builtin(&att);
+				add_index_to_custom_env(&att);
 				if (att.local_var != NULL)
 					add_index_to_local_var(&att);
 				// command(&att);
+				// printvar(att.local_var);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
 					break;

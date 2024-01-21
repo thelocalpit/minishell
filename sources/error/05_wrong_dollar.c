@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/10 19:01:03 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:47:51 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	while (j < len)
 		check_envp[j++] = s[i++];
 	error_dollar_02_b(check_envp, &j, &len, att);
+	printf("questa è check_envp: %s\n", check_envp);
 	if (error_dollar_03(check_envp, att, len) == -1)
 	{
 		free(check_envp);

@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 12:44:32 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 01:25:47 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,20 @@ void copy_expanded_str(t_attr *att, int len_name_var)
 {
 	t_list *tmp_list;
 
+	// printf("att.flag_list: %d\n", att->flag_list);
+	// printf("i_flag$: %d\n", att->i_flag$);
 	if (att->flag_list == 0)
 	{
 		tmp_list = att->env_list;
-		printf("Prima-If\n");
+		// printf("Prima-If\n");
 		while (tmp_list && tmp_list->$flag != att->save_y_mx_envp[att->i_flag$])
 			tmp_list = tmp_list->next;
+		// printf("tmp_list->content: %s\n", tmp_list->content);
+		// printf("flag ==0: content nodo da copiare: \n%s\n", tmp_list->content);
+		// printlist(att);
 		att->x_mx_envp = len_name_var + 1;
 		//tmp_list = att->env_list;
-		printf("Dopo-If\n");
+		// printf("Dopo-If\n");
 		while (tmp_list && tmp_list->content[att->x_mx_envp])
 			att->arr2[att->y2][att->x2++] = tmp_list->content[att->x_mx_envp++];
 		return;
@@ -38,16 +43,17 @@ void copy_expanded_str(t_attr *att, int len_name_var)
 	else
 	{
 		tmp_list = att->local_var;
-		printf("Prima-Else\n");
+		// printf("Prima-Else\n");
 		while (tmp_list && tmp_list->$flag != att->save_y_mx_envp[att->i_flag$])
 			tmp_list = tmp_list->next;
-		printf("Dopo-Else\n");
+		// printf("flag ==1: content nodo da copiare: \n%s\n", tmp_list->content);
+		// printf("Dopo-Else\n");
 		att->x_mx_envp = len_name_var + 1;
 		//tmp_list = att->local_var;
-		printf("Prima-Else-parte2\n");
+		// printf("Prima-Else-parte2\n");
 		while (tmp_list && tmp_list->content[att->x_mx_envp])
 			att->arr2[att->y2][att->x2++] = tmp_list->content[att->x_mx_envp++];
-		printf("Dopo-Else-parte2\n");
+		// printf("Dopo-Else-parte2\n");
 		att->flag_list = 0;
 		return;
 	}
@@ -55,13 +61,14 @@ void copy_expanded_str(t_attr *att, int len_name_var)
 
 void count_expanded_token_local_var(t_attr *att)
 {
-	t_list *current;
+	t_list *tmp_list;
 
-	current = att->local_var;
+	tmp_list = att->local_var;
 	while (att->local_var != NULL)
 	{
 		if (!ft_strncmp(att->check_exp, att->local_var->content, att->len_call_exp))
 		{
+			// printf("sono dentro count_expanded_token_local_var:\nquesto è la variabile trovata da copiare: %s\n e questa è la variabile che abbiamo richiesto di espandere: %s\n", tmp_list->content, att->check_exp);
 			while (att->local_var->content[att->x_mx_envp])
 			{
 				att->mem_space++;
@@ -69,7 +76,7 @@ void count_expanded_token_local_var(t_attr *att)
 			}
 			free(att->check_exp);
 			att->save_y_mx_envp[att->i_flag$] = att->local_var->$flag;
-			att->local_var = current;
+			att->local_var = tmp_list;
 			return;
 		}
 		att->local_var = att->local_var->next;
@@ -86,6 +93,7 @@ int count_expanded_token_02(t_attr *att)
 	{
 		if (!ft_strncmp(att->check_exp, tmp_list->content, att->len_call_exp))
 		{
+			// printf("sono dentro count_expanded_token:\nquesto è la variabile trovata da copiare: %s\n e questa è la variabile che abbiamo richiesto di espandere: %s\n", tmp_list->content, att->check_exp);
 			while (tmp_list->content[att->x_mx_envp])
 			{
 				att->mem_space++;
@@ -129,8 +137,10 @@ void count_expanded_token(t_attr *att, char *s)
 	if (count_expanded_token_02(att) == -1)
 	{
 		att->flag_list = 1;
+		// printf("entro dentro count_exp_token_local_var: flag_list: %d\n", att->flag_list);
 		count_expanded_token_local_var(att);
 	}
+	// att->flag_list = 0;
 	att->mem_space++;
 	return ;
 }

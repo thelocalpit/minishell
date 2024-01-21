@@ -6,17 +6,32 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/18 13:03:52 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 00:44:52 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void add_index_to_custom_env(t_attr *att)
+{
+    int i;
+
+    t_list *tmp_list = att->env_list;
+    i = 0;
+    while (att->env_list != NULL)
+    {
+        att->env_list->$flag = i;
+        i++;
+        att->env_list = att->env_list->next;
+    }
+    att->env_list = tmp_list;
+}
+
 void add_index_to_local_var(t_attr *att)
 {
     int i;
 
-    t_list *current = att->local_var;
+    t_list *tmp_list = att->local_var;
     i = 0;
     while (att->local_var != NULL)
     {
@@ -24,7 +39,7 @@ void add_index_to_local_var(t_attr *att)
         i++;
         att->local_var = att->local_var->next;
     }
-    att->local_var = current;
+    att->local_var = tmp_list;
 }
 
 /* questa funzione aggiunge un id ad ogni nodo. necessaria quando lavoriamo
