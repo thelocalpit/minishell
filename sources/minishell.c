@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/21 16:10:18 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:20:23 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int ac, char **av, char **envp)
 	att.index_list = 0;
 	rl_clear_history();
 	set_signals();
+	att.i_flag$ = 0;
 	init_parameters(&att);
 	// questo è l'init del env per il momento fatto cosi, poi va sistemato dove volete voi
 	// e va sostituito ovunque, per il momento lo aggiungo come parametro in piu dove
