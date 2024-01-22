@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/21 13:16:55 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:09:47 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,7 @@ int     count_quotes(char *s);
 int     error_begin(char *s);
 int     error_end(char *s, char c);
 
-// 03_error_redir.c
+// 03_error_mixed.c
 
 int     check_extra_char(char *s, int i);
 int     check_next_arg(char *s, int i);
@@ -266,7 +266,7 @@ int     check_2nd_char(char *s, int i);
 int     ft_scorri(char *s, int i);
 int     error_mixed_start(char *s);
 
-// 04_error_mixed.c
+// 04_error_messages.c
 
 int     return_not_required(void);
 int     return_pipe_error(void);
@@ -274,9 +274,14 @@ int     return_gt_error(void);
 int     return_lt_error(void);
 int     return_nl_error(void);
 
+
+// 05_error_messages.c
+
+int exit__err(char *str);
+
 // 05_error_dollar.c
 
-int     error_dollar(char *s, t_attr *att);
+int error_dollar(char *s, t_attr *att);
 int     error_dollar_02(char *s, int i, t_attr *att);
 int     error_dollar_03(char *check_envp, t_attr *att, int len);
 int count_dollar_sign(char *s, t_attr *att);
@@ -312,11 +317,16 @@ int     ft_export(char **args, t_attr *att);
 int     ft_unset(char **args, t_attr *att);
 void    ft_remove_node(t_list **env_list, char *arg);
 
+// exit.c
+
+void ft_exit_custom(t_attr *att);
+int ft_exit_02(t_attr *att);
+
 // parser folder
 
 // parser.c
 
-void    reset_flags(t_attr *att);
+void reset_flags(t_attr *att);
 void    next_step_sub2(t_attr *att);
 void    next_step_sub(t_attr *att);
 int     check_next_step(t_attr *att);

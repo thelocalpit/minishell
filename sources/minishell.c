@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/21 16:20:23 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:41:36 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int ac, char **av, char **envp)
 				if (!att.split_arr[att.y + 1])
 					break;
 				att.y += 2;
-				if (att.i_flag$ > 0)
+				if (att.flag$ && att.save_y_mx_envp)
 				{
 					free(att.flag$);
 					free(att.save_y_mx_envp);						// DA RISOLVERE

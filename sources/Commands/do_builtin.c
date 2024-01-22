@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/19 16:33:25 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:10:11 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	do_builtin(t_attr *att)
 		return (ft_unset(att->arr2, att));
 	else if (ft_strncmp(att->arr2[0], "exit\0", 5) == 0)
 	{
-		ft_exit();
+		ft_exit_custom(att);
+		// ft_exit();
 		return (0);
 	}
 	else if (ft_strncmp(att->arr2[0], "cd\0", 3) == 0)
