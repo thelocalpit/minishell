@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/19 12:44:54 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:24:38 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ void create_matrix_cmd(char *s, t_attr *att)
 			return ;
 		}
 		att->y2++;
+	}
+	if (att->flag$ && att->save_y_mx_envp)
+	{
+		free(att->flag$);
+		free(att->save_y_mx_envp); // DA RISOLVERE
 	}
 }
 /* questa funzione si occupa di spezzare ciascun str della split_arr

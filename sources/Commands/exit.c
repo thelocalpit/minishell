@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:17:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/22 19:27:51 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:25:09 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void exit_free(t_attr *att)
 {
 	free_arr2(att->arr2, att);
-	if (att->save_y_mx_envp && att->flag$)
-	{
-		free(att->save_y_mx_envp);
-		free(att->flag$);
-	}
+	// if (att->save_y_mx_envp && att->flag$)
+	// {
+	// 	free(att->save_y_mx_envp);
+	// 	free(att->flag$);
+	// }
 	free_arr(att->split_arr);
 	if (att->nb_pipes != 0)
 		ft_delete_matrix(att->pipesfd);
-	printf("sono dentro exit_free\n");
+	// printf("sono dentro exit_free\n");
 	// free_arr(att->env);
 	// free_arr(att->paths);
 }
