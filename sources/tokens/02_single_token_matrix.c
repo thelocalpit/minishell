@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/23 16:24:38 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:51:28 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void create_matrix_cmd(char *s, t_attr *att)
 		}
 		att->y2++;
 	}
-	if (att->flag$ && att->save_y_mx_envp)
+	if (att->i_flag$ > 0)
 	{
 		free(att->flag$);
 		free(att->save_y_mx_envp); // DA RISOLVERE
