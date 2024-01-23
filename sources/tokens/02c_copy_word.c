@@ -74,6 +74,7 @@ int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 				&& s[i + 1] && s[i + 1] != '"')
 		{
 			i++;
+			//printf("numero$%d--%d\n", att->flag$[att->i_flag$], att->i_flag$);
 			if (att->flag$[att->i_flag$] == 0)
 			{
 				len_name_var = ft_strlen_name_var(s, &i, len_name_var);
@@ -120,5 +121,6 @@ char *ft_write_word(char *s, t_attr *att, int flag, int i)
 		i = copy_no_quotes(s, i, att, len_name_var);
 	}
 	att->arr2[att->y2][att->x2] = '\0';
+	//printf("%s\n", s);
 	return (&s[++i]);
 }

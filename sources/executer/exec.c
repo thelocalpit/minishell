@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/12 05:02:47 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/21 15:46:50 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	find_paths(t_attr *att)
 		if (ft_strncmp(tmp_list->content, "PATH=", 5) == 0)
 		{
 			att->paths = ft_split(tmp_list->content + 5, ':');
+			// ft_print_array(att->paths);
 			return (1);
 		}
 		tmp_list = tmp_list->next;
@@ -67,10 +68,13 @@ int	exec(t_attr *att)
 			//printf("pippo\n");
 			do_child_cmd(att);
 		}
+		free_arr(att->paths);
+		// free(att->paths);
 		exit(g_value);
 	}
 	else
 		waitpid(att->pid, &g_value, 0);
-	free(att->paths);
+	free_arr(att->paths);
+	// free(att->paths);
 	return (0);
 }

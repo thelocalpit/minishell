@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/19 16:44:20 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:10:18 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	att.index_list = 0;
+	att.i_flag$ = 0;
+	att.flag_list = 0;
 	rl_clear_history();
 	set_signals();
 	init_parameters(&att);
@@ -33,7 +35,7 @@ int	main(int ac, char **av, char **envp)
 	add_index_to_env_list(&att);
 	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
 	att.local_var = NULL;
-	printlist(&att);
+	// printlist(&att);
 	while (1)
 	{
 		s = prompt();
@@ -56,22 +58,25 @@ int	main(int ac, char **av, char **envp)
 			while (att.split_arr[att.y] && !verify_readline(s, &att))
 			{
 				check_next_step(&att);
-				get_cmd_matrix(att.split_arr[att.y], &att);
-				// ft_print_array(att.arr2);
+				get_cmd_matrix(att.split_arr[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
+				//ft_print_array(att.arr2);
 				do_builtin(&att);
+				add_index_to_custom_env(&att);
 				if (att.local_var != NULL)
 					add_index_to_local_var(&att);
 				// command(&att);
+				// printvar(att.local_var);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
 					break;
 				att.y += 2;
 				if (att.i_flag$ > 0)
+				{
 					free(att.flag$);
-				//free(att.save_y_mx_envp);						// DA RISOLVERE
+					free(att.save_y_mx_envp);
+				}						// DA RISOLVERE
 			}
-			//free_arr(att.split_arr);
-			// free(att.flag$);
+			free_arr(att.split_arr);
 			if (att.nb_pipes != 0)
 				ft_delete_matrix(att.pipesfd);
 

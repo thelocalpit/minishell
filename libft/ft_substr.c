@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:38:17 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/23 15:38:19 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 15:45:47 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		sub[0] = 0;
 		return (sub);
 	}
-	else
 	{
 		if (len >= ft_strlen(s))
 			len = ft_strlen(s) - start;

@@ -6,17 +6,32 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/18 13:03:52 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 00:44:52 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void add_index_to_custom_env(t_attr *att)
+{
+    int i;
+
+    t_list *tmp_list = att->env_list;
+    i = 0;
+    while (att->env_list != NULL)
+    {
+        att->env_list->$flag = i;
+        i++;
+        att->env_list = att->env_list->next;
+    }
+    att->env_list = tmp_list;
+}
+
 void add_index_to_local_var(t_attr *att)
 {
     int i;
 
-    t_list *current = att->local_var;
+    t_list *tmp_list = att->local_var;
     i = 0;
     while (att->local_var != NULL)
     {
@@ -24,7 +39,7 @@ void add_index_to_local_var(t_attr *att)
         i++;
         att->local_var = att->local_var->next;
     }
-    att->local_var = current;
+    att->local_var = tmp_list;
 }
 
 /* questa funzione aggiunge un id ad ogni nodo. necessaria quando lavoriamo
@@ -86,11 +101,12 @@ t_list *sort_list(t_list *list)
     t_list *prev;
     t_list *new_node;
     char *tempA;
+    t_list *tmp_list = list;
 
     sorted_list = NULL;
-    while (list)
+    while (tmp_list)
     {
-        tempA = get_var_name(list->content);
+        tempA = get_var_name(tmp_list->content);
         sorted_list_temp = &sorted_list;
         prev = NULL;
         while (*sorted_list_temp &&
@@ -99,7 +115,7 @@ t_list *sort_list(t_list *list)
             prev = *sorted_list_temp;
             sorted_list_temp = &(*sorted_list_temp)->next;
         }
-        new_node = ft_lstnew(list->content);
+        new_node = ft_lstnew(tmp_list->content);
         if (prev == NULL) {
             new_node->next = sorted_list;
             sorted_list = new_node;
@@ -107,7 +123,7 @@ t_list *sort_list(t_list *list)
             new_node->next = prev->next;
             prev->next = new_node;
         }
-        list = list->next;
+        tmp_list = tmp_list->next;
     }
     return sorted_list;
 }

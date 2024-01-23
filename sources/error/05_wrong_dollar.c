@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/10 19:01:03 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:05:36 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ int error_dollar_02(char *s, int i, t_attr *att)
 	if (s[i] == '?')
 		return (1);
 	error_dollar_02_a(s, &i, &len);
-	check_envp = malloc(sizeof(char) * len + 2);
+	check_envp = malloc(sizeof(char) * len + 2); 
 	i = start;
 	while (j < len)
 		check_envp[j++] = s[i++];
 	error_dollar_02_b(check_envp, &j, &len, att);
+	// printf("questa è check_envp: %s\n", check_envp);
 	if (error_dollar_03(check_envp, att, len) == -1)
 	{
 		free(check_envp);
@@ -61,11 +62,16 @@ int error_dollar_02(char *s, int i, t_attr *att)
 }
 int error_dollar_01(char *s, t_attr *att)
 {
+	int i;
+
+	i = 0;
 	if (count_dollar_sign(s, att) != 0)
 	{
 		att->save_y_mx_envp = malloc(sizeof(int) * att->nb_$);
 		att->flag$ = malloc(sizeof(int) * att->nb_$);
-		if (!att->flag$)
+		while(i < att->nb_$)
+			att->flag$[i++] = 0;
+		if (!att->flag$ && !att->save_y_mx_envp)
 			return (-1);
 		att->i_flag$ = 0;
 	}
