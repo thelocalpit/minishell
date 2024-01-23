@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/21 13:16:55 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:43:00 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,7 +301,7 @@ int		envi(t_attr *att);
 int		echo(char **args);
 void	ft_exit(void);
 int		ft_cd(char **args);
-int		add_var(char *str, t_list **var_list);
+int		add_var(char *str, t_attr *att);
 
 // 01_export
 
