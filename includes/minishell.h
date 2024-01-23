@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/22 19:09:47 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:24:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,7 @@ void add_index_to_custom_env(t_attr *att);
 void envp_to_matrix(t_attr *att);
 int	matrix_len(char **matrix);
 void add_index_to_local_var(t_attr *att);
+int ft_isspace(char *s);
 
 // 02_utils.c
 

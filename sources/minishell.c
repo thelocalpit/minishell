@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/23 16:24:54 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:28:15 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av, char **envp)
 		reinit_parameters(&att, envp);
 		//start_env(envp, &att);
 
-		if (s)
+		if (s && ft_isspace(s))
 		{
 			add_history(s);
 			split_init(s, &att);

@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   03_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:26:11 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/12 01:52:44 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:24:35 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int ft_isspace(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == ' ')
+			i++;
+		else
+			return (1);
+	}
+	return (0);
+}
 
 void	envp_to_matrix(t_attr *att)
 {
