@@ -39,7 +39,7 @@ char *get_cmd_token(char *s, t_attr *att)
 	else
 	{
 		flag = 0;
-		printf("sono_qui\n");
+		//printf("sono_qui\n");
 		return (ft_write_word(s, att, flag, i));
 	}
 }
@@ -54,7 +54,7 @@ void create_matrix_cmd(char *s, t_attr *att)
 	att->x2 = 0;
 	att->y2 = 0;
 	//printf("---%d\n", att->count_words);
-	att->arr2 = malloc((att->count_words) * sizeof(char *) + 1);
+	att->arr2 = malloc((att->count_words + 1) * sizeof(char *));
 	att->arr2[att->count_words] = NULL;
 	if (!att->arr2)
 		return;
@@ -69,7 +69,7 @@ void create_matrix_cmd(char *s, t_attr *att)
 			s = NULL;
 			return ;
 		}
-		printf("%s\n", att->arr2[att->y2]);
+		//printf("%s\n", att->arr2[att->y2]);
 		att->y2++;
 	}
 }

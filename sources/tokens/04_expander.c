@@ -24,6 +24,7 @@ void copy_expanded_str(t_attr *att, int len_name_var)
 
 	// printf("att.flag_list: %d\n", att->flag_list);
 	// printf("i_flag$: %d\n", att->i_flag$);
+	//printf("%d", att->flag_list);
 	if (att->flag_list == 0)
 	{
 		tmp_list = att->env_list;
@@ -68,7 +69,7 @@ void count_expanded_token_local_var(t_attr *att)
 	{
 		if (!ft_strncmp(att->check_exp, att->local_var->content, att->len_call_exp))
 		{
-			printf("2222222222sono dentro count_expanded_token_local_var:\nquesto è la variabile trovata da copiare: %s\n e questa è la variabile che abbiamo richiesto di espandere: %s\n", tmp_list->content, att->check_exp);
+			//printf("2222222222sono dentro count_expanded_token_local_var:\nquesto è la variabile trovata da copiare: %s\n e questa è la variabile che abbiamo richiesto di espandere: %s\n", tmp_list->content, att->check_exp);
 			while (att->local_var->content[att->x_mx_envp])
 			{
 				att->mem_space++;
@@ -93,7 +94,7 @@ int count_expanded_token_02(t_attr *att)
 	{
 		if (!ft_strncmp(att->check_exp, tmp_list->content, att->len_call_exp))
 		{
-			printf("11111111111sono dentro count_expanded_token:\nquesto è la variabile trovata da copiare: %s\n e questa è la variabile che abbiamo richiesto di espandere: %s\n", tmp_list->content, att->check_exp);
+			//printf("11111111111sono dentro count_expanded_token:\nquesto è la variabile trovata da copiare: %s\n e questa è la variabile che abbiamo richiesto di espandere: %s\n", tmp_list->content, att->check_exp);
 			while (tmp_list->content[att->x_mx_envp])
 			{
 				att->mem_space++;
@@ -137,7 +138,7 @@ void count_expanded_token(t_attr *att, char *s)
 	if (count_expanded_token_02(att) == -1)
 	{
 		att->flag_list = 1;
-		printf("entro dentro count_exp_token_local_var: flag_list: %d\n", att->flag_list);
+		//printf("entro dentro count_exp_token_local_var: flag_list: %d\n", att->flag_list);
 		count_expanded_token_local_var(att);
 	}
 	// att->flag_list = 0;
