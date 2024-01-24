@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/24 16:50:04 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:24:46 by alesac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	do_builtin(t_attr *att)
 		return (add_var(att->arr2[0], att));
 	else
 		exec(att);
+	set_signals();
 	return (0);
 }
 
