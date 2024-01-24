@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/24 12:05:02 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:45:08 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,18 @@ int error_dollar(char *s, t_attr *att)
 		}
 		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i +1] != '"')
 		{
-			if (error_dollar_02(s, i, att) == -1)
+			if (s[i + 1] == '$') //controllo $$
+			{
+				att->flag$[att->i_flag$++] = -1;
+				att->flag$[att->i_flag$] = -1;
+				i += 2;
+			}
+			else if (error_dollar_02(s, i, att) == -1)
 				att->flag$[att->i_flag$] = -1;
 			else
+			{
 				i += error_dollar_02(s, i, att);
+			}
 			att->i_flag$++;
 		}
 		i++;

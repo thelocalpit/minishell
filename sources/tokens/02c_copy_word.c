@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:16:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/19 13:26:24 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:34:16 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var)
 {
 	while (s[i] != ' ' && s[i])
 	{
-		if (s[i] == '$' && s[i + 1] == '?')
+		if (s[i] == '$' && s[i + 1] == '$')
+		{
+			i += 2;
+			att->i_flag$ += 2;
+			att->arr2[att->y2][att->x2++] = '$';
+			att->arr2[att->y2][att->x2++] = '$';
+		}
+		else if (s[i] == '$' && s[i + 1] == '?')
 			i = copy_g_value(att, i);
 		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
 		{
@@ -68,7 +75,14 @@ int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 	att->arr2[att->y2][att->x2++] = '"';
 	while (s[i] != '"')
 	{
-		if (s[i] == '$' && s[i + 1] == '?')
+		if (s[i] == '$' && s[i + 1] == '$')
+		{
+			i += 2;
+			att->i_flag$ += 2;
+			att->arr2[att->y2][att->x2++] = '$';
+			att->arr2[att->y2][att->x2++] = '$';
+		}
+		else if (s[i] == '$' && s[i + 1] == '?')
 			i = copy_g_value(att, i);
 		else if (s[i] == '$' && s[i + 1] != ' '
 				&& s[i + 1] && s[i + 1] != '"')
