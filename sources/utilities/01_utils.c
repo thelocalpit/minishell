@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/23 21:41:57 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/24 04:36:46 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char    *get_var_name(char *full_var)
 		p--;
 	}
 	name = malloc(sizeof(char) * var_name_length + 1);
+	name[var_name_length] = '\0';
 	ft_strncpy(name, full_var, p - full_var);
 	return (name);
 }

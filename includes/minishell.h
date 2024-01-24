@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/23 21:43:00 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/23 23:43:24 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,7 @@ int		echo(char **args);
 void	ft_exit(void);
 int		ft_cd(char **args);
 int		add_var(char *str, t_attr *att);
+int		update_var(char *str, t_list *list);
 
 // 01_export
 
