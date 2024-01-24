@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/22 19:10:11 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:50:04 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	do_builtin(t_attr *att)
 	else if (ft_strchr(att->arr2[0], '=') != NULL
 		&& ((att->arr2[0][0] >= 65 && att->arr2[0][0] <= 90)
 		|| (att->arr2[0][0] >= 97 && att->arr2[0][0] <= 122)))
-		return (add_var(att->arr2[0], &(att->local_var)));
+		return (add_var(att->arr2[0], att));
 	else
 		exec(att);
 	return (0);

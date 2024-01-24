@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/24 11:57:39 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:49:37 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,7 +307,9 @@ int		envi(t_attr *att);
 int		echo(char **args);
 void	ft_exit(void);
 int		ft_cd(char **args);
-int		add_var(char *str, t_list **var_list);
+int		add_var(char *str, t_attr *att);
+int		new_var(char *str, t_attr *att, int add, int empty);
+int		update_var(char *str, t_list *list, int add);
 
 // 01_export
 

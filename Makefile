@@ -6,7 +6,7 @@
 #    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/01/22 18:34:11 by pfalasch         ###   ########.fr        #
+#    Updated: 2024/01/24 16:49:12 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRC =	sources/minishell.c \
 		sources/Commands/builtin.c \
 		sources/Commands/do_builtin.c \
 		sources/Commands/export.c \
+		sources/Commands/localvar.c \
 		sources/Commands/unset.c \
 		sources/Commands/exit.c \
 		sources/executer/ecxeve.c \

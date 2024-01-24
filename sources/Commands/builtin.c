@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/11 18:07:31 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/23 20:10:04 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,34 +108,5 @@ int	ft_cd(char **args)
 		printf(RED"cd : diocane non ce sta la cartella");
 		printf("\n");
 	}
-	return (0);
-}
-
-int	add_var(char *str, t_list **local_var)
-{
-	t_list	*tmp;
-	char	*name;
-
-	tmp = *local_var;
-	name = get_var_name(str);
-	if (!str[ft_strlen(name) + 1])
-		free(str);
-	if (!str)
-		str = ft_strjoin(name, "=\"\"");
-	free(name);
-	while (tmp)
-	{
-		if (!ft_strcmp(get_var_name(str), get_var_name(tmp->content)))
-		{
-			free(tmp->content);
-			tmp->content = ft_strdup(str);
-			return (0);
-		}
-		tmp = tmp->next;
-	}
-	tmp = ft_lstnew(ft_strdup(str));
-	if (!tmp)
-		perror("malloc");
-	ft_lstadd_back(local_var, tmp);
 	return (0);
 }
