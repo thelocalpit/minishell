@@ -50,13 +50,15 @@ void ft_strlen_double_quotes(char *s, t_attr *att)
 
 void ft_strlen_no_quotes(char *s, t_attr *att)
 {
-	while (s[att->i] != ' ' && s[att->i])
+	//printf("PORCODIO%s\n", s);
+	while (s[att->i] && s[att->i] != ' ')
 	{
 		if (s[att->i] == '$' && s[att->i + 1] == '?')
 			ft_count_exp_print_error(att);
 		if (s[att->i] == '$' && s[att->i + 1] != ' ' && s[att->i + 1])
 		{
 			att->i++;
+			//printf("----%d---%d\n", att->flag$[att->i_flag$], att->i_flag$);
 			if (att->flag$[att->i_flag$] == 0)
 				count_expanded_token(att, s);
 			else
@@ -84,6 +86,7 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 	if (!s)
 		return (0);
 	save_$ = att->i_flag$;
+	//printf("flagfflagffalg----%d\n", att->i_flag$);
 	if (flag == 0)
 		ft_strlen_no_quotes(s, att);
 	if (flag == 1)
