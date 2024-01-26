@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/11 06:13:16 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/26 04:15:24 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void next_step_sub2(t_attr *att)
 		att->read_from_pipe = 1;
 	if (!ft_strcmp(att->split_arr[att->y - 1], ">>")
 		|| !ft_strcmp(att->split_arr[att->y - 1], ">"))
+	{
+		att->redir = 0;
 		att->skip = 1;
+	}
 	if (!ft_strcmp(att->split_arr[att->y - 1], "<"))
 		att->skip = 1;
 	if (!ft_strcmp(att->split_arr[att->y - 1], "<<"))
