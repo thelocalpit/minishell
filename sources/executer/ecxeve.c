@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:20:37 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/26 04:06:45 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/26 05:43:39 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,22 @@ int	bin_exec(t_attr *att)
 	printf("%s: command not found\n", att->arr2[0]);
 	free_arr(path);
 	return (1);
+}
+
+int	relative_exec(t_attr *att)
+{
+	char	*tmp;
+	char	*current_path;
+	char	*path;
+
+	tmp = ft_strjoin("/", att->arr2[0]);
+	current_path = malloc(sizeof(char) * PATH_MAX);
+	getcwd(current_path, PATH_MAX);
+	path = ft_strjoin(current_path, tmp);
+	if (ft_ecxev(path, att->arr2, att->env))
+		printf("%s: No such file or directory\n", att->arr2[0]);
+	free(path);
+	free(tmp);
+	free(current_path);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/26 05:15:32 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/26 05:36:57 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,27 @@ int	red_input(t_attr *att, char *path)
 
 int	heredoc(t_attr *att)
 {
-	char	*eof;
+	char	**eof;
 	char	*input;
-	int		fd;
 
-	eof = ft_strdup(att->split_arr[att->y + 2]);
-	fd = open("objects/heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	eof = ft_split(att->split_arr[att->y + 2], ' ');
+	att->red_fd = open("objects/heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	while (1)
 	{
 		input = readline(RED_BOLD "> " RESET);
-		if (ft_strcmp(input, eof) == 0)
+		if (ft_strcmp(input, eof[0]) == 0)
 		{
 			free(input);
 			break ;
 		}
-		write(fd, input, ft_strlen(input));
-		write(fd, "\n", 1);
+		write(att->red_fd, input, ft_strlen(input));
+		write(att->red_fd, "\n", 1);
 		free(input);
 	}
-	free(eof);
-	close(fd);
+	free_arr(eof);
+	close(att->red_fd);
 	if (red_input(att, "objects/heredoc"))
-		printf("minishell: %s: No such file or directory\n",
-			att->split_arr[att->y + 2]);
+		printf("heredoc error\n");
 	unlink("objects/heredoc");
 	return (0);
 }

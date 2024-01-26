@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/26 04:43:10 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/26 05:44:24 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	do_execve(t_attr *att)
 		absolute_exec(att);
 	else if (att->arr2[0][0] == '.')
 		binary_exec(att);
+	else if (ft_strchr(att->arr2[0], '/'))
+		relative_exec(att);
 	else
 		bin_exec(att);
 	free_arr(att->env);
