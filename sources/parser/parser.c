@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/26 04:54:49 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:45:58 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /* in questa funzione andiamo a resettare le flags che servono per
 	reindirizzare gli output e prendere gli input in caso di arrivo da pipe */
 
-void reset_flags(t_attr *att)
+void	reset_flags(t_attr *att)
 {
 	att->write_to_pipe = 0;
 	att->redir = 0;
@@ -31,7 +31,7 @@ void reset_flags(t_attr *att)
 	att->only_create = 0;
 }
 
-void next_step_sub2(t_attr *att)
+void	next_step_sub2(t_attr *att)
 {
 	if (!ft_strcmp(att->split_arr[att->y - 1], "|"))
 		att->read_from_pipe = 1;
@@ -47,7 +47,7 @@ void next_step_sub2(t_attr *att)
 		att->skip = 1;
 }
 
-void next_step_sub(t_attr *att)
+void	next_step_sub(t_attr *att)
 {
 	if (!ft_strcmp(att->split_arr[att->y + 1], "|"))
 		att->write_to_pipe = 1;
@@ -57,7 +57,8 @@ void next_step_sub(t_attr *att)
 	else if (!ft_strcmp(att->split_arr[att->y + 1], "<"))
 	{
 		att->read_from_file = 1;
-		if (!ft_strcmp(att->split_arr[att->y + 3], "|"))
+		if (att->split_arr[att->y + 3]
+			&& !ft_strcmp(att->split_arr[att->y + 3], "|"))
 			att->write_to_pipe = 1;
 	}
 	else if (!ft_strcmp(att->split_arr[att->y + 1], "<<"))
@@ -72,7 +73,7 @@ void next_step_sub(t_attr *att)
 			dobbiamo prendere qualcosa dalla pipe prima e nel caso settiamo 
 			la flag   */
 
-	int check_next_step(t_attr *att)
+int check_next_step(t_attr *att)
 {
 	reset_flags(att);
 	if (!ft_strcmp(att->split_arr[0], ">")
