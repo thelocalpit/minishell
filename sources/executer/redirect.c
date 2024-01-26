@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/18 13:02:04 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/01/26 03:50:53 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_redir(t_attr *att)
 			|| !ft_strcmp(att->split_arr[att->y + 3], ">>")))
 	{
 		att->y = att->y + 2;
-		name = ft_strtrim(att->split_arr[att->y + 2], " ");
+		name = ft_strtrim(att->split_arr[att->y], " ");
 		att->red_fd = open(name, O_CREAT, 0644);
 		if (att->red_fd < 0)
 		{
@@ -29,6 +29,7 @@ int	check_redir(t_attr *att)
 			return (-1);
 		}
 		close(att->red_fd);
+		free(name);
 	}
 	return (0);
 }
@@ -36,7 +37,9 @@ int	check_redir(t_attr *att)
 int	redir(t_attr *att)
 {
 	char	*name;
+	int		y;
 
+	y = att->y;
 	check_redir(att);
 	name = ft_strtrim(att->split_arr[att->y + 2], " ");
 	if (att->redir == 1)
@@ -51,6 +54,7 @@ int	redir(t_attr *att)
 	dup2(att->red_fd, 1);
 	close(att->red_fd);
 	free(name);
+	att->y = y;
 	return (0);
 }
 
