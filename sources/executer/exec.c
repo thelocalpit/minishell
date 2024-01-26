@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/26 05:44:24 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/26 06:26:41 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	exec(t_attr *att)
 	}
 	else
 		waitpid(att->pid, &g_value, 0);
+	close_pipeline(att);
 	free_arr(att->paths);
 	// free(att->paths);
 	return (0);

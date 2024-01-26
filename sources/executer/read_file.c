@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/26 06:00:11 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/26 06:22:11 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,11 @@ int	read_from_file(t_attr *att)
 		free(current_path);
 	}
 	if (red_input(att, file_path))
+	{
 		printf("minishell: %s: No such file or directory\n",
 			att->split_arr[att->y + 2]);
+		att->skip = 1;
+	}
 	free(file_path);
 	return (0);
 }
