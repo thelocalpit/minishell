@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/26 05:36:57 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/26 06:00:11 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,37 @@ int	red_input(t_attr *att, char *path)
 int	heredoc(t_attr *att)
 {
 	char	**eof;
-	char	*input;
 
 	eof = ft_split(att->split_arr[att->y + 2], ' ');
-	att->red_fd = open("objects/heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (heredoc_read(att, eof[0]))
+	{
+		free_arr(eof);
+		return (1);
+	}
+	free_arr(eof);
+	att->red_fd = open("objects/.heredoc", O_RDONLY);
+	dup2(att->red_fd, 0);
+	if (red_input(att, "objects/.heredoc") || att->red_fd < 0)
+		printf("heredoc error\n");
+	close(att->red_fd);
+	unlink("objects/.heredoc");
+	return (0);
+}
+
+int	heredoc_read(t_attr *att, char *eof)
+{
+	char	*input;
+
+	att->red_fd = open("objects/.heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (att->red_fd < 0)
+	{
+		printf("heredoc error\n");
+		return (1);
+	}
 	while (1)
 	{
 		input = readline(RED_BOLD "> " RESET);
-		if (ft_strcmp(input, eof[0]) == 0)
+		if (ft_strcmp(input, eof) == 0)
 		{
 			free(input);
 			break ;
@@ -41,11 +64,7 @@ int	heredoc(t_attr *att)
 		write(att->red_fd, "\n", 1);
 		free(input);
 	}
-	free_arr(eof);
 	close(att->red_fd);
-	if (red_input(att, "objects/heredoc"))
-		printf("heredoc error\n");
-	unlink("objects/heredoc");
 	return (0);
 }
 

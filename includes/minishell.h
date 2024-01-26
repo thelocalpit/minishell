@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/26 05:43:35 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/26 06:00:18 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,6 +354,7 @@ void    close_pipeline(t_attr *att);
 // read_file.c
 int    red_input(t_attr *att, char *path);
 int    heredoc(t_attr *att);
+int    heredoc_read(t_attr *att, char *eof);
 int    read_from_file(t_attr *att);
 
 // redirect.c
