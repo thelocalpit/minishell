@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/26 15:45:58 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/27 17:00:28 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	next_step_sub(t_attr *att)
 	else if (!ft_strcmp(att->split_arr[att->y + 1], "<<"))
 		att->heredoc = 1;
 }
-
 	/* in questa funzione procediamo nel seguente modo:
 		1. si resettano le flag.
 		2. si controlla se non è un comando singolo per creare un file
@@ -73,7 +72,7 @@ void	next_step_sub(t_attr *att)
 			dobbiamo prendere qualcosa dalla pipe prima e nel caso settiamo 
 			la flag   */
 
-int check_next_step(t_attr *att)
+int	check_next_step(t_attr *att)
 {
 	reset_flags(att);
 	if (!ft_strcmp(att->split_arr[0], ">")
@@ -89,5 +88,25 @@ int check_next_step(t_attr *att)
 		next_step_sub(att);
 	if (att->y > 1)
 		next_step_sub2(att);
+	red_index(att);
 	return (0);
+}
+
+void	red_index(t_attr *att)
+{
+	int	y;
+
+	y = att->y + 1;
+	while (att->split_arr[y])
+	{
+		if (!ft_strcmp(att->split_arr[y], ">")
+			|| !ft_strcmp(att->split_arr[y], ">>"))
+			att->i_redir = y;
+		else if (!ft_strcmp(att->split_arr[y], "<")
+			|| !ft_strcmp(att->split_arr[y], "<<"))
+			att->i_readfile = y;
+		if (!ft_strcmp(att->split_arr[y], "|"))
+			break ;
+		y += 2;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/26 07:00:55 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/27 17:40:49 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,46 @@ int	create_file(t_attr *att)
 //  controllari segnali per here doc
 //	dare un occhiata alle pipe
 
+// int	do_red(t_attr *att)
+// {
+// 	if (att->heredoc)
+// 		heredoc(att);
+// 	if (att->read_from_pipe)
+// 		read_from_pipe(att);
+// 	else if (att->read_from_file)
+// 		read_from_file(att);
+// 	if (att->redir)
+// 		redir(att);
+// 	if (att->only_create)
+// 		create_file(att);
+// 	if (att->write_to_pipe && att->read_from_pipe)
+// 		att->pipe_index++;
+// 	if (att->write_to_pipe)
+// 		write_to_pipe(att);
+// 	return (0);
+// }
+
 int	do_red(t_attr *att)
 {
-	if (att->heredoc)
-		heredoc(att);
-	if (att->read_from_pipe)
-		read_from_pipe(att);
-	else if (att->read_from_file)
-		read_from_file(att);
-	if (att->redir)
-		redir(att);
+	// printf("only create: %d | read from pipe: %d | read from file: %d | heredoc: %d | write to pipe: %d | redir: %d\n", att->only_create, att->read_from_pipe, att->read_from_file, att->heredoc, att->write_to_pipe, att->redir);
+	// printf("pipe index: %d | i redir: %d | i readfile: %d\n", att->pipe_index, att->i_redir, att->i_readfile);
 	if (att->only_create)
 		create_file(att);
+	if (att->read_from_pipe && att->y > att->i_readfile)
+		read_from_pipe(att);
+	// else if (att->read_from_file)
+	// 	read_from_file(att);
+	// if (att->heredoc)
+	// 	heredoc(att);
+	if (att->y < att->i_redir)
+		redir(att);
+	if (att->y < att->i_readfile)
+		read_from_file(att);
 	if (att->write_to_pipe && att->read_from_pipe)
 		att->pipe_index++;
 	if (att->write_to_pipe)
 		write_to_pipe(att);
-	return (0);
+	// if (att->redir)
+	// 	redir(att);
+	return (0);	
 }

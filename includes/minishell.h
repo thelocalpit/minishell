@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/26 06:00:18 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/27 16:47:53 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ typedef struct s_attr
 	int     only_create;
 	int     heredoc;
 	int     skip;
+	int     i_redir;
+	int     i_readfile;
 	//---- envp custom matrix ---
 	// char    **mx_envp;
 	int     y_mx_envp;
@@ -322,6 +324,7 @@ void    reset_flags(t_attr *att);
 void    next_step_sub2(t_attr *att);
 void    next_step_sub(t_attr *att);
 int     check_next_step(t_attr *att);
+void    red_index(t_attr *att);
 
 // lexer.c
 
