@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/29 07:15:25 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 07:25:07 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	find_paths(t_attr *att)
 int	do_execve(t_attr *att)
 {
 	envp_to_matrix(att);
-	absolute_exec(att);
 	if (att->arr2[0][0] == '/' || att->arr2[0][0] == '.')
 		absolute_exec(att);
 	//else if (att->arr2[0][0] == '.')   // a quanto pare non serve
