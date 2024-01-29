@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/29 05:33:18 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 17:17:58 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,7 +363,9 @@ int    read_from_file(t_attr *att);
 // redirect.c
 int    check_redir(t_attr *att);
 int    redir(t_attr *att);
+int    create_file(t_attr *att);
 int    do_red(t_attr *att);
+void	reset_flags2(t_attr *att);
 
 
 // expander

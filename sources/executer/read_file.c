@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/29 06:26:48 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:32:09 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	heredoc_read(t_attr *att, char *eof)
 {
 	char	*input;
 
-	printf("eof: %s\n", eof);
 	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
 	{
