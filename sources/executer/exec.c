@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/26 06:52:39 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 05:33:32 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,10 @@ int	exec(t_attr *att)
 	}
 	if (att->pid == 0)
 	{
-		do_red(att);
 		if (!att->skip)
-		{
-			//printf("pippo\n");
+			do_red(att);
+		if (!att->skip)
 			do_child_cmd(att);
-		}
 		free_arr(att->paths);
 		// free(att->paths);
 		exit(g_value);

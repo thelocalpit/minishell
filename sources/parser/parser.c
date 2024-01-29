@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/27 17:00:28 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 05:33:39 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ void	next_step_sub2(t_attr *att)
 		att->read_from_pipe = 1;
 	if (!ft_strcmp(att->split_arr[att->y - 1], ">>")
 		|| !ft_strcmp(att->split_arr[att->y - 1], ">"))
-	{
-		att->redir = 0;
 		att->skip = 1;
-	}
 	if (!ft_strcmp(att->split_arr[att->y - 1], "<"))
 		att->skip = 1;
 	if (!ft_strcmp(att->split_arr[att->y - 1], "<<"))
@@ -51,16 +48,12 @@ void	next_step_sub(t_attr *att)
 {
 	if (!ft_strcmp(att->split_arr[att->y + 1], "|"))
 		att->write_to_pipe = 1;
-	else if (!ft_strcmp(att->split_arr[att->y + 1], ">")
-		|| !ft_strcmp(att->split_arr[att->y + 1], ">>"))
+	else if (!ft_strcmp(att->split_arr[att->y + 1], ">"))
 		att->redir = 1;
+	else if (!ft_strcmp(att->split_arr[att->y + 1], ">>"))
+		att->redir = 2;
 	else if (!ft_strcmp(att->split_arr[att->y + 1], "<"))
-	{
 		att->read_from_file = 1;
-		if (att->split_arr[att->y + 3]
-			&& !ft_strcmp(att->split_arr[att->y + 3], "|"))
-			att->write_to_pipe = 1;
-	}
 	else if (!ft_strcmp(att->split_arr[att->y + 1], "<<"))
 		att->heredoc = 1;
 }
@@ -75,15 +68,15 @@ void	next_step_sub(t_attr *att)
 int	check_next_step(t_attr *att)
 {
 	reset_flags(att);
-	if (!ft_strcmp(att->split_arr[0], ">")
-		|| !ft_strcmp(att->split_arr[0], ">>"))
-	{
-		att->skip = 1;
-		if (!ft_strcmp(att->split_arr[0], ">"))
-			att->only_create = 1;
-		else
-			att->only_create = 2;
-	}
+	// if (!ft_strcmp(att->split_arr[0], ">")
+	// 	|| !ft_strcmp(att->split_arr[0], ">>"))
+	// {
+	// 	att->skip = 1;
+	// 	if (!ft_strcmp(att->split_arr[0], ">"))
+	// 		att->only_create = 1;
+	// 	else
+	// 		att->only_create = 2;
+	// }
 	if (att->split_arr[att->y] && att->split_arr[att->y + 1])
 		next_step_sub(att);
 	if (att->y > 1)

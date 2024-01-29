@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/27 01:49:07 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 03:04:12 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	heredoc(t_attr *att)
 {
 	char	**eof;
 
+	printf("heredoc\n");
 	eof = ft_split(att->split_arr[att->y + 2], ' ');
 	if (heredoc_read(att, eof[0]))
 	{

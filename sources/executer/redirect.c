@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/27 17:40:49 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 05:35:26 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@ int	check_redir(t_attr *att)
 {
 	char	*name;
 
-	while (att->split_arr[att->y + 3]
-		&& (!ft_strcmp(att->split_arr[att->y + 3], ">")
-			|| !ft_strcmp(att->split_arr[att->y + 3], ">>")))
+	if (att->y + 1 < att->i_redir)
 	{
-		att->y = att->y + 2;
-		name = ft_strtrim(att->split_arr[att->y], " ");
-		printf("name: %s\n", name);
-		if (!ft_strcmp(att->split_arr[att->y - 1], ">"))
+		name = ft_strtrim(att->split_arr[att->y + 2], " ");
+		//printf("name: %s\n", name);
+		if (att->redir == 1)
 			att->red_fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		else
 			att->red_fd = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
@@ -34,6 +31,7 @@ int	check_redir(t_attr *att)
 		}
 		close(att->red_fd);
 		free(name);
+		return (1);
 	}
 	return (0);
 }
@@ -41,12 +39,11 @@ int	check_redir(t_attr *att)
 int	redir(t_attr *att)
 {
 	char	*name;
-	int		y;
 
-	y = att->y;
-	check_redir(att);
+	if (check_redir(att))
+		return (0);
 	name = ft_strtrim(att->split_arr[att->y + 2], " ");
-	if (!ft_strcmp(att->split_arr[att->y + 1], ">"))
+	if (att->redir == 1)
 		att->red_fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else
 		att->red_fd = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
@@ -58,7 +55,6 @@ int	redir(t_attr *att)
 	dup2(att->red_fd, 1);
 	close(att->red_fd);
 	free(name);
-	att->y = y;
 	return (0);
 }
 
@@ -81,6 +77,34 @@ int	create_file(t_attr *att)
 	return (0);
 }
 
+int	do_red(t_attr *att)
+{
+	int	y;
+
+	y = att->y;
+	if (att->only_create)  // secondo me va tolto e inizializato att->y = -1
+		create_file(att);
+	if (att->read_from_pipe)
+		read_from_pipe(att);
+	while (att->i_redir > att->y || att->i_readfile > att->y)
+	{
+		reset_flags(att);
+		next_step_sub(att);
+		if (att->redir)
+			redir(att);
+		if (att->heredoc)
+			heredoc(att);
+		if (att->read_from_file && att->y + 1 == att->i_readfile)
+			read_from_file(att);
+		att->y += 2;
+	}
+	if (att->write_to_pipe && att->read_from_pipe)
+		att->pipe_index++;
+	if (att->write_to_pipe)
+		write_to_pipe(att);
+	att->y = y;
+	return (0);
+}
 
 // Da gestire:
 //  FIXARE "code ignetion" nell'heredoc, e creazione di file chiamati come parti di codice per le redir
@@ -108,27 +132,27 @@ int	create_file(t_attr *att)
 // 	return (0);
 // }
 
-int	do_red(t_attr *att)
-{
-	// printf("only create: %d | read from pipe: %d | read from file: %d | heredoc: %d | write to pipe: %d | redir: %d\n", att->only_create, att->read_from_pipe, att->read_from_file, att->heredoc, att->write_to_pipe, att->redir);
-	// printf("pipe index: %d | i redir: %d | i readfile: %d\n", att->pipe_index, att->i_redir, att->i_readfile);
-	if (att->only_create)
-		create_file(att);
-	if (att->read_from_pipe && att->y > att->i_readfile)
-		read_from_pipe(att);
-	// else if (att->read_from_file)
-	// 	read_from_file(att);
-	// if (att->heredoc)
-	// 	heredoc(att);
-	if (att->y < att->i_redir)
-		redir(att);
-	if (att->y < att->i_readfile)
-		read_from_file(att);
-	if (att->write_to_pipe && att->read_from_pipe)
-		att->pipe_index++;
-	if (att->write_to_pipe)
-		write_to_pipe(att);
-	// if (att->redir)
-	// 	redir(att);
-	return (0);	
-}
+// int	do_red(t_attr *att)
+// {
+// 	// printf("only create: %d | read from pipe: %d | read from file: %d | heredoc: %d | write to pipe: %d | redir: %d\n", att->only_create, att->read_from_pipe, att->read_from_file, att->heredoc, att->write_to_pipe, att->redir);
+// 	// printf("pipe index: %d | i redir: %d | i readfile: %d\n", att->pipe_index, att->i_redir, att->i_readfile);
+// 	if (att->only_create)
+// 		create_file(att);
+// 	if (att->read_from_pipe && att->y > att->i_readfile)
+// 		read_from_pipe(att);
+// 	// else if (att->read_from_file)
+// 	// 	read_from_file(att);
+// 	// if (att->heredoc)
+// 	// 	heredoc(att);
+// 	if (att->y < att->i_redir)
+// 		redir(att);
+// 	if (att->y < att->i_readfile)
+// 		read_from_file(att);
+// 	if (att->write_to_pipe && att->read_from_pipe)
+// 		att->pipe_index++;
+// 	if (att->write_to_pipe)
+// 		write_to_pipe(att);
+// 	// if (att->redir)
+// 	// 	redir(att);
+// 	return (0);	
+// }
