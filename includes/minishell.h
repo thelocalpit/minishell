@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/24 18:23:39 by alesac           ###   ########.fr       */
+/*   Updated: 2024/01/29 10:27:22 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,8 @@ int ft_intsize(int n);
 int ft_ispositive(int n);
 void ft_itoa_custom(int n, t_attr *att);
 char    *get_var_content(char *full_var);
+char    *removePlus(char *full_var);
+int		var_name_length(char *full_var);
 
 //	error_folder
 

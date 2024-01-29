@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 13:31:40 by mcoppola          #+#    #+#             */
-/*   Updated: 2023/12/29 17:04:56 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:16:04 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_remove_node(t_list **list, char *arg)
 	prev = NULL;
 	while (tmp)
 	{
-		if (ft_strncmp(arg, get_var_name((char *)tmp->content), ft_strlen(arg)) == 0)
+		if (ft_strncmp(arg, (char *)tmp->content, ft_strlen(arg)) == 0)
 		{
 			if (prev == NULL)
 				*list = tmp->next;

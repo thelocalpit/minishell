@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   localvar.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:09:39 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/24 15:56:39 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 14:05:08 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	update_var(char *str, t_list *list, int add)
 	tmp = list;
 	while (tmp)
 	{
-		if (!ft_strcmp(get_var_name(str), get_var_name(tmp->content)))
+		if (!ft_strncmp(str, tmp->content, var_name_length(str)))
 		{
 			if (!add)
 			{
@@ -57,7 +57,7 @@ int	update_var(char *str, t_list *list, int add)
 				return (1);
 			}
 			temp = ft_strjoin(tmp->content,
-					str + ft_strlen(get_var_name(str)) + 2);
+					str + var_name_length(str) + 2);
 			tmp->content = ft_strdup(temp);
 			free(temp);
 			return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/24 04:36:46 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 10:27:47 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,15 @@ t_list *sort_list(t_list *list)
 	t_list **sorted_list_temp;
 	t_list *prev;
 	t_list *new_node;
-	char *tempA;
 	t_list *tmp_list = list;
 
 	sorted_list = NULL;
 	while (tmp_list)
 	{
-		tempA = get_var_name(tmp_list->content);
 		sorted_list_temp = &sorted_list;
 		prev = NULL;
 		while (*sorted_list_temp &&
-			ft_strcmp(tempA, get_var_name((*sorted_list_temp)->content)) > 0)
+			ft_strncmp(tmp_list->content, (*sorted_list_temp)->content, var_name_length(tmp_list->content)) > 0)
 		{
 			prev = *sorted_list_temp;
 			sorted_list_temp = &(*sorted_list_temp)->next;

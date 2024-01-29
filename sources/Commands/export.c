@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/17 22:25:12 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:40:40 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 int	basic_export(t_attr *att)
 {
 	t_list	*export;
+	t_list	*temp;
+	char	*varName;
 
 	export = sort_list(att->env_list);
 	while (export)
@@ -31,10 +33,16 @@ int	basic_export(t_attr *att)
 		if (get_var_content((char *)export->content)[0] == '"')
 			printf("declare -x %s\n", export->content);
 		else
+		{
+			varName = get_var_name(export->content);
 			printf("declare -x %s=\"%s\"\n",
-				get_var_name((char *)export->content),
-				get_var_content((char *)export->content));
+				varName,
+				get_var_content(export->content));
+				free(varName);
+		}
+		temp = export;
 		export = export->next;
+		free(temp);
 	}
 	return (0);
 }
@@ -55,14 +63,16 @@ void	check_duplicate(t_attr *att, char *content)
 	list = att->env_list;
 	while (list)
 	{
-		if (!ft_strcmp(get_var_name(content),
-				get_var_name((char *)list->content)))
+	printf("quiiii\n");
+		if (!ft_strncmp(content,
+				(char *)list->content, var_name_length(content)))
 		{
 			list->content = ft_strdup(content);
 			return ;
 		}
 		list = list->next;
 	}
+	printf("quiiii\n");
 	ft_lstadd_back(&(att->env_list), ft_lstnew(ft_strdup(content)));
 }
 
@@ -78,28 +88,49 @@ int	add_on_env(char *arg, t_attr *att)
 	t_list	*env_list;
 	t_list	*local_list;
 	char	*content;
+	int		append;
 
+	append = 0;
 	env_list = att->env_list;
 	local_list = att->local_var;
 	content = arg;
+
 	if (ft_strchr(arg, '=') == NULL)
+	{
 		while (local_list)
 		{
-			if (ft_strcmp(get_var_name(arg), get_var_name((char *)local_list->content)) == 0)
+			if (ft_strncmp(arg, (char *)local_list->content, var_name_length(arg)) == 0)
 			{
 				content = local_list->content;
 				break ;
 			}
 			local_list = local_list->next;
 		}
+		if (!local_list)
+			return (printf("ERROR: La variabile richiesta non esiste nelle locali\n"), 1);
+	}
+	/*la funzione strchr se trova il carattere richiesto ritorna una stringa da quel punto,
+		quindi mi chiedo se il carattere successivo sia '=' e se si appendo il contenuto della
+		var a quello gia esistente
+	*/
+	if (ft_strchr(content, '+') && ft_strchr(content, '+')[1] == '=')
+		append = 1;
 	while (env_list)
 	{
-		if (ft_strcmp(get_var_name(content), get_var_name((char *)env_list->content)) == 0)
+		if (ft_strncmp(content, (char *)env_list->content, var_name_length(content)) == 0)
+		{
+			if (append)
+				return (env_list->content = ft_strjoin(env_list->content, get_var_content(content)), 0);
 			return (env_list->content = ft_strdup(content), 0);
+		}
 		env_list = env_list->next;
 	}
-	ft_lstadd_back(&(att->env_list), ft_lstnew(ft_strdup(content)));
+	if (append)
+		ft_lstadd_back(&(att->env_list), ft_lstnew(removePlus(content)));
+	else
+		ft_lstadd_back(&(att->env_list), ft_lstnew(ft_strdup(content)));
 	return (0);
+
 }
 
 /**
