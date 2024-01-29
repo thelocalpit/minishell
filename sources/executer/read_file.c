@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/29 03:04:12 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 06:26:48 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	heredoc(t_attr *att)
 {
 	char	**eof;
 
-	printf("heredoc\n");
 	eof = ft_split(att->split_arr[att->y + 2], ' ');
 	if (heredoc_read(att, eof[0]))
 	{
@@ -34,12 +33,14 @@ int	heredoc(t_attr *att)
 		return (1);
 	}
 	free_arr(eof);
-	att->red_fd = open("objects/.heredoc", O_RDONLY);
+	if (att->i_readfile != att->y + 1)
+		return (0);
+	att->red_fd = open(".heredoc", O_RDONLY);
 	dup2(att->red_fd, 0);
-	if (red_input(att, "objects/.heredoc") || att->red_fd < 0)
+	if (red_input(att, ".heredoc") || att->red_fd < 0)
 		printf("heredoc error\n");
 	close(att->red_fd);
-	unlink("objects/.heredoc");
+	unlink(".heredoc");
 	return (0);
 }
 
@@ -47,7 +48,8 @@ int	heredoc_read(t_attr *att, char *eof)
 {
 	char	*input;
 
-	att->red_fd = open("objects/.heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	printf("eof: %s\n", eof);
+	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
 	{
 		printf("heredoc error\n");
