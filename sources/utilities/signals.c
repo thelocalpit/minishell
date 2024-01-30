@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/23 21:42:12 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/30 15:31:09 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,19 @@ void	set_signals(void)
 {
 	signal(SIGINT, handle_interrupt);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+
+void	heredoc_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		unlink(".heredoc");
+		exit(130);
+	}
+	else if (sig == SIGQUIT)
+	{
+		unlink(".heredoc");
+		exit(131);
+	}
 }

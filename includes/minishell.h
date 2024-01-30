@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/29 17:17:58 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/30 15:31:49 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ char *prompt(void);
 // signals.c
 void    set_signals(void);
 void    handle_interrupt(int sig);
+void    heredoc_handler(int sig);
 
 // debugg.c
 
