@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/30 15:31:49 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:45:35 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,11 +361,15 @@ int    heredoc(t_attr *att);
 int    heredoc_read(t_attr *att, char *eof);
 int    read_from_file(t_attr *att);
 
-// redirect.c
+// redir.c
 int    check_redir(t_attr *att);
 int    redir(t_attr *att);
 int    create_file(t_attr *att);
+
+// redirections.c
 int    do_red(t_attr *att);
+int    check_read_file(t_attr *att);
+int    check_redir_flag(t_attr *att);
 void	reset_flags2(t_attr *att);
 
 

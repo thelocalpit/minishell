@@ -6,7 +6,7 @@
 #    By: deggio <deggio@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/01/23 20:10:42 by deggio           ###   ########.fr        #
+#    Updated: 2024/01/30 16:06:38 by deggio           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ SRC =	sources/minishell.c \
 		sources/executer/exec.c \
 		sources/executer/pipe.c \
 		sources/executer/read_file.c \
-		sources/executer/redirect.c \
+		sources/executer/redir.c \
+		sources/executer/redirections.c \
 		sources/parser/parser.c \
 		#sources/parser/lexer.c \
 		#sources/expander/00_expander.c \
