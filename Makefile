@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
+#    By: deggio <deggio@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/01/24 16:49:12 by pfalasch         ###   ########.fr        #
+#    Updated: 2024/01/30 17:31:12 by deggio           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ SRC =	sources/minishell.c \
 		sources/executer/exec.c \
 		sources/executer/pipe.c \
 		sources/executer/read_file.c \
-		sources/executer/redirect.c \
+		sources/executer/redir.c \
+		sources/executer/redirections.c \
 		sources/parser/parser.c \
 		#sources/parser/lexer.c \
 		#sources/expander/00_expander.c \

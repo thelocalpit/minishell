@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/30 16:34:54 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:30:59 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int ac, char **av, char **envp)
 	// serve a me e ricordiamoci di freearlo (Marco)
 	att.env_list = copy_env_in_list(envp);
 	add_index_to_env_list(&att);
-	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
 	att.local_var = NULL;
 	// printlist(&att);
 	while (1)
@@ -66,7 +65,6 @@ int	main(int ac, char **av, char **envp)
 				if (att.local_var != NULL)
 					add_index_to_local_var(&att);
 				// command(&att);
-				// printvar(att.local_var);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
 					break;

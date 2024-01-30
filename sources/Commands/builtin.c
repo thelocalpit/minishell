@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/23 20:10:04 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 07:33:39 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	pwd(t_attr *att)
 		perror("getcwd error!");
 		return (1);
 	}
-	if (att->redir > 0)
-		printf("%s", cwd);
+	if (att->redir || att->write_to_pipe)
+		printf("%s\n", cwd);
 	else
 		printf(YELLOW_BOLD "%s\n", cwd);
 	return (0);

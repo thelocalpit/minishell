@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/24 18:23:39 by alesac           ###   ########.fr       */
+/*   Updated: 2024/01/30 17:17:31 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ typedef struct s_attr
 	int     only_create;
 	int     heredoc;
 	int     skip;
+	int     i_redir;
+	int     i_readfile;
 	//---- envp custom matrix ---
 	// char    **mx_envp;
 	int     y_mx_envp;
@@ -209,6 +211,7 @@ char *prompt(void);
 void	set_signals2(void);
 void    set_signals(void);
 void    handle_interrupt(int sig);
+void    heredoc_handler(int sig);
 
 // debugg.c
 
@@ -334,6 +337,7 @@ void reset_flags(t_attr *att);
 void    next_step_sub2(t_attr *att);
 void    next_step_sub(t_attr *att);
 int     check_next_step(t_attr *att);
+void    red_index(t_attr *att);
 
 // lexer.c
 
@@ -346,6 +350,7 @@ void    command(t_attr *att);
 int	absolute_exec(t_attr *att);
 int	binary_exec(t_attr *att);
 int	bin_exec(t_attr *att);
+int	relative_exec(t_attr *att);
 
 
 // exec.c
@@ -365,12 +370,19 @@ void    close_pipeline(t_attr *att);
 // read_file.c
 int    red_input(t_attr *att, char *path);
 int    heredoc(t_attr *att);
+int    heredoc_read(t_attr *att, char *eof);
 int    read_from_file(t_attr *att);
 
-// redirect.c
+// redir.c
 int    check_redir(t_attr *att);
 int    redir(t_attr *att);
+int    create_file(t_attr *att);
+
+// redirections.c
 int    do_red(t_attr *att);
+int    check_read_file(t_attr *att);
+int    check_redir_flag(t_attr *att);
+void	reset_flags2(t_attr *att);
 
 
 // expander

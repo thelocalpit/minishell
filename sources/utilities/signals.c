@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/24 18:22:50 by alesac           ###   ########.fr       */
+/*   Updated: 2024/01/30 17:40:52 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,19 @@ void	set_signals2(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+
+void	heredoc_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		unlink(".heredoc");
+		exit(130);
+	}
+	else if (sig == SIGQUIT)
+	{
+		unlink(".heredoc");
+		exit(131);
+	}
 }
