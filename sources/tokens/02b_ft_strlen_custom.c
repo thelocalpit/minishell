@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:37:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/24 16:29:59 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:31:12 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void ft_count_exp_print_error(t_attr *att)
 void ft_strlen_double_quotes(char *s, t_attr *att)
 {
 	att->i++;
-	att->mem_space++; // questo per aggiungere un char delle quotes
+	// att->mem_space++; // questo per aggiungere un char delle quotes
 	while (s[att->i] != '"')
 	{
 		if (s[att->i] == '$' && s[att->i + 1] == '$')
@@ -52,7 +52,7 @@ void ft_strlen_double_quotes(char *s, t_attr *att)
 			att->i++;
 		}
 	}
-	att->mem_space++; //questo per aggiungere un char delle quotes
+	// att->mem_space++; //questo per aggiungere un char delle quotes
 }
 
 void ft_strlen_no_quotes(char *s, t_attr *att)
@@ -106,13 +106,13 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 	if (flag == 1)
 	{
 		att->i++;
-		att->mem_space++;
+		// att->mem_space++;
 		while (s[att->i] != '\'')
 		{
 			att->mem_space++;
 			att->i++;
 		}
-		att->mem_space++;
+		// att->mem_space++;
 	}
 	if (flag == 2)
 		ft_strlen_double_quotes(s, att);
