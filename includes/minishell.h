@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/30 17:17:31 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/30 18:13:47 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,11 +347,9 @@ void    command(t_attr *att);
 
 // ecxeve.c
 
+int	ft_ecxev(char *path, char **arg, char **env);
 int	absolute_exec(t_attr *att);
-int	binary_exec(t_attr *att);
 int	bin_exec(t_attr *att);
-int	relative_exec(t_attr *att);
-
 
 // exec.c
 

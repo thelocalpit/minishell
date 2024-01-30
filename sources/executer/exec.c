@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/30 17:24:32 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/30 18:12:55 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,8 @@ int	find_paths(t_attr *att)
 int	do_execve(t_attr *att)
 {
 	envp_to_matrix(att);
-	if (att->arr2[0][0] == '/' || att->arr2[0][0] == '.')
+	if (ft_strchr(att->arr2[0], '.') || ft_strchr(att->arr2[0], '/'))
 		absolute_exec(att);
-	//else if (att->arr2[0][0] == '.')   // a quanto pare non serve
-	//	binary_exec(att);
-	////else if (ft_strchr(att->arr2[0], '/'))
-	//	relative_exec(att);
 	else
 		bin_exec(att);
 	free_arr(att->env);
