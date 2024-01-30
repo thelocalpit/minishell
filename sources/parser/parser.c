@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/11 06:13:16 by deggio           ###   ########.fr       */
+/*   Updated: 2024/01/29 05:33:39 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /* in questa funzione andiamo a resettare le flags che servono per
 	reindirizzare gli output e prendere gli input in caso di arrivo da pipe */
 
-void reset_flags(t_attr *att)
+void	reset_flags(t_attr *att)
 {
 	att->write_to_pipe = 0;
 	att->redir = 0;
@@ -31,7 +31,7 @@ void reset_flags(t_attr *att)
 	att->only_create = 0;
 }
 
-void next_step_sub2(t_attr *att)
+void	next_step_sub2(t_attr *att)
 {
 	if (!ft_strcmp(att->split_arr[att->y - 1], "|"))
 		att->read_from_pipe = 1;
@@ -44,7 +44,7 @@ void next_step_sub2(t_attr *att)
 		att->skip = 1;
 }
 
-void next_step_sub(t_attr *att)
+void	next_step_sub(t_attr *att)
 {
 	if (!ft_strcmp(att->split_arr[att->y + 1], "|"))
 		att->write_to_pipe = 1;
@@ -53,15 +53,10 @@ void next_step_sub(t_attr *att)
 	else if (!ft_strcmp(att->split_arr[att->y + 1], ">>"))
 		att->redir = 2;
 	else if (!ft_strcmp(att->split_arr[att->y + 1], "<"))
-	{
 		att->read_from_file = 1;
-		if (!ft_strcmp(att->split_arr[att->y + 3], "|"))
-			att->write_to_pipe = 1;
-	}
 	else if (!ft_strcmp(att->split_arr[att->y + 1], "<<"))
 		att->heredoc = 1;
 }
-
 	/* in questa funzione procediamo nel seguente modo:
 		1. si resettano le flag.
 		2. si controlla se non è un comando singolo per creare un file
@@ -70,18 +65,41 @@ void next_step_sub(t_attr *att)
 			dobbiamo prendere qualcosa dalla pipe prima e nel caso settiamo 
 			la flag   */
 
-	int check_next_step(t_attr *att)
+int	check_next_step(t_attr *att)
 {
 	reset_flags(att);
 	// if (!ft_strcmp(att->split_arr[0], ">")
 	// 	|| !ft_strcmp(att->split_arr[0], ">>"))
 	// {
-	// 	att->only_create = 1;
 	// 	att->skip = 1;
+	// 	if (!ft_strcmp(att->split_arr[0], ">"))
+	// 		att->only_create = 1;
+	// 	else
+	// 		att->only_create = 2;
 	// }
 	if (att->split_arr[att->y] && att->split_arr[att->y + 1])
 		next_step_sub(att);
 	if (att->y > 1)
 		next_step_sub2(att);
+	red_index(att);
 	return (0);
+}
+
+void	red_index(t_attr *att)
+{
+	int	y;
+
+	y = att->y + 1;
+	while (att->split_arr[y])
+	{
+		if (!ft_strcmp(att->split_arr[y], ">")
+			|| !ft_strcmp(att->split_arr[y], ">>"))
+			att->i_redir = y;
+		else if (!ft_strcmp(att->split_arr[y], "<")
+			|| !ft_strcmp(att->split_arr[y], "<<"))
+			att->i_readfile = y;
+		if (!ft_strcmp(att->split_arr[y], "|"))
+			break ;
+		y += 2;
+	}
 }

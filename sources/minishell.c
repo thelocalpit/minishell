@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/24 11:55:31 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:30:59 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int ac, char **av, char **envp)
 	// serve a me e ricordiamoci di freearlo (Marco)
 	att.env_list = copy_env_in_list(envp);
 	add_index_to_env_list(&att);
-	// CREARE LISTA VARIABILI       INIZIALIZZARE A NULL
 	att.local_var = NULL;
 	// printlist(&att);
 	while (1)
@@ -60,13 +59,12 @@ int	main(int ac, char **av, char **envp)
 			{
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
-				//ft_print_array(att.arr2);
+				// ft_print_array(att.arr2);
 				do_builtin(&att);
 				add_index_to_custom_env(&att);
 				if (att.local_var != NULL)
 					add_index_to_local_var(&att);
 				// command(&att);
-				// printvar(att.local_var);
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
 					break;

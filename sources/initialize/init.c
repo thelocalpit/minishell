@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:16:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/17 16:31:20 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/01/29 05:34:08 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	init_attributes(t_attr *att)
 	att->x2 = 0;
 
 	att->nb_tokens = 0;
+	att->pipe_index = 0;
 }
 
 void	reinit_parameters(t_attr *att, char **envp)
@@ -60,5 +61,8 @@ void	reinit_parameters(t_attr *att, char **envp)
 	att->check_exp = NULL;
 	att->y_mx_envp = 0;
 	att->x_mx_envp = 0;
-	
+	att->pipe_index = 0;
+	att->i_readfile = 0;
+	att->i_redir = 0;
 }
+

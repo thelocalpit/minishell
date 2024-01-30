@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesac <alesac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/24 18:24:31 by alesac           ###   ########.fr       */
+/*   Updated: 2024/01/30 18:12:55 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ int	find_paths(t_attr *att)
 int	do_execve(t_attr *att)
 {
 	envp_to_matrix(att);
-	if (att->arr2[0][0] == '/')
+	if (ft_strchr(att->arr2[0], '.') || ft_strchr(att->arr2[0], '/'))
 		absolute_exec(att);
-	else if (att->arr2[0][0] == '.')
-		binary_exec(att);
 	else
 		bin_exec(att);
 	free_arr(att->env);
@@ -63,18 +61,19 @@ int	exec(t_attr *att)
 	}
 	if (att->pid == 0)
 	{
-		do_red(att);
 		if (!att->skip)
-		{
-			//printf("pippo\n");
+			do_red(att);
+		if (!att->skip)
 			do_child_cmd(att);
-		}
 		free_arr(att->paths);
 		// free(att->paths);
 		exit(g_value);
 	}
 	else
 		waitpid(att->pid, &g_value, 0);
+	if (att->read_from_pipe)
+		att->pipe_index++;
+	close_pipeline(att);
 	free_arr(att->paths);
 	// free(att->paths);
 	return (0);
