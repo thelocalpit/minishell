@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/03 21:43:28 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/04 04:02:08 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct s_attr
 	// int *flag$;
 	//------ cmds -------------
 	int     count;
-	int		built_in;
 	//----- token variables ---------
 	int     count_words;
 	int     flag_cmd_valid;
@@ -310,7 +309,7 @@ void    free_env_list(t_attr *att);
 
 int do_builtin(t_attr *att);
 int do_child_cmd(t_attr *att);
-void	built_in_check(t_attr *att);
+int	built_in_check(t_attr *att);
 void	ft_exit(void);
 
 // builtin.c

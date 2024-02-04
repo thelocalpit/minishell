@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/04 03:25:37 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/04 04:29:40 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	do_builtin(t_attr *att)
 {
-	built_in_check(att);
 	if (!att->write_to_pipe && ! att->read_from_pipe
 		&& !att->read_from_file && !att->redir && !att->heredoc
 		&& !att->skip)
@@ -43,6 +42,8 @@ int	do_builtin(t_attr *att)
 
 int	do_child_cmd(t_attr *att)
 {
+	if (built_in_check(att))
+		return (0);
 	if (ft_strncmp(att->arr2[0], "pwd\0", 4) == 0)
 		return (pwd(att));
 	else if (ft_strncmp(att->arr2[0], "env\0", 4) == 0)
@@ -59,15 +60,15 @@ int	do_child_cmd(t_attr *att)
 	return (0);
 }
 
-void	built_in_check(t_attr *att)
+int	built_in_check(t_attr *att)
 {
-	att->built_in = 0;
 	if ((!ft_strncmp(att->arr2[0], "export\0", 7) && att->arr2[1])
 		|| !ft_strncmp(att->arr2[0], "unset\0", 6)
 		|| !ft_strncmp(att->arr2[0], "exit\0", 5)
 		|| !ft_strncmp(att->arr2[0], "cd\0", 3)
-		|| !ft_strchr(att->arr2[0], '='))
-		att->built_in = 1;
+		|| ft_strchr(att->arr2[0], '='))
+		return (1);
+	return (0);
 }
 
 void	ft_exit(void)
