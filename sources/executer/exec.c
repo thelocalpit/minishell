@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/30 18:12:55 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/04 03:30:14 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	exec(t_attr *att)
 	{
 		if (!att->skip)
 			do_red(att);
-		if (!att->skip)
+		if (!att->skip && !att->built_in)
 			do_child_cmd(att);
 		free_arr(att->paths);
 		// free(att->paths);

@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/03 23:07:22 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/04 03:25:37 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	do_child_cmd(t_attr *att)
 		return (envi(att));
 	else if (ft_strncmp(att->arr2[0], "export\0", 7) == 0)
 		return (ft_export(att->arr2, att));
-	//else if (strstr(att->arr2[0], "echo") != NULL)
-	//	return (echo(att->arr2));
+	else if (ft_strncmp(att->arr2[0], "echo\0", 5) == 0)
+		return (echo(att->arr2));
 	else
 	{
 		//printf("do_child_cmd_here\n");
