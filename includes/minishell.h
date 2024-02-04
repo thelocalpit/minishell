@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/30 18:18:42 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/03 21:43:28 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_attr
 	// int *flag$;
 	//------ cmds -------------
 	int     count;
+	int		built_in;
 	//----- token variables ---------
 	int     count_words;
 	int     flag_cmd_valid;
@@ -303,16 +304,25 @@ void    ft_delete_matrix(void *matrix);
 void    free_mx_envp(t_attr *att);
 void    free_env_list(t_attr *att);
 
-// Commands
+// Commands folder
+
+// do_builtin.c
 
 int do_builtin(t_attr *att);
 int do_child_cmd(t_attr *att);
+void	built_in_check(t_attr *att);
+void	ft_exit(void);
+
+// builtin.c
+
+int		echo(char **args);
 int		pwd(t_attr *att);
 int		envi(t_attr *att);
 //int		ls_l(char **env, int j);
-int		echo(char **args);
-void	ft_exit(void);
 int		ft_cd(char **args);
+
+//local_var.c
+
 int		add_var(char *str, t_attr *att);
 int		new_var(char *str, t_attr *att, int add, int empty);
 int		update_var(char *str, t_list *list, int add);
