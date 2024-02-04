@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/04 03:47:04 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/04 06:18:16 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	find_paths(t_attr *att)
 {
-	t_list *tmp_list;
+	t_list	*tmp_list;
 
 	tmp_list = att->env_list;
 	while (tmp_list)
@@ -22,7 +22,6 @@ int	find_paths(t_attr *att)
 		if (ft_strncmp(tmp_list->content, "PATH=", 5) == 0)
 		{
 			att->paths = ft_split(tmp_list->content + 5, ':');
-			// ft_print_array(att->paths);
 			return (1);
 		}
 		tmp_list = tmp_list->next;

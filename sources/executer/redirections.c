@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/30 16:45:51 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/04 06:35:09 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	do_red(t_attr *att)
 	int	y;
 
 	y = att->y;
-	if (att->only_create)  // secondo me va tolto e inizializato att->y = -1
-		create_file(att);
 	if (att->read_from_pipe)
 		read_from_pipe(att);
 	check_read_file(att);
@@ -73,5 +71,4 @@ void	reset_flags2(t_attr *att)
 	att->read_from_file = 0;
 	att->heredoc = 0;
 	att->create_file = 0;
-	att->only_create = 0;
 }

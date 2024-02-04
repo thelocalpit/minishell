@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/04 04:02:08 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/04 06:34:59 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ typedef struct s_attr
 	int     read_from_file;
 	int     redir;
 	int     create_file;
-	int     only_create;
 	int     heredoc;
 	int     skip;
 	int     i_redir;
@@ -385,7 +384,7 @@ int    read_from_file(t_attr *att);
 // redir.c
 int    check_redir(t_attr *att);
 int    redir(t_attr *att);
-int    create_file(t_attr *att);
+int		create_file(t_attr *att, char *str, int redir);
 
 // redirections.c
 int    do_red(t_attr *att);
