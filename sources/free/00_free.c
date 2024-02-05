@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:37:23 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 12:45:12 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/05 16:45:26 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,26 @@ void ft_delete_matrix(void *matrix)
 // 	}
 // 	free(att->mx_envp);
 // }
+
+void	free_local_var(t_attr *att)
+{
+	while (att->local_var)
+	{
+		free(att->local_var->content);
+		att->local_var = att->local_var->next;
+	}
+
+}
+
+void	free_env_list(t_attr *att)
+{
+	t_list	*tmp;
+
+	while (att->env_list)
+	{
+		tmp = att->env_list;
+		att->env_list = att->env_list->next;
+		free(tmp);
+	}
+
+}

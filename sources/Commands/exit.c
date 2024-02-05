@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:17:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/24 12:12:19 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/05 16:40:10 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void exit_free(t_attr *att)
 {
 	free_arr2(att->arr2, att);
 	free_arr(att->split_arr);
+	free_local_var(att);
+	free_env_list(att);
 	if (att->nb_pipes != 0)
 		ft_delete_matrix(att->pipesfd);
 	// free_arr(att->env);

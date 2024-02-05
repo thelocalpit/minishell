@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:09:39 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/29 14:05:08 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/04 19:30:49 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int	new_var(char *str, t_attr *att, int add, int empty)
 	}
 	tmp = att->local_var;
 	tmp = ft_lstnew(ft_strdup(str));
+	// da capire se va lasciato perche in questa funzione ce un leak
+	// if (add && !empty)
+	// 	free(str);
 	if (!tmp)
 		perror("malloc");
 	ft_lstadd_back(&att->local_var, tmp);
