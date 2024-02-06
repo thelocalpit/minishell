@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/05 20:41:25 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:55:11 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	main(int ac, char **av, char **envp)
 				init_pipes(&att);
 			while (att.split_arr[att.y] && !verify_readline(s, &att))
 			{
-				printf("att.y = %d\n", att.y);
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
 				// ft_print_array(att.arr2);
@@ -69,9 +68,7 @@ int	main(int ac, char **av, char **envp)
 				free_arr2(att.arr2, &att);
 				if (!att.split_arr[att.y + 1])
 					break ;
-				printf("att.y = %d\n", att.y);
 				att.y += 2;
-				printf("att.y = %d\n", att.y);
 				// if (att.flag$ && att.save_y_mx_envp)
 				// {
 				// 	free(att.flag$);
