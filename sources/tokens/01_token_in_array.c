@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_token_in_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:04:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/10 17:20:29 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:39:00 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void check_next_special_token(char *s, int i, char **token)
 /* in this function we, as the function say, get the token to put in the
 	matrix. to do so, we scan the str and check if it's a special char or if
 	it's a str of character. */
-	
+
 char *get_token(char *s)
 {
 	char *token;
@@ -63,7 +63,6 @@ char *get_token(char *s)
 
 	i = 0;
 	j = 0;
-	token = 0;
 	if (s[j] != '|' && s[j] != '>' && s[j] != '<')
 	{
 		while (s[j] != '|' && s[j] != '>' && s[j] != '<' && s[j] != '\0')
@@ -87,15 +86,15 @@ char *get_token(char *s)
 	return (token);
 }
 /* In this function I'm creating a matrix, allocating space thanks to the
-	number of tokens we found. 
+	number of tokens we found.
 	In the while loop, we continue untile the variable i reach the same value
 	of nb_tokens. it's important to get rid of the spaces so another while
 	is necessary.
 	when we find something different from a ' ', we call the function
-	get_token that we'll return a str. we do this process for all the tokens 
+	get_token that we'll return a str. we do this process for all the tokens
 	we have.  */
 /* questo e'il primo array che creiamo. */
-	
+
 void	create_array(char *s, t_attr *att)
 {
 	int i;
