@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/04 06:18:16 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/05 20:19:01 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,14 @@ int	exec(t_attr *att)
 	}
 	if (att->pid == 0)
 	{
+		printf("\nexec\n");
+		printf("arr2[0] = %s\n", att->arr2[0]);
+		printf("skip = %d\n", att->skip);
 		if (!att->skip)
 			do_red(att);
 		if (!att->skip)
 			do_child_cmd(att);
+		printf("exit\n");
 		free_arr(att->paths);
 		// free(att->paths);
 		exit(g_value);

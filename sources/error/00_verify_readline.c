@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_verify_readline.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:00:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/19 16:26:19 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/05 20:59:49 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int return_negative(void)
 	su ciascuna parte di arr2) */
 int verify_readline(char *s, t_attr *att)
 {
+	 printf("verify_readline\n");
 	if (count_quotes(s))
 		return (return_negative());
 	else if (error_end(s, '>') || error_end(s, '<') || error_end(s, '|'))
@@ -37,5 +38,6 @@ int verify_readline(char *s, t_attr *att)
 
 	else if (error_dollar(s, att))
 		return (return_negative());
+	printf("verify_readline_end\n");
 	return (0);
 }

@@ -6,11 +6,26 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/30 15:31:27 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:48:09 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	check_read_file(t_attr *att)
+{
+	while (att->i_readfile > att->y)
+	{
+		reset_flags2(att);
+		next_step_sub(att);
+		if (att->heredoc)
+			heredoc(att);
+		if (att->read_from_file && att->y + 1 == att->i_readfile)
+			read_from_file(att);
+		att->y += 2;
+	}
+	return (0);
+}
 
 int	red_input(t_attr *att, char *path)
 {
@@ -27,13 +42,12 @@ int	heredoc(t_attr *att)
 	char	**eof;
 
 	eof = ft_split(att->split_arr[att->y + 2], ' ');
-	signal(SIGINT, &heredoc_handler);
-	signal(SIGQUIT, &heredoc_handler);
 	if (heredoc_read(att, eof[0]))
 	{
 		free_arr(eof);
 		return (1);
 	}
+	close(att->red_fd);
 	free_arr(eof);
 	if (att->i_readfile != att->y + 1)
 		return (0);
@@ -50,6 +64,8 @@ int	heredoc_read(t_attr *att, char *eof)
 {
 	char	*input;
 
+	signal(SIGINT, &heredoc_handler);
+	signal(SIGQUIT, &heredoc_handler);
 	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
 	{
@@ -68,7 +84,6 @@ int	heredoc_read(t_attr *att, char *eof)
 		write(att->red_fd, "\n", 1);
 		free(input);
 	}
-	close(att->red_fd);
 	return (0);
 }
 

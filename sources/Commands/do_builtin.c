@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/04 04:29:40 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/05 19:44:38 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	do_builtin(t_attr *att)
 {
+	printf("\ndo_builtin\n");
 	if (!att->write_to_pipe && ! att->read_from_pipe
 		&& !att->read_from_file && !att->redir && !att->heredoc
 		&& !att->skip)
@@ -42,6 +43,7 @@ int	do_builtin(t_attr *att)
 
 int	do_child_cmd(t_attr *att)
 {
+	printf("\ndo_child_cmd\n");
 	if (built_in_check(att))
 		return (0);
 	if (ft_strncmp(att->arr2[0], "pwd\0", 4) == 0)

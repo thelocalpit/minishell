@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/04 06:34:59 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/05 22:38:39 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_attr
 	int     skip;
 	int     i_redir;
 	int     i_readfile;
+	int		frirst_redir;
 	//---- envp custom matrix ---
 	// char    **mx_envp;
 	int     y_mx_envp;
@@ -376,22 +377,22 @@ void    read_from_pipe(t_attr *att);
 void    close_pipeline(t_attr *att);
 
 // read_file.c
+int    check_read_file(t_attr *att);
 int    red_input(t_attr *att, char *path);
 int    heredoc(t_attr *att);
 int    heredoc_read(t_attr *att, char *eof);
 int    read_from_file(t_attr *att);
 
 // redir.c
+int    check_redir_flag(t_attr *att);
 int    check_redir(t_attr *att);
 int    redir(t_attr *att);
 int		create_file(t_attr *att, char *str, int redir);
 
 // redirections.c
-int    do_red(t_attr *att);
-int    check_read_file(t_attr *att);
-int    check_redir_flag(t_attr *att);
+int		do_red(t_attr *att);
 void	reset_flags2(t_attr *att);
-
+int		frist_redir(t_attr *att);
 
 // expander
 

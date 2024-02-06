@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/04 06:49:28 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/05 23:18:02 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,37 @@ void	next_step_sub(t_attr *att)
 
 int	check_next_step(t_attr *att)
 {
+	printf("att->y: %d\n", att->y);
+	printf("\n parser check_next_step\n");
+	printf("att->y: %d\n", att->y);
 	reset_flags(att);
-	if (!ft_strcmp(att->split_arr[0], ">")
-		|| !ft_strcmp(att->split_arr[0], ">>"))
+	printf("att->y: %d\n", att->y);
+	if (att->y == 0 && (!ft_strcmp(att->split_arr[0], ">")
+			|| !ft_strcmp(att->split_arr[0], ">>")
+			|| !ft_strcmp(att->split_arr[0], "<")
+			|| !ft_strcmp(att->split_arr[0], "<<")))
+		frist_redir(att);
+	else
 	{
-		att->y += 1;
-		if (!ft_strcmp(att->split_arr[0], ">"))
-			create_file(att, att->split_arr[att->y], 3);
-		else
-			create_file(att, att->split_arr[att->y], 4);
-		att->skip = 1;
-		close(att->red_fd);
+		printf("att->y: %d\n", att->y);
+		printf("skip: %d\n", att->skip);
+		printf("att->split_arr[att->y] %s\n", att->split_arr[att->y]);
+		if (att->split_arr[att->y] && att->split_arr[att->y + 1])
+			next_step_sub(att);
+		printf("next_step_sub\n");
+		if (att->y > 1)
+			next_step_sub2(att);
+		printf("next_step_sub2\n");
+		red_index(att);
+		printf("skip: %d\n", att->skip);
 	}
-	if (att->split_arr[att->y] && att->split_arr[att->y + 1])
-		next_step_sub(att);
-	if (att->y > 1)
-		next_step_sub2(att);
-	red_index(att);
 	return (0);
 }
 
 void	red_index(t_attr *att)
 {
 	int	y;
-
+	
 	y = att->y + 1;
 	while (att->split_arr[y])
 	{
