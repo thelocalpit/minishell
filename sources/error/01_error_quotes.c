@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:01:14 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 17:40:30 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:28:47 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int count_single_quotes(char *s)
 		i++;
 	}
 	if (count_quotes % 2 != 0)
+	{
+		printf("error unclosed quotes\n");
 		return (1);
+	}
 	return (0);
 }
 
@@ -61,7 +64,10 @@ int count_double_quotes(char *s)
 		i++;
 	}
 	if (count_quotes % 2 != 0)
+	{
+		printf("error unclosed quotes\n");
 		return (1);
+	}
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/30 17:30:59 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/05 17:05:31 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,6 @@ int	main(int ac, char **av, char **envp)
 				if (!att.split_arr[att.y + 1])
 					break;
 				att.y += 2;
-				// if (att.flag$ && att.save_y_mx_envp)
-				// {
-				// 	free(att.flag$);
-				// 	free(att.save_y_mx_envp);						// DA RISOLVERE
-				// }
 			}
 			free_arr(att.split_arr);
 			if (att.nb_pipes != 0)

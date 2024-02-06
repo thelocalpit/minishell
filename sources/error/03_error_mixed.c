@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:02:39 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 17:43:38 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:23:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ int check_2nd_char(char *s, int i)
 			return (return_lt_error());
 		else if (d == '|')
 			return (return_not_required());
+		else if (d == '>' && s[i + 1] == '>')
+			return (return_not_required());
+		else if (d == '>' && s[i + 1] == '<')
+			return (return_not_required());
 	}
 	else if (c == '<')
 	{
@@ -82,6 +86,10 @@ int check_2nd_char(char *s, int i)
 			return (return_not_required());
 		else if (d == '|')
 			return (return_pipe_error());
+		else if(d == '<' && s[i + 1] == '<')
+			return (return_not_required());
+		else if (d == '<' && s[i + 1] == '>')
+			return (return_not_required());
 	}
 	else if (c == '|' && (d == '>' || d == '<' || d == '|'))
 		return (return_not_required());
