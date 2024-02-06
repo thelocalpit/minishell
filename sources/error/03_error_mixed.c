@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:02:39 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/05 17:23:58 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/06 19:12:08 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,10 @@ int error_mixed_start(char *s)
 	while (s[i])
 	{
 		i = ft_scorri(s, i);
-		// printf("sono qui8\n");
 		if (s[i] == '>' || s[i] == '<' || s[i] == '|')
 		{
 			if (check_2nd_char(s, i))
-			{
-				// printf("sono qui1\n");
 				return (1);
-			}
 			else if (check_extra_char(s, i))
 				return (1);
 			else if (check_next_arg(s, i))
@@ -140,6 +136,12 @@ int error_mixed_start(char *s)
 				i += 2;
 			else
 				i++;
+			while (s[i] == ' ' || s[i] == '\0')
+			{
+				if (s[i] == '\0')
+					return (return_nl_error());
+				i++;
+			}
 		}
 	}
 	return (0);
