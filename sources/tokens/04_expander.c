@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/24 16:34:53 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/07 19:02:29 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 	potevo scriverla meglio? SI.
 	Funziona? SI.
 	la riscriverò? COL CAZZO IMPANATO CON LE PATATE. */
-
 void copy_expanded_str(t_attr *att, int len_name_var)
 {
 	t_list *tmp_list;
@@ -55,8 +54,6 @@ void count_expanded_token_local_var(t_attr *att)
 	{
 		if (!ft_strncmp(att->check_exp, att->local_var->content, att->len_call_exp))
 		{
-			//printf("2222222222sono dentro count_expanded_token_local_var:\nquesto è la variabile trovata da copiare: %s\n e questa è la variabile che abbiamo richiesto di espandere: %s\n", tmp_list->content, att->check_exp);
-			// printf("sono dentro count_expanded_token_local_var:\nquesto è la variabile trovata da copiare: %s\n e questa è la variabile che abbiamo richiesto di espandere: %s\n", tmp_list->content, att->check_exp);
 			while (att->local_var->content[att->x_mx_envp])
 			{
 				att->mem_space++;
@@ -80,7 +77,6 @@ int count_expanded_token_02(t_attr *att)
 	{
 		if (!ft_strncmp(att->check_exp, tmp_list->content, att->len_call_exp))
 		{
-			//printf("11111111111sono dentro count_expanded_token:\nquesto è la variabile trovata da copiare: %s\n e questa è la variabile che abbiamo richiesto di espandere: %s\n", tmp_list->content, att->check_exp);
 			while (tmp_list->content[att->x_mx_envp])
 			{
 				att->mem_space++;
@@ -106,11 +102,11 @@ void count_expanded_token(t_attr *att, char *s)
 	int start;
 	int j;
 	j = 0;
-	start = att->i; // mi salvo il valore iniziale.
+	start = att->i;
 	while (s[att->i] != '"' && s[att->i] != ' '
 			&& s[att->i] != '$' && s[att->i])
 		att->i++;
-	att->len_call_exp = att->i - start + 1; // +1 perchè c'è anche l'uguale
+	att->len_call_exp = att->i - start + 1;
 	att->check_exp = malloc(sizeof(char) * att->len_call_exp + 1);
 	att->i = start;
 	while (j < att->len_call_exp && s[att->i] != '"' && s[att->i] != ' ' && s[att->i] != '$' && s[att->i])
@@ -122,10 +118,8 @@ void count_expanded_token(t_attr *att, char *s)
 	if (count_expanded_token_02(att) == -1)
 	{
 		att->flag_list = 1;
-		//printf("entro dentro count_exp_token_local_var: flag_list: %d\n", att->flag_list);
 		count_expanded_token_local_var(att);
 	}
-	// att->flag_list = 0;
 	att->mem_space++;
 	return ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/05 16:20:37 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:21:02 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,11 +267,17 @@ int     error_end(char *s, char c);
 
 // 03_error_mixed.c
 
-int     check_extra_char(char *s, int i);
-int     check_next_arg(char *s, int i);
-int     check_2nd_char(char *s, int i);
-int     ft_scorri(char *s, int i);
-int     error_mixed_start(char *s);
+int check_2nd_char_02(char *s, int i, char d);
+int check_2nd_char_03(char *s, int i, char d);
+int check_spaces(char *s, int *i);
+int check_2nd_char(char *s, int i);
+int	error_mixed_start(char *s);
+
+//03a_error_mixed.c
+
+int ft_scorri(char *s, int i);
+int check_extra_char(char *s, int i);
+int check_next_arg(char *s, int i);
 
 // 04_error_messages.c
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/29 07:33:39 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/07 17:15:08 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	pwd(t_attr *att)
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
 		perror("getcwd error!");
+		g_value = 1;
 		return (1);
 	}
 	if (att->redir || att->write_to_pipe)

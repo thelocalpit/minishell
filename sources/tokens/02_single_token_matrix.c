@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/23 16:51:28 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:58:40 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ char *get_cmd_token(char *s, t_attr *att)
 	else
 	{
 		flag = 0;
-		//printf("sono_qui\n");
 		return (ft_write_word(s, att, flag, i));
 	}
 }
+
 /* creiamo una nuova matrice ("arr2"). allochiamo la memoria e andiamo a
 	copiare ogni elemento all'interno della matrice. 
 	NB: con elemento intendiamo solo separati da spazi 
@@ -53,7 +53,6 @@ void create_matrix_cmd(char *s, t_attr *att)
 	att->i_flag$ = 0;
 	att->x2 = 0;
 	att->y2 = 0;
-	//printf("---%d\n", att->count_words);
 	att->arr2 = malloc((att->count_words + 1) * sizeof(char *));
 	att->arr2[att->count_words] = NULL;
 	if (!att->arr2)
@@ -69,7 +68,6 @@ void create_matrix_cmd(char *s, t_attr *att)
 			s = NULL;
 			return ;
 		}
-		//printf("%s\n", att->arr2[att->y2]);
 		att->y2++;
 	}
 	if (att->i_flag$ > 0)

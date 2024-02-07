@@ -6,13 +6,13 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:09:43 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/20 17:59:29 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/07 19:02:37 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int check_single_quotes(char *s, int len, int i, t_attr *att)
+int	check_single_quotes(char *s, int len, int i, t_attr *att)
 {
 	att->count_words++;
 	i++;
@@ -23,7 +23,7 @@ int check_single_quotes(char *s, int len, int i, t_attr *att)
 	return (++i);
 }
 
-int check_double_quotes(char *s, int len, int i, t_attr *att)
+int	check_double_quotes(char *s, int len, int i, t_attr *att)
 {
 	att->count_words++;
 	i++;
@@ -38,14 +38,14 @@ int check_double_quotes(char *s, int len, int i, t_attr *att)
 	}
 	return (++i);
 }
-int check_special(int i, t_attr *att)
+int	check_special(int i, t_attr *att)
 {
 	att->count_words++;
 	i += 2;
 	return (i);
 }
 
-int check_no_space(char *s, int len, int i, t_attr *att)
+int	check_no_space(char *s, int len, int i, t_attr *att)
 {
 	att->count_words++;
 	while (i <= len && s[i] != ' ')
@@ -55,11 +55,10 @@ int check_no_space(char *s, int len, int i, t_attr *att)
 
 /* questa ft serve per il conto di elementi. necessaria per allocare
 	la giusta quantità di memoria */
-	
-void ft_count_words(char *s, t_attr *att)
+void	ft_count_words(char *s, t_attr *att)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	i = 0;
 	att->count_words = 0;
@@ -70,8 +69,6 @@ void ft_count_words(char *s, t_attr *att)
 			i = check_single_quotes(s, len, i, att);
 		else if (s[i] == '"')
 			i = check_double_quotes(s, len, i, att);
-		// else if (s[i] == '$' && s[i + 1] == '?')
-		//  	i = check_special(i, att);
 		else if (s[i] != ' ')
 			i = check_no_space(s, len, i, att);
 		else

@@ -6,16 +6,16 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:45:03 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/10 18:21:19 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:31:53 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /* controlla il primo elemento se è sbagliato */
-int error_begin(char *s)
+int	error_begin(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)
@@ -43,9 +43,9 @@ int error_begin(char *s)
 
 /* controlla ultimo elemento se è sbagliato */
 
-int error_end(char *s, char c)
+int	error_end(char *s, char c)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(s);
 	if (len == 0)

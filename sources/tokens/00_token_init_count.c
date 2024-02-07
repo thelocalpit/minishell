@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/18 17:38:38 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:43:23 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	process_special_token(t_attr *att, char *s, int i)
 		return (++i);
 }
 
-int check_s_d_quotes(char *s, int i)
+int	check_s_d_quotes(char *s, int i)
 {
 	if (s[i] == '\'')
 	{
@@ -56,8 +56,8 @@ int check_s_d_quotes(char *s, int i)
 	 */
 int	count_tokens(char *s, t_attr *att)
 {
-	int i;
-	int len;
+	int 	i;
+	int		len;
 
 	if (!s)
 		return (0);

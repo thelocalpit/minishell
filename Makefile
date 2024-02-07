@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: deggio <deggio@student.42.fr>              +#+  +:+       +#+         #
+#    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/01/30 17:31:12 by deggio           ###   ########.fr        #
+#    Updated: 2024/02/07 18:22:54 by pfalasch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,9 +54,11 @@ SRC =	sources/minishell.c \
 		sources/error/01_error_quotes.c \
 		sources/error/02_error_start_last.c \
 		sources/error/03_error_mixed.c \
+		sources/error/03a_error_mixed.c \
 		sources/error/04_error_messages.c \
 		sources/error/04a_error_messages.c \
 		sources/error/05_wrong_dollar.c \
+		sources/error/05a_wrong_dollar.c \
 		sources/error/06_wrong_dollar_02.c \
 		sources/free/00_free.c \
 		sources/Commands/builtin.c \

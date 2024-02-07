@@ -6,120 +6,70 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:02:39 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/06 19:12:08 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:01:34 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* questa funzione si assicura che non ci siano extra char
-	oltre i possibili 2 consentiti e stampa i relativi errori */
-int check_extra_char(char *s, int i)
+int	check_2nd_char_03(char *s, int i, char d)
 {
-	char c;
-	char d;
-	char e;
-
-	i++;
-	c = s[i - 2];
-	d = s[i - 1];
-	e = s[i];
-	if (c == '<' && d == '<' && e == '<')
+	if (d == '>')
 		return (return_not_required());
-	else if ((c == '>' && d == '>') || (c == '<' && d == '<'))
-	{
-		if (e == '>')
-			return (return_gt_error());
-		else if (e == '<')
-			return (return_lt_error());
-		else if (e == '|')
-			return (return_pipe_error());
-	}
+	else if (d == '|')
+		return (return_pipe_error());
+	else if (d == '<' && s[i + 1] == '<')
+		return (return_not_required());
+	else if (d == '<' && s[i + 1] == '>')
+		return (return_not_required());
 	return (0);
 }
 
-/* questa funzione si assicura che non ci siano due redir
-	di fila a quell'altra e stampa i relativi errori in caso ci siano  */
-
-int check_next_arg(char *s, int i)
+int	check_2nd_char_02(char *s, int i, char d)
 {
-	i++;
-	if (s[i] == '>' || s[i] == '<')
-		i++;
-	while (s[i] != ' ')
-		i++;
-	if (s[i] != '>' || s[i] != '<' || s[i] != '|')
-		return (0);
-	else
-	{
-		if (s[i] == '>')
-			return (return_gt_error());
-		else if (s[i] == '<')
-			return (return_lt_error());
-		else
-			return (return_pipe_error());
-	}
+	if (d == '<')
+		return (return_lt_error());
+	else if (d == '|')
+		return (return_not_required());
+	else if (d == '>' && s[i + 1] == '>')
+		return (return_not_required());
+	else if (d == '>' && s[i + 1] == '<')
+		return (return_not_required());
+	return (0);
 }
 
-int check_2nd_char(char *s, int i)
+int	check_2nd_char(char *s, int i)
 {
-	char c;
-	char d;
+	char	c;
+	char	d;
 
 	i++;
 	c = s[i - 1];
 	d = s[i];
-	if (c == '>')
-	{
-		if (d == '<')
-			return (return_lt_error());
-		else if (d == '|')
-			return (return_not_required());
-		else if (d == '>' && s[i + 1] == '>')
-			return (return_not_required());
-		else if (d == '>' && s[i + 1] == '<')
-			return (return_not_required());
-	}
-	else if (c == '<')
-	{
-		if (d == '>')
-			return (return_not_required());
-		else if (d == '|')
-			return (return_pipe_error());
-		else if(d == '<' && s[i + 1] == '<')
-			return (return_not_required());
-		else if (d == '<' && s[i + 1] == '>')
-			return (return_not_required());
-	}
+	if (c == '>' && check_2nd_char_02(s, i, d) == 1)
+		return (1);
+	else if (c == '<' && check_2nd_char_03(s, i, d) == 1)
+		return (1);
 	else if (c == '|' && (d == '>' || d == '<' || d == '|'))
 		return (return_not_required());
 	return (0);
 }
 
-int ft_scorri(char *s, int i)
+int	check_spaces(char *s, int *i)
 {
-	while (s[i] != '|' && s[i] != '>' && s[i] != '<' && s[i])
+	while (s[*i] == ' ' || s[*i] == '\0')
 	{
-		if (s[i] == '"')
-		{
-			i++;
-			while (s[i] != '"' && s[i])
-				i++;
-		}
-		else if (s[i] == '\'')
-		{
-			i++;
-			while (s[i] != '\'' && s[i])
-				i++;
-		}
-		i++;
+		if (s[*i] == '\0')
+			return (1);
+		(*i)++;
 	}
-	return (i);
+	return (0);
 }
 
-int error_mixed_start(char *s)
+int	error_mixed_start(char *s)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (s[i])
 	{
@@ -136,12 +86,8 @@ int error_mixed_start(char *s)
 				i += 2;
 			else
 				i++;
-			while (s[i] == ' ' || s[i] == '\0')
-			{
-				if (s[i] == '\0')
-					return (return_nl_error());
-				i++;
-			}
+			if (check_spaces(s, &i) != 0)
+				return_nl_error();
 		}
 	}
 	return (0);
