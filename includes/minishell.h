@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/07 18:21:02 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:46:58 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,8 +190,14 @@ int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var);
 int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var);
 char *ft_write_word(char *s, t_attr *att, int flag, int i);
 
+// 02d_copy_word_02.c
+
+int ft_strlen_name_var(char *s, int *i, int len_name_var);
+int copy_g_value(t_attr *att, int i);
+int copy_double_dollar(int i, t_attr *att);
+
 // 03_count_words.c
-int     check_single_quotes(char *s, int len, int i, t_attr *att);
+int check_single_quotes(char *s, int len, int i, t_attr *att);
 int     check_double_quotes(char *s, int len, int i, t_attr *att);
 int     check_no_space(char *s, int len, int i, t_attr *att);
 void    ft_count_words(char *s, t_attr *att);

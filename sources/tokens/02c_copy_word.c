@@ -6,27 +6,12 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:16:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/07 19:00:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:42:22 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int ft_strlen_name_var(char *s, int *i, int len_name_var)
-{
-	len_name_var = (*i);
-	while (s[*i] != '"' && s[*i] != ' ' && s[*i] != '$' && s[*i])
-		(*i)++;
-	len_name_var = (*i) - len_name_var;
-	return (len_name_var);
-}
-
-int copy_g_value(t_attr *att, int i)
-{
-	ft_itoa_custom(g_value, att);
-	i += 2;
-	return (i);
-}
 
 /* vedi funzione sotto ma senza "" */
 int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var)
@@ -34,12 +19,7 @@ int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var)
 	while (s[i] != ' ' && s[i])
 	{
 		if (s[i] == '$' && s[i + 1] == '$')
-		{
-			i += 2;
-			att->i_flag$ += 2;
-			att->arr2[att->y2][att->x2++] = '$';
-			att->arr2[att->y2][att->x2++] = '$';
-		}
+			i += copy_double_dollar(i, att);
 		else if (s[i] == '$' && s[i + 1] == '?')
 			i = copy_g_value(att, i);
 		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1])
@@ -75,16 +55,10 @@ int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 	while (s[i] != '"')
 	{
 		if (s[i] == '$' && s[i + 1] == '$')
-		{
-			i += 2;
-			att->i_flag$ += 2;
-			att->arr2[att->y2][att->x2++] = '$';
-			att->arr2[att->y2][att->x2++] = '$';
-		}
+			i += copy_double_dollar(i, att);
 		else if (s[i] == '$' && s[i + 1] == '?')
 			i = copy_g_value(att, i);
-		else if (s[i] == '$' && s[i + 1] != ' '
-				&& s[i + 1] && s[i + 1] != '"')
+		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
 		{
 			i++;
 			if (att->flag$[att->i_flag$] == 0)
