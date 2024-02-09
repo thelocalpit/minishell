@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:09:39 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/04 03:16:34 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 18:55:02 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	new_var(char *str, t_attr *att, int add, int empty)
 	tmp = att->local_var;
 	tmp = ft_lstnew(ft_strdup(str));
 	if (!tmp)
-		perror("malloc");
+		ft_putstr_fd("malloc", 2);
 	ft_lstadd_back(&att->local_var, tmp);
 	free(name);
 	return (0);

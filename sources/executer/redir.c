@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:05:37 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/09 07:47:24 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 18:55:56 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	create_file(t_attr *att, char *str, int redir)
 	if (att->red_fd < 0)
 	{
 		g_value = 1;
-		perror("cannot create the file");
+		ft_putstr_fd("cannot create the file", 2);
 		return (1);
 	}
 	free(name);

@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/09 07:03:29 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 20:11:13 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	exec(t_attr *att)
 	att->pid = fork();
 	if (!find_paths(att))
 	{
-		perror("PATH not found");
+		ft_putstr_fd("PATH not found", 2);
 		return (1);
 	}
 	if (att->pid == -1)
 	{
-		perror("fork failed");
+		ft_putstr_fd("fork failed", 2);
 		return (1);
 	}
 	if (att->pid == 0)
@@ -71,8 +71,9 @@ int	exec(t_attr *att)
 	else
 		waitpid(att->pid, &g_value, 0);
 	g_value = WEXITSTATUS(g_value);
+	errno = -1;
 	if (g_value == 127)
-		perror("command not found\n");
+		command_not_found(att->arr2[0]);
 	if (att->read_from_pipe)
 		att->pipe_index++;
 	close_pipeline(att);

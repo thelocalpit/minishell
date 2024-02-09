@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/09 07:47:31 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 20:10:17 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,9 +281,11 @@ int     return_lt_error(void);
 int     return_nl_error(void);
 
 
-// 05_error_messages.c
+// 04a_error_messages.c
 
 int exit__err(char *str);
+void	read_file_error(t_attr *att, char *file);
+void	command_not_found(char *str);
 
 // 05_error_dollar.c
 

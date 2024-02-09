@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/09 07:33:54 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 20:19:42 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ int	red_input(t_attr *att, char *path)
 {
 	att->red_fd = open(path, O_RDONLY);
 	if (att->red_fd < 0)
-	{
-		g_value = 1;
 		return (1);
-	}
 	dup2(att->red_fd, 0);
 	close(att->red_fd);
 	g_value = 0;
@@ -59,7 +56,7 @@ int	heredoc(t_attr *att)
 	dup2(att->red_fd, 0);
 	if (red_input(att, ".heredoc") || att->red_fd < 0)
 	{
-		perror("heredoc error\n");
+		ft_putstr_fd("heredoc error\n", 2);
 		unlink(".heredoc");
 		return (1);
 	}
@@ -77,7 +74,7 @@ int	heredoc_read(t_attr *att, char *eof)
 	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
 	{
-		perror("heredoc error\n");
+		ft_putstr_fd("heredoc error\n", 2);
 		return (1);
 	}
 	while (1)
@@ -98,27 +95,10 @@ int	heredoc_read(t_attr *att, char *eof)
 int	read_from_file(t_attr *att)
 {
 	char	*file_path;
-	char	*current_path;
-	char	*tmp;
 
 	file_path = ft_strtrim(att->split_arr[att->y + 2], " ");
-	if (file_path[0] != '/')
-	{
-		current_path = malloc(sizeof(char) * PATH_MAX);
-		getcwd(current_path, PATH_MAX);
-		tmp = ft_strjoin(current_path, "/");
-		free(current_path);
-		current_path = ft_strjoin(tmp, file_path);
-		free(tmp);
-		free(file_path);
-		file_path = ft_strdup(current_path);
-		free(current_path);
-	}
 	if (red_input(att, file_path))
-	{
-		perror("");
-		att->skip = 1;
-	}
+		read_file_error(att, file_path);
 	free(file_path);
 	return (0);
 }
