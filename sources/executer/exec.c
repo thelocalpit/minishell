@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/06 19:58:20 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 00:06:33 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	exec(t_attr *att)
 			do_red(att);
 		if (!att->skip)
 			do_child_cmd(att);
-		printf("exit\n");
 		free_arr(att->paths);
 		// free(att->paths);
 		exit(g_value);
@@ -73,7 +72,7 @@ int	exec(t_attr *att)
 	{
 		waitpid(att->pid, &g_value, 0);
 	}
-	printf("g_value = %d\n", g_value);
+	g_value = WEXITSTATUS(g_value);
 	if (g_value != 0)
 		printf("command not found\n");
 	if (att->read_from_pipe)

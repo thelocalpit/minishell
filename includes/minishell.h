@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/05 22:38:39 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/08 23:58:10 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ typedef struct s_attr
 	int     read_from_pipe;
 	int     read_from_file;
 	int     redir;
-	int     create_file;
 	int     heredoc;
 	int     skip;
 	int     i_redir;

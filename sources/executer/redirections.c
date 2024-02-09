@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/06 19:54:30 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 00:06:54 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ int	do_red(t_attr *att)
 		write_to_pipe(att);
 	att->y = y;
 	if(att->frirst_redir)
-	{
 		att->skip = 1;
-		att->frirst_redir = 0;
-	}
 	return (0);
 }
 
@@ -49,7 +46,6 @@ void	reset_flags2(t_attr *att)
 	att->redir = 0;
 	att->read_from_file = 0;
 	att->heredoc = 0;
-	att->create_file = 0;
 }
 
 int	frist_redir(t_attr *att)

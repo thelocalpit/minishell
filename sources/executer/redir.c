@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:05:37 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/05 19:39:18 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 02:03:49 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	create_file(t_attr *att, char *str, int redir)
 	char	*name;
 
 	name = ft_strtrim(str, " ");
-	printf("name: '%s'\n", name);
 	if (redir == 1)
 		att->red_fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else

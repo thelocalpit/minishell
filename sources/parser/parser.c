@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/06 19:56:37 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 01:54:59 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	reset_flags(t_attr *att)
 	att->read_from_file = 0;
 	att->heredoc = 0;
 	att->skip = 0;
-	att->create_file = 0;
+	att->frirst_redir = 0;
 }
 
 void	next_step_sub2(t_attr *att)
@@ -67,16 +67,16 @@ void	next_step_sub(t_attr *att)
 int	check_next_step(t_attr *att)
 {
 	reset_flags(att);
-	if (!ft_strcmp(att->split_arr[0], ">")
-		|| !ft_strcmp(att->split_arr[0], ">>")
-		|| !ft_strcmp(att->split_arr[0], "<")
-		|| !ft_strcmp(att->split_arr[0], "<<"))
+	if ((att->y == 0 || att->y == 2) && (!ft_strcmp(att->split_arr[0], ">")
+			|| !ft_strcmp(att->split_arr[0], ">>")
+			|| !ft_strcmp(att->split_arr[0], "<")
+			|| !ft_strcmp(att->split_arr[0], "<<")))
 	{
 		if (att->y == 0)
 			frist_redir(att);
 		else if (att->y == 2)
 		{
-			att->y--;	
+			att->y--;
 			next_step_sub2(att);
 		}
 	}
