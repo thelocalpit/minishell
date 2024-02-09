@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/09 00:06:54 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 07:47:40 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	do_red(t_attr *att)
 		read_from_pipe(att);
 	check_read_file(att);
 	att->y = y;
-	check_redir_flag(att);
+	check_redir(att);
 	if (att->i_redir > att->i_readfile)
 		att->y = att->i_redir + 1;
 	else if (att->i_readfile != 0)
@@ -36,7 +36,7 @@ int	do_red(t_attr *att)
 	if (att->write_to_pipe)
 		write_to_pipe(att);
 	att->y = y;
-	if(att->frirst_redir)
+	if (att->frirst_redir)
 		att->skip = 1;
 	return (0);
 }

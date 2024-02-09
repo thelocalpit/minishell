@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:20:37 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/06 19:44:01 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 04:21:33 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,12 @@
 int	ft_ecxev(char *path, char **arg, char **env)
 {
 	if (access(path, X_OK))
-		return (1);
+		return (126);
 	if (execve(path, arg, env) != 0)
 	{
 		perror("execve failed");
-		return (1);
-	}
-	return (0);
-}
-
-int	absolute_exec(t_attr *att)
-{
-	if (ft_ecxev(att->arr2[0], att->arr2, att->env))
 		return (127);
+	}
 	return (0);
 }
 

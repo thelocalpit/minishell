@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/09 00:04:40 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 04:53:37 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char **av, char **envp)
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO 
 				// ft_print_array(att.arr2);
-				do_builtin(&att);
+				g_value = do_builtin(&att);
 				add_index_to_custom_env(&att);
 				if (att.local_var != NULL)
 					add_index_to_local_var(&att);

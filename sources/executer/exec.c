@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/09 00:06:33 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 07:03:29 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	do_execve(t_attr *att)
 {
 	envp_to_matrix(att);
 	if (ft_strchr(att->arr2[0], '.') || ft_strchr(att->arr2[0], '/'))
-		g_value = absolute_exec(att);
+		g_value = ft_ecxev(att->arr2[0], att->arr2, att->env);
 	else
 		g_value = bin_exec(att);
 	free_arr(att->env);
-	return (0);
+	return (g_value);
 }
 
 // VANNO GESTITI I SEGNALI PER QUITTARE I PROCESSI FIGLI
@@ -63,22 +63,20 @@ int	exec(t_attr *att)
 		if (!att->skip)
 			do_red(att);
 		if (!att->skip)
-			do_child_cmd(att);
+			g_value = do_child_cmd(att);
 		free_arr(att->paths);
 		// free(att->paths);
 		exit(g_value);
 	}
 	else
-	{
 		waitpid(att->pid, &g_value, 0);
-	}
 	g_value = WEXITSTATUS(g_value);
-	if (g_value != 0)
-		printf("command not found\n");
+	if (g_value == 127)
+		perror("command not found\n");
 	if (att->read_from_pipe)
 		att->pipe_index++;
 	close_pipeline(att);
 	free_arr(att->paths);
 	// free(att->paths);
-	return (0);
+	return (g_value);
 }

@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/05 18:48:09 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 07:33:54 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_read_file(t_attr *att)
 		reset_flags2(att);
 		next_step_sub(att);
 		if (att->heredoc)
-			heredoc(att);
+			g_value = heredoc(att);
 		if (att->read_from_file && att->y + 1 == att->i_readfile)
 			read_from_file(att);
 		att->y += 2;
@@ -31,9 +31,13 @@ int	red_input(t_attr *att, char *path)
 {
 	att->red_fd = open(path, O_RDONLY);
 	if (att->red_fd < 0)
+	{
+		g_value = 1;
 		return (1);
+	}
 	dup2(att->red_fd, 0);
 	close(att->red_fd);
+	g_value = 0;
 	return (0);
 }
 
@@ -54,7 +58,11 @@ int	heredoc(t_attr *att)
 	att->red_fd = open(".heredoc", O_RDONLY);
 	dup2(att->red_fd, 0);
 	if (red_input(att, ".heredoc") || att->red_fd < 0)
-		printf("heredoc error\n");
+	{
+		perror("heredoc error\n");
+		unlink(".heredoc");
+		return (1);
+	}
 	close(att->red_fd);
 	unlink(".heredoc");
 	return (0);
@@ -69,7 +77,7 @@ int	heredoc_read(t_attr *att, char *eof)
 	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
 	{
-		printf("heredoc error\n");
+		perror("heredoc error\n");
 		return (1);
 	}
 	while (1)
@@ -108,8 +116,7 @@ int	read_from_file(t_attr *att)
 	}
 	if (red_input(att, file_path))
 	{
-		printf("minishell: %s: No such file or directory\n",
-			att->split_arr[att->y + 2]);
+		perror("");
 		att->skip = 1;
 	}
 	free(file_path);

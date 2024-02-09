@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/01/29 07:33:39 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 07:02:18 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	ft_cd(char **args)
 	{
 		printf(RED"cd : diocane non ce sta la cartella");
 		printf("\n");
+		return (1);
 	}
 	return (0);
 }
