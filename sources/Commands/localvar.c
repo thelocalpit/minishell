@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   localvar.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:09:39 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/04 19:30:49 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/10 01:42:34 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	update_var(char *str, t_list *list, int add)
 				return (1);
 			}
 			temp = ft_strjoin(tmp->content,
-					str + var_name_length(str) + 2);
+				str + var_name_length(str) + 2);
+			free(tmp->content);
 			tmp->content = ft_strdup(temp);
 			free(temp);
 			return (1);
@@ -92,7 +93,7 @@ int	new_var(char *str, t_attr *att, int add, int empty)
 	// if (add && !empty)
 	// 	free(str);
 	if (!tmp)
-		perror("malloc");
+		ft_putstr_fd("malloc", 2);
 	ft_lstadd_back(&att->local_var, tmp);
 	free(name);
 	return (0);
