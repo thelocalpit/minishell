@@ -6,11 +6,26 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/01/30 15:31:27 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 20:19:42 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	check_read_file(t_attr *att)
+{
+	while (att->i_readfile > att->y)
+	{
+		reset_flags2(att);
+		next_step_sub(att);
+		if (att->heredoc)
+			g_value = heredoc(att);
+		if (att->read_from_file && att->y + 1 == att->i_readfile)
+			read_from_file(att);
+		att->y += 2;
+	}
+	return (0);
+}
 
 int	red_input(t_attr *att, char *path)
 {
@@ -19,6 +34,7 @@ int	red_input(t_attr *att, char *path)
 		return (1);
 	dup2(att->red_fd, 0);
 	close(att->red_fd);
+	g_value = 0;
 	return (0);
 }
 
@@ -27,20 +43,23 @@ int	heredoc(t_attr *att)
 	char	**eof;
 
 	eof = ft_split(att->split_arr[att->y + 2], ' ');
-	signal(SIGINT, &heredoc_handler);
-	signal(SIGQUIT, &heredoc_handler);
 	if (heredoc_read(att, eof[0]))
 	{
 		free_arr(eof);
 		return (1);
 	}
+	close(att->red_fd);
 	free_arr(eof);
 	if (att->i_readfile != att->y + 1)
 		return (0);
 	att->red_fd = open(".heredoc", O_RDONLY);
 	dup2(att->red_fd, 0);
 	if (red_input(att, ".heredoc") || att->red_fd < 0)
-		printf("heredoc error\n");
+	{
+		ft_putstr_fd("heredoc error\n", 2);
+		unlink(".heredoc");
+		return (1);
+	}
 	close(att->red_fd);
 	unlink(".heredoc");
 	return (0);
@@ -50,10 +69,12 @@ int	heredoc_read(t_attr *att, char *eof)
 {
 	char	*input;
 
+	signal(SIGINT, &heredoc_handler);
+	signal(SIGQUIT, &heredoc_handler);
 	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
 	{
-		printf("heredoc error\n");
+		ft_putstr_fd("heredoc error\n", 2);
 		return (1);
 	}
 	while (1)
@@ -68,35 +89,16 @@ int	heredoc_read(t_attr *att, char *eof)
 		write(att->red_fd, "\n", 1);
 		free(input);
 	}
-	close(att->red_fd);
 	return (0);
 }
 
 int	read_from_file(t_attr *att)
 {
 	char	*file_path;
-	char	*current_path;
-	char	*tmp;
 
 	file_path = ft_strtrim(att->split_arr[att->y + 2], " ");
-	if (file_path[0] != '/')
-	{
-		current_path = malloc(sizeof(char) * PATH_MAX);
-		getcwd(current_path, PATH_MAX);
-		tmp = ft_strjoin(current_path, "/");
-		free(current_path);
-		current_path = ft_strjoin(tmp, file_path);
-		free(tmp);
-		free(file_path);
-		file_path = ft_strdup(current_path);
-		free(current_path);
-	}
 	if (red_input(att, file_path))
-	{
-		printf("minishell: %s: No such file or directory\n",
-			att->split_arr[att->y + 2]);
-		att->skip = 1;
-	}
+		read_file_error(att, file_path);
 	free(file_path);
 	return (0);
 }

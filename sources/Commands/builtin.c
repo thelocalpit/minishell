@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/07 17:15:08 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/10 14:33:35 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	pwd(t_attr *att)
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
-		perror("getcwd error!");
-		g_value = 1;
+		ft_putstr_fd("getcwd error!", 2);
 		return (1);
 	}
 	if (att->redir || att->write_to_pipe)
@@ -79,7 +78,7 @@ int	ls_l(char **env, int j)
 		option = "-h";
 	if (child_pid == -1)
 	{
-		perror("fork failed");
+		ft_putstr_fd("fork failed", 2);
 		return (1);
 	}
 	else if (child_pid == 0)
@@ -87,7 +86,7 @@ int	ls_l(char **env, int j)
 		// Questo è il processo figlio
 		char *ls_args[] = {"/bin/ls", option, NULL};
 		execve("/bin/ls", ls_args, env);
-		perror("execve failed");
+		ft_putstr_fd("execve failed", 2);
 		exit(1);
 	}
 	else
@@ -108,6 +107,7 @@ int	ft_cd(char **args)
 	{
 		printf(RED"cd : diocane non ce sta la cartella");
 		printf("\n");
+		return (1);
 	}
 	return (0);
 }

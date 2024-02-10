@@ -6,9 +6,10 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/08 16:46:58 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/10 14:32:45 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 
@@ -109,12 +110,11 @@ typedef struct s_attr
 	int     read_from_pipe;
 	int     read_from_file;
 	int     redir;
-	int     create_file;
-	int     only_create;
 	int     heredoc;
 	int     skip;
 	int     i_redir;
 	int     i_readfile;
+	int		frirst_redir;
 	//---- envp custom matrix ---
 	// char    **mx_envp;
 	int     y_mx_envp;
@@ -294,9 +294,11 @@ int     return_lt_error(void);
 int     return_nl_error(void);
 
 
-// 05_error_messages.c
+// 04a_error_messages.c
 
 int exit__err(char *str);
+void	read_file_error(t_attr *att, char *file);
+void	command_not_found(char *str);
 
 // 05_error_dollar.c
 
@@ -316,16 +318,25 @@ void    free_mx_envp(t_attr *att);
 void	free_local_var(t_attr *att);
 void	free_env_list(t_attr *att);
 
+// Commands folder
+
 // Commands
 
 int do_builtin(t_attr *att);
 int do_child_cmd(t_attr *att);
+int	built_in_check(t_attr *att);
+void	ft_exit(void);
+
+// builtin.c
+
+int		echo(char **args);
 int		pwd(t_attr *att);
 int		envi(t_attr *att);
 //int		ls_l(char **env, int j);
-int		echo(char **args);
-void	ft_exit(void);
 int		ft_cd(char **args);
+
+//local_var.c
+
 int		add_var(char *str, t_attr *att);
 int		new_var(char *str, t_attr *att, int add, int empty);
 int		update_var(char *str, t_list *list, int add);
@@ -381,6 +392,7 @@ void    read_from_pipe(t_attr *att);
 void    close_pipeline(t_attr *att);
 
 // read_file.c
+int    check_read_file(t_attr *att);
 int    red_input(t_attr *att, char *path);
 int    heredoc(t_attr *att);
 int    heredoc_read(t_attr *att, char *eof);
@@ -389,14 +401,12 @@ int    read_from_file(t_attr *att);
 // redir.c
 int    check_redir(t_attr *att);
 int    redir(t_attr *att);
-int    create_file(t_attr *att);
+int		create_file(t_attr *att, char *str, int redir);
 
 // redirections.c
-int    do_red(t_attr *att);
-int    check_read_file(t_attr *att);
-int    check_redir_flag(t_attr *att);
+int		do_red(t_attr *att);
 void	reset_flags2(t_attr *att);
-
+int		frist_redir(t_attr *att);
 
 // expander
 

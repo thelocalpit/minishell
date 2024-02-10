@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:16:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/29 05:34:08 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/09 07:17:37 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	reinit_parameters(t_attr *att, char **envp)
 	att->pipe_index = 0;
 	att->i_readfile = 0;
 	att->i_redir = 0;
+	att->frirst_redir = 0;
 }
 
