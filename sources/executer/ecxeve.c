@@ -15,11 +15,11 @@
 int	ft_ecxev(char *path, char **arg, char **env)
 {
 	if (access(path, X_OK))
-		return (126);
+		return (127);
 	if (execve(path, arg, env) != 0)
 	{
 		ft_putstr_fd("execve failed", 2);
-		return (127);
+		return (126);
 	}
 	return (0);
 }
