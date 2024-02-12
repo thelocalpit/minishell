@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 13:31:40 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/05 16:03:08 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/12 01:42:54 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int	ft_unset(char **args, t_attr *att)
 	while (args[i])
 	{
 		ft_remove_node(&(att->env_list), args[i]);
-		i++;
-	}
-	i = 1;
-	while (args[i])
-	{
 		ft_remove_node(&(att->local_var), args[i]);
 		i++;
 	}
