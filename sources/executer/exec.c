@@ -75,7 +75,6 @@ int	exec(t_attr *att)
 	else
 		waitpid(att->pid, &g_value, 0);
 	g_value = WEXITSTATUS(g_value);
-	errno = -1;
 	if (g_value == 127)
 		command_not_found(att->arr2[0]);
 	if (att->read_from_pipe)
