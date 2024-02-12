@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:23:47 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/29 10:27:47 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/12 03:11:23 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,13 @@ t_list  *copy_env_in_list(char **env)
 {
 	t_list *head;
 
-	head = ft_lstnew((void *)*env++);
+	head = ft_lstnew((void *)ft_strdup(*env));
+	// head = ft_lstnew((void *)*env);
+	env++;
 	while (*env)
 	{
-		ft_lstadd_back(&head, ft_lstnew(*env));
+		ft_lstadd_back(&head, ft_lstnew(ft_strdup(*env)));
+		// ft_lstadd_back(&head, ft_lstnew(*env));
 		env++;
 	}
 	return (head);

@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:37:23 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/05 16:45:26 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/12 03:15:42 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	free_env_list(t_attr *att)
 	while (att->env_list)
 	{
 		tmp = att->env_list;
+		free(att->env_list->content);
 		att->env_list = att->env_list->next;
 		free(tmp);
 	}
