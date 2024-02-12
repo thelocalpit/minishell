@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:20:37 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/10 16:34:53 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:58:02 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	ft_ecxev(char *path, char **arg, char **env)
 {
 	if (access(path, X_OK))
 		return (126);
-	set_signals();
 	if (execve(path, arg, env) != 0)
 	{
 		ft_putstr_fd("execve failed", 2);

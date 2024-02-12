@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/10 14:32:45 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:26:18 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,8 @@ void count_expanded_token_local_var(t_attr *att);
 char *prompt(void);
 
 // signals.c
-void	set_signals2(void);
+void set_signals3(void);
+void set_signals2(void);
 void    set_signals(void);
 void    handle_interrupt(int sig);
 void    heredoc_handler(int sig);

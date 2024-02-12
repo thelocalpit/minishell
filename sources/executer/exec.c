@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/10 14:38:08 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:55:48 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ int	do_execve(t_attr *att)
 	if (ft_strchr(att->arr2[0], '.') || ft_strchr(att->arr2[0], '/'))
 		g_value = ft_ecxev(att->arr2[0], att->arr2, att->env);
 	else
+	{
+		set_signals();
 		g_value = bin_exec(att);
+		set_signals2();
+	}
 	free_arr(att->env);
 	return (g_value);
 }
