@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02a_utils.c                                        :+:      :+:    :+:   */
+/*   02a_itoa_custom.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:26:11 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/12/16 12:40:46 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:59:07 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int ft_intsize(int n)
+int	ft_intsize(int n)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (n <= 0)
@@ -27,17 +27,17 @@ int ft_intsize(int n)
 	return (count);
 }
 
-int ft_ispositive(int n)
+int	ft_ispositive(int n)
 {
 	if (n < 0)
 		return (-n);
 	return (n);
 }
 
-void ft_itoa_custom(int n, t_attr *att)
+void	ft_itoa_custom(int n, t_attr *att)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	i = ft_intsize(n);
 	str = malloc(sizeof(char) * (i + 1));

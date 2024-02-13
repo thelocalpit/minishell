@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/10 01:41:44 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/12 19:26:18 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 
@@ -189,8 +190,14 @@ int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var);
 int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var);
 char *ft_write_word(char *s, t_attr *att, int flag, int i);
 
+// 02d_copy_word_02.c
+
+int ft_strlen_name_var(char *s, int *i, int len_name_var);
+int copy_g_value(t_attr *att, int i);
+int copy_double_dollar(int i, t_attr *att);
+
 // 03_count_words.c
-int     check_single_quotes(char *s, int len, int i, t_attr *att);
+int check_single_quotes(char *s, int len, int i, t_attr *att);
 int     check_double_quotes(char *s, int len, int i, t_attr *att);
 int     check_no_space(char *s, int len, int i, t_attr *att);
 void    ft_count_words(char *s, t_attr *att);
@@ -207,7 +214,8 @@ void count_expanded_token_local_var(t_attr *att);
 char *prompt(void);
 
 // signals.c
-void	set_signals2(void);
+void set_signals3(void);
+void set_signals2(void);
 void    set_signals(void);
 void    handle_interrupt(int sig);
 void    heredoc_handler(int sig);
@@ -266,11 +274,17 @@ int     error_end(char *s, char c);
 
 // 03_error_mixed.c
 
-int     check_extra_char(char *s, int i);
-int     check_next_arg(char *s, int i);
-int     check_2nd_char(char *s, int i);
-int     ft_scorri(char *s, int i);
-int     error_mixed_start(char *s);
+int check_2nd_char_02(char *s, int i, char d);
+int check_2nd_char_03(char *s, int i, char d);
+int check_spaces(char *s, int *i);
+int check_2nd_char(char *s, int i);
+int	error_mixed_start(char *s);
+
+//03a_error_mixed.c
+
+int ft_scorri(char *s, int i);
+int check_extra_char(char *s, int i);
+int check_next_arg(char *s, int i);
 
 // 04_error_messages.c
 

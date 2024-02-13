@@ -3,19 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   01_token_in_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:04:54 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/06 16:39:00 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:56:29 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* in this ft we check every single options that can occur with (|,<,>).
-	allochiamo la memoria. */
+void	check_next_special_token_02(char *s, int i, char **token)
+{
+	if (s[i] == '<' && s[i + 1] != '<')
+	{
+		*token = malloc(sizeof(char) * 2);
+		(*token)[0] = s[i];
+		(*token)[1] = 0;
+	}
+	else if (s[i] == '<' && s[i + 1] == '<')
+	{
+		*token = malloc(sizeof(char) * 3);
+		(*token)[0] = s[i];
+		(*token)[1] = s[i + 1];
+		(*token)[2] = 0;
+	}
+}
 
-void check_next_special_token(char *s, int i, char **token)
+	/* in this ft we check every single options that can occur with (|,<,>).
+		allochiamo la memoria. */
+void	check_next_special_token(char *s, int i, char **token)
 {
 	if (s[i] == '|')
 	{
@@ -36,41 +52,33 @@ void check_next_special_token(char *s, int i, char **token)
 		(*token)[1] = s[i + 1];
 		(*token)[2] = 0;
 	}
-	else if (s[i] == '<' && s[i + 1] != '<')
+}
+
+int	get_token_01(char *s, int j)
+{
+	while (s[j] != '|' && s[j] != '>' && s[j] != '<' && s[j] != '\0')
 	{
-		*token = malloc(sizeof(char) * 2);
-		(*token)[0] = s[i];
-		(*token)[1] = 0;
+		if (s[j] == '\'' || s[j] == '"')
+			j = check_s_d_quotes(s, j);
+		j++;
 	}
-	else if (s[i] == '<' && s[i + 1] == '<')
-	{
-		*token = malloc(sizeof(char) * 3);
-		(*token)[0] = s[i];
-		(*token)[1] = s[i + 1];
-		(*token)[2] = 0;
-	}
+	return (j);
 }
 
 /* in this function we, as the function say, get the token to put in the
 	matrix. to do so, we scan the str and check if it's a special char or if
 	it's a str of character. */
-
-char *get_token(char *s)
+char	*get_token(char *s)
 {
-	char *token;
-	int i;
-	int j;
+	char	*token;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
 	if (s[j] != '|' && s[j] != '>' && s[j] != '<')
 	{
-		while (s[j] != '|' && s[j] != '>' && s[j] != '<' && s[j] != '\0')
-		{
-			if (s[j] == '\'' || s[j] == '"')
-				j = check_s_d_quotes(s, j);
-			j++;
-		}
+		j += get_token_01(s, j);
 		token = malloc(sizeof(char) * (j + 1));
 		if (!token)
 			return (NULL);
@@ -82,9 +90,13 @@ char *get_token(char *s)
 		}
 	}
 	else
+	{
 		check_next_special_token(s, j, &token);
+		check_next_special_token_02(s, j, &token);
+	}
 	return (token);
 }
+
 /* In this function I'm creating a matrix, allocating space thanks to the
 	number of tokens we found.
 	In the while loop, we continue untile the variable i reach the same value
@@ -94,10 +106,9 @@ char *get_token(char *s)
 	get_token that we'll return a str. we do this process for all the tokens
 	we have.  */
 /* questo e'il primo array che creiamo. */
-
 void	create_array(char *s, t_attr *att)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	att->split_arr = malloc((att->nb_tokens + 1) * sizeof(char *));

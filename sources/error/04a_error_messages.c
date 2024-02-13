@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   04a_error_messages.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:22:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/09 20:11:04 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/10 14:37:46 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int exit__err(char *str)
+int	exit__err(char *str)
 {
 	printf("exit: %s: numeric argument required\n", str);
 	g_value = 2;

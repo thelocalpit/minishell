@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:17:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/05 16:40:10 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:06:40 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void exit_free(t_attr *att)
+void	exit_free(t_attr *att)
 {
 	free_arr2(att->arr2, att);
 	free_arr(att->split_arr);
@@ -24,11 +24,11 @@ void exit_free(t_attr *att)
 	// free_arr(att->paths);
 }
 
-int ft_exit_02(t_attr *att)
+int	ft_exit_02(t_attr *att)
 {
-	int i;
-	char *str;
-	int flag;
+	int		i;
+	char	*str;
+	int		flag;
 
 	i = 0;
 	str = att->arr2[1];
@@ -40,7 +40,7 @@ int ft_exit_02(t_attr *att)
 		if (ft_isdigit(str[i]))
 		{
 			flag = 0;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -51,7 +51,7 @@ int ft_exit_02(t_attr *att)
 	return (g_value);
 }
 
-void ft_exit_custom(t_attr *att)
+void	ft_exit_custom(t_attr *att)
 {
 	g_value = 0;
 	if (att->count_words == 1)

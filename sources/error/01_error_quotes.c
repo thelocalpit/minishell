@@ -6,17 +6,17 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:01:14 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/06 16:28:47 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:08:15 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int count_single_quotes(char *s)
+int	count_single_quotes(char *s)
 {
-	int i;
-	int count_quotes;
-	
+	int	i;
+	int	count_quotes;
+
 	count_quotes = 0;
 	i = 0;
 	while (s[i])
@@ -42,10 +42,10 @@ int count_single_quotes(char *s)
 }
 
 /* se le quotes sono dispari */
-int count_double_quotes(char *s)
+int	count_double_quotes(char *s)
 {
-	int i;
-	int count_quotes;
+	int	i;
+	int	count_quotes;
 
 	i = 0;
 	count_quotes = 0;
@@ -72,7 +72,7 @@ int count_double_quotes(char *s)
 }
 
 /* controllo delle quotes */
-int count_quotes(char *s)
+int	count_quotes(char *s)
 {
 	if (count_single_quotes(s))
 		return (-1);

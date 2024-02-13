@@ -6,60 +6,12 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/24 16:45:08 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:16:30 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* queste due funzioni servono solamente a ridurre il numero di righe */
-void error_dollar_02_b(char *check_envp, int *j, int *len, t_attr *att)
-{
-	check_envp[*j] = '=';
-	check_envp[*j + 1] = '\0';
-	len += 1;
-	att->y_mx_envp = 0;
-	att->x_mx_envp = *len;
-}
-void error_dollar_02_a(char *s, int *i, int *len)
-{
-	while (s[*i] != '"' && s[*i] != '\'' && s[*i] != ' ' && s[*i])
-	{
-		(*i)++;
-		(*len)++;
-		if (s[*i] == '$')
-			break;
-	}
-}
-
-int error_dollar_02(char *s, int i, t_attr *att)
-{
-	int len;
-	char *check_envp;
-	int j;
-	int start;
-
-	len = 0;
-	j = 0;
-	i++;
-	start = i;
-	if (s[i] == '?')
-		return (1);
-	error_dollar_02_a(s, &i, &len);
-	check_envp = malloc(sizeof(char) * len + 2); 
-	i = start;
-	while (j < len)
-		check_envp[j++] = s[i++];
-	error_dollar_02_b(check_envp, &j, &len, att);
-	// printf("questa è check_envp: %s\n", check_envp);
-	if (error_dollar_03(check_envp, att, len) == -1)
-	{
-		free(check_envp);
-		return (-1);
-	}
-	free(check_envp);
-	return (len - 1);
-}
 int error_dollar_01(char *s, t_attr *att)
 {
 	int i;
@@ -77,6 +29,25 @@ int error_dollar_01(char *s, t_attr *att)
 	}
 	return (0);
 }
+
+int error_dollar_00(char *s, int i, t_attr *att)
+{
+	if (s[i + 1] == '$') // controllo $$
+	{
+		att->flag$[att->i_flag$++] = -1;
+		att->flag$[att->i_flag$] = -1;
+		i += 2;
+	}
+	else if (error_dollar_02(s, i, att) == -1)
+		att->flag$[att->i_flag$] = -1;
+	else
+	{
+		i += error_dollar_02(s, i, att);
+	}
+	att->i_flag$++;
+	return (i);
+}
+
 int error_dollar(char *s, t_attr *att)
 {
 	int i;
@@ -93,21 +64,7 @@ int error_dollar(char *s, t_attr *att)
 				i++;
 		}
 		else if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i +1] != '"')
-		{
-			if (s[i + 1] == '$') //controllo $$
-			{
-				att->flag$[att->i_flag$++] = -1;
-				att->flag$[att->i_flag$] = -1;
-				i += 2;
-			}
-			else if (error_dollar_02(s, i, att) == -1)
-				att->flag$[att->i_flag$] = -1;
-			else
-			{
-				i += error_dollar_02(s, i, att);
-			}
-			att->i_flag$++;
-		}
+			i += error_dollar_00(s, i, att);
 		i++;
 	}
 	return (0);

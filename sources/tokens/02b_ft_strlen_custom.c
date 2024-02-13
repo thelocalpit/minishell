@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:37:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/30 16:31:12 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:19:10 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,61 +18,59 @@ void ft_count_exp_print_error(t_attr *att)
 	att->i += 2;
 	att->i_flag$++;
 }
+
+void double_dollar(t_attr *att)
+{
+	att->mem_space += 2;
+	att->i += 2;
+	att->save_y_mx_envp[att->i_flag$++] = -1;
+	att->save_y_mx_envp[att->i_flag$++] = -1;
+}
+void ft_strlen_double_quotes_02(char *s, t_attr *att)
+{
+	att->i++;
+	if (att->flag$[att->i_flag$] == 0)
+		count_expanded_token(att, s);
+	else
+	{
+		while (s[att->i] != '"' && s[att->i] != ' ' && s[att->i] != '$' && s[att->i])
+			att->i++;
+		att->save_y_mx_envp[att->i_flag$] = -1;
+	}
+	att->i_flag$++;
+}
 void ft_strlen_double_quotes(char *s, t_attr *att)
 {
 	att->i++;
-	// att->mem_space++; // questo per aggiungere un char delle quotes
 	while (s[att->i] != '"')
 	{
 		if (s[att->i] == '$' && s[att->i + 1] == '$')
-		{
-			att->mem_space += 2;
-			att->i += 2;
-			att->save_y_mx_envp[att->i_flag$++] = -1;
-			att->save_y_mx_envp[att->i_flag$++] = -1;
-		}
+			double_dollar(att);
 		else if (s[att->i] == '$' && s[att->i + 1] == '?')
 			ft_count_exp_print_error(att);
 		else if (s[att->i] == '$' && s[att->i + 1] != ' ' && s[att->i + 1] && s[att->i + 1] != '"')
-		{
-			att->i++;
-			if (att->flag$[att->i_flag$] == 0)
-				count_expanded_token(att, s);
-			else
-			{
-				while (s[att->i] != '"' && s[att->i] != ' ' && s[att->i] != '$' && s[att->i])
-					att->i++;
-				att->save_y_mx_envp[att->i_flag$] = -1;
-			}
-			att->i_flag$++;
-		}
+			ft_strlen_double_quotes_02(s, att);
 		else
 		{
 			att->mem_space++;
 			att->i++;
 		}
 	}
-	// att->mem_space++; //questo per aggiungere un char delle quotes
 }
+
+
 
 void ft_strlen_no_quotes(char *s, t_attr *att)
 {
-	//printf("PORCODIO%s\n", s);
 	while (s[att->i] && s[att->i] != ' ')
 	{
 		if (s[att->i] == '$' && s[att->i + 1] == '$')
-		{
-			att->mem_space += 2;
-			att->i += 2;
-			att->save_y_mx_envp[att->i_flag$++] = -1;
-			att->save_y_mx_envp[att->i_flag$++] = -1;
-		}
+			double_dollar(att);
 		else if (s[att->i] == '$' && s[att->i + 1] == '?')
 			ft_count_exp_print_error(att);
 		else if (s[att->i] == '$' && s[att->i + 1] != ' ' && s[att->i + 1])
 		{
 			att->i++;
-			//printf("----%d---%d\n", att->flag$[att->i_flag$], att->i_flag$);
 			if (att->flag$[att->i_flag$] == 0)
 				count_expanded_token(att, s);
 			else
@@ -100,19 +98,16 @@ int ft_strlen_custom(char *s, int flag, t_attr *att)
 	if (!s)
 		return (0);
 	save_$ = att->i_flag$;
-	//printf("flagfflagffalg----%d\n", att->i_flag$);
 	if (flag == 0)
 		ft_strlen_no_quotes(s, att);
 	if (flag == 1)
 	{
 		att->i++;
-		// att->mem_space++;
 		while (s[att->i] != '\'')
 		{
 			att->mem_space++;
 			att->i++;
 		}
-		// att->mem_space++;
 	}
 	if (flag == 2)
 		ft_strlen_double_quotes(s, att);

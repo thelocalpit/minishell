@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/09 06:50:38 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/12 19:00:14 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int	do_child_cmd(t_attr *att)
 	else if (ft_strncmp(att->arr2[0], "echo\0", 5) == 0)
 		return (echo(att->arr2));
 	else
+	{
+		// printf("entro qui quando faccio minishell\n");
 		return (do_execve(att));
+	}
 }
 
 int	built_in_check(t_attr *att)
