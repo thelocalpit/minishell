@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/13 13:10:49 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:44:41 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	find_paths(t_attr *att)
 int	do_execve(t_attr *att)
 {
 	envp_to_matrix(att);
-	set_signals3();
+	set_signals();
 	if (ft_strchr(att->arr2[0], '.') || ft_strchr(att->arr2[0], '/'))
 		g_value = ft_ecxev(att->arr2[0], att->arr2, att->env);
 	else

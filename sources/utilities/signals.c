@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/13 13:39:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:45:05 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void handle_interrupt3(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("miao\n");
 		printf("\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
@@ -54,7 +53,7 @@ void handle_interrupt3(int sig)
 }
 void set_signals3(void)
 {
-	printf("sono dentro 3\n");
+	// printf("sono dentro 3\n")
 	signal(SIGINT, handle_interrupt3);
 	signal(SIGQUIT, SIG_IGN);
 }
