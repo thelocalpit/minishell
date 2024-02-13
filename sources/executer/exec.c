@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/12 19:55:48 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:50:56 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	find_paths(t_attr *att)
 		}
 		tmp_list = tmp_list->next;
 	}
+	att->paths = malloc(sizeof(char *) * 1);
+	att->paths[0] = 0;
 	return (0);
 }
 
@@ -46,17 +48,13 @@ int	do_execve(t_attr *att)
 
 // VANNO GESTITI I SEGNALI PER QUITTARE I PROCESSI FIGLI
 
-//controllare la gestione di g_value 
+//controllare la gestione di g_value
 
 int	exec(t_attr *att)
 {
 	set_signals2();
 	att->pid = fork();
-	if (!find_paths(att))
-	{
-		ft_putstr_fd("PATH not found", 2);
-		return (1);
-	}
+	find_paths(att);
 	if (att->pid == -1)
 	{
 		ft_putstr_fd("fork failed", 2);
