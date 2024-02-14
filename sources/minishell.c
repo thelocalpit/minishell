@@ -12,8 +12,6 @@
 
 #include "../includes/minishell.h"
 
-int g_value = 0;
-
 int	main(int ac, char **av, char **envp)
 {
 	char	*s;
@@ -22,6 +20,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
+	att.g_value = 0;
 	att.index_list = 0;
 	att.i_flag$ = 0;
 	att.flag_list = 0;
@@ -60,7 +59,7 @@ int	main(int ac, char **av, char **envp)
 				check_next_step(&att);
 				get_cmd_matrix(att.split_arr[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO 
 				// ft_print_array(att.arr2);
-				g_value = do_builtin(&att);
+				att.g_value = do_builtin(&att);
 				add_index_to_custom_env(&att);
 				if (att.local_var != NULL)
 					add_index_to_local_var(&att);

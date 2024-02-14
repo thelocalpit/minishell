@@ -36,9 +36,9 @@ int	do_builtin(t_attr *att)
 			&& (att->arr2[0][0] != '='))
 			return (add_var(att->arr2[0], att));
 	}
-	g_value = exec(att);
+	att->g_value = exec(att);
 	set_signals();
-	return (g_value);
+	return (att->g_value);
 }
 
 int	do_child_cmd(t_attr *att)

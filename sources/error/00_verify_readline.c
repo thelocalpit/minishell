@@ -13,9 +13,9 @@
 #include "../../includes/minishell.h"
 
 /* controlla la linea di comando inserita con tutte le varie casistiche */
-int	return_negative(void)
+int	return_negative(t_attr *att)
 {
-	g_value = 2;
+	att->g_value = 2;
 	return (-1);
 }
 
@@ -28,14 +28,14 @@ int	return_negative(void)
 int	verify_readline(char *s, t_attr *att)
 {
 	if (count_quotes(s))
-		return (return_negative());
-	else if (error_end(s, '>') || error_end(s, '<') || error_end(s, '|'))
-		return (return_negative());
-	else if (error_begin(s))
-		return (return_negative());
-	else if (error_mixed_start(s))
-		return (return_negative());
+		return (return_negative(att));
+	else if (error_end(s, '>', att) || error_end(s, '<', att) || error_end(s, '|', att))
+		return (return_negative(att));
+	else if (error_begin(s, att))
+		return (return_negative(att));
+	else if (error_mixed_start(s, att))
+		return (return_negative(att));
 	else if (error_dollar(s, att))
-		return (return_negative());
+		return (return_negative(att));
 	return (0);
 }

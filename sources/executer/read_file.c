@@ -19,7 +19,7 @@ int	check_read_file(t_attr *att)
 		reset_flags2(att);
 		next_step_sub(att);
 		if (att->heredoc)
-			g_value = heredoc(att);
+			att->g_value = heredoc(att);
 		if (att->read_from_file && att->y + 1 == att->i_readfile)
 			read_from_file(att);
 		att->y += 2;
@@ -34,7 +34,7 @@ int	red_input(t_attr *att, char *path)
 		return (1);
 	dup2(att->red_fd, 0);
 	close(att->red_fd);
-	g_value = 0;
+	att->g_value = 0;
 	return (0);
 }
 

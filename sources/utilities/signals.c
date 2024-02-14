@@ -38,7 +38,7 @@ void	handle_interrupt(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	g_value = 130;
+	//att.g_value = 130;
 }
 void handle_interrupt3(int sig)
 {
@@ -49,7 +49,7 @@ void handle_interrupt3(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	g_value = 130;
+	//att.g_value = 130;
 }
 void set_signals3(void)
 {

@@ -14,7 +14,7 @@
 
 void ft_count_exp_print_error(t_attr *att)
 {
-	att->mem_space = ft_intsize(g_value);
+	att->mem_space = ft_intsize(att->g_value);
 	att->i += 2;
 	att->i_flag$++;
 }

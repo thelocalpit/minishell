@@ -46,11 +46,11 @@ int	create_file(t_attr *att, char *str, int redir)
 		att->red_fd = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (att->red_fd < 0)
 	{
-		g_value = 1;
+		att->g_value = 1;
 		ft_putstr_fd("cannot create the file", 2);
 		return (1);
 	}
 	free(name);
-	g_value = 0;
+	att->g_value = 0;
 	return (0);
 }

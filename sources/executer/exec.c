@@ -34,19 +34,19 @@ int	do_execve(t_attr *att)
 	envp_to_matrix(att);
 	set_signals();
 	if (ft_strchr(att->arr2[0], '.') || ft_strchr(att->arr2[0], '/'))
-		g_value = ft_ecxev(att->arr2[0], att->arr2, att->env);
+		att->g_value = ft_ecxev(att->arr2[0], att->arr2, att->env);
 	else
 	{
-		g_value = bin_exec(att);
+		att->g_value = bin_exec(att);
 	}
 	set_signals2();
 	free_arr(att->env);
-	return (g_value);
+	return (att->g_value);
 }
 
 // VANNO GESTITI I SEGNALI PER QUITTARE I PROCESSI FIGLI
 
-//controllare la gestione di g_value 
+//controllare la gestione di att.g_value 
 
 int	exec(t_attr *att)
 {
@@ -67,20 +67,20 @@ int	exec(t_attr *att)
 		if (!att->skip)
 			do_red(att);
 		if (!att->skip)
-			g_value = do_child_cmd(att);
+			att->g_value = do_child_cmd(att);
 		free_arr(att->paths);
 		// free(att->paths);
-		exit(g_value);
+		exit(att->g_value);
 	}
 	else
-		waitpid(att->pid, &g_value, 0);
-	g_value = WEXITSTATUS(g_value);
-	if (g_value == 127)
+		waitpid(att->pid, &att->g_value, 0);
+	att->g_value = WEXITSTATUS(att->g_value);
+	if (att->g_value == 127)
 		command_not_found(att->arr2[0]);
 	if (att->read_from_pipe)
 		att->pipe_index++;
 	close_pipeline(att);
 	free_arr(att->paths);
 	// free(att->paths);
-	return (g_value);
+	return (att->g_value);
 }
