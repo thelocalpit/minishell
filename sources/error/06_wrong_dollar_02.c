@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:46:01 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/24 16:44:58 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:24:20 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int error_dollar_03(char *check_envp, t_attr *att, int len)
 	att->y_mx_envp = 0;
 	if (!check_local_list(check_envp, att, len))
 		return (0);
-	return (-1);
+	return (1);
 }

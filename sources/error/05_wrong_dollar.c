@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:52 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/07 18:16:30 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:25:20 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int error_dollar_01(char *s, t_attr *att)
 		while(i < att->nb_$)
 			att->flag$[i++] = 0;
 		if (!att->flag$ && !att->save_y_mx_envp)
-			return (-1);
+			return (1);
 		att->i_flag$ = 0;
 	}
 	return (0);
@@ -53,7 +53,7 @@ int error_dollar(char *s, t_attr *att)
 	int i;
 
 	if (error_dollar_01(s, att))
-		return (-1);
+		return (1);
 	i = 0;
 	while (s[i] && att->i_flag$ < att->nb_$)
 	{
