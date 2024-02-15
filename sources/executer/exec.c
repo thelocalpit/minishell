@@ -6,7 +6,7 @@
 /*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/15 22:29:58 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:48:18 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	do_execve(t_attr *att)
 int	exec(t_attr *att)
 {
 	att->pid = fork();
-	set_signal_child();
 	if (!find_paths(att))
 	{
 		ft_putstr_fd("PATH not found", 2);
@@ -62,6 +61,7 @@ int	exec(t_attr *att)
 	}
 	if (att->pid == 0)
 	{
+		set_signal_child();
 		if (!att->skip)
 			do_red(att);
 		if (!att->skip)
@@ -70,16 +70,15 @@ int	exec(t_attr *att)
 		// free(att->paths);
 		exit(att->g_value);
 	}
-	else
-		waitpid(att->pid, &att->g_value, 0);
+	set_signal_avoid(); //SIGNAL SPENTI
+	waitpid(att->pid, &att->g_value, 0);
 	att->g_value = WEXITSTATUS(att->g_value);
-	//set_signal_avoid(); //SIGNAL SPENTI
 	set_signal();
-//	if (g_signal == SIGINT)
-//	{
-//		printf("\n");
-//		att->g_value = 130;
-//	}
+	if (g_signal == SIGINT)
+	{
+		printf("\n");
+		att->g_value = 130;
+	}
 	if (att->g_value == 127)
 		command_not_found(att->arr2[0]);
 	if (att->read_from_pipe)
