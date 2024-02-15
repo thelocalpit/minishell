@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/12 19:56:15 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:09:12 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int g_signal;
 
 int	main(int ac, char **av, char **envp)
 {
@@ -21,11 +23,12 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	att.g_value = 0;
+	g_signal = 0;
 	att.index_list = 0;
 	att.i_flag$ = 0;
 	att.flag_list = 0;
 	rl_clear_history();
-	set_signals();
+	set_signal();
 	att.i_flag$ = 0;
 	init_parameters(&att);
 	// questo è l'init del env per il momento fatto cosi, poi va sistemato dove volete voi
@@ -57,7 +60,7 @@ int	main(int ac, char **av, char **envp)
 			while (att.split_arr[att.y] && !verify_readline(s, &att))
 			{
 				check_next_step(&att);
-				get_cmd_matrix(att.split_arr[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO 
+				get_cmd_matrix(att.split_arr[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
 				// ft_print_array(att.arr2);
 				att.g_value = do_builtin(&att);
 				add_index_to_custom_env(&att);

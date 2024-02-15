@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/09 20:19:42 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/15 17:51:09 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	heredoc_read(t_attr *att, char *eof)
 {
 	char	*input;
 
-	signal(SIGINT, &heredoc_handler);
-	signal(SIGQUIT, &heredoc_handler);
+	//signal(SIGINT, &heredoc_handler);
+	//signal(SIGQUIT, &heredoc_handler);
 	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
 	{

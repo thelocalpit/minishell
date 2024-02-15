@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/13 16:45:05 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:13:48 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../includes/minishell.h"
 
 /*
 	handle_interrupt is a signal handler for Ctrl+C
@@ -20,66 +18,70 @@
 	SIGQUIT - CTRL BACKSLSH
 	SIGTSTP - CTRL Z
 */
-
-
 /* la seguente funzione è necessaria per gestire il segnale CTRL+C
-	se il sig passato in funzione è SIGINT, allora andiamo a capo, sostituiamo 
+	se il sig passato in funzione è SIGINT, allora andiamo a capo, sostituiamo
 	la riga con una vuota.
 	muovo il cursore su una nuova linea.
 	faccio un redisplay del prompt
-	
-	 */
-void	handle_interrupt(int sig)
+*/
+
+
+#include "../../includes/minishell.h"
+#include <signal.h>
+
+extern int	g_signal;
+
+void	handle_interrupt(int signum)
 {
-	if (sig == SIGINT)
-	{
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-	//att.g_value = 130;
-}
-void handle_interrupt3(int sig)
-{
-	if (sig == SIGINT)
-	{
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-	//att.g_value = 130;
-}
-void set_signals3(void)
-{
-	// printf("sono dentro 3\n")
-	signal(SIGINT, handle_interrupt3);
-	signal(SIGQUIT, SIG_IGN);
+	g_signal = signum;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line ("", 0);
+	rl_redisplay();
 }
 
-void	set_signals(void)
+void	handle_quit(int signum)
 {
-	signal(SIGINT, handle_interrupt);
-	signal(SIGQUIT, SIG_IGN);
+	(void)signum;
+	return ;
 }
 
-void	set_signals2(void)
+void	check_child(int signum)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	g_signal = signum;
+}
+void	set_signal(void)
+{
+	struct sigaction	new_action;
+
+	new_action.sa_handler = handle_interrupt;
+	sigemptyset(&new_action.sa_mask);
+	new_action.sa_flags = 0;
+	sigaction(SIGINT, &new_action, NULL);
+	new_action.sa_handler = SIG_IGN;
+	sigemptyset(&new_action.sa_mask);
+	sigaction(SIGQUIT, &new_action, NULL);
 }
 
-void	heredoc_handler(int sig)
+void	set_signal_child(void)
 {
-	if (sig == SIGINT)
-	{
-		unlink(".heredoc");
-		exit(130);
-	}
-	else if (sig == SIGQUIT)
-	{
-		unlink(".heredoc");
-		exit(131);
-	}
+	struct sigaction	new_action;
+
+	new_action.sa_handler = SIG_DFL;
+	sigemptyset(&new_action.sa_mask);
+	new_action.sa_flags = 0;
+	sigaction(SIGINT, &new_action, NULL);
+	new_action.sa_handler = SIG_DFL;
+	sigemptyset(&new_action.sa_mask);
+	sigaction(SIGQUIT, &new_action, NULL);
+}
+
+void	set_signal_avoid(void)
+{
+	struct sigaction	new_action;
+
+	new_action.sa_handler = check_child;
+	sigemptyset(&new_action.sa_mask);
+	new_action.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &new_action, NULL);
 }

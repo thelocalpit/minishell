@@ -6,6 +6,8 @@
 		"macros.h": "c",
 		"__locale": "c",
 		"unistd.h": "c",
-		"syslimits.h": "c"
-	}
+		"syslimits.h": "c",
+		"signal.h": "c"
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }

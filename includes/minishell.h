@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/12 19:26:18 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/15 21:58:28 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,11 +215,10 @@ void count_expanded_token_local_var(t_attr *att);
 char *prompt(void);
 
 // signals.c
-void set_signals3(void);
-void set_signals2(void);
-void    set_signals(void);
-void    handle_interrupt(int sig);
-void    heredoc_handler(int sig);
+void	set_signal(void);
+void	set_signal_child(void);
+void	set_signal_avoid(void);
+
 
 // debugg.c
 
