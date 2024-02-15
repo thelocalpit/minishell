@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:24 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/13 16:37:50 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:32:08 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_next_arg(char *s, int i)
 		i++;
 	if (s[i] == '\0')
 		return (return_not_required());
-	if (s[i] != '>' || s[i] != '<' || s[i] != '|')
+	if (s[i] != '>' && s[i] != '<' && s[i] != '|')
 		return (0);
 	else
 	{
