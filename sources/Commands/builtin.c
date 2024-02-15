@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/10 14:33:35 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:48:54 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	ft_cd(char **args)
 	}
 	else if (chdir(args[1]) == -1)
 	{
-		printf(RED"cd : diocane non ce sta la cartella");
+		printf(RED "cd: no such file or directory: %s", args[1]);
 		printf("\n");
 		return (1);
 	}

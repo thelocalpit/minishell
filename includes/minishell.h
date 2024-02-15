@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/12 19:26:18 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:44:01 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,11 +261,15 @@ int		var_name_length(char *full_var);
 //	error_folder
 
 // 00_verify_readline.c
+
 int     verify_readline(char *s, t_attr *att);
+int error_begin_02(char *s);
+int check_next_chars(char *s);
+int return_negative(void);
 
 // 01_error_quotes.c
 
-int     count_quotes(char *s);
+int count_quotes(char *s);
 
 // 02_error_error_start_last.c
 

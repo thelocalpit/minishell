@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/12 19:56:38 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:35:49 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 	 */
 void	handle_interrupt(int sig)
 {
+	// printf("CIAO\n");
 	if (sig == SIGINT)
 	{
 		printf("\n");
@@ -40,15 +41,7 @@ void	handle_interrupt(int sig)
 	}
 	g_value = 130;
 }
-// void handle_interrupt3()
-// {
-// 	write(1, "\n", 1);
-// }
-// void set_signals3(void)
-// {
-// 	signal(SIGINT, handle_interrupt3);
-// 	signal(SIGQUIT, handle_interrupt3);
-// }
+
 
 void	set_signals(void)
 {
