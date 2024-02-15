@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:02:39 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/14 14:38:19 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:51:08 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,16 @@ int	check_2nd_char(char *s, int i)
 
 int	check_spaces(char *s, int *i)
 {
-	while (s[*i] == ' ' || s[*i] == '\0')
-	{
-		if (s[*i] == '\0')
-			return (1);
+	while (s[*i] == ' ')
 		(*i)++;
-	}
+	if (s[*i] == '\0')
+		return (return_nl_error());
+	// else if (s[*i] == '>')
+	// 	return_gt_error();
+	// else if (s[*i] == '<')
+	// 	return_lt_error();
+	// else if (s[*i] == '|')
+	// 	return_pipe_error();
 	return (0);
 }
 
@@ -90,7 +94,7 @@ int	error_mixed_start(char *s)
 			else
 				i++;
 			if (check_spaces(s, &i) != 0)
-				return (return_nl_error());
+				return (1);
 		}
 	}
 	return (0);
