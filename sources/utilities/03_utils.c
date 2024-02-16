@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   03_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:26:11 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 11:31:00 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:20:27 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int ft_isspace(char *s)
+int	ft_isspace(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	//write(1, "\t", 1);
 	while (s[i])
 	{
 		if (s[i] == ' ' && s[i] == '\t')
@@ -30,26 +29,19 @@ int ft_isspace(char *s)
 
 void	envp_to_matrix(t_attr *att)
 {
-	t_list *tmp_list;
-	int	i;
+	t_list	*tmp_list;
+	int		i;
 
 	tmp_list = att->env_list;
 	i = 0;
 	att->env = malloc(sizeof(char *) * (ft_lstsize(tmp_list) + 1));
 	tmp_list = att->env_list;
-	//printf("envp_to_matrix\n");
 	while (tmp_list)
 	{
 		att->env[i] = ft_strdup(tmp_list->content);
 		tmp_list = tmp_list->next;
 		i++;
 	}
-	// i = 0;
-	// while(att->env[i])
-	// {
-	// 	printf("%s\n", att->env[i]);
-	// 	i++;
-	// }
 	att->env[i] = NULL;
 }
 

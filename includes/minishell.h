@@ -3,17 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/16 12:36:25 by mcoppola         ###   ########.fr       */
+/*   Created: 2024/02/16 18:12:38 by pfalasch          #+#    #+#             */
+/*   Updated: 2024/02/16 18:19:41 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-
-
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -258,7 +253,7 @@ void ft_itoa_custom(int n, t_attr *att);
 // 02_utils.c
 
 char    *get_var_content(char *full_var);
-char    *removePlus(char *full_var);
+char    *removeplus(char *full_var);
 int		var_name_length(char *full_var);
 char	*var_no_content_quote(char *str);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/15 23:57:33 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:48:18 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		s = prompt();
+		if (s == NULL)
+		{
+			rl_clear_history();
+			break;
+		}
+		g_signal = 0;
 		if (g_signal == SIGINT)
 		{
 			att.g_value = 130;
 		}
 		//printf("%d\n", g_signal);
-		g_signal = 0;
 		//printf("%d\n", g_signal);
-		if (s == NULL)
-		{
-			rl_clear_history();
-			break ;
-		}
 		reinit_parameters(&att, envp);
 		//start_env(envp, &att);
 

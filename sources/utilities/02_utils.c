@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:26:11 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 12:35:15 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:19:28 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_var_content(char *full_var)
 	p++;
 	p_len = ft_strlen(p);
 
-	if(*p == '\"' &&  p[p_len - 1] == '\"')
+	if (*p == '\"' && p[p_len - 1] == '\"')
 	{
 		p[p_len - 1] = '\0';
 		p++;
@@ -36,14 +36,14 @@ char	*get_var_content(char *full_var)
 	return (p);
 }
 
-char    *removePlus(char *full_var)
+char	*removeplus(char *full_var)
 {
-	char    *name;
-	char	*varName;
+	char	*name;
+	char	*varname;
 
-	varName = get_var_name(full_var);
-	name = ft_strjoin(varName, ft_strchr(full_var, '='));
-	free(varName);
+	varname = get_var_name(full_var);
+	name = ft_strjoin(varname, ft_strchr(full_var, '='));
+	free(varname);
 	return (name);
 }
 

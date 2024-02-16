@@ -3,21 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 00:22:41 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:21:20 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-	handle_interrupt is a signal handler for Ctrl+C
-	(SIGINT) that clears the current input line and
-	starts a new line with a new prompt.
-	SIGINT - CTRL C
-	SIGQUIT - CTRL BACKSLSH
-	SIGTSTP - CTRL Z
-*/
 /* la seguente funzione è necessaria per gestire il segnale CTRL+C
 	se il sig passato in funzione è SIGINT, allora andiamo a capo, sostituiamo
 	la riga con una vuota.
@@ -42,6 +34,7 @@ void	handle_interrupt(int signum)
 
 void	handle_quit(int signum)
 {
+	printf("sono dentro handle_quit\n");
 	(void)signum;
 	return ;
 }

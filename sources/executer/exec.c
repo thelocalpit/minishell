@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/16 12:02:06 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:46:46 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	find_paths(t_attr *att)
 
 int	do_execve(t_attr *att)
 {
+	// signal(SIGQUIT, SIG_IGN);
 	envp_to_matrix(att);
 	if (ft_strchr(att->arr2[0], '.') || ft_strchr(att->arr2[0], '/'))
 		att->g_value = ft_ecxev(att->arr2[0], att->arr2, att->env);
@@ -77,6 +78,7 @@ int	exec(t_attr *att)
 		printf("\n");
 		att->g_value = 130;
 	}
+	g_signal = 0;
 	if (att->g_value == 127)
 		command_not_found(att->arr2[0]);
 	if (att->read_from_pipe)
