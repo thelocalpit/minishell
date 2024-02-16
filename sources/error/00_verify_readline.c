@@ -13,10 +13,10 @@
 #include "../../includes/minishell.h"
 
 /* controlla la linea di comando inserita con tutte le varie casistiche */
-int	return_negative(void)
+int	return_negative(t_attr *att)
 {
-	g_value = 2;
-	return (1);
+	att->g_value = 2;
+	return (1); //HO MERGIATO PRIMA IL RETURNN ERA da g_struct_var branch -1 DA VERIFICARE CON PIETRO PORCO DIO
 }
 
 /* questa funzione serve per valutare la validità della linea di comando.
@@ -38,6 +38,6 @@ int	verify_readline(char *s, t_attr *att)
 	else if (error_mixed_start(s))
 		return (return_negative());
 	else if (error_dollar(s, att))
-		return (return_negative());
+		return (return_negative(att));
 	return (0);
 }

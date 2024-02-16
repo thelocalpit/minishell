@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/15 11:44:01 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 00:10:49 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 //global variable
 
-extern int  g_value;
+extern int  g_signal;
 
 // colors
 
@@ -130,7 +130,8 @@ typedef struct s_attr
 	int i_flag$;
 	int *save_y_mx_envp;
     int flag_list;
-
+	// exit_status
+	int g_value;
     //--- lista ----
 
 	t_list *env_list;
@@ -214,11 +215,11 @@ void count_expanded_token_local_var(t_attr *att);
 char *prompt(void);
 
 // signals.c
-void set_signals3(void);
-void set_signals2(void);
-void    set_signals(void);
-void    handle_interrupt(int sig);
-void    heredoc_handler(int sig);
+void	set_signal(void);
+void	set_signal_child(void);
+void	set_signal_avoid(void);
+void	signal_heredoc_handler(void);
+
 
 // debugg.c
 
@@ -273,35 +274,35 @@ int count_quotes(char *s);
 
 // 02_error_error_start_last.c
 
-int     error_begin(char *s);
-int     error_end(char *s, char c);
+int     error_begin(char *s, t_attr *att);
+int     error_end(char *s, char c, t_attr *att);
 
 // 03_error_mixed.c
 
-int check_2nd_char_02(char *s, int i, char d);
-int check_2nd_char_03(char *s, int i, char d);
+int check_2nd_char_02(char *s, int i, char d, t_attr *att);
+int check_2nd_char_03(char *s, int i, char d, t_attr *att);
 int check_spaces(char *s, int *i);
-int check_2nd_char(char *s, int i);
-int	error_mixed_start(char *s);
+int check_2nd_char(char *s, int i, t_attr *att);
+int	error_mixed_start(char *s, t_attr *att);
 
 //03a_error_mixed.c
 
 int ft_scorri(char *s, int i);
-int check_extra_char(char *s, int i);
-int check_next_arg(char *s, int i);
+int check_extra_char(char *s, int i, t_attr *att);
+int check_next_arg(char *s, int i, t_attr *att);
 
 // 04_error_messages.c
 
-int     return_not_required(void);
-int     return_pipe_error(void);
-int     return_gt_error(void);
-int     return_lt_error(void);
-int     return_nl_error(void);
+int     return_not_required(t_attr *att);
+int     return_pipe_error(t_attr *att);
+int     return_gt_error(t_attr *att);
+int     return_lt_error(t_attr *att);
+int     return_nl_error(t_attr *att);
 
 
 // 04a_error_messages.c
 
-int exit__err(char *str);
+int exit__err(char *str, t_attr *att);
 void	read_file_error(t_attr *att, char *file);
 void	command_not_found(char *str);
 

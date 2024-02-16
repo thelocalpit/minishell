@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/09 20:19:42 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/16 00:11:52 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_read_file(t_attr *att)
 		reset_flags2(att);
 		next_step_sub(att);
 		if (att->heredoc)
-			g_value = heredoc(att);
+			att->g_value = heredoc(att);
 		if (att->read_from_file && att->y + 1 == att->i_readfile)
 			read_from_file(att);
 		att->y += 2;
@@ -34,7 +34,7 @@ int	red_input(t_attr *att, char *path)
 		return (1);
 	dup2(att->red_fd, 0);
 	close(att->red_fd);
-	g_value = 0;
+	att->g_value = 0;
 	return (0);
 }
 
@@ -69,8 +69,7 @@ int	heredoc_read(t_attr *att, char *eof)
 {
 	char	*input;
 
-	signal(SIGINT, &heredoc_handler);
-	signal(SIGQUIT, &heredoc_handler);
+	signal_heredoc_handler();
 	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
 	{

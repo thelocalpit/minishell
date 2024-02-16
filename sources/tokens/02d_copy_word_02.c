@@ -23,7 +23,7 @@ int ft_strlen_name_var(char *s, int *i, int len_name_var)
 
 int copy_g_value(t_attr *att, int i)
 {
-	ft_itoa_custom(g_value, att);
+	ft_itoa_custom(att->g_value, att);
 	i += 2;
 	return (i);
 }

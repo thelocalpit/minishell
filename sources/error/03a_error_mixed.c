@@ -35,7 +35,7 @@ int	ft_scorri(char *s, int i)
 
 /* questa funzione si assicura che non ci siano extra char
 	oltre i possibili 2 consentiti e stampa i relativi errori */
-int	check_extra_char(char *s, int i)
+int	check_extra_char(char *s, int i, t_attr *att)
 {
 	char	c;
 	char	d;
@@ -49,22 +49,22 @@ int	check_extra_char(char *s, int i)
 	d = s[i - 1];
 	e = s[i];
 	if (c == '<' && d == '<' && e == '<')
-		return (return_not_required());
+		return (return_not_required(att));
 	else if ((c == '>' && d == '>') || (c == '<' && d == '<'))
 	{
 		if (e == '>')
-			return (return_gt_error());
+			return (return_gt_error(att));
 		else if (e == '<')
-			return (return_lt_error());
+			return (return_lt_error(att));
 		else if (e == '|')
-			return (return_pipe_error());
+			return (return_pipe_error(att));
 	}
 	return (0);
 }
 
 /* questa funzione si assicura che non ci siano due redir
 	di fila a quell'altra e stampa i relativi errori in caso ci siano  */
-int	check_next_arg(char *s, int i)
+int	check_next_arg(char *s, int i, t_attr *att)
 {
 	i++;
 	if (s[i] == '>' || s[i] == '<')
@@ -72,16 +72,17 @@ int	check_next_arg(char *s, int i)
 	while (s[i] != ' ' && s[i] != '\0')
 		i++;
 	if (s[i] == '\0')
-		return (return_not_required());
+		return (return_not_required(att));
 	if (s[i] != '>' && s[i] != '<' && s[i] != '|')
+
 		return (0);
 	else
 	{
 		if (s[i] == '>')
-			return (return_gt_error());
+			return (return_gt_error(att));
 		else if (s[i] == '<')
-			return (return_lt_error());
+			return (return_lt_error(att));
 		else
-			return (return_pipe_error());
+			return (return_pipe_error(att));
 	}
 }

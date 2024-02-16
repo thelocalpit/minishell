@@ -12,37 +12,37 @@
 
 #include "../../includes/minishell.h"
 
-int	return_not_required(void)
+int	return_not_required(t_attr *att)
 {
 	printf("command not required by subject\n");
-	g_value = 2;
+	att->g_value = 2;
 	return (1);
 }
 
-int	return_pipe_error(void)
+int	return_pipe_error(t_attr *att)
 {
 	printf("parse error near `|'\n");
-	g_value = 2;
+	att->g_value = 2;
 	return (1);
 }
 
-int	return_gt_error(void)
+int	return_gt_error(t_attr *att)
 {
 	printf("parse error near `>'\n");
-	g_value = 2;
+	att->g_value = 2;
 	return (1);
 }
 
-int	return_lt_error(void)
+int	return_lt_error(t_attr *att)
 {
 	printf("parse error near `<'\n");
-	g_value = 2;
+	att->g_value = 2;
 	return (1);
 }
 
-int return_nl_error(void)
+int return_nl_error(t_attr *att)
 {
 	printf("syntax error near unexpected token 'newline'\n");
-	g_value = 2;
+	att->g_value = 2;
 	return (1);
 }
