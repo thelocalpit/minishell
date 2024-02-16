@@ -6,13 +6,19 @@
 /*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/15 23:57:33 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:46:26 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int g_signal;
+
+		//	if (!s)
+		//	{
+		//		ft_exit_custom(&att);
+		//		return (0);
+		//	}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -50,8 +56,8 @@ int	main(int ac, char **av, char **envp)
 		//printf("%d\n", g_signal);
 		if (s == NULL)
 		{
-			rl_clear_history();
-			break ;
+			exit(5);
+			return(0);
 		}
 		reinit_parameters(&att, envp);
 		//start_env(envp, &att);
@@ -82,7 +88,6 @@ int	main(int ac, char **av, char **envp)
 			free_arr(att.split_arr);
 			if (att.nb_pipes != 0)
 				ft_delete_matrix(att.pipesfd);
-
 			free(s);
 		}
 	}

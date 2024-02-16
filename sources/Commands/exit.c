@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:17:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/08 17:06:40 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:30:19 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	ft_exit_custom(t_attr *att)
 		return ;
 	}
 	exit_free(att);
+	write(1, "exit\n", 5);
 	exit(att->g_value);
 }

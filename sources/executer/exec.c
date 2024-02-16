@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/16 12:02:06 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:19:03 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	exec(t_attr *att)
 		printf("\n");
 		att->g_value = 130;
 	}
+	g_signal = 0;
 	if (att->g_value == 127)
 		command_not_found(att->arr2[0]);
 	if (att->read_from_pipe)
