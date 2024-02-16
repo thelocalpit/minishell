@@ -6,7 +6,7 @@
 /*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/15 22:13:48 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 00:22:41 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,32 @@ void	set_signal_avoid(void)
 	new_action.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &new_action, NULL);
 }
+
+void	heredoc_handler(int signum)
+{
+	if (signum == SIGINT)
+	{
+		unlink(".heredoc");
+		exit(130);
+	}
+	else if (signum == SIGQUIT)
+	{
+		unlink(".heredoc");
+		exit(0);
+	}
+}
+
+void	signal_heredoc_handler(void)
+{
+	struct sigaction new_action;
+
+	new_action.sa_handler = heredoc_handler;
+	sigemptyset(&new_action.sa_mask);
+	new_action.sa_flags = 0;
+	sigaction(SIGINT, &new_action, NULL);
+	new_action.sa_handler = heredoc_handler;
+	sigemptyset(&new_action.sa_mask);
+	sigaction(SIGQUIT, &new_action, NULL);
+
+}
+

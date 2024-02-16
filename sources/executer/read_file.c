@@ -6,7 +6,7 @@
 /*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/15 17:51:09 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 00:11:52 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int	heredoc_read(t_attr *att, char *eof)
 {
 	char	*input;
 
-	//signal(SIGINT, &heredoc_handler);
-	//signal(SIGQUIT, &heredoc_handler);
+	signal_heredoc_handler();
 	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
 	{

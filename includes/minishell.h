@@ -6,7 +6,7 @@
 /*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/15 21:58:28 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 00:10:49 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ char *prompt(void);
 void	set_signal(void);
 void	set_signal_child(void);
 void	set_signal_avoid(void);
+void	signal_heredoc_handler(void);
 
 
 // debugg.c

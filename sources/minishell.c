@@ -6,7 +6,7 @@
 /*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/15 23:05:47 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/15 23:57:33 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		s = prompt();
+		if (g_signal == SIGINT)
+		{
+			att.g_value = 130;
+		}
+		//printf("%d\n", g_signal);
+		g_signal = 0;
+		//printf("%d\n", g_signal);
 		if (s == NULL)
 		{
 			rl_clear_history();
