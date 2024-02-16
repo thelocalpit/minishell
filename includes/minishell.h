@@ -262,11 +262,15 @@ int		var_name_length(char *full_var);
 //	error_folder
 
 // 00_verify_readline.c
+
 int     verify_readline(char *s, t_attr *att);
+int error_begin_02(char *s);
+int check_next_chars(char *s);
+int return_negative(void);
 
 // 01_error_quotes.c
 
-int     count_quotes(char *s);
+int count_quotes(char *s);
 
 // 02_error_error_start_last.c
 

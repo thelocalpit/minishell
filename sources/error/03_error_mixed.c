@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:02:39 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/10 14:35:42 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:51:08 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ int	check_2nd_char(char *s, int i, t_attr *att)
 {
 	char	c;
 	char	d;
-
-	i++;
+	
+	if (s[i + 1])
+		i++;
+	else
+		return (return_nl_error());
 	c = s[i - 1];
 	d = s[i];
 	if (c == '>' && check_2nd_char_02(s, i, d, att) == 1)
@@ -57,12 +60,16 @@ int	check_2nd_char(char *s, int i, t_attr *att)
 
 int	check_spaces(char *s, int *i)
 {
-	while (s[*i] == ' ' || s[*i] == '\0')
-	{
-		if (s[*i] == '\0')
-			return (1);
+	while (s[*i] == ' ')
 		(*i)++;
-	}
+	if (s[*i] == '\0')
+		return (return_nl_error());
+	// else if (s[*i] == '>')
+	// 	return_gt_error();
+	// else if (s[*i] == '<')
+	// 	return_lt_error();
+	// else if (s[*i] == '|')
+	// 	return_pipe_error();
 	return (0);
 }
 
@@ -87,7 +94,7 @@ int	error_mixed_start(char *s, t_attr *att)
 			else
 				i++;
 			if (check_spaces(s, &i) != 0)
-				return_nl_error(att);
+				return (1);
 		}
 	}
 	return (0);
