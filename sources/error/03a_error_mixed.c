@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03a_error_mixed.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:24 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/15 16:51:30 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 01:40:13 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	check_extra_char(char *s, int i, t_attr *att)
 	if (s[i + 2])
 		i += 2;
 	else
-		return (return_nl_error());
+		return (return_nl_error(att));
 	c = s[i - 2];
 	d = s[i - 1];
 	e = s[i];

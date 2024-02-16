@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_verify_readline.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:00:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/15 16:16:16 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 01:37:54 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ int	return_negative(t_attr *att)
 	su ciascuna parte di arr2) */
 int	verify_readline(char *s, t_attr *att)
 {
-	if (error_begin_02(s))
-		return (return_negative());
+	if (error_begin_02(s, att))
+		return (return_negative(att));
 	else if (count_quotes(s))
-		return (return_negative());
-	else if (error_end(s, '>') || error_end(s, '<') || error_end(s, '|'))
-		return (return_negative());
-	else if (error_begin(s))
-		return (return_negative());
-	else if (error_mixed_start(s))
-		return (return_negative());
+		return (return_negative(att));
+	else if (error_end(s, '>', att) || error_end(s, '<', att) || error_end(s, '|', att))
+		return (return_negative(att));
+	else if (error_begin(s, att))
+		return (return_negative(att));
+	else if (error_mixed_start(s, att))
+		return (return_negative(att));
 	else if (error_dollar(s, att))
 		return (return_negative(att));
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_error_mixed.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:02:39 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/15 16:51:08 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 01:39:29 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	check_2nd_char(char *s, int i, t_attr *att)
 {
 	char	c;
 	char	d;
-	
+
 	if (s[i + 1])
 		i++;
 	else
-		return (return_nl_error());
+		return (return_nl_error(att));
 	c = s[i - 1];
 	d = s[i];
 	if (c == '>' && check_2nd_char_02(s, i, d, att) == 1)
@@ -58,12 +58,12 @@ int	check_2nd_char(char *s, int i, t_attr *att)
 	return (0);
 }
 
-int	check_spaces(char *s, int *i)
+int	check_spaces(char *s, int *i, t_attr *att)
 {
 	while (s[*i] == ' ')
 		(*i)++;
 	if (s[*i] == '\0')
-		return (return_nl_error());
+		return (return_nl_error(att));
 	// else if (s[*i] == '>')
 	// 	return_gt_error();
 	// else if (s[*i] == '<')
@@ -93,7 +93,7 @@ int	error_mixed_start(char *s, t_attr *att)
 				i += 2;
 			else
 				i++;
-			if (check_spaces(s, &i) != 0)
+			if (check_spaces(s, &i, att) != 0)
 				return (1);
 		}
 	}

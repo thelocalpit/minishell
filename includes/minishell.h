@@ -6,7 +6,7 @@
 /*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/16 00:10:49 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 01:39:35 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,9 +264,9 @@ int		var_name_length(char *full_var);
 // 00_verify_readline.c
 
 int     verify_readline(char *s, t_attr *att);
-int error_begin_02(char *s);
-int check_next_chars(char *s);
-int return_negative(void);
+int error_begin_02(char *s, t_attr *att);
+int check_next_chars(char *s, t_attr *att);
+int return_negative(t_attr *att);
 
 // 01_error_quotes.c
 
@@ -281,7 +281,7 @@ int     error_end(char *s, char c, t_attr *att);
 
 int check_2nd_char_02(char *s, int i, char d, t_attr *att);
 int check_2nd_char_03(char *s, int i, char d, t_attr *att);
-int check_spaces(char *s, int *i);
+int check_spaces(char *s, int *i, t_attr *att);
 int check_2nd_char(char *s, int i, t_attr *att);
 int	error_mixed_start(char *s, t_attr *att);
 
