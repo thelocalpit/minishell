@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:26:11 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/29 16:35:40 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:35:15 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@
 char	*get_var_content(char *full_var)
 {
 	char	*p;
+	int		p_len;
 
 	p = ft_strchr(full_var, '=');
 	if (!p)
 		return ("");
-	return (++p);
+	p++;
+	p_len = ft_strlen(p);
+
+	if(*p == '\"' &&  p[p_len - 1] == '\"')
+	{
+		p[p_len - 1] = '\0';
+		p++;
+	}
+	return (p);
 }
 
 char    *removePlus(char *full_var)
@@ -51,4 +60,25 @@ int	var_name_length(char *full_var)
 	if (full_var[var_name_length - 1] == '+')
 		var_name_length--;
 	return (var_name_length);
+}
+
+/**
+ * Return the variable string without the  quote ("") on the content
+ *
+ * ex1: ciao="pippo" => ciao=pippo
+ * ex2: prova=casa   => prova=casa
+*/
+char	*var_no_content_quote(char *str)
+{
+	char	*new_str;
+	char	*tmp;
+	char	*var_name;
+
+	var_name = get_var_name(str);
+
+	tmp = ft_strjoin(var_name, "=");
+	new_str = ft_strjoin(tmp, get_var_content(str));
+	free(tmp);
+	free(var_name);
+	return (new_str);
 }

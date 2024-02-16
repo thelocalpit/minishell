@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   localvar.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:09:39 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/10 01:42:34 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/16 12:55:57 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int	update_var(char *str, t_list *list, int add)
 			if (!add)
 			{
 				free(tmp->content);
-				tmp->content = ft_strdup(str);
+				tmp->content = var_no_content_quote(str);
 				return (1);
 			}
 			temp = ft_strjoin(tmp->content,
 				str + var_name_length(str) + 2);
 			free(tmp->content);
-			tmp->content = ft_strdup(temp);
+			tmp->content = var_no_content_quote(temp);
 			free(temp);
 			return (1);
 		}
@@ -84,11 +84,11 @@ int	new_var(char *str, t_attr *att, int add, int empty)
 	{
 		temp = ft_strjoin(name, str + ft_strlen(name) + 1);
 		free(str);
-		str = ft_strdup(temp);
+		str = var_no_content_quote(temp);
 		free(temp);
 	}
 	tmp = att->local_var;
-	tmp = ft_lstnew(ft_strdup(str));
+	tmp = ft_lstnew(var_no_content_quote(str));
 	// da capire se va lasciato perche in questa funzione ce un leak
 	// if (add && !empty)
 	// 	free(str);

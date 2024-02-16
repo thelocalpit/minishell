@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/02/16 01:39:35 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:36:25 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,14 +250,17 @@ int	matrix_len(char **matrix);
 void add_index_to_local_var(t_attr *att);
 int ft_isspace(char *s);
 
-// 02_utils.c
 
 int ft_intsize(int n);
 int ft_ispositive(int n);
 void ft_itoa_custom(int n, t_attr *att);
+
+// 02_utils.c
+
 char    *get_var_content(char *full_var);
 char    *removePlus(char *full_var);
 int		var_name_length(char *full_var);
+char	*var_no_content_quote(char *str);
 
 //	error_folder
 

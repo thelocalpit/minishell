@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/01/29 16:40:40 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:56:54 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,15 @@ void	check_duplicate(t_attr *att, char *content)
 	list = att->env_list;
 	while (list)
 	{
-	printf("quiiii\n");
 		if (!ft_strncmp(content,
 				(char *)list->content, var_name_length(content)))
 		{
-			list->content = ft_strdup(content);
+			list->content = var_no_content_quote(content);
 			return ;
 		}
 		list = list->next;
 	}
-	printf("quiiii\n");
-	ft_lstadd_back(&(att->env_list), ft_lstnew(ft_strdup(content)));
+	ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_content_quote(content)));
 }
 
 /**
@@ -121,14 +119,14 @@ int	add_on_env(char *arg, t_attr *att)
 		{
 			if (append)
 				return (env_list->content = ft_strjoin(env_list->content, get_var_content(content)), 0);
-			return (env_list->content = ft_strdup(content), 0);
+			return (env_list->content = var_no_content_quote(content), 0);
 		}
 		env_list = env_list->next;
 	}
 	if (append)
-		ft_lstadd_back(&(att->env_list), ft_lstnew(removePlus(content)));
+		ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_content_quote(content)));
 	else
-		ft_lstadd_back(&(att->env_list), ft_lstnew(ft_strdup(content)));
+		ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_content_quote(content)));
 	return (0);
 
 }
