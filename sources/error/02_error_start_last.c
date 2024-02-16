@@ -13,7 +13,7 @@
 #include "../../includes/minishell.h"
 
 /* controlla il primo elemento se è sbagliato */
-int	error_begin(char *s)
+int	error_begin(char *s, t_attr *att)
 {
 	int	i;
 
@@ -23,27 +23,27 @@ int	error_begin(char *s)
 	while (s[i] == ' ')
 		i++;
 	if (s[i] == '|' || (s[i] == '<' && s[i + 1] == '|'))
-		return (return_pipe_error());
+		return (return_pipe_error(att));
 	else if (s[i] == '>' && s[i + 1] == '>' && s[i + 2] == '|')
-		return (return_pipe_error());
+		return (return_pipe_error(att));
 	else if (s[i] == '<' && s[i + 1] == '<' && s[i + 2] == '|')
-		return (return_pipe_error());
+		return (return_pipe_error(att));
 	else if (s[i] == '<' && s[i + 1] == '>' && s[i + 2] == '|')
-		return (return_pipe_error());
+		return (return_pipe_error(att));
 	else if (s[i] == '>' && s[i + 1] == '|')
-		return (return_not_required());
+		return (return_not_required(att));
 	else if (s[i] == '<' && s[i + 1] == '<' && s[i + 2] == '<')
-		return (return_not_required());
+		return (return_not_required(att));
 	else if (s[i] == '>' && s[i + 1] == '<' && s[i + 2] == '|')
-		return (return_lt_error());
+		return (return_lt_error(att));
 	else if (s[i] == '>' && s[i + 1] == '>' && s[i + 2] == '>')
-		return (return_gt_error());
+		return (return_gt_error(att));
 	return (0);
 }
 
 /* controlla ultimo elemento se è sbagliato */
 
-int	error_end(char *s, char c)
+int	error_end(char *s, char c, t_attr *att)
 {
 	int	len;
 
@@ -53,9 +53,9 @@ int	error_end(char *s, char c)
 	if (s[len - 1] == c)
 	{
 		if (c != '|')
-			return (return_nl_error());
+			return (return_nl_error(att));
 		else
-			return (return_not_required());
+			return (return_not_required(att));
 	}
 	return (0);
 }

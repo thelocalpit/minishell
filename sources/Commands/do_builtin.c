@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/12 19:00:14 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:06:20 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int	do_builtin(t_attr *att)
 			&& (att->arr2[0][0] != '='))
 			return (add_var(att->arr2[0], att));
 	}
-	g_value = exec(att);
-	set_signals();
-	return (g_value);
+	att->g_value = exec(att);
+	return (att->g_value);
 }
 
 int	do_child_cmd(t_attr *att)

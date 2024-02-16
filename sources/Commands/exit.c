@@ -45,25 +45,25 @@ int	ft_exit_02(t_attr *att)
 		i++;
 	}
 	if (flag == 0)
-		g_value = ft_atoi(str);
+		att->g_value = ft_atoi(str);
 	else
-		exit__err(str);
-	return (g_value);
+		exit__err(str, att);
+	return (att->g_value);
 }
 
 void	ft_exit_custom(t_attr *att)
 {
-	g_value = 0;
+	att->g_value = 0;
 	if (att->count_words == 1)
-		g_value = 0;
+		att->g_value = 0;
 	else if (att->count_words == 2)
-		g_value = ft_exit_02(att);
+		att->g_value = ft_exit_02(att);
 	else
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);
-		g_value = 1;
+		att->g_value = 1;
 		return ;
 	}
 	exit_free(att);
-	exit(g_value);
+	exit(att->g_value);
 }

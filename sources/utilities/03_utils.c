@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:26:11 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/23 17:24:35 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:31:00 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ int ft_isspace(char *s)
 	int i;
 
 	i = 0;
+	//write(1, "\t", 1);
 	while (s[i])
 	{
-		if (s[i] == ' ')
+		if (s[i] == ' ' && s[i] == '\t')
 			i++;
 		else
 			return (1);
