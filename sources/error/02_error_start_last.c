@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:45:03 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/10 14:35:26 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:35:55 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	error_begin(char *s, t_attr *att)
 	i = 0;
 	if (!s)
 		return (0);
-	while (s[i] == ' ')
+	while (s[i] == ' ' && s[i])
 		i++;
 	if (s[i] == '|' || (s[i] == '<' && s[i + 1] == '|'))
 		return (return_pipe_error(att));
