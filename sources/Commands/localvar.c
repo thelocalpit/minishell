@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   localvar.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:09:39 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/16 12:55:57 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:25:11 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,10 @@ int	add_var(char *str, t_attr *att)
 		add = 1;
 	if (!str[ft_strlen(name) + 1] || ((!str[ft_strlen(name) + 2]) && add))
 		empty = 1;
-	else
-	{
-		if (update_var(str, att->local_var, add))
-			skip = 1;
-		if (update_var(str, att->env_list, add))
-			skip = 1;
-	}
+	if (update_var(str, att->local_var, add))
+		skip = 1;
+	if (update_var(str, att->env_list, add))
+		skip = 1;
 	if (!skip)
 		new_var(str, att, add, empty);
 	free(name);
