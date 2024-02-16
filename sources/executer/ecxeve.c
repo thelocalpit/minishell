@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ecxeve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:20:37 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/12 19:58:02 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:03:36 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_ecxev(char *path, char **arg, char **env)
 		return (127);
 	if (execve(path, arg, env) != 0)
 	{
-		ft_putstr_fd("execve failed", 2);
+		ft_putstr_fd("execve failed\n", 2);
 		return (126);
 	}
 	return (0);

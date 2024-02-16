@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 18:21:20 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:34:30 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@ void	handle_interrupt(int signum)
 	rl_on_new_line();
 	rl_replace_line ("", 0);
 	rl_redisplay();
-}
-
-void	handle_quit(int signum)
-{
-	printf("sono dentro handle_quit\n");
-	(void)signum;
-	return ;
 }
 
 void	check_child(int signum)
