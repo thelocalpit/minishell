@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/09 07:47:40 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/16 23:04:41 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	do_red(t_attr *att)
 	att->y = y;
 	if (att->frirst_redir)
 		att->skip = 1;
+	get_arr3(att);
 	return (0);
 }
 

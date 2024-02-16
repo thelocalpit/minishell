@@ -6,7 +6,7 @@
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:05:37 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/09 18:55:56 by deggio           ###   ########.fr       */
+/*   Updated: 2024/02/16 23:04:31 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	check_redir(t_attr *att)
 		reset_flags2(att);
 		next_step_sub(att);
 		if (att->redir)
+		{
+			att->flag3 = 1;
 			redir(att);
+		}
 		att->y += 2;
 	}
 	return (0);

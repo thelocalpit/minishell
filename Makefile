@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
+#    By: deggio <deggio@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/02/15 16:41:38 by pfalasch         ###   ########.fr        #
+#    Updated: 2024/02/16 23:28:07 by deggio           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC =	sources/minishell.c \
 		sources/tokens/02d_copy_word_02.c \
 		sources/tokens/03_count_words.c \
 		sources/tokens/04_expander.c \
+		sources/tokens/arr3.c \
 		sources/initialize/init.c \
 		sources/error/00_verify_readline.c \
 		sources/error/01_error_quotes.c \

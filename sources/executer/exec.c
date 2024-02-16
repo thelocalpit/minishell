@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:27:15 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/16 18:32:43 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:25:19 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,18 @@ int	do_execve(t_attr *att)
 	// signal(SIGQUIT, SIG_IGN);
 	envp_to_matrix(att);
 	if (ft_strchr(att->arr2[0], '.') || ft_strchr(att->arr2[0], '/'))
-		att->g_value = ft_ecxev(att->arr2[0], att->arr2, att->env);
+	{
+			if (!att->flag3)
+				att->g_value = ft_ecxev(att->arr2[0], att->arr2, att->env);
+			else
+				att->g_value = ft_ecxev(att->arr3[0], att->arr3, att->env);
+	}
 	else
 	{
-		att->g_value = bin_exec(att);
+		if (!att->flag3)
+			att->g_value = bin_exec(att, att->arr2);
+		else
+			att->g_value = bin_exec(att, att->arr3);
 	}
 	free_arr(att->env);
 	return (att->g_value);
@@ -66,6 +74,8 @@ int	exec(t_attr *att)
 		if (!att->skip)
 			att->g_value = do_child_cmd(att);
 		free_arr(att->paths);
+		if (att->flag3)
+			free_arr(att->arr3);
 		// free(att->paths);
 		exit(att->g_value);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 18:19:41 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:27:28 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ typedef struct s_attr
 	char    **arr2;
 	int     y2;
 	int     x2;
+	char	**arr3;
+	int		y3;
+	int		flag3;
 	// int *flag$;
 	//------ cmds -------------
 	int     count;
@@ -204,6 +207,10 @@ void copy_expanded_str(t_attr *att, int start);
 void count_expanded_token(t_attr *att, char *s);
 void count_expanded_token_local_var(t_attr *att);
 
+// arr3
+void	get_arr3(t_attr *att);
+int	count_arr3(t_attr *att);
+
 // utilities_folder
 
 // prompt.c
@@ -314,7 +321,6 @@ int count_dollar_sign(char *s, t_attr *att);
 //	free_folder
 
 // 00_free.c
-
 void free_arr2(char **tokens, t_attr *att);
 void    free_arr(char **arr);
 void    ft_delete_matrix(void *matrix);
@@ -379,7 +385,7 @@ void    command(t_attr *att);
 
 int	ft_ecxev(char *path, char **arg, char **env);
 int	absolute_exec(t_attr *att);
-int	bin_exec(t_attr *att);
+int	bin_exec(t_attr *att, char **arr);
 
 // exec.c
 

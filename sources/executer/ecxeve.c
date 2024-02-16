@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ecxeve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:20:37 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/16 17:03:36 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:24:53 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	ft_ecxev(char *path, char **arg, char **env)
 	return (0);
 }
 
-int	bin_exec(t_attr *att)
+int	bin_exec(t_attr *att, char **arr)
 {
 	char	**path;
 	char	*tmp;
 	int		i;
 
-	tmp = ft_strjoin("/", att->arr2[0]);
+	tmp = ft_strjoin("/", arr[0]);
 	path = malloc(sizeof(char *) * (matrix_len(att->paths) + 1));
 	path[matrix_len(att->paths)] = NULL;
 	i = -1;
@@ -40,7 +40,7 @@ int	bin_exec(t_attr *att)
 	i = -1;
 	while (path[++i])
 	{
-		if (ft_ecxev(path[i], att->arr2, att->env) == 0)
+		if (ft_ecxev(path[i], arr, att->env) == 0)
 		{
 			free_arr(path);
 			return (0);

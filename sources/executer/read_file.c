@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/16 00:11:52 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:04:10 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@ int	check_read_file(t_attr *att)
 		reset_flags2(att);
 		next_step_sub(att);
 		if (att->heredoc)
+		{
+			att->flag3 = 1;
 			att->g_value = heredoc(att);
-		if (att->read_from_file && att->y + 1 == att->i_readfile)
-			read_from_file(att);
+		}
+		if (att->read_from_file)
+		{
+			att->flag3 = 1;
+			if (att->y + 1 == att->i_readfile)
+				read_from_file(att);
+		}
 		att->y += 2;
 	}
 	return (0);

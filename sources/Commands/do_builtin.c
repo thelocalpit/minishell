@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/15 22:06:20 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:25:49 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ int	do_child_cmd(t_attr *att)
 		return (envi(att));
 	else if (ft_strncmp(att->arr2[0], "export\0", 7) == 0)
 		return (ft_export(att->arr2, att));
-	else if (ft_strncmp(att->arr2[0], "echo\0", 5) == 0)
+	else if (!att->flag3 && ft_strncmp(att->arr2[0], "echo\0", 5) == 0)
 		return (echo(att->arr2));
-	else
+	else if (att->flag3 && ft_strncmp(att->arr2[0], "echo\0", 5) == 0)
+		return (echo(att->arr3));
 	{
 		// printf("entro qui quando faccio minishell\n");
 		return (do_execve(att));
