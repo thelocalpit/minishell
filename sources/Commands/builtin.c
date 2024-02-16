@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/13 16:48:54 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:11:46 by ntamiano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	ft_cd(char **args)
 {
 	char	*tmp;
 
-	if (args[1] == NULL)
+	if (args[1] == NULL || args[1][0] == '~')
 	{
 		tmp = getenv("HOME");
 		chdir(tmp);
