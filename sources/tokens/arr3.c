@@ -24,6 +24,7 @@ void	get_arr3(t_attr *att)
 	att->arr3 = malloc((count_arr3(att) + 1) * sizeof(char *));
     while (y <= att->i_redir + 1 || y <= att->i_readfile + 1)
     {
+						free_arr(att->arr2);
 		get_cmd_matrix(att->split_arr[y], att);
 		if (att->y3 == 0)
 			y2 = 0;
