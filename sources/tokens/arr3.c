@@ -39,6 +39,8 @@ void	get_arr3(t_attr *att)
 		y += 2;
     }
 	att->arr3[att->y3] = NULL;
+	free_arr(att->arr2);
+		get_cmd_matrix(att->split_arr[y], att);
 }
 
 int	count_arr3(t_attr *att)
