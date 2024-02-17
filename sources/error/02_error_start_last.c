@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:45:03 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 23:35:55 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/17 07:29:56 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int	error_end(char *s, char c, t_attr *att)
 	len = ft_strlen(s);
 	if (len == 0)
 		return (0);
-	if (s[len - 1] == c)
+	while (s[len] == ' ' || s[len] == '\0')
+		len--;
+	if (s[len] == c)
 	{
 		if (c != '|')
 			return (return_nl_error(att));

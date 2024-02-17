@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:00:05 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 23:37:32 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/17 07:24:38 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	return_negative(t_attr *att)
 	su ciascuna parte di arr2) */
 int	verify_readline(char *s, t_attr *att)
 {
-	if (error_begin_02(s, att))
+	if (error_end(s, '>', att) || error_end(s, '<', att) || error_end(s, '|', att))
+		return (return_negative(att));
+	else if (error_begin_02(s, att))
 		return (return_negative(att));
 	else if (count_quotes(s))
-		return (return_negative(att));
-	else if (error_end(s, '>', att) || error_end(s, '<', att) || error_end(s, '|', att))
 		return (return_negative(att));
 	else if (error_begin(s, att))
 		return (return_negative(att));
