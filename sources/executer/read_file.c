@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/16 23:04:10 by deggio           ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/02/18 04:53:51 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
@@ -86,9 +87,12 @@ int	heredoc_read(t_attr *att, char *eof)
 	while (1)
 	{
 		input = readline(RED_BOLD "> " RESET);
-		if (ft_strcmp(input, eof) == 0)
+		if (input == NULL || !ft_strcmp(input, eof))
 		{
-			free(input);
+			if (input)
+				free(input);
+			else
+				printf("bash: warning: here-document delimited by end-of-file (wanted `%s')\n", eof);
 			break ;
 		}
 		write(att->red_fd, input, ft_strlen(input));
