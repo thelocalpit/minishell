@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_error_mixed.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:02:39 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 01:39:29 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:58:21 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,30 @@ int	check_2nd_char(char *s, int i, t_attr *att)
 		return (return_not_required(att));
 	return (0);
 }
-
-int	check_spaces(char *s, int *i, t_attr *att)
+int check_spaces(char *s, int *i, t_attr *att)
 {
-	while (s[*i] == ' ')
+	while (s[*i] == ' ' && s[*i] != '\0')
+	{
+		if (s[*i] == '\0')
+			return (return_nl_error(att));
 		(*i)++;
-	if (s[*i] == '\0')
-		return (return_nl_error(att));
-	// else if (s[*i] == '>')
-	// 	return_gt_error();
-	// else if (s[*i] == '<')
-	// 	return_lt_error();
-	// else if (s[*i] == '|')
-	// 	return_pipe_error();
+	}
 	return (0);
 }
+// int	check_spaces(char *s, int *i, t_attr *att)
+// {
+// 	while (s[*i] == ' ')
+// 		(*i)++;
+// 	if (s[*i] == '\0')
+// 		return (return_nl_error(att));
+// 	// else if (s[*i] == '>')
+// 	// 	return_gt_error();
+// 	// else if (s[*i] == '<')
+// 	// 	return_lt_error();
+// 	// else if (s[*i] == '|')
+// 	// 	return_pipe_error();
+// 	return (0);
+// }
 
 int	error_mixed_start(char *s, t_attr *att)
 {

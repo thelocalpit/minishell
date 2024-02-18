@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:16:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/08 16:42:22 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/17 08:10:32 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 			}
 			att->i_flag$++;
 		}
-		else
+		else if (s[i] == '\\' && s[i + 1] == '"')
+		{
+			att->arr2[att->y2][att->x2++] = '"';
+			i += 2;
+		}
+		else 
 			att->arr2[att->y2][att->x2++] = s[i++];
 	}
 	return (i);

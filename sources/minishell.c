@@ -6,7 +6,7 @@
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 18:31:49 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/17 08:15:22 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			add_history(s);
 			split_init(s, &att);
-			//ft_print_array(att.split_arr);
+			// ft_print_array(att.split_arr);
 			att.y = 0;
 			if (count_pipes(&att))
 				init_pipes(&att);

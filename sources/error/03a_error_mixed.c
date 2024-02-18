@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03a_error_mixed.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:24 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 01:40:13 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:18:46 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,28 @@ int	check_extra_char(char *s, int i, t_attr *att)
 	char	d;
 	char	e;
 
-	if (s[i + 2])
-		i += 2;
-	else
-		return (return_nl_error(att));
-	c = s[i - 2];
-	d = s[i - 1];
-	e = s[i];
-	if (c == '<' && d == '<' && e == '<')
-		return (return_not_required(att));
-	else if ((c == '>' && d == '>') || (c == '<' && d == '<'))
+	if (s[i + 1] == '>' || s[i + 1] == '<')
 	{
-		if (e == '>')
-			return (return_gt_error(att));
-		else if (e == '<')
-			return (return_lt_error(att));
-		else if (e == '|')
-			return (return_pipe_error(att));
+		if (s[i + 2])
+			i += 2;
+		else
+		{
+			return (return_nl_error(att));
+		}
+		c = s[i - 2];
+		d = s[i - 1];
+		e = s[i];
+		if (c == '<' && d == '<' && e == '<')
+			return (return_not_required(att));
+		else if ((c == '>' && d == '>') || (c == '<' && d == '<'))
+		{
+			if (e == '>')
+				return (return_gt_error(att));
+			else if (e == '<')
+				return (return_lt_error(att));
+			else if (e == '|')
+				return (return_pipe_error(att));
+		}
 	}
 	return (0);
 }
@@ -69,12 +74,11 @@ int	check_next_arg(char *s, int i, t_attr *att)
 	i++;
 	if (s[i] == '>' || s[i] == '<')
 		i++;
-	while (s[i] != ' ' && s[i] != '\0')
+	while (s[i] == ' ' && s[i] != '\0')
 		i++;
 	if (s[i] == '\0')
 		return (return_not_required(att));
 	if (s[i] != '>' && s[i] != '<' && s[i] != '|')
-
 		return (0);
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_begin_02.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:12:15 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 01:38:17 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:19:28 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int error_begin_02(char *s, t_attr *att)
 
 {
 	int i;
-
 	i = 0;
 	while (!(*s > 32 && *s < 127))
 		s++;
@@ -35,7 +34,10 @@ int error_begin_02(char *s, t_attr *att)
 		{
 			s += 2;
 			if (check_next_chars(s, att))
+			{
+				// printf("sono qui1\n");
 				return (1);
+			}
 		}
 		else
 		{
