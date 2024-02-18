@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamiano <ntamiano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:23:19 by deggio            #+#    #+#             */
-/*   Updated: 2024/02/16 00:11:52 by ntamiano         ###   ########.fr       */
+/*   Updated: 2024/02/18 04:46:11 by deggio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,12 @@ int	heredoc_read(t_attr *att, char *eof)
 	while (1)
 	{
 		input = readline(RED_BOLD "> " RESET);
-		if (ft_strcmp(input, eof) == 0)
+		if (input == NULL || !ft_strcmp(input, eof))
 		{
-			free(input);
+			if (input)
+				free(input);
+			else
+				printf("bash: warning: here-document delimited by end-of-file (wanted `%s')\n", eof);
 			break ;
 		}
 		write(att->red_fd, input, ft_strlen(input));
