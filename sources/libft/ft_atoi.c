@@ -1,29 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 15:36:16 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/23 15:36:18 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/09/23 15:28:28 by pfalasch          #+#    #+#             */
+/*   Updated: 2023/09/23 15:28:30 by pfalasch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+int	ft_atoi(const char *nptr)
 {
+	int	sign;
 	int	i;
+	int	result;
 
+	sign = 1;
 	i = 0;
-	if (!s || fd < 0)
-		return ;
-	while (s[i])
+	result = 0;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || (nptr[i] == 32))
+		i++;
+	if (nptr[i] == '+')
+		i++;
+	else if (nptr[i] == '-')
 	{
-		write(fd, &s[i], 1);
+		sign = sign * -1;
 		i++;
 	}
-	write (fd, "\n", 1);
-	return ;
+	while (nptr[i] && nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		result = result * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (result * sign);
 }
+/*
+int	main(void)
+{
+	char	s[] = "    +1355234";
+
+	printf("%d %d", ft_atoi(s), atoi(s));
+	return (0);
+}*/
