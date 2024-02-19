@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 15:30:42 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/23 15:30:44 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/09/23 15:29:12 by pfalasch          #+#    #+#             */
+/*   Updated: 2024/02/19 15:32:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_isascii(int x)
 {
-	int	i;
-
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
+	if (x >= 0 && x <= 127)
+		return (1);
+	else
+		return (0);
 }

@@ -6,12 +6,11 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 13:31:40 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/12 01:42:54 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:19:36 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../../libft/libft.h"
 #include "../../includes/minishell.h"
 
 int	ft_unset(char **args, t_attr *att)

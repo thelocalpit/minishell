@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 15:28:55 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/23 15:28:57 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/09/23 15:29:35 by pfalasch          #+#    #+#             */
+/*   Updated: 2024/02/19 15:32:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-int	ft_isalnum(int x)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (((x > 47 && x < 58)) || (x > 64 && x < 91) || (x > 96 && x < 123))
-		return (1);
-	else
-		return (0);
+	t_list	*temp;
+
+	if (!new)
+		return ;
+	temp = ft_lstlast(*lst);
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	temp->next = new;
 }

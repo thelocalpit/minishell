@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/16 18:19:41 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:27:04 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 // libs
 
-# include "../libft/libft.h"
 # include <dirent.h>
 # include <errno.h>
 # include <limits.h>
@@ -29,6 +28,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+#include <fcntl.h>
 
 //global variable
 
@@ -69,6 +69,13 @@ extern int  g_signal;
 # define ERROR_PIPE "minishell : syntax error  near '|'\n"
 
 /* ------------------------  STRUCTS  ---------------------------------- */
+
+typedef struct s_list
+{
+	char			*content;
+	int 			$flag;
+	struct s_list *next;
+}				t_list;
 
 typedef struct s_attr
 {
@@ -141,6 +148,28 @@ typedef struct s_attr
 
 
 	/* ------------------------  FUNCTIONS ---------------------------------- */
+
+// libft
+int		ft_atoi(const char *nptr);
+void	*ft_calloc(size_t nmemb, size_t size);
+int		ft_isascii(int x);
+int		ft_isdigit(int x);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstnew(void *content);
+int		ft_lstsize(t_list *lst);
+void	ft_putstr_fd(char *s, int fd);
+char	**ft_split(char const *s, char c);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(const char *s1, const char *s2);
+size_t	ft_strlen(const char *s);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strtrim(char const *s1, char const *set);
+char 	*ft_substr(const char *s, unsigned int start, size_t len);
+
+
+
 
 	// init_folder
 

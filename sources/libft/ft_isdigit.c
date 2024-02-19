@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 15:29:24 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/23 15:29:26 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/09/23 15:29:18 by pfalasch          #+#    #+#             */
+/*   Updated: 2024/02/19 15:32:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-int	ft_isprint(int x)
+int	ft_isdigit(int x)
 {
-	if (x >= 32 && x < 127)
+	if (x > 47 && x < 58)
 		return (1);
 	else
 		return (0);

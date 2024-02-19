@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:38:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/23 15:38:14 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:32:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
 static int	checker(char const c, char const *str)
 {
@@ -50,11 +50,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	temp[i] = '\0';
 	return (temp);
 }
-/*
-int	main(void)
-{
-	char	str[] = "bugIs strange!gub";
-	char	totrim[] = "bug";
-	printf("%s\n", ft_strtrim(str, totrim));
-	return (0);
-}*/

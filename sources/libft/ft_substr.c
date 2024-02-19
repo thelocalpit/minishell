@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:38:17 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/01/24 12:06:02 by pfalasch         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:32:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
 char *ft_substr(const char *s, unsigned int start, size_t len)
 {
@@ -40,19 +40,3 @@ char *ft_substr(const char *s, unsigned int start, size_t len)
 	}
 	return (sub);
 }
-
-/*
-int	main(void)
-{
-	const char	str[] = "This is a test";
-	unsigned int	i;
-	size_t		size;
-	char	*lolo;
-
-	i = 5;
-	size = 11;
-	lolo = ft_substr(str, i, size);
-	puts(lolo);
-	free(lolo);
-	return (0);
-}*/

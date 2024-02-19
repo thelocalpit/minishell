@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+         #
+#    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by pfalasch          #+#    #+#              #
-#    Updated: 2024/02/15 16:41:38 by pfalasch         ###   ########.fr        #
+#    Updated: 2024/02/19 15:34:23 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,6 @@ CFLAGS = -Wall -Wextra -Werror
 RLFLAG = -lreadline
 RM = rm -rf
 
-# LIBFT
-LIBFT = ./libft/libft.a
-
 # COLORS
 RESET			:= \033[0m
 GREEN			=	\e[32m
@@ -29,7 +26,6 @@ BLUE			=	\e[34m
 WHITE			=	\e[00m
 RED				:= \033[1;31m
 BOLD			:= \033[1;1m
-
 
 #MINISHELL
 NAME = minishell
@@ -76,8 +72,23 @@ SRC =	sources/minishell.c \
 		sources/executer/redir.c \
 		sources/executer/redirections.c \
 		sources/parser/parser.c \
-		#sources/parser/lexer.c \
-		#sources/expander/00_expander.c \
+		sources/libft/ft_atoi.c \
+		sources/libft/ft_calloc.c \
+		sources/libft/ft_isascii.c \
+		sources/libft/ft_isdigit.c \
+		sources/libft/ft_lstadd_back.c \
+		sources/libft/ft_lstlast.c \
+		sources/libft/ft_lstnew.c \
+		sources/libft/ft_lstsize.c \
+		sources/libft/ft_putstr_fd.c \
+		sources/libft/ft_split.c \
+		sources/libft/ft_strchr.c \
+		sources/libft/ft_strdup.c \
+		sources/libft/ft_strjoin.c \
+		sources/libft/ft_strlen.c \
+		sources/libft/ft_strncmp.c \
+		sources/libft/ft_strtrim.c \
+		sources/libft/ft_substr.c
 
 
 
@@ -88,13 +99,11 @@ OBJ = $(addprefix $(OBJSDIR)/, $(SRC:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(MAKE) bonus -C ./libft
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(RLFLAG) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(RLFLAG) -o $(NAME)
 	echo "Everything Done!"
 
 sani: re $(OBJ)
-	$(MAKE) -C ./libft
-	$(CSANI) $(CFLAGS) $(OBJ) $(LIBFT) $(RLFLAG) -o $(NAME)
+	$(CSANI) $(CFLAGS) $(OBJ) $(RLFLAG) -o $(NAME)
 	echo "Compiled with fsanitizer"
 
 $(OBJSDIR)/%.o: %.c
@@ -103,11 +112,9 @@ $(OBJSDIR)/%.o: %.c
 
 clean:
 	$(RM) $(OBJ)
-	$(MAKE)	clean -C ./libft
 
 fclean: clean
 	$(RM) $(NAME) $(SANI) $(OBJSDIR)
-	$(MAKE) fclean -C ./libft
 	echo "Everything Deleted..."
 
 re: fclean all

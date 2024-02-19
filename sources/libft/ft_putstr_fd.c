@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 15:36:41 by pfalasch          #+#    #+#             */
-/*   Updated: 2023/09/23 15:36:43 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/09/23 15:36:41 by mcoppola          #+#    #+#             */
+/*   Updated: 2024/02/19 15:32:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -26,11 +26,3 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 	return ;
 }
-/*
-int	main(void)
-{
-	char	str[] = "this is a test";
-
-	ft_putstr_fd(str, 1);
-	return (0);
-}*/
