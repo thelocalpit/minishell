@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02c_copy_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 13:16:38 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/17 08:10:32 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/12/16 13:16:38 by asacchin          #+#    #+#             */
+/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int copy_no_quotes(char *s, int i, t_attr *att, int len_name_var)
 	se c'è da espandere, facciamo riferimento alla flag$ che ci dice
 	se è un elemento corretto da espandere o se deve ritornare il vuoto
 	nel caso lo sia, calcoliamo la lunghezza del nome della variabile
-	e ritorniamo il suo valore con copy_expanded_str. 
+	e ritorniamo il suo valore con copy_expanded_str.
 	Se non è da espandere facciamo un normale copia. */
 int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 {
@@ -78,7 +78,7 @@ int copy_double_quotes(char *s, int i, t_attr *att, int len_name_var)
 			att->arr2[att->y2][att->x2++] = '"';
 			i += 2;
 		}
-		else 
+		else
 			att->arr2[att->y2][att->x2++] = s[i++];
 	}
 	return (i);

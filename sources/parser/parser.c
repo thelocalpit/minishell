@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <mcoppola@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 20:40:12 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/09 01:54:59 by deggio           ###   ########.fr       */
+/*   Created: 2023/11/10 20:40:12 by asacchin          #+#    #+#             */
+/*   Updated: 2024/02/09 01:54:59 by mcoppola           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 // qui è dove settiamo le giuste flag per andare a dire al prossimo cmd
-// dove dovrà andare a leggere (se non  è il primo) e dove dovrà scrivere 
+// dove dovrà andare a leggere (se non  è il primo) e dove dovrà scrivere
 // se c'è una successiva PIPE
 
 /* in questa funzione andiamo a resettare le flags che servono per
@@ -61,7 +61,7 @@ void	next_step_sub(t_attr *att)
 		2. si controlla se non è un comando singolo per creare un file
 		3. se esiste e non è l'ultimo argomento allora si vanno ad attivare le flag
 		4. ulteriore controllo se non è il cmd[0] allora andiamo a indagare se
-			dobbiamo prendere qualcosa dalla pipe prima e nel caso settiamo 
+			dobbiamo prendere qualcosa dalla pipe prima e nel caso settiamo
 			la flag   */
 
 int	check_next_step(t_attr *att)

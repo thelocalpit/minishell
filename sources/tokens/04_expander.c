@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   04_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 17:18:48 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/07 19:02:29 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/11/27 17:18:48 by asacchin          #+#    #+#             */
+/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /* questa funzione copia dalla lista delle variabili d'abiente nella
-	nostra matrice arr2. 
+	nostra matrice arr2.
 	potevo scriverla meglio? SI.
 	Funziona? SI.
 	la riscriverò? COL CAZZO IMPANATO CON LE PATATE. */
@@ -71,7 +71,7 @@ void count_expanded_token_local_var(t_attr *att)
 int count_expanded_token_02(t_attr *att)
 {
 	t_list *tmp_list;
-	
+
 	tmp_list = att->env_list;
 	while (tmp_list != NULL)
 	{
@@ -94,7 +94,7 @@ int count_expanded_token_02(t_attr *att)
 }
 /* questa funzione conta quanta memoria devo allocare per l'exp.
 	mi devo calcolare la lunghezza del nome ed escluderla (check_exp)
-	poi in ft:strncmp faccio un strncmp e trovo la variabile 
+	poi in ft:strncmp faccio un strncmp e trovo la variabile
 	d'ambiente giusta per calcolo quanto necessario per allocare la
 	memoria. */
 void count_expanded_token(t_attr *att, char *s)

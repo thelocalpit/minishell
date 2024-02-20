@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deggio <deggio@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <mcoppola@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 14:16:57 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/09 07:17:37 by deggio           ###   ########.fr       */
+/*   Created: 2023/09/25 14:16:57 by asacchin          #+#    #+#             */
+/*   Updated: 2024/02/09 07:17:37 by mcoppola           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* questa funzione serve per creare una matrice custom con tutte le variabili di 
+/* questa funzione serve per creare una matrice custom con tutte le variabili di
 	ambiente. */
 // void start_env(char **envp, t_attr *att)
 // {

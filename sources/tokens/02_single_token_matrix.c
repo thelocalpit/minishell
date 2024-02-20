@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_single_token_matrix.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfalasch <pfalasch@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 18:53:26 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/07 18:58:40 by pfalasch         ###   ########.fr       */
+/*   Created: 2023/10/18 18:53:26 by asacchin          #+#    #+#             */
+/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ char *get_cmd_token(char *s, t_attr *att)
 }
 
 /* creiamo una nuova matrice ("arr2"). allochiamo la memoria e andiamo a
-	copiare ogni elemento all'interno della matrice. 
-	NB: con elemento intendiamo solo separati da spazi 
+	copiare ogni elemento all'interno della matrice.
+	NB: con elemento intendiamo solo separati da spazi
 		(quindi una doppia "" sarà 1 solo argomento anche se all'interno
 			contiene degli spazi) */
 void create_matrix_cmd(char *s, t_attr *att)
