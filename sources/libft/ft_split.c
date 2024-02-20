@@ -6,13 +6,13 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:36:56 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:10:37 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	ft_stringcounter(const char *s, char c)
+static int	ft_stringcounterer(const char *s, char c)
 {
 	int	i;
 	int	nstrings;
@@ -54,7 +54,7 @@ char	**ft_split(char const *s, char c)
 	o = 0;
 	if (!s)
 		return (NULL);
-	nofstrs = ft_stringcounter(s, c);
+	nofstrs = ft_stringcounterer(s, c);
 	result = malloc(sizeof(char *) * (nofstrs + 1));
 	if (!result)
 		return (NULL);

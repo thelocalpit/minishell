@@ -12,35 +12,51 @@
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Execute the command with the given path and arguments and environment variables
+ *
+ * @param path the path of the command to execute
+ * @param arg the arguments of the command to execute
+ * @param env the environment of the command to execute
+ * @return int the error code of the command
+*/
 int	ft_ecxev(char *path, char **arg, char **env)
 {
 	if (access(path, X_OK))
-		return (127);
-	if (execve(path, arg, env) != 0)
 	{
-		ft_putstr_fd("execve failed\n", 2);
+		return (127);
+	}
+	else if (execve(path, arg, env) != 0)
+	{
+		ft_putstr_fd("Execve Failed\n", 2);
 		return (126);
 	}
 	return (0);
 }
 
-int	bin_exec(t_attr *att)
+/**
+ * @brief
+ *
+ * @param att the global structure of the program
+ * @return int the error code of the command executed
+*/
+int	bin_executer(t_attr *att)
 {
 	char	**path;
-	char	*tmp;
+	char	*temp;
 	int		i;
 
-	tmp = ft_strjoin("/", att->arr2[0]);
+	temp = ft_strjoin("/", att->array2[0]);
 	path = malloc(sizeof(char *) * (matrix_len(att->paths) + 1));
 	path[matrix_len(att->paths)] = NULL;
 	i = -1;
 	while (att->paths[++i])
-		path[i] = ft_strjoin(att->paths[i], tmp);
-	free(tmp);
+		path[i] = ft_strjoin(att->paths[i], temp);
+	free(temp);
 	i = -1;
 	while (path[++i])
 	{
-		if (ft_ecxev(path[i], att->arr2, att->env) == 0)
+		if (ft_ecxev(path[i], att->array2, att->env) == 0)
 		{
 			free_arr(path);
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:04:54 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:07:06 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*get_token(char *s)
 /* In this function I'm creating a matrix, allocating space thanks to the
 	number of tokens we found.
 	In the while loop, we continue untile the variable i reach the same value
-	of nb_tokens. it's important to get rid of the spaces so another while
+	of num_tokens. it's important to get rid of the spaces so another while
 	is necessary.
 	when we find something different from a ' ', we call the function
 	get_token that we'll return a str. we do this process for all the tokens
@@ -111,16 +111,16 @@ void	create_array(char *s, t_attr *att)
 	int	i;
 
 	i = 0;
-	att->split_arr = malloc((att->nb_tokens + 1) * sizeof(char *));
-	att->split_arr[att->nb_tokens] = NULL;
-	if (!att->split_arr)
+	att->split_array = malloc((att->num_tokens + 1) * sizeof(char *));
+	att->split_array[att->num_tokens] = NULL;
+	if (!att->split_array)
 		return ;
-	while (i < att->nb_tokens)
+	while (i < att->num_tokens)
 	{
 		while (*s == ' ')
 			s++;
-		att->split_arr[i] = get_token(s);
-		s += ft_strlen(att->split_arr[i]);
+		att->split_array[i] = get_token(s);
+		s += ft_strlen(att->split_array[i]);
 		i++;
 	}
 }

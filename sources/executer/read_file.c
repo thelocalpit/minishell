@@ -19,9 +19,9 @@ int	check_read_file(t_attr *att)
 		reset_flags2(att);
 		next_step_sub(att);
 		if (att->heredoc)
-			att->g_value = heredoc(att);
-		if (att->read_from_file && att->y + 1 == att->i_readfile)
-			read_from_file(att);
+			att->value = heredoc(att);
+		if (att->read_files && att->y + 1 == att->i_readfile)
+			read_files(att);
 		att->y += 2;
 	}
 	return (0);
@@ -34,7 +34,7 @@ int	red_input(t_attr *att, char *path)
 		return (1);
 	dup2(att->red_fd, 0);
 	close(att->red_fd);
-	att->g_value = 0;
+	att->value = 0;
 	return (0);
 }
 
@@ -42,7 +42,7 @@ int	heredoc(t_attr *att)
 {
 	char	**eof;
 
-	eof = ft_split(att->split_arr[att->y + 2], ' ');
+	eof = ft_split(att->split_array[att->y + 2], ' ');
 	if (heredoc_read(att, eof[0]))
 	{
 		free_arr(eof);
@@ -94,11 +94,11 @@ int	heredoc_read(t_attr *att, char *eof)
 	return (0);
 }
 
-int	read_from_file(t_attr *att)
+int	read_files(t_attr *att)
 {
 	char	*file_path;
 
-	file_path = ft_strtrim(att->split_arr[att->y + 2], " ");
+	file_path = ft_strtrim(att->split_array[att->y + 2], " ");
 	if (red_input(att, file_path))
 		read_file_error(att, file_path);
 	free(file_path);

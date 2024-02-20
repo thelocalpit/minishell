@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:22:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:07:52 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	exit__err(char *str, t_attr *att)
 {
 	printf("exit: %s: numeric argument required\n", str);
-	att->g_value = 2;
-	return (att->g_value);
+	att->value = 2;
+	return (att->value);
 }
 
 void	read_file_error(t_attr *att, char *file)
@@ -24,7 +24,7 @@ void	read_file_error(t_attr *att, char *file)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
-	att->g_value = 1;
+	att->value = 1;
 	att->skip = 1;
 }
 

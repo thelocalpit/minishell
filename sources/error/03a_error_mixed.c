@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:24 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:19:00 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	check_extra_char(char *s, int i, t_attr *att)
 	return (0);
 }
 
-/* questa funzione si assicura che non ci siano due redir
+/* questa funzione si assicura che non ci siano due redirect
 	di fila a quell'altra e stampa i relativi errori in caso ci siano  */
 int	check_next_arg(char *s, int i, t_attr *att)
 {

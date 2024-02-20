@@ -6,13 +6,13 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:53:29 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 23:44:35 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int g_signal;
+int g_sig_val;
 
 		//	if (!s)
 		//	{
@@ -28,21 +28,21 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	att.g_value = 0;
-	g_signal = 0;
-	att.index_list = 0;
-	att.i_flag$ = 0;
-	att.flag_list = 0;
+	att.value = 0;
+	g_sig_val = 0;
+	att.list_index = 0;
+	att.i_flag_dol = 0;
+	att.list_flag = 0;
 	rl_clear_history();
 	set_signal();
-	att.i_flag$ = 0;
+	att.i_flag_dol = 0;
 	init_parameters(&att);
 	// questo è l'init del env per il momento fatto cosi, poi va sistemato dove volete voi
 	// e va sostituito ovunque, per il momento lo aggiungo come parametro in piu dove
 	// serve a me e ricordiamoci di freearlo (Marco)
 	att.env_list = copy_env_in_list(envp);
 	add_index_to_env_list(&att);
-	att.local_var = NULL;
+	att.local_list = NULL;
 	// printlist(&att);
 	while (1)
 	{
@@ -52,13 +52,13 @@ int	main(int ac, char **av, char **envp)
 			rl_clear_history();
 			break;
 		}
-		g_signal = 0;
-		if (g_signal == SIGINT)
+		g_sig_val = 0;
+		if (g_sig_val == SIGINT)
 		{
-			att.g_value = 130;
+			att.value = 130;
 		}
-		//printf("%d\n", g_signal);
-		//printf("%d\n", g_signal);
+		//printf("%d\n", g_sig_val);
+		//printf("%d\n", g_sig_val);
 		if (s == NULL)
 		{
 			exit(5);
@@ -71,28 +71,28 @@ int	main(int ac, char **av, char **envp)
 		{
 			add_history(s);
 			split_init(s, &att);
-			// ft_print_array(att.split_arr);
+			// ft_print_array(att.split_array);
 			att.y = 0;
-			if (count_pipes(&att))
+			if (counter_pipes(&att))
 				init_pipes(&att);
-			while (att.split_arr[att.y] && !verify_readline(s, &att))
+			while (att.split_array[att.y] && !verify_readline(s, &att))
 			{
 				check_next_step(&att);
-				get_cmd_matrix(att.split_arr[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
-				// ft_print_array(att.arr2);
-				att.g_value = do_builtin(&att);
+				get_cmd_matrix(att.split_array[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
+				// ft_print_array(att.array2);
+				att.value = do_builtin(&att);
 				add_index_to_custom_env(&att);
-				if (att.local_var != NULL)
-					add_index_to_local_var(&att);
+				if (att.local_list != NULL)
+					add_index_to_local_list(&att);
 				// command(&att);
-				free_arr2(att.arr2, &att);
-				if (!att.split_arr[att.y + 1])
+				free_array2(att.array2, &att);
+				if (!att.split_array[att.y + 1])
 					break ;
 				att.y += 2;
 			}
-			free_arr(att.split_arr);
-			if (att.nb_pipes != 0)
-				ft_delete_matrix(att.pipesfd);
+			free_arr(att.split_array);
+			if (att.pipes_num != 0)
+				ft_delete_matrix(att.pipes_fd);
 			free(s);
 		}
 	}

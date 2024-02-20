@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:26:11 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:10:37 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	ft_intsize(int n)
 {
-	int	count;
+	int	counter;
 
-	count = 0;
+	counter = 0;
 	if (n <= 0)
-		count++;
+		counter++;
 	while (n != 0)
 	{
-		count++;
+		counter++;
 		n = n / 10;
 	}
-	return (count);
+	return (counter);
 }
 
 int	ft_ispositive(int n)
@@ -56,7 +56,7 @@ void	ft_itoa_custom(int n, t_attr *att)
 	}
 	i = 0;
 	while (str[i])
-		att->arr2[att->y2][att->x2++] = str[i++];
+		att->array2[att->y2][att->x2++] = str[i++];
 	free(str);
 	return ;
 }

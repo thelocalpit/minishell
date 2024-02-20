@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:49:02 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:50:45 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,23 @@ void printlist(t_attr *att)
 	while (tmp_list != NULL)
 	{
 		printf("content: %s\n", tmp_list->content);
-		printf("number: %d\n\n", tmp_list->$flag);
+		printf("number: %d\n\n", tmp_list->dol_flag);
 		tmp_list = tmp_list->next;
 	}
 }
 
 
-void printvar(t_list *local_var)
+void printvar(t_list *local_list)
 {
 	t_list *head;
 
-	head = local_var;
+	head = local_list;
 	printf("questa è la lista:\n");
-	while (local_var != NULL)
+	while (local_list != NULL)
 	{
-		printf("content: %s\n", local_var->content);
-		printf("number: %d\n\n", local_var->$flag);
-		local_var = local_var->next;
+		printf("content: %s\n", local_list->content);
+		printf("number: %d\n\n", local_list->dol_flag);
+		local_list = local_list->next;
 	}
-	local_var = head;
+	local_list = head;
 }

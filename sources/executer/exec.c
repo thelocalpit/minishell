@@ -35,19 +35,19 @@ int	do_execve(t_attr *att)
 {
 	// signal(SIGQUIT, SIG_IGN);
 	envp_to_matrix(att);
-	if (ft_strchr(att->arr2[0], '.') || ft_strchr(att->arr2[0], '/'))
-		att->g_value = ft_ecxev(att->arr2[0], att->arr2, att->env);
+	if (ft_strchr(att->array2[0], '.') || ft_strchr(att->array2[0], '/'))
+		att->value = ft_ecxev(att->array2[0], att->array2, att->env);
 	else
 	{
-		att->g_value = bin_exec(att);
+		att->value = bin_executer(att);
 	}
 	free_arr(att->env);
-	return (att->g_value);
+	return (att->value);
 }
 
 // VANNO GESTITI I SEGNALI PER QUITTARE I PROCESSI FIGLI
 
-//controllare la gestione di att.g_value
+//controllare la gestione di att.value
 
 int	exec(t_attr *att)
 {
@@ -64,27 +64,27 @@ int	exec(t_attr *att)
 		if (!att->skip)
 			do_red(att);
 		if (!att->skip)
-			att->g_value = do_child_cmd(att);
+			att->value = do_child_cmd(att);
 		free_arr(att->paths);
 		// free(att->paths);
-		exit(att->g_value);
+		exit(att->value);
 	}
 	set_signal_avoid(); //SIGNAL SPENTI
-	waitpid(att->pid, &att->g_value, 0);
-	att->g_value = WEXITSTATUS(att->g_value);
+	waitpid(att->pid, &att->value, 0);
+	att->value = WEXITSTATUS(att->value);
 	set_signal();
-	if (g_signal == SIGINT)
+	if (g_sig_val == SIGINT)
 	{
 		printf("\n");
-		att->g_value = 130;
+		att->value = 130;
 	}
-	g_signal = 0;
-	if (att->g_value == 127)
-		command_not_found(att->arr2[0]);
-	if (att->read_from_pipe)
-		att->pipe_index++;
+	g_sig_val = 0;
+	if (att->value == 127)
+		command_not_found(att->array2[0]);
+	if (att->read_pipe)
+		att->pipe_index_num++;
 	close_pipeline(att);
 	free_arr(att->paths);
 	// free(att->paths);
-	return (att->g_value);
+	return (att->value);
 }

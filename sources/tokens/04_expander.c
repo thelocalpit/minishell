@@ -6,14 +6,14 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:18:48 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:51:36 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /* questa funzione copia dalla lista delle variabili d'abiente nella
-	nostra matrice arr2.
+	nostra matrice array2.
 	potevo scriverla meglio? SI.
 	Funziona? SI.
 	la riscriverò? COL CAZZO IMPANATO CON LE PATATE. */
@@ -21,54 +21,54 @@ void copy_expanded_str(t_attr *att, int len_name_var)
 {
 	t_list *tmp_list;
 
-	if (att->flag_list == 0)
+	if (att->list_flag == 0)
 	{
 		tmp_list = att->env_list;
 
-		while (tmp_list && tmp_list->$flag != att->save_y_mx_envp[att->i_flag$])
+		while (tmp_list && tmp_list->dol_flag != att->save_y_mtx_envp[att->i_flag_dol])
 			tmp_list = tmp_list->next;
-		att->x_mx_envp = len_name_var + 1;
-		while (tmp_list && tmp_list->content[att->x_mx_envp])
-			att->arr2[att->y2][att->x2++] = tmp_list->content[att->x_mx_envp++];
+		att->x_mtx_envp = len_name_var + 1;
+		while (tmp_list && tmp_list->content[att->x_mtx_envp])
+			att->array2[att->y2][att->x2++] = tmp_list->content[att->x_mtx_envp++];
 		return;
 	}
 	else
 	{
-		tmp_list = att->local_var;
-		while (tmp_list && tmp_list->$flag != att->save_y_mx_envp[att->i_flag$])
+		tmp_list = att->local_list;
+		while (tmp_list && tmp_list->dol_flag != att->save_y_mtx_envp[att->i_flag_dol])
 			tmp_list = tmp_list->next;
-		att->x_mx_envp = len_name_var + 1;
-		while (tmp_list && tmp_list->content[att->x_mx_envp])
-			att->arr2[att->y2][att->x2++] = tmp_list->content[att->x_mx_envp++];
-		att->flag_list = 0;
+		att->x_mtx_envp = len_name_var + 1;
+		while (tmp_list && tmp_list->content[att->x_mtx_envp])
+			att->array2[att->y2][att->x2++] = tmp_list->content[att->x_mtx_envp++];
+		att->list_flag = 0;
 		return;
 	}
 }
 
-void count_expanded_token_local_var(t_attr *att)
+void counter_expanded_token_local_list(t_attr *att)
 {
 	t_list *tmp_list;
 
-	tmp_list = att->local_var;
-	while (att->local_var != NULL)
+	tmp_list = att->local_list;
+	while (att->local_list != NULL)
 	{
-		if (!ft_strncmp(att->check_exp, att->local_var->content, att->len_call_exp))
+		if (!ft_strncmp(att->check_exp, att->local_list->content, att->len_call_exp))
 		{
-			while (att->local_var->content[att->x_mx_envp])
+			while (att->local_list->content[att->x_mtx_envp])
 			{
 				att->mem_space++;
-				att->x_mx_envp++;
+				att->x_mtx_envp++;
 			}
 			free(att->check_exp);
-			att->save_y_mx_envp[att->i_flag$] = att->local_var->$flag;
-			att->local_var = tmp_list;
+			att->save_y_mtx_envp[att->i_flag_dol] = att->local_list->dol_flag;
+			att->local_list = tmp_list;
 			return;
 		}
-		att->local_var = att->local_var->next;
-		att->y_mx_envp++;
+		att->local_list = att->local_list->next;
+		att->y_mtx_envp++;
 	}
 }
-int count_expanded_token_02(t_attr *att)
+int counter_expanded_token_02(t_attr *att)
 {
 	t_list *tmp_list;
 
@@ -77,19 +77,19 @@ int count_expanded_token_02(t_attr *att)
 	{
 		if (!ft_strncmp(att->check_exp, tmp_list->content, att->len_call_exp))
 		{
-			while (tmp_list->content[att->x_mx_envp])
+			while (tmp_list->content[att->x_mtx_envp])
 			{
 				att->mem_space++;
-				att->x_mx_envp++;
+				att->x_mtx_envp++;
 			}
 			free(att->check_exp);
-			att->save_y_mx_envp[att->i_flag$] = tmp_list->$flag;
+			att->save_y_mtx_envp[att->i_flag_dol] = tmp_list->dol_flag;
 			return (0);
 		}
 		tmp_list = tmp_list->next;
-		att->y_mx_envp++;
+		att->y_mtx_envp++;
 	}
-	att->y_mx_envp = 0;
+	att->y_mtx_envp = 0;
 	return (-1);
 }
 /* questa funzione conta quanta memoria devo allocare per l'exp.
@@ -97,7 +97,7 @@ int count_expanded_token_02(t_attr *att)
 	poi in ft:strncmp faccio un strncmp e trovo la variabile
 	d'ambiente giusta per calcolo quanto necessario per allocare la
 	memoria. */
-void count_expanded_token(t_attr *att, char *s)
+void counter_expanded_token(t_attr *att, char *s)
 {
 	int start;
 	int j;
@@ -113,12 +113,12 @@ void count_expanded_token(t_attr *att, char *s)
 		att->check_exp[j++] = s[att->i++];
 	att->check_exp[j] = '=';
 	att->check_exp[j + 1] = '\0';
-	att->y_mx_envp = 0;
-	att->x_mx_envp = att->len_call_exp;
-	if (count_expanded_token_02(att) == -1)
+	att->y_mtx_envp = 0;
+	att->x_mtx_envp = att->len_call_exp;
+	if (counter_expanded_token_02(att) == -1)
 	{
-		att->flag_list = 1;
-		count_expanded_token_local_var(att);
+		att->list_flag = 1;
+		counter_expanded_token_local_list(att);
 	}
 	att->mem_space++;
 	return ;

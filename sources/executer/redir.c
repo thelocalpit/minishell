@@ -28,7 +28,7 @@ int	check_redir(t_attr *att)
 
 int	redir(t_attr *att)
 {
-	create_file(att, att->split_arr[att->y + 2], att->redir);
+	create_file(att, att->split_array[att->y + 2], att->redir);
 	if (att->i_redir == att->y + 1)
 		dup2(att->red_fd, 1);
 	close(att->red_fd);
@@ -46,11 +46,11 @@ int	create_file(t_attr *att, char *str, int redir)
 		att->red_fd = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (att->red_fd < 0)
 	{
-		att->g_value = 1;
+		att->value = 1;
 		ft_putstr_fd("cannot create the file", 2);
 		return (1);
 	}
 	free(name);
-	att->g_value = 0;
+	att->value = 0;
 	return (0);
 }

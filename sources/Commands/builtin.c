@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:55:31 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/20 11:51:08 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:25:08 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	pwd(t_attr *att)
 		ft_putstr_fd("getcwd error!", 2);
 		return (1);
 	}
-	if (att->redir || att->write_to_pipe)
+	if (att->redir || att->write_pipe)
 		printf("%s\n", cwd);
 	else
 		printf(YELLOW_BOLD "%s\n", cwd);

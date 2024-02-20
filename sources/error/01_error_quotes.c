@@ -6,22 +6,22 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:01:14 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:10:37 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	count_single_quotes(char *s)
+int	counter_single_quotes(char *s)
 {
 	int	i;
-	int	count_quotes;
+	int	counter_quotes;
 
-	count_quotes = 0;
+	counter_quotes = 0;
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '"' && count_quotes % 2 == 0)
+		if (s[i] == '"' && counter_quotes % 2 == 0)
 		{
 			i++;
 			while (s[i] != '"' && s[i])
@@ -30,10 +30,10 @@ int	count_single_quotes(char *s)
 		if (s[i] == '\\' && s[i + 1] == '\'')
 			i += 2;
 		if (s[i] == '\'')
-			count_quotes++;
+			counter_quotes++;
 		i++;
 	}
-	if (count_quotes % 2 != 0)
+	if (counter_quotes % 2 != 0)
 	{
 		printf("error unclosed quotes\n");
 		return (1);
@@ -42,16 +42,16 @@ int	count_single_quotes(char *s)
 }
 
 /* se le quotes sono dispari */
-int	count_double_quotes(char *s)
+int	counter_double_quotes(char *s)
 {
 	int	i;
-	int	count_quotes;
+	int	counter_quotes;
 
 	i = 0;
-	count_quotes = 0;
+	counter_quotes = 0;
 	while (s[i])
 	{
-		if (s[i] == '\'' && (count_quotes % 2 == 0))
+		if (s[i] == '\'' && (counter_quotes % 2 == 0))
 		{
 			i++;
 			while (s[i] != '\'' && s[i])
@@ -60,10 +60,10 @@ int	count_double_quotes(char *s)
 		else if (s[i] == '\\' && s[i + 1] == '"')
 			i += 2;
 		if (s[i] == '"')
-			count_quotes++;
+			counter_quotes++;
 		i++;
 	}
-	if (count_quotes % 2 != 0)
+	if (counter_quotes % 2 != 0)
 	{
 		printf("error unclosed quotes\n");
 		return (1);
@@ -72,11 +72,11 @@ int	count_double_quotes(char *s)
 }
 
 /* controllo delle quotes */
-int	count_quotes(char *s)
+int	counter_quotes(char *s)
 {
-	if (count_single_quotes(s))
+	if (counter_single_quotes(s))
 		return (-1);
-	if (count_double_quotes(s))
+	if (counter_double_quotes(s))
 		return (-1);
 	return (0);
 }

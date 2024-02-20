@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 23:44:35 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 #include "../../includes/minishell.h"
 #include <signal.h>
 
-extern int	g_signal;
+extern int	g_sig_val;
 
 void	handle_interrupt(int signum)
 {
-	g_signal = signum;
+	g_sig_val = signum;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line ("", 0);
@@ -34,7 +34,7 @@ void	handle_interrupt(int signum)
 
 void	check_child(int signum)
 {
-	g_signal = signum;
+	g_sig_val = signum;
 }
 void	set_signal(void)
 {

@@ -6,25 +6,25 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:46:01 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:51:07 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int count_dollar_sign(char *s, t_attr *att)
+int counter_dollar_sign(char *s, t_attr *att)
 {
 	int i;
 
 	i = 0;
-	att->nb_$ = 0;
+	att->num_dol = 0;
 	while (s[i])
 	{
 		if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
-			att->nb_$++;
+			att->num_dol++;
 		i++;
 	}
-	return (att->nb_$);
+	return (att->num_dol);
 }
 
 int check_local_list(char *check_envp, t_attr *att, int len)
@@ -32,13 +32,13 @@ int check_local_list(char *check_envp, t_attr *att, int len)
 	t_list *tmp_list;
 
 	// printf("entro nel check del wrong dollar della local list anche con PATH?\n");
-	tmp_list = att->local_var;
+	tmp_list = att->local_list;
 	while (tmp_list != NULL)
 	{
 		if (!ft_strncmp(check_envp, tmp_list->content, len))
 			return (0);
 		tmp_list = tmp_list->next;
-		att->y_mx_envp++;
+		att->y_mtx_envp++;
 	}
 	return (-1);
 }
@@ -48,7 +48,7 @@ int error_dollar_03(char *check_envp, t_attr *att, int len)
 	t_list *tmp_list;
 
 	tmp_list = att->env_list;
-	att->y_mx_envp = 0;
+	att->y_mtx_envp = 0;
 	while (tmp_list != NULL)
 	{
 		if (!ft_strncmp(check_envp, tmp_list->content, len))
@@ -56,9 +56,9 @@ int error_dollar_03(char *check_envp, t_attr *att, int len)
 		if (!ft_strncmp(check_envp, "?", 1))
 			return (0);
 		tmp_list = tmp_list->next;
-		att->y_mx_envp++;
+		att->y_mtx_envp++;
 	}
-	att->y_mx_envp = 0;
+	att->y_mtx_envp = 0;
 	if (!check_local_list(check_envp, att, len))
 		return (0);
 	return (1);

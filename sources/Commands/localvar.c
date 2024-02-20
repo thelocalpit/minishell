@@ -27,7 +27,7 @@ int	add_var(char *str, t_attr *att)
 		add = 1;
 	if (!str[ft_strlen(name) + 1] || ((!str[ft_strlen(name) + 2]) && add))
 		empty = 1;
-	if (update_var(str, att->local_var, add))
+	if (update_var(str, att->local_list, add))
 		skip = 1;
 	if (update_var(str, att->env_list, add))
 		skip = 1;
@@ -84,14 +84,14 @@ int	new_var(char *str, t_attr *att, int add, int empty)
 		str = var_no_content_quote(temp);
 		free(temp);
 	}
-	tmp = att->local_var;
+	tmp = att->local_list;
 	tmp = ft_lstnew(var_no_content_quote(str));
 	// da capire se va lasciato perche in questa funzione ce un leak
 	// if (add && !empty)
 	// 	free(str);
 	if (!tmp)
 		ft_putstr_fd("malloc", 2);
-	ft_lstadd_back(&att->local_var, tmp);
+	ft_lstadd_back(&att->local_list, tmp);
 	free(name);
 	return (0);
 }

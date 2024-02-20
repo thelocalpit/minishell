@@ -6,20 +6,20 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:37:23 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:10:25 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* questa funzione serve a liberare l'arr2 */
+/* questa funzione serve a liberare l'array2 */
 
-void	free_arr2(char **tokens, t_attr *att)
+void	free_array2(char **tokens, t_attr *att)
 {
 	int i;
 
 	i = 0;
-	while (i < att->count_words)
+	while (i < att->words_counter)
 		free(tokens[i++]);
 	free(tokens);
 }
@@ -52,12 +52,12 @@ void	ft_delete_matrix(void *matrix)
 	free(matrix);
 }
 
-void	free_local_var(t_attr *att)
+void	free_local_list(t_attr *att)
 {
-	while (att->local_var)
+	while (att->local_list)
 	{
-		free(att->local_var->content);
-		att->local_var = att->local_var->next;
+		free(att->local_list->content);
+		att->local_list = att->local_list->next;
 	}
 }
 

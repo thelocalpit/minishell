@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_count_words.c                                   :+:      :+:    :+:   */
+/*   03_words_counter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,7 +14,7 @@
 
 int	check_single_quotes(char *s, int len, int i, t_attr *att)
 {
-	att->count_words++;
+	att->words_counter++;
 	i++;
 	if (s[i] == '\'' && (s[i + 1] == ' ' || !s[i + 1]))
 		return (i + 1);
@@ -25,7 +25,7 @@ int	check_single_quotes(char *s, int len, int i, t_attr *att)
 
 int	check_double_quotes(char *s, int len, int i, t_attr *att)
 {
-	att->count_words++;
+	att->words_counter++;
 	i++;
 	if (s[i] == '"' && (s[i + 1] == ' ' || !s[i + 1]))
 		return (i + 1);
@@ -40,14 +40,14 @@ int	check_double_quotes(char *s, int len, int i, t_attr *att)
 }
 int	check_special(int i, t_attr *att)
 {
-	att->count_words++;
+	att->words_counter++;
 	i += 2;
 	return (i);
 }
 
 int	check_no_space(char *s, int len, int i, t_attr *att)
 {
-	att->count_words++;
+	att->words_counter++;
 	while (i <= len && s[i] != ' ')
 		i++;
 	return (++i);
@@ -55,13 +55,13 @@ int	check_no_space(char *s, int len, int i, t_attr *att)
 
 /* questa ft serve per il conto di elementi. necessaria per allocare
 	la giusta quantità di memoria */
-void	ft_count_words(char *s, t_attr *att)
+void	ft_words_counter(char *s, t_attr *att)
 {
 	int	len;
 	int	i;
 
 	i = 0;
-	att->count_words = 0;
+	att->words_counter = 0;
 	len = ft_strlen(s) - 1;
 	while (i <= len)
 	{

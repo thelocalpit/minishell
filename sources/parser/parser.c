@@ -21,39 +21,39 @@
 
 void	reset_flags(t_attr *att)
 {
-	att->write_to_pipe = 0;
+	att->write_pipe = 0;
 	att->redir = 0;
-	att->read_from_pipe = 0;
-	att->read_from_file = 0;
+	att->read_pipe = 0;
+	att->read_files = 0;
 	att->heredoc = 0;
 	att->skip = 0;
-	att->frirst_redir = 0;
+	att->first_redir = 0;
 }
 
 void	next_step_sub2(t_attr *att)
 {
-	if (!ft_strcmp(att->split_arr[att->y - 1], "|"))
-		att->read_from_pipe = 1;
-	if (!ft_strcmp(att->split_arr[att->y - 1], ">>")
-		|| !ft_strcmp(att->split_arr[att->y - 1], ">"))
+	if (!ft_strcmp(att->split_array[att->y - 1], "|"))
+		att->read_pipe = 1;
+	if (!ft_strcmp(att->split_array[att->y - 1], ">>")
+		|| !ft_strcmp(att->split_array[att->y - 1], ">"))
 		att->skip = 1;
-	if (!ft_strcmp(att->split_arr[att->y - 1], "<"))
+	if (!ft_strcmp(att->split_array[att->y - 1], "<"))
 		att->skip = 1;
-	if (!ft_strcmp(att->split_arr[att->y - 1], "<<"))
+	if (!ft_strcmp(att->split_array[att->y - 1], "<<"))
 		att->skip = 1;
 }
 
 void	next_step_sub(t_attr *att)
 {
-	if (!ft_strcmp(att->split_arr[att->y + 1], "|"))
-		att->write_to_pipe = 1;
-	else if (!ft_strcmp(att->split_arr[att->y + 1], ">"))
+	if (!ft_strcmp(att->split_array[att->y + 1], "|"))
+		att->write_pipe = 1;
+	else if (!ft_strcmp(att->split_array[att->y + 1], ">"))
 		att->redir = 1;
-	else if (!ft_strcmp(att->split_arr[att->y + 1], ">>"))
+	else if (!ft_strcmp(att->split_array[att->y + 1], ">>"))
 		att->redir = 2;
-	else if (!ft_strcmp(att->split_arr[att->y + 1], "<"))
-		att->read_from_file = 1;
-	else if (!ft_strcmp(att->split_arr[att->y + 1], "<<"))
+	else if (!ft_strcmp(att->split_array[att->y + 1], "<"))
+		att->read_files = 1;
+	else if (!ft_strcmp(att->split_array[att->y + 1], "<<"))
 		att->heredoc = 1;
 }
 	/* in questa funzione procediamo nel seguente modo:
@@ -67,10 +67,10 @@ void	next_step_sub(t_attr *att)
 int	check_next_step(t_attr *att)
 {
 	reset_flags(att);
-	if ((att->y == 0 || att->y == 2) && (!ft_strcmp(att->split_arr[0], ">")
-			|| !ft_strcmp(att->split_arr[0], ">>")
-			|| !ft_strcmp(att->split_arr[0], "<")
-			|| !ft_strcmp(att->split_arr[0], "<<")))
+	if ((att->y == 0 || att->y == 2) && (!ft_strcmp(att->split_array[0], ">")
+			|| !ft_strcmp(att->split_array[0], ">>")
+			|| !ft_strcmp(att->split_array[0], "<")
+			|| !ft_strcmp(att->split_array[0], "<<")))
 	{
 		if (att->y == 0)
 			frist_redir(att);
@@ -82,7 +82,7 @@ int	check_next_step(t_attr *att)
 	}
 	else
 	{
-		if (att->split_arr[att->y] && att->split_arr[att->y + 1])
+		if (att->split_array[att->y] && att->split_array[att->y + 1])
 			next_step_sub(att);
 		if (att->y > 1)
 			next_step_sub2(att);
@@ -96,15 +96,15 @@ void	red_index(t_attr *att)
 	int	y;
 
 	y = att->y + 1;
-	while (att->split_arr[y])
+	while (att->split_array[y])
 	{
-		if (!ft_strcmp(att->split_arr[y], ">")
-			|| !ft_strcmp(att->split_arr[y], ">>"))
+		if (!ft_strcmp(att->split_array[y], ">")
+			|| !ft_strcmp(att->split_array[y], ">>"))
 			att->i_redir = y;
-		else if (!ft_strcmp(att->split_arr[y], "<")
-			|| !ft_strcmp(att->split_arr[y], "<<"))
+		else if (!ft_strcmp(att->split_array[y], "<")
+			|| !ft_strcmp(att->split_array[y], "<<"))
 			att->i_readfile = y;
-		if (!ft_strcmp(att->split_arr[y], "|"))
+		if (!ft_strcmp(att->split_array[y], "|"))
 			break ;
 		y += 2;
 	}

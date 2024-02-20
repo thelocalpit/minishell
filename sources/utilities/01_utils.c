@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:16:08 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:50:45 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@ void add_index_to_custom_env(t_attr *att)
 	i = 0;
 	while (att->env_list != NULL)
 	{
-		att->env_list->$flag = i;
+		att->env_list->dol_flag = i;
 		i++;
 		att->env_list = att->env_list->next;
 	}
 	att->env_list = tmp_list;
 }
 
-void add_index_to_local_var(t_attr *att)
+void add_index_to_local_list(t_attr *att)
 {
 	int i;
 
-	t_list *tmp_list = att->local_var;
+	t_list *tmp_list = att->local_list;
 	i = 0;
-	while (att->local_var != NULL)
+	while (att->local_list != NULL)
 	{
-		att->local_var->$flag = i;
+		att->local_list->dol_flag = i;
 		i++;
-		att->local_var = att->local_var->next;
+		att->local_list = att->local_list->next;
 	}
-	att->local_var = tmp_list;
+	att->local_list = tmp_list;
 }
 
 /* questa funzione aggiunge un id ad ogni nodo. necessaria quando lavoriamo
@@ -52,7 +52,7 @@ void add_index_to_env_list(t_attr *att)
 	i = 0;
 	while (tmp_list != NULL)
 	{
-		tmp_list->$flag = i;
+		tmp_list->dol_flag = i;
 		i++;
 		tmp_list = tmp_list->next;
 	}

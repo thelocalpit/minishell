@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:15:44 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 11:52:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:14:29 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	error_dollar_02_b(char *check_envp, int *j, int *len, t_attr *att)
 	check_envp[*j] = '=';
 	check_envp[*j + 1] = '\0';
 	len += 1;
-	att->y_mx_envp = 0;
-	att->x_mx_envp = *len;
+	att->y_mtx_envp = 0;
+	att->x_mtx_envp = *len;
 }
 
 void	error_dollar_02_a(char *s, int *i, int *len)

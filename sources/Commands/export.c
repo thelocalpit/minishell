@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/16 12:56:54 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:10:25 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	add_on_env(char *arg, t_attr *att)
 
 	append = 0;
 	env_list = att->env_list;
-	local_list = att->local_var;
+	local_list = att->local_list;
 	content = arg;
 
 	if (ft_strchr(arg, '=') == NULL)
