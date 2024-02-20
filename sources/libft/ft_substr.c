@@ -6,16 +6,16 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:38:17 by pfalasch          #+#    #+#             */
-/*   Updated: 2024/02/19 15:32:59 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:50:10 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char *ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char *sub;
-	unsigned int j;
+	char			*sub;
+	unsigned int	j;
 
 	j = 0;
 	if ((start > ft_strlen(s)) || (!s) || (len == 0))
