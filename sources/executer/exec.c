@@ -3,76 +3,142 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 17:27:15 by mcoppola            #+#    #+#             */
-/*   Updated: 2024/02/16 18:32:43 by asacchin         ###   ########.fr       */
+/*   Created: 2024/02/21 10:50:45 by mcoppola          #+#    #+#             */
+/*   Updated: 2024/02/21 13:56:32 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	find_paths(t_attr *att)
+/**
+ * @brief Executes the command using execve system call.
+ *
+ * @param att The attribute structure containing command information.
+ * @return The exit status of the executed command.
+ */
+int	do_execve(t_attr *att)
 {
-	t_list	*tmp_list;
-
-	tmp_list = att->env_list;
-	while (tmp_list)
+	envp_to_matrix(att);
+	if (ft_strchr(att->array2[0], '.') || ft_strchr(att->array2[0], '/'))
 	{
-		if (ft_strncmp(tmp_list->content, "PATH=", 5) == 0)
+		att->value = ft_ecxev(att->array2[0], att->array2, att->env);
+	}
+	else
+		att->value = binary_executer(att);
+	return (free_array(att->env), att->value);
+}
+
+/**
+ * @brief Searches for the "PATH" environment variable in the given attribute
+ * structure. If found, splits the value by ':' delimiter and stores the paths
+ * in the attribute structure. If not found, allocates memory for an empty paths
+ * array.
+ *
+ * @param att: The attribute structure containing the environment list and paths
+ * array.
+ *
+ * @return 1 if "PATH" environment variable is found, 0 otherwise.
+ */
+int	paths_finder(t_attr *att)
+{
+	t_list	*temp_list;
+
+	temp_list = att->env_list;
+	while (temp_list)
+	{
+		if (ft_strncmp(temp_list->content, "PATH=", 5) == 0)
 		{
-			att->paths = ft_split(tmp_list->content + 5, ':');
+			att->paths = ft_split(temp_list->content + 5, ':');
 			return (1);
 		}
-		tmp_list = tmp_list->next;
+		temp_list = temp_list->next;
 	}
 	att->paths = malloc(sizeof(char *) * 1);
 	att->paths[0] = 0;
 	return (0);
 }
 
-int	do_execve(t_attr *att)
+/**
+ * @brief Performs redirection operations based on the given attributes.
+ *
+ * This function handles redirection operations by reading from pipes, checking
+ *  read files, checking redirections, and writing to pipes. It also updates
+ * the attribute's y value based on the index of the redirection or read file.
+ * Additionally, it calls the next step sub-function if there are more steps
+ * to be executed. Finally, it sets the skip flag if it is the first
+ * redirection operation.
+ *
+ * @param att The attribute structure containing information about the execution.
+ */
+void	do_redirect(t_attr *att)
 {
-	// signal(SIGQUIT, SIG_IGN);
-	envp_to_matrix(att);
-	if (ft_strchr(att->array2[0], '.') || ft_strchr(att->array2[0], '/'))
-		att->value = ft_ecxev(att->array2[0], att->array2, att->env);
-	else
-	{
-		att->value = bin_executer(att);
-	}
-	free_arr(att->env);
-	return (att->value);
+	int	temp_y;
+
+	if (att->first_redir)
+		att->y--;
+	temp_y = att->y;
+	if (att->read_pipe)
+		read_pipe(att);
+	check_read_file(att);
+	att->y = temp_y;
+	check_redirections(att);
+	if (att->i_redir > att->i_readfile)
+		att->y = att->i_redir + 1;
+	else if (att->i_readfile != 0)
+		att->y = att->i_readfile + 1;
+	if (att->split_array[att->y] && att->split_array[att->y + 1])
+		next_step_sub(att);
+	if (att->write_pipe && att->read_pipe)
+		att->pipe_index_num++;
+	if (att->write_pipe)
+		write_pipe(att);
+	att->y = temp_y;
+	if (att->first_redir)
+		att->skip = 1;
 }
 
-// VANNO GESTITI I SEGNALI PER QUITTARE I PROCESSI FIGLI
+/**
+ * @brief This function is responsible for executing the child process in
+ * the minishell. It sets the signal handler for the child process, performs
+ *  input/output redirection, executes the child command, frees the array of
+ *  paths, and exits with the return value of the child command.
+ *
+ * @param att The attribute structure containing information about the command
+ *  execution.
+ */
+void	if_child(t_attr *att)
+{
+	set_signal_child();
+	if (!att->skip)
+		do_redirect(att);
+	if (!att->skip)
+		att->value = do_child_command(att);
+	free_array(att->paths);
+	exit(att->value);
+}
 
-//controllare la gestione di att.value
-
+/**
+ * Executes a command by forking a child process and running the appropriate
+ * code.
+ *
+ * @param att The attribute structure containing the necessary information for
+ * execution.
+ * @return Returns the exit status of the executed command.
+ */
 int	exec(t_attr *att)
 {
 	att->pid = fork();
-	find_paths(att);
+	paths_finder(att);
 	if (att->pid == -1)
-	{
-		ft_putstr_fd("fork failed", 2);
-		return (1);
-	}
+		return (ft_putstr_fd("fork failed", 2), 1);
 	if (att->pid == 0)
-	{
-		set_signal_child();
-		if (!att->skip)
-			do_red(att);
-		if (!att->skip)
-			att->value = do_child_cmd(att);
-		free_arr(att->paths);
-		// free(att->paths);
-		exit(att->value);
-	}
-	set_signal_avoid(); //SIGNAL SPENTI
+		if_child(att);
+	signal_set_avoid();
 	waitpid(att->pid, &att->value, 0);
 	att->value = WEXITSTATUS(att->value);
-	set_signal();
+	signal_set();
 	if (g_sig_val == SIGINT)
 	{
 		printf("\n");
@@ -84,7 +150,5 @@ int	exec(t_attr *att)
 	if (att->read_pipe)
 		att->pipe_index_num++;
 	close_pipeline(att);
-	free_arr(att->paths);
-	// free(att->paths);
-	return (att->value);
+	return (free_array(att->paths), att->value);
 }

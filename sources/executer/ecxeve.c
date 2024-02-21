@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 20:20:37 by mcoppola            #+#    #+#             */
-/*   Updated: 2024/02/20 11:51:08 by mcoppola         ###   ########.fr       */
+/*   Created: 2024/02/21 10:49:37 by mcoppola          #+#    #+#             */
+/*   Updated: 2024/02/21 10:57:42 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
- * @brief Execute the command with the given path and arguments and environment variables
+ * @brief Execute the command with the given path and arguments and
+ * environment variables
  *
  * @param path the path of the command to execute
  * @param arg the arguments of the command to execute
@@ -27,10 +28,7 @@ int	ft_ecxev(char *path, char **arg, char **env)
 		return (127);
 	}
 	else if (execve(path, arg, env) != 0)
-	{
-		ft_putstr_fd("Execve Failed\n", 2);
-		return (126);
-	}
+		return (ft_putstr_fd("Execve Failed\n", 2), 126);
 	return (0);
 }
 
@@ -40,29 +38,24 @@ int	ft_ecxev(char *path, char **arg, char **env)
  * @param att the global structure of the program
  * @return int the error code of the command executed
 */
-int	bin_executer(t_attr *att)
+int	binary_executer(t_attr *att)
 {
-	char	**path;
+	char	**paths;
 	char	*temp;
-	int		i;
+	int		c;
 
 	temp = ft_strjoin("/", att->array2[0]);
-	path = malloc(sizeof(char *) * (matrix_len(att->paths) + 1));
-	path[matrix_len(att->paths)] = NULL;
-	i = -1;
-	while (att->paths[++i])
-		path[i] = ft_strjoin(att->paths[i], temp);
+	paths = malloc(sizeof(char *) * (matrix_len(att->paths) + 1));
+	paths[matrix_len(att->paths)] = NULL;
+	c = -1;
+	while (att->paths[++c])
+		paths[c] = ft_strjoin(att->paths[c], temp);
 	free(temp);
-	i = -1;
-	while (path[++i])
+	c = -1;
+	while (paths[++c])
 	{
-		if (ft_ecxev(path[i], att->array2, att->env) == 0)
-		{
-			free_arr(path);
-			return (0);
-		}
+		if (ft_ecxev(paths[c], att->array2, att->env) == 0)
+			return (free_array(paths), 0);
 	}
-	free_arr(path);
-	return (127);
+	return (free_array(paths), 127);
 }
-

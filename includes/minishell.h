@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/21 10:23:59 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:52:37 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,9 +206,9 @@ void	ft_itoa_custom(int n, t_attr *att);
 char	*prompt(void);
 
 // signals.c
-void	set_signal(void);
+void	signal_set(void);
 void	set_signal_child(void);
-void	set_signal_avoid(void);
+void	signal_set_avoid(void);
 void	signal_heredoc_handler(void);
 
 // debugg.c
@@ -284,7 +284,7 @@ int		return_nl_error(t_attr *att);
 
 // 04a_error_messages.c
 int		exit__err(char *str, t_attr *att);
-void	read_file_error(t_attr *att, char *file);
+void	file_error_reader(t_attr *att, char *file);
 void	command_not_found(char *str);
 
 // 05_error_dollar.c
@@ -299,7 +299,7 @@ int		counter_dollar_sign(char *s, t_attr *att);
 // 00_free.c
 
 void	free_array2(char **tokens, t_attr *att);
-void	free_arr(char **arr);
+void	free_array(char **arr);
 void	ft_delete_matrix(void *matrix);
 void	free_mx_envp(t_attr *att);
 void	free_local_list(t_attr *att);
@@ -310,7 +310,7 @@ void	free_env_list(t_attr *att);
 // Commands
 
 int		do_builtin(t_attr *att);
-int		do_child_cmd(t_attr *att);
+int		do_child_command(t_attr *att);
 int		built_in_check(t_attr *att);
 void	ft_exit(void);
 
@@ -356,11 +356,10 @@ void	red_index(t_attr *att);
 // ecxeve.c
 
 int		ft_ecxev(char *path, char **arg, char **env);
-int		bin_executer(t_attr *att);
+int		binary_executer(t_attr *att);
 
 // exec.c
 
-int		find_paths(t_attr *att);
 int		do_execve(t_attr *att);
 int		exec(t_attr *att);
 
@@ -373,20 +372,15 @@ void	read_pipe(t_attr *att);
 void	close_pipeline(t_attr *att);
 
 // read_file.c
-int		check_read_file(t_attr *att);
-int		red_input(t_attr *att, char *path);
+void	check_read_file(t_attr *att);
 int		heredoc(t_attr *att);
-int		heredoc_read(t_attr *att, char *eof);
-int		read_files(t_attr *att);
 
 // redir.c
-int		check_redir(t_attr *att);
-int		redir(t_attr *att);
+void	check_redirections(t_attr *att);
 int		create_file(t_attr *att, char *str, int redir);
 
 // redirections.c
-int		do_red(t_attr *att);
-void	reset_flags2(t_attr *att);
-int		frist_redir(t_attr *att);
+void	reset_flag2(t_attr *att);
+void	frist_redir(t_attr *att);
 
 #endif

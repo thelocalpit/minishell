@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:17:05 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 13:10:25 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:57:42 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	exit_free(t_attr *att)
 {
 	free_array2(att->array2, att);
-	free_arr(att->split_array);
+	free_array(att->split_array);
 	free_local_list(att);
 	free_env_list(att);
 	if (att->pipes_num != 0)
 		ft_delete_matrix(att->pipes_fd);
-	// free_arr(att->env);
-	// free_arr(att->paths);
+	// free_array(att->env);
+	// free_array(att->paths);
 }
 
 int	ft_exit_02(t_attr *att)

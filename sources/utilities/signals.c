@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 23:44:35 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:08:52 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	check_child(int signum)
 {
 	g_sig_val = signum;
 }
-void	set_signal(void)
+void	signal_set(void)
 {
 	struct sigaction	new_action;
 
@@ -62,7 +62,7 @@ void	set_signal_child(void)
 	sigaction(SIGQUIT, &new_action, NULL);
 }
 
-void	set_signal_avoid(void)
+void	signal_set_avoid(void)
 {
 	struct sigaction	new_action;
 

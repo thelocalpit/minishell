@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:37:23 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 13:10:25 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:57:42 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_array2(char **tokens, t_attr *att)
 
 /* questo è per liberare una matrix generica */
 
-void	free_arr(char **arr)
+void	free_array(char **arr)
 {
 	int	i;
 

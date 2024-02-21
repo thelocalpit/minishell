@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 23:44:35 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:08:30 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int ac, char **av, char **envp)
 	att.i_flag_dol = 0;
 	att.list_flag = 0;
 	rl_clear_history();
-	set_signal();
+	signal_set();
 	att.i_flag_dol = 0;
 	init_parameters(&att);
 	// questo è l'init del env per il momento fatto cosi, poi va sistemato dove volete voi
@@ -90,7 +90,7 @@ int	main(int ac, char **av, char **envp)
 					break ;
 				att.y += 2;
 			}
-			free_arr(att.split_array);
+			free_array(att.split_array);
 			if (att.pipes_num != 0)
 				ft_delete_matrix(att.pipes_fd);
 			free(s);

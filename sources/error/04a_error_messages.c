@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:22:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 13:07:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:19:13 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	exit__err(char *str, t_attr *att)
 	return (att->value);
 }
 
-void	read_file_error(t_attr *att, char *file)
+void	file_error_reader(t_attr *att, char *file)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(file, 2);

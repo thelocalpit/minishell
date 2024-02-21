@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:34:32 by alesac            #+#    #+#             */
-/*   Updated: 2024/02/20 13:07:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:07:02 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	do_builtin(t_attr *att)
 	return (att->value);
 }
 
-int	do_child_cmd(t_attr *att)
+int	do_child_command(t_attr *att)
 {
 	if (built_in_check(att))
 		return (0);

@@ -3,68 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <mcoppola@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:23:19 by mcoppola            #+#    #+#             */
-/*   Updated: 2024/02/18 04:46:11 by mcoppola           ###   ########.fr       */
+/*   Created: 2024/02/21 11:39:29 by mcoppola          #+#    #+#             */
+/*   Updated: 2024/02/21 13:46:24 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_read_file(t_attr *att)
-{
-	while (att->i_readfile > att->y)
-	{
-		reset_flags2(att);
-		next_step_sub(att);
-		if (att->heredoc)
-			att->value = heredoc(att);
-		if (att->read_files && att->y + 1 == att->i_readfile)
-			read_files(att);
-		att->y += 2;
-	}
-	return (0);
-}
-
+/**
+ * @brief Redirects the input from a file to the standard input.
+ *
+ * This function opens the specified file in read-only mode and redirects its
+ *  contents to the standard input. It then closes the file descriptor and
+ * sets the value of `att->value` to 0.
+ *
+ * @param att The attribute structure containing file descriptors and other
+ * information.
+ * @param path The path of the file to be read.
+ * @return Returns 0 if the file is successfully opened and the input is
+ * redirected, otherwise returns 1.
+ */
 int	red_input(t_attr *att, char *path)
 {
 	att->red_fd = open(path, O_RDONLY);
 	if (att->red_fd < 0)
+	{
 		return (1);
+	}
 	dup2(att->red_fd, 0);
 	close(att->red_fd);
 	att->value = 0;
 	return (0);
 }
 
-int	heredoc(t_attr *att)
-{
-	char	**eof;
-
-	eof = ft_split(att->split_array[att->y + 2], ' ');
-	if (heredoc_read(att, eof[0]))
-	{
-		free_arr(eof);
-		return (1);
-	}
-	close(att->red_fd);
-	free_arr(eof);
-	if (att->i_readfile != att->y + 1)
-		return (0);
-	att->red_fd = open(".heredoc", O_RDONLY);
-	dup2(att->red_fd, 0);
-	if (red_input(att, ".heredoc") || att->red_fd < 0)
-	{
-		ft_putstr_fd("heredoc error\n", 2);
-		unlink(".heredoc");
-		return (1);
-	}
-	close(att->red_fd);
-	unlink(".heredoc");
-	return (0);
-}
-
+/**
+ * @brief Reads input from the user until a specified delimiter is encountered.
+ * The input is written to a file named ".heredoc".
+ *
+ * @param att   A pointer to the attribute structure.
+ * @param eof   The end-of-file delimiter.
+ * @return      0 on success, 1 on error.
+ */
 int	heredoc_read(t_attr *att, char *eof)
 {
 	char	*input;
@@ -72,10 +53,7 @@ int	heredoc_read(t_attr *att, char *eof)
 	signal_heredoc_handler();
 	att->red_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (att->red_fd < 0)
-	{
-		ft_putstr_fd("heredoc error\n", 2);
-		return (1);
-	}
+		return (ft_putstr_fd("heredoc error\n", 2), 1);
 	while (1)
 	{
 		input = readline(RED_BOLD "> " RESET);
@@ -84,23 +62,92 @@ int	heredoc_read(t_attr *att, char *eof)
 			if (input)
 				free(input);
 			else
-				printf("bash: warning: here-document delimited by end-of-file (wanted `%s')\n", eof);
+				printf("bash: warning: here-document delimited by\
+					end-of-file (wanted `%s')\n", eof);
 			break ;
 		}
-		write(att->red_fd, input, ft_strlen(input));
-		write(att->red_fd, "\n", 1);
-		free(input);
+		else
+		{
+			write(att->red_fd, input, ft_strlen(input));
+			write(att->red_fd, "\n", 1);
+			free(input);
+		}
 	}
 	return (0);
 }
 
-int	read_files(t_attr *att)
+/**
+ * @brief the heredoc functionality.
+ *
+ * @param att The attribute structure.
+ * @return 0 if successful, 1 otherwise.
+ */
+int	heredoc(t_attr *att)
+{
+	char	**eof;
+
+	eof = ft_split(att->split_array[att->y + 2], ' ');
+	if (heredoc_read(att, eof[0]))
+		return (free_array(eof), 1);
+	close(att->red_fd);
+	free_array(eof);
+	if (att->i_readfile != att->y + 1)
+	{
+		return (0);
+	}
+	att->red_fd = open(".heredoc", O_RDONLY);
+	dup2(att->red_fd, 0);
+	if (red_input(att, ".heredoc") || att->red_fd < 0)
+	{
+		ft_putstr_fd("heredoc error\n", 2);
+		return (unlink(".heredoc"), 1);
+	}
+	close(att->red_fd);
+	return (unlink(".heredoc"), 0);
+}
+
+/**
+ * @brief Reads files and performs necessary operations.
+ *
+ * This function reads files specified in the `att` structure and performs
+ * the necessary operations based on the file content. It trims the file path,
+ * checks if the file is a valid input redirection, and handles any errors
+ * that occur during the process.
+ *
+ * @param att The attribute structure containing necessary information.
+ * @return 0 on success, or an error code on failure.
+ */
+int	files_reader(t_attr *att)
 {
 	char	*file_path;
 
 	file_path = ft_strtrim(att->split_array[att->y + 2], " ");
 	if (red_input(att, file_path))
-		read_file_error(att, file_path);
-	free(file_path);
-	return (0);
+	{
+		file_error_reader(att, file_path);
+	}
+	return (free(file_path), 0);
+}
+
+/**
+ * @brief Checks and reads files based on the given attributes.
+ *
+ * @param att The attribute structure containing necessary information.
+ */
+void	check_read_file(t_attr *att)
+{
+	while (att->i_readfile > att->y)
+	{
+		reset_flag2(att);
+		next_step_sub(att);
+		if (att->heredoc)
+		{
+			att->value = heredoc(att);
+		}
+		if (att->read_files && ((att->y + 1) == att->i_readfile))
+		{
+			files_reader(att);
+		}
+		att->y = att->y + 2;
+	}
 }

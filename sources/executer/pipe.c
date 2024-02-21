@@ -3,84 +3,122 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <mcoppola@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 19:45:28 by asacchin          #+#    #+#             */
-/*   Updated: 2024/01/29 15:34:30 by mcoppola           ###   ########.fr       */
+/*   Created: 2024/02/21 11:16:51 by mcoppola          #+#    #+#             */
+/*   Updated: 2024/02/21 11:37:36 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-/* questa funzione serve per scrivere dalla pipe. prima di tutto chiudiamo
-	la parte della pipe che non ci serve che in questo caso è la lettura.
-	poi utilizziamo la dup2 per reindirizzare il fd su stdout (==1). */
-void write_pipe(t_attr *att)
+/**
+ * @brief Writes the output of the current command to the next command in the
+ *  pipeline.
+ *
+ * This function is responsible for redirecting the standard output of the
+ * current command to the input of the next command in the pipeline. It uses
+ *  the pipe file descriptors stored in the `att` structure to establish the
+ * connection between the commands.
+ *
+ * @param att The attribute structure containing information about the
+ * pipeline.
+ */
+void	write_pipe(t_attr *att)
 {
 	if (att->pipe_index_num >= att->pipes_num)
-		return;
+		return ;
 	close(att->pipes_fd[att->pipe_index_num][0]);
 	dup2(att->pipes_fd[att->pipe_index_num][WRITE_END], STDOUT_FILENO);
 	if (att->pipes_fd[att->pipe_index_num] == NULL)
+	{
 		close(att->pipes_fd[att->pipe_index_num][1]);
+	}
 }
 
-/* questo serve per leggere dalla pipe. prima di tutto chiudiamo
-	la parte del write_end (che non serve).
-	poi utilizziamo la funzione dup2 che ci consente di
-	reinderizzare l'uscita di read con lo stdin (== 0).
-	*/
-
-void read_pipe(t_attr *att)
+/**
+ * @brief Reads from the pipe and redirects the input to the standard input
+ * file descriptor.
+ *
+ * @param att The attribute structure containing pipe file descriptors and
+ * index.
+ */
+void	read_pipe(t_attr *att)
 {
 	close(att->pipes_fd[att->pipe_index_num][1]);
 	dup2(att->pipes_fd[att->pipe_index_num][READ_END], STDIN_FILENO);
 	if (att->pipes_fd[att->pipe_index_num] == NULL)
+	{
 		close(att->pipes_fd[att->pipe_index_num][0]);
+	}
 }
 
-/* questa funzione è necessaria per chiudere i lati del read_end
-	e del write_end della pipe in questione.  */
-
-void close_pipeline(t_attr *att)
+/**
+ * @brief Closes the file descriptors of the pipeline.
+ *
+ * This function is responsible for closing the file descriptors of the
+ * pipeline. It closes the read end of the previous pipe if the current
+ * pipe index is greater than 0, and it closes the write end of the current
+ * pipe if the current pipe index is less than the total number of pipes.
+ *
+ * @param att The attribute structure containing information about the
+ * pipeline.
+ */
+void	close_pipeline(t_attr *att)
 {
 	if (att->pipe_index_num > 0)
+	{
 		close(att->pipes_fd[att->pipe_index_num - 1][READ_END]);
-	if (att->pipe_index_num < att->pipes_num)
+	}
+	if (att->pipes_num > att->pipe_index_num)
+	{
 		close(att->pipes_fd[att->pipe_index_num][WRITE_END]);
+	}
 }
 
-/* questa funzione serve per contare il numero di pipe nella readline */
-
+/**
+ * @brief Counts the number of pipes in the given command.
+ *
+ * @param att The attribute structure containing the command to be executed.
+ * @return 1 if the command contains pipes, 0 otherwise.
+*/
 int	counter_pipes(t_attr *att)
 {
-	int	i;
+	int	c;
 
 	att->pipes_num = 0;
-	i = 0;
-	while (att->split_array[i])
+	c = 0;
+	while (att->split_array[c])
 	{
-		if (!ft_strcmp(att->split_array[i], "|"))
+		if (!ft_strcmp(att->split_array[c], "|"))
+		{
 			att->pipes_num++;
-		i++;
+		}
+		c++;
 	}
 	if (att->pipes_num == 0)
+	{
 		return (0);
+	}
 	return (1);
 }
 
-void  init_pipes(t_attr *att)
+/**
+ * @brief Initializes the pipes for inter-process communication.
+ *
+ * @param att The attribute structure containing pipe information.
+ */
+void	init_pipes(t_attr *att)
 {
-	int i;
+	int	c;
 
 	att->pipes_fd = ft_calloc(att->pipes_num + 1, sizeof(int *));
 	if (!att->pipes_fd)
-		return;
-	i = -1;
-	while (++i < att->pipes_num)
+		return ;
+	c = -1;
+	while (++c < att->pipes_num)
 	{
-		att->pipes_fd[i] = malloc(2 * sizeof(int));
-		pipe(att->pipes_fd[i]);
+		att->pipes_fd[c] = malloc(sizeof(int) * 2);
+		pipe(att->pipes_fd[c]);
 	}
 }
