@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 23:44:35 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:23:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 # define MINISHELL_H
 
 // libs
-
 # include <dirent.h>
 # include <errno.h>
-# include <limits.h>
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <signal.h>
-# include <stdbool.h>
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
-# include <sys/types.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdbool.h>
+# include <limits.h>
+# include <stdio.h>
 # include <sys/wait.h>
+# include <sys/types.h>
+# include <string.h>
 # include <unistd.h>
+# include <signal.h>
 # include <fcntl.h>
 
 //global variable
 
-extern int  g_sig_val;
+extern int	g_sig_val;
 
 // colors
 # define GREEN "\033[0;32m"
@@ -48,19 +47,18 @@ extern int  g_sig_val;
 
 // variables
 
-#ifdef __linux__
-#define PATH_MAX 4096
-#elif __MACH__
-#define PATH_MAX 1024
-#else
-#warning "Unknown or unsupported operating system. Assuming PATH_MAX is 4096."
-#define PATH_MAX 4096
-#endif
+# ifdef __linux__
+#  define PATH_MAX 4096
+# elif __MACH__
+#  define PATH_MAX 1024
+# else
+#  warning "Unknown or unsupported operating system. Assuming PATH_MAX is 4096."
+#  define PATH_MAX 4096
+# endif
 // pipe
 
 # define READ_END 0
 # define WRITE_END 1
-
 
 /* ------------------------  ERRORS   ---------------------------------- */
 
@@ -72,7 +70,7 @@ extern int  g_sig_val;
 typedef struct s_list
 {
 	char			*content;
-	int 			dol_flag;
+	int				dol_flag;
 	struct s_list	*next;
 }				t_list;
 
@@ -107,7 +105,7 @@ typedef struct s_attr
 	int		*flag_dol;
 	int		i;
 	int		*save_y_mtx_envp;
-    int		list_flag;
+	int		list_flag;
 	int		list_index;
 	int		value;
 	char	**split_array;
@@ -139,7 +137,7 @@ char	*ft_strjoin(const char *s1, const char *s2);
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strtrim(char const *s1, char const *set);
-char 	*ft_substr(const char *s, unsigned int start, size_t len);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
 
 //---------------------------------------------------------------------
 
@@ -197,7 +195,6 @@ void	copy_expanded_str(t_attr *att, int start);
 void	counter_expanded_token(t_attr *att, char *s);
 void	counter_expanded_token_local_list(t_attr *att);
 
-
 int		ft_intsize(int n);
 int		ft_ispositive(int n);
 void	ft_itoa_custom(int n, t_attr *att);
@@ -213,7 +210,6 @@ void	set_signal(void);
 void	set_signal_child(void);
 void	set_signal_avoid(void);
 void	signal_heredoc_handler(void);
-
 
 // debugg.c
 void	ft_print_array(char **array);
@@ -240,10 +236,9 @@ int		matrix_len(char **matrix);
 void	add_index_to_local_list(t_attr *att);
 int		ft_isspace(char *s);
 
-
 // 02_utils.c
-char    *get_var_content(char *full_var);
-char    *removeplus(char *full_var);
+char	*get_var_content(char *full_var);
+char	*removeplus(char *full_var);
 int		var_name_length(char *full_var);
 char	*var_no_content_quote(char *str);
 
@@ -287,9 +282,7 @@ int		return_gt_error(t_attr *att);
 int		return_lt_error(t_attr *att);
 int		return_nl_error(t_attr *att);
 
-
 // 04a_error_messages.c
-
 int		exit__err(char *str, t_attr *att);
 void	read_file_error(t_attr *att, char *file);
 void	command_not_found(char *str);
