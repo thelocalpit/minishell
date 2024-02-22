@@ -5,132 +5,132 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 18:16:08 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 13:50:45 by mcoppola         ###   ########.fr       */
+/*   Created: 2024/02/22 11:17:30 by mcoppola          #+#    #+#             */
+/*   Updated: 2024/02/22 18:09:50 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void add_index_to_custom_env(t_attr *att)
+/**
+ * @brief Updates the 'dol_flag' field of each node in the environment list.
+ * The 'dol_flag' field represents the index of the node in the list.
+ *
+ * @param att The attribute structure containing the environment list.
+ */
+void	add_index_env_list(t_attr *att)
 {
-	int i;
+	t_list	*temp_list;
+	int		c;
 
-	t_list *tmp_list = att->env_list;
-	i = 0;
-	while (att->env_list != NULL)
+	c = 0;
+	temp_list = att->env_list;
+	while (temp_list != NULL)
 	{
-		att->env_list->dol_flag = i;
-		i++;
-		att->env_list = att->env_list->next;
-	}
-	att->env_list = tmp_list;
-}
-
-void add_index_to_local_list(t_attr *att)
-{
-	int i;
-
-	t_list *tmp_list = att->local_list;
-	i = 0;
-	while (att->local_list != NULL)
-	{
-		att->local_list->dol_flag = i;
-		i++;
-		att->local_list = att->local_list->next;
-	}
-	att->local_list = tmp_list;
-}
-
-/* questa funzione aggiunge un id ad ogni nodo. necessaria quando lavoriamo
-	con l'expander. */
-void add_index_to_env_list(t_attr *att)
-{
-	int i;
-
-	t_list *tmp_list = att->env_list;
-	i = 0;
-	while (tmp_list != NULL)
-	{
-		tmp_list->dol_flag = i;
-		i++;
-		tmp_list = tmp_list->next;
+		temp_list->dol_flag = c;
+		temp_list = temp_list->next;
+		c++;
 	}
 }
 
-void insert_between_node(t_list *prev, char *content)
+/**
+ * @brief Copies the environment variables into a linked list.
+ *
+ * @param env The array of environment variables.
+ * @return A pointer to the head of the linked list.
+ */
+t_list	*copy_env_in_list(char **env)
 {
-	t_list *new_node = (t_list *)malloc(sizeof(t_list));
-	new_node->content = content;
-	new_node->next = prev->next;
-	prev->next = new_node;
-}
+	t_list	*node;
 
-t_list  *copy_env_in_list(char **env)
-{
-	t_list *head;
-
-	head = ft_lstnew((void *)ft_strdup(*env));
-	// head = ft_lstnew((void *)*env);
+	node = ft_lstnew((void *)ft_strdup(*env));
 	env++;
 	while (*env)
 	{
-		ft_lstadd_back(&head, ft_lstnew(ft_strdup(*env)));
-		// ft_lstadd_back(&head, ft_lstnew(*env));
+		ft_lstadd_back(&node, ft_lstnew(ft_strdup(*env)));
 		env++;
 	}
-	return (head);
+	return (node);
 }
 
-char    *get_var_name(char *full_var)
+/**
+ * @brief Retrieves the variable name from a given string containing a variable
+ *  assignment. If the string does not contain an equal sign ('='), it is
+ * assumed to be the variable name itself. If the variable name ends with a
+ * plus sign ('+'), the plus sign is excluded from the name.
+ *
+ * @param full_var The string containing the variable assignment.
+ * @return The variable name extracted from the given string.
+ */
+char	*get_variable_name(char *full_var)
 {
-	char    *name;
-	char    *p;
-	int     var_name_length;
+	int		var_name_len;
+	char	*p;
+	char	*name;
 
 	p = ft_strchr(full_var, '=');
 	if (!p)
-		return (full_var);
-	var_name_length = ft_strlen(full_var) - ft_strlen(p);
-	if (full_var[var_name_length - 1] == '+')
 	{
-		var_name_length--;
-		p--;
+		return (full_var);
 	}
-	name = malloc(sizeof(char) * var_name_length + 1);
-	name[var_name_length] = '\0';
-	ft_strncpy(name, full_var, p - full_var);
+	var_name_len = ft_strlen(full_var) - ft_strlen(p);
+	if (full_var[var_name_len - 1] == '+')
+	{
+		p--;
+		var_name_len--;
+	}
+	name = malloc(sizeof(char) * var_name_len + 1);
+	name[var_name_len] = '\0';
+	ft_strncpy(name, full_var, (p - full_var));
 	return (name);
 }
 
-t_list *sort_list(t_list *list)
+void	sort_list_conditions( t_list *prev, t_list *new_nd,
+	t_list *list_sorted)
 {
-	t_list *sorted_list;
-	t_list **sorted_list_temp;
-	t_list *prev;
-	t_list *new_node;
-	t_list *tmp_list = list;
-
-	sorted_list = NULL;
-	while (tmp_list)
+	if (prev == NULL)
 	{
-		sorted_list_temp = &sorted_list;
-		prev = NULL;
-		while (*sorted_list_temp &&
-			ft_strncmp(tmp_list->content, (*sorted_list_temp)->content, var_name_length(tmp_list->content)) > 0)
-		{
-			prev = *sorted_list_temp;
-			sorted_list_temp = &(*sorted_list_temp)->next;
-		}
-		new_node = ft_lstnew(tmp_list->content);
-		if (prev == NULL) {
-			new_node->next = sorted_list;
-			sorted_list = new_node;
-		} else {
-			new_node->next = prev->next;
-			prev->next = new_node;
-		}
-		tmp_list = tmp_list->next;
+		new_nd->next = list_sorted;
+		list_sorted = new_nd;
 	}
-	return sorted_list;
+	else
+	{
+		new_nd->next = prev->next;
+		prev->next = new_nd;
+	}
+}
+
+/**
+ * @brief Sorts a linked list in ascending order based on the content of each
+ * node.
+ *
+ * @param list The linked list to be sorted.
+ * @return The sorted linked list.
+ */
+t_list	*sort_list(t_list *list)
+{
+	t_list	**sorted_list_tmp;
+	t_list	*new_nd;
+	t_list	*list_sorted;
+	t_list	*temp_list;
+	t_list	*prev;
+
+	list_sorted = NULL;
+	temp_list = list;
+	while (temp_list)
+	{
+		sorted_list_tmp = &list_sorted;
+		prev = NULL;
+		while (*sorted_list_tmp
+			&& ft_strncmp(temp_list->content, (*sorted_list_tmp)->content,
+				var_name_length(temp_list->content)) > 0)
+		{
+			prev = *sorted_list_tmp;
+			sorted_list_tmp = &(*sorted_list_tmp)->next;
+		}
+		new_nd = ft_lstnew(temp_list->content);
+		sort_list_conditions(prev, new_nd, list_sorted);
+		temp_list = temp_list->next;
+	}
+	return (list_sorted);
 }

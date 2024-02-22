@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/20 13:10:25 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:05:32 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ int	basic_export(t_attr *att)
 	export = sort_list(att->env_list);
 	while (export)
 	{
-		if (get_var_content((char *)export->content)[0] == '"')
+		if (get_variable_content((char *)export->content)[0] == '"')
 			printf("declare -x %s\n", export->content);
 		else
 		{
-			varName = get_var_name(export->content);
+			varName = get_variable_name(export->content);
 			printf("declare -x %s=\"%s\"\n",
 				varName,
-				get_var_content(export->content));
+				get_variable_content(export->content));
 				free(varName);
 		}
 		temp = export;
@@ -66,12 +66,12 @@ void	check_duplicate(t_attr *att, char *content)
 		if (!ft_strncmp(content,
 				(char *)list->content, var_name_length(content)))
 		{
-			list->content = var_no_content_quote(content);
+			list->content = var_no_quote_on_content(content);
 			return ;
 		}
 		list = list->next;
 	}
-	ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_content_quote(content)));
+	ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_quote_on_content(content)));
 }
 
 /**
@@ -118,15 +118,15 @@ int	add_on_env(char *arg, t_attr *att)
 		if (ft_strncmp(content, (char *)env_list->content, var_name_length(content)) == 0)
 		{
 			if (append)
-				return (env_list->content = ft_strjoin(env_list->content, get_var_content(content)), 0);
-			return (env_list->content = var_no_content_quote(content), 0);
+				return (env_list->content = ft_strjoin(env_list->content, get_variable_content(content)), 0);
+			return (env_list->content = var_no_quote_on_content(content), 0);
 		}
 		env_list = env_list->next;
 	}
 	if (append)
-		ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_content_quote(content)));
+		ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_quote_on_content(content)));
 	else
-		ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_content_quote(content)));
+		ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_quote_on_content(content)));
 	return (0);
 
 }

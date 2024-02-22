@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/21 13:52:37 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:14:29 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,29 +218,26 @@ void	printvar(t_list *var);
 
 // 00_utils.c
 int		ft_strcmp(const char *str1, const char *str2);
-char	*ft_strcpy(char *destination, const char *source);
 char	*ft_strcat(char *dest, const char *src);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 
 // 01_utils.c
 t_list	*copy_env_in_list(char **env);
 t_list	*sort_list(t_list *list);
-void	insert_between_node(t_list *prev, char *content);
-char	*get_var_name(char *full_var);
-void	add_index_to_env_list(t_attr *att);
-void	add_index_to_custom_env(t_attr *att);
+char	*get_variable_name(char *full_var);
+void	add_index_env_list(t_attr *att);
+void	add_index_custom_env(t_attr *att);
 
 // 03_utils.c
-void	envp_to_matrix(t_attr *att);
+void	env_to_matrix(t_attr *att);
 int		matrix_len(char **matrix);
-void	add_index_to_local_list(t_attr *att);
-int		ft_isspace(char *s);
+void	add_index_local_list(t_attr *att);
+int		ft_is_space(char *s);
 
 // 02_utils.c
-char	*get_var_content(char *full_var);
-char	*removeplus(char *full_var);
+char	*get_variable_content(char *full_var);
 int		var_name_length(char *full_var);
-char	*var_no_content_quote(char *str);
+char	*var_no_quote_on_content(char *str);
 
 //---------------------------------------------------------------------
 

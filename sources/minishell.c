@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/21 11:08:30 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:11:56 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int ac, char **av, char **envp)
 	// e va sostituito ovunque, per il momento lo aggiungo come parametro in piu dove
 	// serve a me e ricordiamoci di freearlo (Marco)
 	att.env_list = copy_env_in_list(envp);
-	add_index_to_env_list(&att);
+	add_index_env_list(&att);
 	att.local_list = NULL;
 	// printlist(&att);
 	while (1)
@@ -67,7 +67,7 @@ int	main(int ac, char **av, char **envp)
 		reinit_parameters(&att, envp);
 		//start_env(envp, &att);
 
-		if (s && ft_isspace(s))
+		if (s && ft_is_space(s))
 		{
 			add_history(s);
 			split_init(s, &att);
@@ -81,9 +81,9 @@ int	main(int ac, char **av, char **envp)
 				get_cmd_matrix(att.split_array[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
 				// ft_print_array(att.array2);
 				att.value = do_builtin(&att);
-				add_index_to_custom_env(&att);
+				add_index_custom_env(&att);
 				if (att.local_list != NULL)
-					add_index_to_local_list(&att);
+					add_index_local_list(&att);
 				// command(&att);
 				free_array2(att.array2, &att);
 				if (!att.split_array[att.y + 1])

@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:50:45 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/21 13:56:32 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:14:29 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 int	do_execve(t_attr *att)
 {
-	envp_to_matrix(att);
+	env_to_matrix(att);
 	if (ft_strchr(att->array2[0], '.') || ft_strchr(att->array2[0], '/'))
 	{
 		att->value = ft_ecxev(att->array2[0], att->array2, att->env);

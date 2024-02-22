@@ -22,7 +22,7 @@ int	add_var(char *str, t_attr *att)
 	skip = 0;
 	add = 0;
 	empty = 0;
-	name = get_var_name(str);
+	name = get_variable_name(str);
 	if (str[ft_strlen(name)] == '+')
 		add = 1;
 	if (!str[ft_strlen(name) + 1] || ((!str[ft_strlen(name) + 2]) && add))
@@ -50,13 +50,13 @@ int	update_var(char *str, t_list *list, int add)
 			if (!add)
 			{
 				free(tmp->content);
-				tmp->content = var_no_content_quote(str);
+				tmp->content = var_no_quote_on_content(str);
 				return (1);
 			}
 			temp = ft_strjoin(tmp->content,
 				str + var_name_length(str) + 2);
 			free(tmp->content);
-			tmp->content = var_no_content_quote(temp);
+			tmp->content = var_no_quote_on_content(temp);
 			free(temp);
 			return (1);
 		}
@@ -71,7 +71,7 @@ int	new_var(char *str, t_attr *att, int add, int empty)
 	char	*name;
 	char	*temp;
 
-	name = get_var_name(str);
+	name = get_variable_name(str);
 	if (add && empty)
 	{
 		free(str);
@@ -81,11 +81,11 @@ int	new_var(char *str, t_attr *att, int add, int empty)
 	{
 		temp = ft_strjoin(name, str + ft_strlen(name) + 1);
 		free(str);
-		str = var_no_content_quote(temp);
+		str = var_no_quote_on_content(temp);
 		free(temp);
 	}
 	tmp = att->local_list;
-	tmp = ft_lstnew(var_no_content_quote(str));
+	tmp = ft_lstnew(var_no_quote_on_content(str));
 	// da capire se va lasciato perche in questa funzione ce un leak
 	// if (add && !empty)
 	// 	free(str);
