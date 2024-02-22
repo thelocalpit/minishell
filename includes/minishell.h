@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/22 18:14:29 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:19:25 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,23 +306,22 @@ void	free_env_list(t_attr *att);
 
 // Commands
 
-int		do_builtin(t_attr *att);
-int		do_child_command(t_attr *att);
-int		built_in_check(t_attr *att);
-void	ft_exit(void);
+int		builtin_exec(t_attr *strc);
+int		child_command(t_attr *strc);
+int		check_builtin(t_attr *strc);
 
-// builtin.c
+// env-echo-pwd-cd.c
 
-int		echo(char **args);
-int		pwd(t_attr *att);
-int		envi(t_attr *att);
+int		ft_enviorment(t_attr *strc);
+int		ft_echo(char **str);
+int		ft_pwd(t_attr *strc);
 int		ft_cd(char **args);
 
-//localvar.c
+// var.c
 
+int		var_update(char *src, t_list *list, int n);
 int		add_var(char *str, t_attr *att);
-int		new_var(char *str, t_attr *att, int add, int empty);
-int		update_var(char *str, t_list *list, int add);
+int		var_new(char *src, t_attr *strc, int tot, int clear);
 
 // 01_export
 
@@ -330,12 +329,12 @@ int		ft_export(char **args, t_attr *att);
 
 // 01_unset
 
-int		ft_unset(char **args, t_attr *att);
-void	ft_remove_node(t_list **env_list, char *arg);
+int		unset(char **str, t_attr *strc);
+void	node_remove(t_list **env_list, char *str);
 
 // exit.c
 
-void	ft_exit_custom(t_attr *att);
+void	custom_exit(t_attr *strc);
 int		ft_exit_02(t_attr *att);
 
 // parser folder

@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/22 18:11:56 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:21:14 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int ac, char **av, char **envp)
 				check_next_step(&att);
 				get_cmd_matrix(att.split_array[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
 				// ft_print_array(att.array2);
-				att.value = do_builtin(&att);
+				att.value = builtin_exec(&att);
 				add_index_custom_env(&att);
 				if (att.local_list != NULL)
 					add_index_local_list(&att);

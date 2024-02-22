@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:17:30 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/22 18:09:50 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:42:49 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,22 @@ char	*get_variable_name(char *full_var)
 	return (name);
 }
 
-void	sort_list_conditions( t_list *prev, t_list *new_nd,
-	t_list *list_sorted)
+t_list	*create_new_node(t_list *temp_list, t_list **list_sorted, t_list *prev)
 {
+	t_list	*new_nd;
+
+	new_nd = ft_lstnew(temp_list->content);
 	if (prev == NULL)
 	{
-		new_nd->next = list_sorted;
-		list_sorted = new_nd;
+		new_nd->next = *list_sorted;
+		*list_sorted = new_nd;
 	}
 	else
 	{
 		new_nd->next = prev->next;
 		prev->next = new_nd;
 	}
+	return (new_nd);
 }
 
 /**
@@ -110,7 +113,6 @@ void	sort_list_conditions( t_list *prev, t_list *new_nd,
 t_list	*sort_list(t_list *list)
 {
 	t_list	**sorted_list_tmp;
-	t_list	*new_nd;
 	t_list	*list_sorted;
 	t_list	*temp_list;
 	t_list	*prev;
@@ -128,8 +130,7 @@ t_list	*sort_list(t_list *list)
 			prev = *sorted_list_tmp;
 			sorted_list_tmp = &(*sorted_list_tmp)->next;
 		}
-		new_nd = ft_lstnew(temp_list->content);
-		sort_list_conditions(prev, new_nd, list_sorted);
+		create_new_node(temp_list, &list_sorted, prev);
 		temp_list = temp_list->next;
 	}
 	return (list_sorted);
