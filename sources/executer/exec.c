@@ -114,7 +114,7 @@ void	if_child(t_attr *att)
 	if (!att->skip)
 		do_redirect(att);
 	if (!att->skip)
-		att->value = do_child_command(att);
+		att->value = child_command(att);
 	free_array(att->paths);
 	exit(att->value);
 }

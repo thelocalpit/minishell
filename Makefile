@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/20 12:25:52 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/02/22 13:33:27 by asacchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,12 +59,11 @@ SRC =	sources/minishell.c \
 		sources/error/05a_wrong_dollar.c \
 		sources/error/06_wrong_dollar_02.c \
 		sources/free/00_free.c \
-		sources/Commands/builtin.c \
-		sources/Commands/do_builtin.c \
-		sources/Commands/export.c \
-		sources/Commands/localvar.c \
-		sources/Commands/unset.c \
-		sources/Commands/exit.c \
+		sources/builtin/env-echo-pwd-cd.c \
+		sources/builtin/builtin_exec.c \
+		sources/builtin/export.c \
+		sources/builtin/var.c \
+		sources/builtin/unsetexit.c \
 		sources/executer/ecxeve.c \
 		sources/executer/exec.c \
 		sources/executer/pipe.c \
