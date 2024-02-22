@@ -75,7 +75,7 @@ int	main(int ac, char **av, char **envp)
 			att.y = 0;
 			if (counter_pipes(&att))
 				init_pipes(&att);
-			while (att.split_array[att.y] && !verify_readline(s, &att))
+			while (att.split_array[att.y] && !check_readline(s, &att))
 			{
 				check_next_step(&att);
 				get_cmd_matrix(att.split_array[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO

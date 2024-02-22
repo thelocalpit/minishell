@@ -19,10 +19,8 @@ int check_next_chars(char *s, t_attr *att)
 	else
 		return (0);
 }
-/* questo serve per controllare che non ci sia solo '>' '<' senza argomenti e altro.
-	andava in segfault */
-int error_begin_02(char *s, t_attr *att)
 
+int error_begin_02(char *s, t_attr *att)
 {
 	int i;
 	i = 0;

@@ -12,52 +12,49 @@
 
 #include "../../includes/minishell.h"
 
-/* controlla il primo elemento se è sbagliato */
-int	error_begin(char *s, t_attr *att)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] == ' ' && s[i])
-		i++;
-	if (s[i] == '|' || (s[i] == '<' && s[i + 1] == '|'))
-		return (return_pipe_error(att));
-	else if (s[i] == '>' && s[i + 1] == '>' && s[i + 2] == '|')
-		return (return_pipe_error(att));
-	else if (s[i] == '<' && s[i + 1] == '<' && s[i + 2] == '|')
-		return (return_pipe_error(att));
-	else if (s[i] == '<' && s[i + 1] == '>' && s[i + 2] == '|')
-		return (return_pipe_error(att));
-	else if (s[i] == '>' && s[i + 1] == '|')
-		return (return_not_required(att));
-	else if (s[i] == '<' && s[i + 1] == '<' && s[i + 2] == '<')
-		return (return_not_required(att));
-	else if (s[i] == '>' && s[i + 1] == '<' && s[i + 2] == '|')
-		return (return_lt_error(att));
-	else if (s[i] == '>' && s[i + 1] == '>' && s[i + 2] == '>')
-		return (return_gt_error(att));
-	return (0);
-}
-
-/* controlla ultimo elemento se è sbagliato */
-
-int	error_end(char *s, char c, t_attr *att)
+int	end_error(char *c, char s, t_attr *strct)
 {
 	int	len;
 
-	len = ft_strlen(s);
+	len = ft_strlen(c);
 	if (len == 0)
 		return (0);
-	while (s[len] == ' ' || s[len] == '\0')
+	while (c[len] == ' ' || c[len] == '\0')
 		len--;
-	if (s[len] == c)
+	if (c[len] == s)
 	{
-		if (c != '|')
-			return (return_nl_error(att));
+		if (s != '|')
+			return (return_nl_error(strct));
 		else
-			return (return_not_required(att));
+			return (return_not_required(strct));
 	}
+	return (0);
+}
+
+int	begin_error(char *c, t_attr *strct)
+{
+	int	j;
+
+	j = 0;
+	if (!c)
+		return (0);
+	while (c[j] == ' ' && c[j])
+		j++;
+	if (c[j] == '|' || (c[j] == '<' && c[j + 1] == '|'))
+		return (return_pipe_error(strct));
+	else if (c[j] == '>' && c[j + 1] == '>' && c[j + 2] == '|')
+		return (return_pipe_error(strct));
+	else if (c[j] == '<' && c[j + 1] == '<' && c[j + 2] == '|')
+		return (return_pipe_error(strct));
+	else if (c[j] == '<' && c[j + 1] == '>' && c[j + 2] == '|')
+		return (return_pipe_error(strct));
+	else if (c[j] == '>' && c[j + 1] == '|')
+		return (return_not_required(strct));
+	else if (c[j] == '<' && c[j + 1] == '<' && c[j + 2] == '<')
+		return (return_not_required(strct));
+	else if (c[j] == '>' && c[j + 1] == '<' && c[j + 2] == '|')
+		return (return_lt_error(strct));
+	else if (c[j] == '>' && c[j + 1] == '>' && c[j + 2] == '>')
+		return (return_gt_error(strct));
 	return (0);
 }

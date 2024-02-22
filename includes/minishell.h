@@ -247,18 +247,18 @@ char	*var_no_content_quote(char *str);
 //	error_folder
 // 00_verify_readline.c
 
-int		verify_readline(char *s, t_attr *att);
+int		check_readline(char *src, t_attr *strct);
 int		error_begin_02(char *s, t_attr *att);
 int		check_next_chars(char *s, t_attr *att);
 int		return_negative(t_attr *att);
 
 // 01_error_quotes.c
-int		counter_quotes(char *s);
+int		quotes_counter(char *c);
 
 // 02_error_error_start_last.c
 
-int		error_begin(char *s, t_attr *att);
-int		error_end(char *s, char c, t_attr *att);
+int		begin_error(char *c, t_attr *strct);
+int		end_error(char *c, char s, t_attr *strct);
 
 // 03_error_mixed.c
 

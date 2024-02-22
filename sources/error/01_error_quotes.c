@@ -12,28 +12,28 @@
 
 #include "../../includes/minishell.h"
 
-int	counter_single_quotes(char *s)
+int	double_quotes_counter(char *c)
 {
-	int	i;
-	int	counter_quotes;
+	int	j;
+	int	quotes_counter;
 
-	counter_quotes = 0;
-	i = 0;
-	while (s[i])
+	j = 0;
+	quotes_counter = 0;
+	while (c[j])
 	{
-		if (s[i] == '"' && counter_quotes % 2 == 0)
+		if (c[j] == '\'' && (quotes_counter % 2 == 0))
 		{
-			i++;
-			while (s[i] != '"' && s[i])
-				i++;
+			j++;
+			while (c[j] != '\'' && c[j])
+				j++;
 		}
-		if (s[i] == '\\' && s[i + 1] == '\'')
-			i += 2;
-		if (s[i] == '\'')
-			counter_quotes++;
-		i++;
+		else if (c[j] == '\\' && c[j + 1] == '"')
+			j += 2;
+		if (c[j] == '"')
+			quotes_counter++;
+		j++;
 	}
-	if (counter_quotes % 2 != 0)
+	if (quotes_counter % 2 != 0)
 	{
 		printf("error unclosed quotes\n");
 		return (1);
@@ -41,29 +41,28 @@ int	counter_single_quotes(char *s)
 	return (0);
 }
 
-/* se le quotes sono dispari */
-int	counter_double_quotes(char *s)
+int	single_quotes_counter(char *src)
 {
-	int	i;
-	int	counter_quotes;
+	int	j;
+	int	quotes_counter;
 
-	i = 0;
-	counter_quotes = 0;
-	while (s[i])
+	quotes_counter = 0;
+	j = 0;
+	while (src[j])
 	{
-		if (s[i] == '\'' && (counter_quotes % 2 == 0))
+		if (src[j] == '"' && quotes_counter % 2 == 0)
 		{
-			i++;
-			while (s[i] != '\'' && s[i])
-				i++;
+			j++;
+			while (src[j] != '"' && src[j])
+				j++;
 		}
-		else if (s[i] == '\\' && s[i + 1] == '"')
-			i += 2;
-		if (s[i] == '"')
-			counter_quotes++;
-		i++;
+		if (src[j] == '\\' && src[j + 1] == '\'')
+			j += 2;
+		if (src[j] == '\'')
+			quotes_counter++;
+		j++;
 	}
-	if (counter_quotes % 2 != 0)
+	if (quotes_counter % 2 != 0)
 	{
 		printf("error unclosed quotes\n");
 		return (1);
@@ -71,12 +70,11 @@ int	counter_double_quotes(char *s)
 	return (0);
 }
 
-/* controllo delle quotes */
-int	counter_quotes(char *s)
+int	quotes_counter(char *c)
 {
-	if (counter_single_quotes(s))
+	if (single_quotes_counter(c))
 		return (-1);
-	if (counter_double_quotes(s))
+	if (double_quotes_counter(c))
 		return (-1);
 	return (0);
 }

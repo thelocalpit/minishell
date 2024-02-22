@@ -47,7 +47,7 @@ SRC =	sources/minishell.c \
 		sources/tokens/03_count_words.c \
 		sources/tokens/04_expander.c \
 		sources/initialize/init.c \
-		sources/error/00_verify_readline.c \
+		sources/error/00-check-readline.c \
 		sources/error/01_error_quotes.c \
 		sources/error/error_begin_02.c \
 		sources/error/02_error_start_last.c \
