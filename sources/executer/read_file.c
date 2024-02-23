@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:39:29 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/21 13:46:24 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:15:10 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	files_reader(t_attr *att)
 	file_path = ft_strtrim(att->split_array[att->y + 2], " ");
 	if (red_input(att, file_path))
 	{
-		file_error_reader(att, file_path);
+		reader_file_error(att, file_path);
 	}
 	return (free(file_path), 0);
 }

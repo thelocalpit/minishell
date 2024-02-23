@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_verify_readline.c                               :+:      :+:    :+:   */
+/*   00-check-readline.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:00:05 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 13:07:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:23:04 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	check_readline(char *src, t_attr *strct)
 		return (negative_return(strct));
 	else if (begin_error(src, strct))
 		return (negative_return(strct));
-	else if (error_mixed_start(src, strct))
+	else if (mixed_error_start(src, strct))
 		return (negative_return(strct));
-	else if (error_dollar(src, strct))
+	else if (dollar_error(src, strct))
 		return (negative_return(strct));
 	return (0);
 }

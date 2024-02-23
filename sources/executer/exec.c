@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:50:45 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/22 18:14:29 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:16:27 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int	exec(t_attr *att)
 	}
 	g_sig_val = 0;
 	if (att->value == 127)
-		command_not_found(att->array2[0]);
+		not_found_command(att->array2[0]);
 	if (att->read_pipe)
 		att->pipe_index_num++;
 	close_pipeline(att);

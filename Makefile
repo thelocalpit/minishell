@@ -6,7 +6,7 @@
 #    By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/22 13:33:27 by asacchin         ###   ########.fr        #
+#    Updated: 2024/02/23 12:33:13 by asacchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,15 +48,15 @@ SRC =	sources/minishell.c \
 		sources/tokens/04_expander.c \
 		sources/initialize/init.c \
 		sources/error/00-check-readline.c \
-		sources/error/01_error_quotes.c \
+		sources/error/01-quotes-error.c \
 		sources/error/error_begin_02.c \
-		sources/error/02_error_start_last.c \
-		sources/error/03_error_mixed.c \
-		sources/error/03a_error_mixed.c \
-		sources/error/04_error_messages.c \
-		sources/error/04a_error_messages.c \
-		sources/error/05_wrong_dollar.c \
-		sources/error/05a_wrong_dollar.c \
+		sources/error/02-last-start-error.c \
+		sources/error/03-mixed-error.c \
+		sources/error/03b-mixed-error.c \
+		sources/error/04-messages-error.c \
+		sources/error/04b-messages-error.c \
+		sources/error/05-wrong-dollar-error.c \
+		sources/error/05b-wrong-dollar-error.c \
 		sources/error/06_wrong_dollar_02.c \
 		sources/free/00_free.c \
 		sources/builtin/env-echo-pwd-cd.c \

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   05a_wrong_dollar.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:15:44 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 13:14:29 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:25:39 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* queste due funzioni servono solamente a ridurre il numero di righe */
 void	error_dollar_02_b(char *check_envp, int *j, int *len, t_attr *att)
 {
 	check_envp[*j] = '=';

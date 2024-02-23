@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/22 18:45:37 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:22:50 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,34 +259,34 @@ int		end_error(char *c, char s, t_attr *strct);
 
 // 03_error_mixed.c
 
-int		check_2nd_char_02(char *s, int i, char d, t_attr *att);
-int		check_2nd_char_03(char *s, int i, char d, t_attr *att);
-int		check_spaces(char *s, int *i, t_attr *att);
+int		char_2nd_check_02(char *c, int j, char b, t_attr *strct);
+int		char_2nd_check_03(char *c, int j, char b, t_attr *strct);
+int		spaces_check(char *src, int *j, t_attr *strct);
 int		check_2nd_char(char *s, int i, t_attr *att);
-int		error_mixed_start(char *s, t_attr *att);
+int		mixed_error_start(char *c, t_attr *strct);
 
 //03a_error_mixed.c
 
-int		ft_scorri(char *s, int i);
-int		check_extra_char(char *s, int i, t_attr *att);
-int		check_next_arg(char *s, int i, t_attr *att);
+int		scroll(char *c, int j);
+int		extra_char_check(char *c, int j, t_attr *strct);
+int		next_arg_check(char *c, int j, t_attr *strct);
 
 // 04_error_messages.c
 
-int		return_not_required(t_attr *att);
-int		return_pipe_error(t_attr *att);
-int		return_gt_error(t_attr *att);
-int		return_lt_error(t_attr *att);
-int		return_nl_error(t_attr *att);
+int		not_required(t_attr *strct);
+int		pipe_error(t_attr *strct);
+int		gt_error(t_attr *strct);
+int		lt_error(t_attr *strct);
+int		nl_error(t_attr *strct);
 
 // 04a_error_messages.c
-int		exit__err(char *str, t_attr *att);
-void	file_error_reader(t_attr *att, char *file);
-void	command_not_found(char *str);
+int		error_exit(char *c, t_attr *strct);
+void	reader_file_error(t_attr *strct, char *src);
+void	not_found_command(char *src);
 
 // 05_error_dollar.c
 
-int		error_dollar(char *s, t_attr *att);
+int		dollar_error(char *c, t_attr *strct);
 int		error_dollar_02(char *s, int i, t_attr *att);
 int		error_dollar_03(char *check_envp, t_attr *att, int len);
 int		counter_dollar_sign(char *s, t_attr *att);

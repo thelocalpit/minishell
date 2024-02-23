@@ -3,46 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   04_error_messages.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:45:30 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 13:07:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:00:50 by asacchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	return_not_required(t_attr *att)
-{
-	printf("command not required by subject\n");
-	att->value = 2;
-	return (1);
-}
-
-int	return_pipe_error(t_attr *att)
-{
-	printf("parse error near `|'\n");
-	att->value = 2;
-	return (1);
-}
-
-int	return_gt_error(t_attr *att)
-{
-	printf("parse error near `>'\n");
-	att->value = 2;
-	return (1);
-}
-
-int	return_lt_error(t_attr *att)
-{
-	printf("parse error near `<'\n");
-	att->value = 2;
-	return (1);
-}
-
-int return_nl_error(t_attr *att)
+int nl_error(t_attr *strct)
 {
 	printf("syntax error near unexpected token 'newline'\n");
-	att->value = 2;
+	strct->value = 2;
+	return (1);
+}
+
+int	pipe_error(t_attr *strct)
+{
+	printf("parse error near `|'\n");
+	strct->value = 2;
+	return (1);
+}
+
+int	not_required(t_attr *strct)
+{
+	printf("command not required by subject\n");
+	strct->value = 2;
+	return (1);
+}
+
+int	gt_error(t_attr *strct)
+{
+	printf("parse error near `>'\n");
+	strct->value = 2;
+	return (1);
+}
+
+int	lt_error(t_attr *strct)
+{
+	printf("parse error near `<'\n");
+	strct->value = 2;
 	return (1);
 }
