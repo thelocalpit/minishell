@@ -59,7 +59,7 @@ int	get_token_01(char *s, int j)
 	while (s[j] != '|' && s[j] != '>' && s[j] != '<' && s[j] != '\0')
 	{
 		if (s[j] == '\'' || s[j] == '"')
-			j = check_s_d_quotes(s, j);
+			j = s_d_quotes(s, j);
 		j++;
 	}
 	return (j);

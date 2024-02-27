@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05a_wrong_dollar.c                                 :+:      :+:    :+:   */
+/*   05b-wrong-dollar-error.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,50 +12,50 @@
 
 #include "../../includes/minishell.h"
 
-void	error_dollar_02_b(char *check_envp, int *j, int *len, t_attr *att)
+void	dollar_error_2_a(char *c, int *j, int *n)
 {
-	check_envp[*j] = '=';
-	check_envp[*j + 1] = '\0';
-	len += 1;
-	att->y_mtx_envp = 0;
-	att->x_mtx_envp = *len;
-}
-
-void	error_dollar_02_a(char *s, int *i, int *len)
-{
-	while (s[*i] != '"' && s[*i] != '\'' && s[*i] != ' ' && s[*i])
+	while (c[*j] != '"' && c[*j] != '\'' && c[*j] != ' ' && c[*j])
 	{
-		(*i)++;
-		(*len)++;
-		if (s[*i] == '$')
+		(*j)++;
+		(*n)++;
+		if (c[*j] == '$')
 			break ;
 	}
 }
 
-int	error_dollar_02(char *s, int i, t_attr *att)
+void	dollar_error_2_b(char *envp_check, int *n, int *c, t_attr *strc)
 {
-	int		len;
-	char	*check_envp;
-	int		j;
-	int		start;
+	envp_check[*n] = '=';
+	envp_check[*n + 1] = '\0';
+	c += 1;
+	strc->y_mtx_envp = 0;
+	strc->x_mtx_envp = *c;
+}
 
-	len = 0;
-	j = 0;
-	i++;
-	start = i;
-	if (s[i] == '?')
+int	dollar_error_2(char *c, int a, t_attr *strc)
+{
+	int		n;
+	char	*envp_check;
+	int		b;
+	int		inizio;
+
+	n = 0;
+	b = 0;
+	a++;
+	inizio = a;
+	if (c[a] == '?')
 		return (1);
-	error_dollar_02_a(s, &i, &len);
-	check_envp = malloc(sizeof(char) * len + 2);
-	i = start;
-	while (j < len)
-		check_envp[j++] = s[i++];
-	error_dollar_02_b(check_envp, &j, &len, att);
-	if (error_dollar_03(check_envp, att, len) == 1)
+	dollar_error_2_a(c, &a, &n);
+	envp_check = malloc(sizeof(char) * n + 2);
+	a = inizio;
+	while (b < n)
+		envp_check[b++] = c[a++];
+	dollar_error_2_b(envp_check, &b, &n, strc);
+	if (dollar_error_3(envp_check, strc, n) == 1)
 	{
-		free(check_envp);
+		free(envp_check);
 		return (1);
 	}
-	free(check_envp);
-	return (len - 1);
+	free(envp_check);
+	return (n - 1);
 }

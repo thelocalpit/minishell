@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_wrong_dollar.c                                  :+:      :+:    :+:   */
+/*   05-wrong-dollar-errror.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,11 +20,11 @@ int dollar_error_00(char *c, int j, t_attr *strct)
 		strct->flag_dol[strct->i_flag_dol] = -1;
 		j += 2;
 	}
-	else if (error_dollar_02(c, j, strct) == -1)
+	else if (dollar_error_2(c, j, strct) == -1)
 		strct->flag_dol[strct->i_flag_dol] = -1;
 	else
 	{
-		j += error_dollar_02(c, j, strct);
+		j += dollar_error_2(c, j, strct);
 	}
 	strct->i_flag_dol++;
 	return (j);
@@ -35,7 +35,7 @@ int dollar_error_01(char *c, t_attr *strct)
 	int j;
 
 	j = 0;
-	if (counter_dollar_sign(c, strct) != 0)
+	if (dollar_sign_counter(c, strct) != 0)
 	{
 		strct->save_y_mtx_envp = malloc(sizeof(int) * strct->num_dol);
 		strct->flag_dol = malloc(sizeof(int) * strct->num_dol);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   06_wrong_dollar_02.c                               :+:      :+:    :+:   */
+/*   06-wrong-dollar-2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,54 +12,53 @@
 
 #include "../../includes/minishell.h"
 
-int counter_dollar_sign(char *s, t_attr *att)
-{
-	int i;
-
-	i = 0;
-	att->num_dol = 0;
-	while (s[i])
-	{
-		if (s[i] == '$' && s[i + 1] != ' ' && s[i + 1] && s[i + 1] != '"')
-			att->num_dol++;
-		i++;
-	}
-	return (att->num_dol);
-}
-
-int check_local_list(char *check_envp, t_attr *att, int len)
+int local_list_check(char *envp_check, t_attr *strc, int n)
 {
 	t_list *tmp_list;
 
-	// printf("entro nel check del wrong dollar della local list anche con PATH?\n");
-	tmp_list = att->local_list;
+	tmp_list = strc->local_list;
 	while (tmp_list != NULL)
 	{
-		if (!ft_strncmp(check_envp, tmp_list->content, len))
+		if (!ft_strncmp(envp_check, tmp_list->content, n))
 			return (0);
 		tmp_list = tmp_list->next;
-		att->y_mtx_envp++;
+		strc->y_mtx_envp++;
 	}
 	return (-1);
 }
 
-int error_dollar_03(char *check_envp, t_attr *att, int len)
+int dollar_sign_counter(char *c, t_attr *strc)
+{
+	int j;
+
+	j = 0;
+	strc->num_dol = 0;
+	while (c[j])
+	{
+		if (c[j] == '$' && c[j + 1] != ' ' && c[j + 1] && c[j + 1] != '"')
+			strc->num_dol++;
+		j++;
+	}
+	return (strc->num_dol);
+}
+
+int dollar_error_3(char *envp_check, t_attr *strc, int n)
 {
 	t_list *tmp_list;
 
-	tmp_list = att->env_list;
-	att->y_mtx_envp = 0;
+	tmp_list = strc->env_list;
+	strc->y_mtx_envp = 0;
 	while (tmp_list != NULL)
 	{
-		if (!ft_strncmp(check_envp, tmp_list->content, len))
+		if (!ft_strncmp(envp_check, tmp_list->content, n))
 			return (0);
-		if (!ft_strncmp(check_envp, "?", 1))
+		if (!ft_strncmp(envp_check, "?", 1))
 			return (0);
 		tmp_list = tmp_list->next;
-		att->y_mtx_envp++;
+		strc->y_mtx_envp++;
 	}
-	att->y_mtx_envp = 0;
-	if (!check_local_list(check_envp, att, len))
+	strc->y_mtx_envp = 0;
+	if (!local_list_check(envp_check, strc, n))
 		return (0);
 	return (1);
 }

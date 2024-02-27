@@ -37,7 +37,7 @@ SRC =	sources/minishell.c \
 		sources/utilities/01_utils.c \
 		sources/utilities/02_utils.c \
 		sources/utilities/03_utils.c \
-		sources/tokens/00_token_init_count.c \
+		sources/tokens/00-init-token-count.c \
 		sources/tokens/01_token_in_array.c \
 		sources/tokens/02_single_token_matrix.c \
 		sources/tokens/02a_itoa_custom.c \
@@ -49,7 +49,7 @@ SRC =	sources/minishell.c \
 		sources/initialize/init.c \
 		sources/error/00-check-readline.c \
 		sources/error/01-quotes-error.c \
-		sources/error/error_begin_02.c \
+		sources/error/begin-error-2.c \
 		sources/error/02-last-start-error.c \
 		sources/error/03-mixed-error.c \
 		sources/error/03b-mixed-error.c \
@@ -57,7 +57,7 @@ SRC =	sources/minishell.c \
 		sources/error/04b-messages-error.c \
 		sources/error/05-wrong-dollar-error.c \
 		sources/error/05b-wrong-dollar-error.c \
-		sources/error/06_wrong_dollar_02.c \
+		sources/error/06-wrong-dollar-2.c \
 		sources/free/00_free.c \
 		sources/builtin/env-echo-pwd-cd.c \
 		sources/builtin/builtin_exec.c \

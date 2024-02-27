@@ -22,7 +22,7 @@ int	check_readline(char *src, t_attr *strct)
 {
 	if (end_error(src, '>', strct) || end_error(src, '<', strct) || end_error(src, '|', strct))
 		return (negative_return(strct));
-	else if (error_begin_02(src, strct))
+	else if (begin_error_2(src, strct))
 		return (negative_return(strct));
 	else if (quotes_counter(src))
 		return (negative_return(strct));

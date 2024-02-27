@@ -150,10 +150,10 @@ void	reinit_parameters(t_attr *att, char **envp);
 
 // tokens_folder
 // 00_token_init_counter.c
-void	split_init(char *s, t_attr *att);
-int		counter_tokens(char *s, t_attr *att);
-int		process_special_token(t_attr *att, char *s, int i);
-int		check_s_d_quotes(char *s, int i);
+void	init_split(char *c, t_attr *strc);
+int		tokens_counter(char *c, t_attr *strc);
+int		special_token_process(t_attr *strc, char *c, int j);
+int		s_d_quotes(char *c, int j);
 
 // 01_token_in_array.c
 void	create_array(char *s, t_attr *att);
@@ -245,8 +245,8 @@ char	*var_no_quote_on_content(char *str);
 // 00_verify_readline.c
 
 int		check_readline(char *src, t_attr *strct);
-int		error_begin_02(char *s, t_attr *att);
-int		check_next_chars(char *s, t_attr *att);
+int		begin_error_2(char *s, t_attr *att);
+int		next_chars_check(char *c, t_attr *strc);
 int		return_negative(t_attr *att);
 
 // 01_error_quotes.c
@@ -287,9 +287,9 @@ void	not_found_command(char *src);
 // 05_error_dollar.c
 
 int		dollar_error(char *c, t_attr *strct);
-int		error_dollar_02(char *s, int i, t_attr *att);
-int		error_dollar_03(char *check_envp, t_attr *att, int len);
-int		counter_dollar_sign(char *s, t_attr *att);
+int		dollar_error_2(char *c, int a, t_attr *strc);
+int		dollar_error_3(char *check_envp, t_attr *att, int len);
+int		dollar_sign_counter(char *c, t_attr *strc);
 
 //	free_folder
 

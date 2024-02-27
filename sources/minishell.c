@@ -70,7 +70,7 @@ int	main(int ac, char **av, char **envp)
 		if (s && ft_is_space(s))
 		{
 			add_history(s);
-			split_init(s, &att);
+			init_split(s, &att);
 			// ft_print_array(att.split_array);
 			att.y = 0;
 			if (counter_pipes(&att))
