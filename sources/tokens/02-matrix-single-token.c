@@ -12,36 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-char *get_cmd_token(char *c, t_attr *strct)
-{
-	int j;
-	int n;
-
-	j = 0;
-	if (c[j] == '"')
-	{
-		j++;
-		if (c[j] == '"')
-			return (NULL);
-		n = 2;
-		return (ft_write_word(c, strct, n, j));
-	}
-	else if (c[j] == '\'')
-	{
-		j++;
-		if (c[j] == '\'')
-			return (NULL);
-		n = 1;
-		return (ft_write_word(c, strct, n, j));
-	}
-	else
-	{
-		n = 0;
-		return (ft_write_word(c, strct, n, j));
-	}
-}
-
-void create_matrix_cmd(char *c, t_attr *strct)
+void build_cmd_matrix(char *c, t_attr *strct)
 {
 	strct->i_flag_dol = 0;
 	strct->x2 = 0;
@@ -55,7 +26,7 @@ void create_matrix_cmd(char *c, t_attr *strct)
 		strct->x2 = 0;
 		while (*c == ' ')
 			c++;
-		c = get_cmd_token(c, strct);
+		c = cmd_token(c, strct);
 		if (strct->array2[strct->y2] == 0 && strct->y2 < strct->words_counter)
 		{
 			c = NULL;
@@ -70,11 +41,40 @@ void create_matrix_cmd(char *c, t_attr *strct)
 	}
 }
 
-void get_cmd_matrix(char *c, t_attr *strct)
+char *cmd_token(char *c, t_attr *strct)
+{
+	int j;
+	int n;
+
+	j = 0;
+	if (c[j] == '"')
+	{
+		j++;
+		if (c[j] == '"')
+			return (NULL);
+		n = 2;
+		return (write_word(c, strct, n, j));
+	}
+	else if (c[j] == '\'')
+	{
+		j++;
+		if (c[j] == '\'')
+			return (NULL);
+		n = 1;
+		return (write_word(c, strct, n, j));
+	}
+	else
+	{
+		n = 0;
+		return (write_word(c, strct, n, j));
+	}
+}
+
+void cmd_matrix(char *c, t_attr *strct)
 {
 	if (!c)
 		return ;
-	ft_words_counter(c, strct);
-	create_matrix_cmd(c, strct);
+	counter_words(c, strct);
+	build_cmd_matrix(c, strct);
 }
 

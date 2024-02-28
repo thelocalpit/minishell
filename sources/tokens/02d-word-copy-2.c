@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int ft_strlen_name_var(char *c, int *j, int name_var_len)
+int var_name_strlen(char *c, int *j, int name_var_len)
 {
 	name_var_len = (*j);
 	while (c[*j] != '"' && c[*j] != ' ' && c[*j] != '$' && c[*j])
@@ -21,14 +21,14 @@ int ft_strlen_name_var(char *c, int *j, int name_var_len)
 	return (name_var_len);
 }
 
-int copy_g_value(t_attr *strct, int j)
+int g_value_copy(t_attr *strct, int j)
 {
-	ft_itoa_custom(strct->value, strct);
+	custom_itoa(strct->value, strct);
 	j += 2;
 	return (j);
 }
 
-int copy_double_dollar(int j, t_attr *strct)
+int double_dollar_copy(int j, t_attr *strct)
 {
 	j += 2;
 	strct->i_flag_dol += 2;

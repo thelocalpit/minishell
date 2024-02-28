@@ -12,12 +12,36 @@
 
 #include "../../includes/minishell.h"
 
+void expanded_token_counter_list(t_attr *strct)
+{
+	t_list *tmp;
+
+	tmp = strct->local_list;
+	while (strct->local_list != NULL)
+	{
+		if (!ft_strncmp(strct->check_exp, strct->local_list->content, strct->len_call_exp))
+		{
+			while (strct->local_list->content[strct->x_mtx_envp])
+			{
+				strct->mem_space++;
+				strct->x_mtx_envp++;
+			}
+			free(strct->check_exp);
+			strct->save_y_mtx_envp[strct->i_flag_dol] = strct->local_list->dol_flag;
+			strct->local_list = tmp;
+			return;
+		}
+		strct->local_list = strct->local_list->next;
+		strct->y_mtx_envp++;
+	}
+}
+
 /* questa funzione copia dalla lista delle variabili d'abiente nella
 	nostra matrice array2.
 	potevo scriverla meglio? SI.
 	Funziona? SI.
 	la riscriverò? COL CAZZO IMPANATO CON LE PATATE. */
-void copy_expanded_str(t_attr *strct, int name_var_len)
+void expanded_str_clone(t_attr *strct, int name_var_len)
 {
 	t_list *tmp;
 
@@ -45,30 +69,7 @@ void copy_expanded_str(t_attr *strct, int name_var_len)
 	}
 }
 
-void counter_expanded_token_local_list(t_attr *strct)
-{
-	t_list *tmp;
-
-	tmp = strct->local_list;
-	while (strct->local_list != NULL)
-	{
-		if (!ft_strncmp(strct->check_exp, strct->local_list->content, strct->len_call_exp))
-		{
-			while (strct->local_list->content[strct->x_mtx_envp])
-			{
-				strct->mem_space++;
-				strct->x_mtx_envp++;
-			}
-			free(strct->check_exp);
-			strct->save_y_mtx_envp[strct->i_flag_dol] = strct->local_list->dol_flag;
-			strct->local_list = tmp;
-			return;
-		}
-		strct->local_list = strct->local_list->next;
-		strct->y_mtx_envp++;
-	}
-}
-int counter_expanded_token_02(t_attr *strct)
+int expanded_token_counter2(t_attr *strct)
 {
 	t_list *tmp;
 
@@ -92,12 +93,13 @@ int counter_expanded_token_02(t_attr *strct)
 	strct->y_mtx_envp = 0;
 	return (-1);
 }
+
 /* questa funzione conta quanta memoria devo allocare per l'exp.
 	mi devo calcolare la lunghezza del nome ed escluderla (check_exp)
 	poi in ft:strncmp faccio un strncmp e trovo la variabile
 	d'ambiente giusta per calcolo quanto necessario per allocare la
 	memoria. */
-void counter_expanded_token(t_attr *strct, char *c)
+void expanded_token_counter(t_attr *strct, char *c)
 {
 	int inizio;
 	int i;
@@ -116,10 +118,10 @@ void counter_expanded_token(t_attr *strct, char *c)
 	strct->check_exp[i + 1] = '\0';
 	strct->y_mtx_envp = 0;
 	strct->x_mtx_envp = strct->len_call_exp;
-	if (counter_expanded_token_02(strct) == -1)
+	if (expanded_token_counter2(strct) == -1)
 	{
 		strct->list_flag = 1;
-		counter_expanded_token_local_list(strct);
+		expanded_token_counter_list(strct);
 	}
 	strct->mem_space++;
 	return ;

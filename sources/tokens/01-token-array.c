@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-void	check_next_special_token(char *c, int j, char **str)
+void	special_token_check(char *c, int j, char **str)
 {
 	if (c[j] == '|')
 	{
@@ -35,7 +35,7 @@ void	check_next_special_token(char *c, int j, char **str)
 	}
 }
 
-int	get_token_01(char *c, int i)
+int	token_1(char *c, int i)
 {
 	while (c[i] != '|' && c[i] != '>' && c[i] != '<' && c[i] != '\0')
 	{
@@ -46,7 +46,7 @@ int	get_token_01(char *c, int i)
 	return (i);
 }
 
-void	check_next_special_token_02(char *c, int j, char **str)
+void	special_token_check2(char *c, int j, char **str)
 {
 	if (c[j] == '<' && c[j + 1] != '<')
 	{
@@ -73,7 +73,7 @@ char	*get_token(char *c)
 	b = 0;
 	if (c[b] != '|' && c[b] != '>' && c[b] != '<')
 	{
-		b += get_token_01(c, b);
+		b += token_1(c, b);
 		str = malloc(sizeof(char) * (b + 1));
 		if (!str)
 			return (NULL);
@@ -86,13 +86,13 @@ char	*get_token(char *c)
 	}
 	else
 	{
-		check_next_special_token(c, b, &str);
-		check_next_special_token_02(c, b, &str);
+		special_token_check(c, b, &str);
+		special_token_check2(c, b, &str);
 	}
 	return (str);
 }
 
-void	create_array(char *c, t_attr *strc)
+void	build_array(char *c, t_attr *strc)
 {
 	int	j;
 

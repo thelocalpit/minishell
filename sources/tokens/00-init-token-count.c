@@ -85,5 +85,5 @@ void	init_split(char *c, t_attr *strc)
 	strc->num_tokens = 0;
 	strc->split_array = NULL;
 	tokens_counter(c, strc);
-	create_array(c, strc);
+	build_array(c, strc);
 }

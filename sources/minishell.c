@@ -73,7 +73,7 @@ int	main(int ac, char **av, char **envp)
 			while (att.split_array[att.y] && !check_readline(s, &att))
 			{
 				check_next_step(&att);
-				get_cmd_matrix(att.split_array[att.y], &att); //IL PROBLEMA È QUIO CIRCA PORCO DIOSTO CON MARCO E SMADONMNO
+				cmd_matrix(att.split_array[att.y], &att);
 				// ft_print_array(att.array2);
 				att.value = builtin_exec(&att);
 				add_index_custom_env(&att);

@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int	ft_intsize(int i)
+int	nsize(int i)
 {
 	int	number;
 
@@ -27,19 +27,19 @@ int	ft_intsize(int i)
 	return (number);
 }
 
-int	ft_ispositive(int i)
+int	is_positive(int i)
 {
 	if (i < 0)
 		return (-i);
 	return (i);
 }
 
-void	ft_itoa_custom(int c, t_attr *strct)
+void	custom_itoa(int c, t_attr *strct)
 {
 	char	*tmp;
 	int		j;
 
-	j = ft_intsize(c);
+	j = nsize(c);
 	tmp = malloc(sizeof(char) * (j + 1));
 	if (!tmp)
 		return ;
@@ -51,7 +51,7 @@ void	ft_itoa_custom(int c, t_attr *strct)
 	while (c != 0)
 	{
 		j--;
-		tmp[j] = ft_ispositive(c % 10) + '0';
+		tmp[j] = is_positive(c % 10) + '0';
 		c = c / 10;
 	}
 	j = 0;

@@ -41,11 +41,11 @@ SRC =	sources/minishell.c \
 		sources/tokens/01-token-array.c \
 		sources/tokens/02-matrix-single-token.c \
 		sources/tokens/02a-custom-itoa.c \
-		sources/tokens/02b-custom-ft-strlen.c \
+		sources/tokens/02b-custom-strlen.c \
 		sources/tokens/02c-word-copy.c \
 		sources/tokens/02d-word-copy-2.c \
 		sources/tokens/03-words-count.c \
-		sources/tokens/04_expander.c \
+		sources/tokens/04-expander.c \
 		sources/initialize/init.c \
 		sources/error/00-check-readline.c \
 		sources/error/01-quotes-error.c \

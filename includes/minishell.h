@@ -155,48 +155,45 @@ int		special_token_process(t_attr *strc, char *c, int j);
 int		s_d_quotes(char *c, int j);
 
 // 01_token_in_array.c
-void	create_array(char *s, t_attr *att);
+void	build_array(char *c, t_attr *strc);
 char	*get_token(char *s);
-void	check_next_special_token(char *s, int i, char **token);
+void	special_token_check(char *c, int j, char **str);
 
 //02_single_token_matrix.c
-void	get_cmd_matrix(char *s, t_attr *att);
-void	create_matrix_cmd(char *s, t_attr *att);
-char	*get_cmd_token(char *s, t_attr *att);
-int		ft_strlen_custom(char *s, int flag, t_attr *att);
-char	*ft_write_word(char *s, t_attr *att, int flag, int i);
+void	cmd_matrix(char *c, t_attr *strct);
+void	build_cmd_matrix(char *c, t_attr *strc);
+char	*cmd_token(char *c, t_attr *strct);
 
 // 02b_ft_strlen_custom.c
-void	ft_counter_exp_print_error(t_attr *att);
-void	ft_strlen_double_quotes(char *s, t_attr *att);
-void	ft_strlen_no_quotes(char *s, t_attr *att);
-int		ft_strlen_custom(char *s, int flag, t_attr *att);
+void	exp_print_counter_error(t_attr *strct);
+void	double_quotes_strlen(char *c, t_attr *strct);
+void	no_quotes(char *s, t_attr *att);
+int		custom_strlen(char *c, int num, t_attr *strct);
 
 // 02c_copy_word.c
-int		copy_g_value(t_attr *att, int i);
-int		copy_no_quotes(char *s, int i, t_attr *att, int len_name_var);
-int		copy_double_quotes(char *s, int i, t_attr *att, int len_name_var);
-char	*ft_write_word(char *s, t_attr *att, int flag, int i);
+int		no_quotes_copy(char *c, int j, t_attr *strct, int name_var_len);
+int		double_quotes_copy(char *c, int j, t_attr *strct, int name_var_len);
+char	*write_word(char *s, t_attr *att, int flag, int i);
 
 // 02d_copy_word_02.c
-int		ft_strlen_name_var(char *s, int *i, int len_name_var);
-int		copy_g_value(t_attr *att, int i);
-int		copy_double_dollar(int i, t_attr *att);
+int		var_name_strlen(char *c, int *j, int name_var_len);
+int		g_value_copy(t_attr *att, int i);
+int		double_dollar_copy(int i, t_attr *att);
 
 // 03_words_counter.c
-int		check_single_quotes(char *s, int len, int i, t_attr *att);
-int		check_double_quotes(char *s, int len, int i, t_attr *att);
-int		check_no_space(char *s, int len, int i, t_attr *att);
-void	ft_words_counter(char *s, t_attr *att);
+int		single_quotes_check(char *c, int n, int j, t_attr *strct);
+int		double_quotes_check(char *c, int n, int j, t_attr *strct);
+int		no_apace(char *c, int n, int j, t_attr *strct);
+void	counter_words(char *c, t_attr *strct);
 
 // 04_expander.c
-void	copy_expanded_str(t_attr *att, int start);
-void	counter_expanded_token(t_attr *att, char *s);
-void	counter_expanded_token_local_list(t_attr *att);
+void	expanded_str_clone(t_attr *strct, int inizio);
+void	expanded_token_counter(t_attr *strct, char *c);
+void	expanded_token_counter_list(t_attr *strct);
 
-int		ft_intsize(int n);
-int		ft_ispositive(int n);
-void	ft_itoa_custom(int n, t_attr *att);
+int		nsize(int i);
+int		is_positive(int i);
+void	custom_itoa(int c, t_attr *strct);
 
 //---------------------------------------------------------------------
 

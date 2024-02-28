@@ -12,18 +12,14 @@
 
 #include "../../includes/minishell.h"
 
-int	check_single_quotes(char *c, int n, int j, t_attr *strct)
+int	check_special(int j, t_attr *strct)
 {
 	strct->words_counter++;
-	j++;
-	if (c[j] == '\'' && (c[j + 1] == ' ' || !c[j + 1]))
-		return (j + 1);
-	while (j <= n && c[j] != '\'')
-		j++;
-	return (++j);
+	j += 2;
+	return (j);
 }
 
-int	check_double_quotes(char *c, int n, int j, t_attr *strct)
+int	double_quotes_check(char *c, int n, int j, t_attr *strct)
 {
 	strct->words_counter++;
 	j++;
@@ -38,14 +34,19 @@ int	check_double_quotes(char *c, int n, int j, t_attr *strct)
 	}
 	return (++j);
 }
-int	check_special(int j, t_attr *strct)
+
+int	single_quotes_check(char *c, int n, int j, t_attr *strct)
 {
 	strct->words_counter++;
-	j += 2;
-	return (j);
+	j++;
+	if (c[j] == '\'' && (c[j + 1] == ' ' || !c[j + 1]))
+		return (j + 1);
+	while (j <= n && c[j] != '\'')
+		j++;
+	return (++j);
 }
 
-int	check_no_space(char *c, int num, int j, t_attr *strct)
+int	no_space(char *c, int num, int j, t_attr *strct)
 {
 	strct->words_counter++;
 	while (j <= num && c[j] != ' ')
@@ -55,7 +56,7 @@ int	check_no_space(char *c, int num, int j, t_attr *strct)
 
 /* questa ft serve per il conto di elementi. necessaria per allocare
 	la giusta quantità di memoria */
-void	ft_words_counter(char *c, t_attr *strct)
+void	counter_words(char *c, t_attr *strct)
 {
 	int	num;
 	int	j;
@@ -66,11 +67,11 @@ void	ft_words_counter(char *c, t_attr *strct)
 	while (j <= num)
 	{
 		if (c[j] == '\'')
-			j = check_single_quotes(c, num, j, strct);
+			j = single_quotes_check(c, num, j, strct);
 		else if (c[j] == '"')
-			j = check_double_quotes(c, num, j, strct);
+			j = double_quotes_check(c, num, j, strct);
 		else if (c[j] != ' ')
-			j = check_no_space(c, num, j, strct);
+			j = no_space(c, num, j, strct);
 		else
 			j++;
 	}
