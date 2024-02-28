@@ -26,6 +26,6 @@ char	*prompt(void)
 {
 	char	*line;
 
-	line = readline(RESET "┗━" RED_BOLD " 👹 minihell" RED_BOLD " " RESET "");
+	line = readline(RESET "◈" RED_BOLD " 👹 Minihell" RED_BOLD " " RESET "");
 	return (line);
 }
