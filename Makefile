@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/28 14:43:56 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/02/28 15:08:54 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ SRC =	sources/minishell.c \
 		sources/exec/read_file00.c \
 		sources/exec/redir00.c \
 		sources/exec/redirections00.c \
-		sources/parser/parser.c \
+		sources/parser/parser00.c \
 		sources/libft/ft_atoi.c \
 		sources/libft/ft_calloc.c \
 		sources/libft/ft_isascii.c \

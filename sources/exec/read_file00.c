@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:36:38 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/28 14:47:12 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:31:50 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	check_read_file(t_attr *att)
 	while (att->i_readfile > att->y)
 	{
 		reset_flag2(att);
-		next_step_sub(att);
+		sub_next_step(att);
 		if (att->heredoc)
 		{
 			att->value = heredoc(att);
