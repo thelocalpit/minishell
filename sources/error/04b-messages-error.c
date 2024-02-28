@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04a_error_messages.c                               :+:      :+:    :+:   */
+/*   04b-messages-error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:22:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/23 12:16:03 by asacchin         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:41:59 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	not_found_command(char *src)
 {
-	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("minihell: ", 2);
 	ft_putstr_fd(src, 2);
 	ft_putstr_fd(": command not found\n", 2);
 }
 
 void	reader_file_error(t_attr *strct, char *src)
 {
-	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("minihell: ", 2);
 	ft_putstr_fd(src, 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
 	strct->value = 1;
