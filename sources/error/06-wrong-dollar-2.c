@@ -12,9 +12,9 @@
 
 #include "../../includes/minishell.h"
 
-int local_list_check(char *envp_check, t_attr *strc, int n)
+int	local_list_check(char *envp_check, t_attr *strc, int n)
 {
-	t_list *tmp_list;
+	t_list	*tmp_list;
 
 	tmp_list = strc->local_list;
 	while (tmp_list != NULL)
@@ -27,9 +27,9 @@ int local_list_check(char *envp_check, t_attr *strc, int n)
 	return (-1);
 }
 
-int dollar_sign_counter(char *c, t_attr *strc)
+int	dollar_sign_counter(char *c, t_attr *strc)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	strc->num_dol = 0;
@@ -42,9 +42,9 @@ int dollar_sign_counter(char *c, t_attr *strc)
 	return (strc->num_dol);
 }
 
-int dollar_error_3(char *envp_check, t_attr *strc, int n)
+int	dollar_error_3(char *envp_check, t_attr *strc, int n)
 {
-	t_list *tmp_list;
+	t_list	*tmp_list;
 
 	tmp_list = strc->env_list;
 	strc->y_mtx_envp = 0;

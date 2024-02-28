@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-void ft_double_dollar(t_attr *strct)
+void	ft_double_dollar(t_attr *strct)
 {
 	strct->mem_space += 2;
 	strct->i += 2;
@@ -20,28 +20,22 @@ void ft_double_dollar(t_attr *strct)
 	strct->save_y_mtx_envp[strct->i_flag_dol++] = -1;
 }
 
-void double_quotes_strlen2(char *c, t_attr *strct)
+void	double_quotes_strlen2(char *c, t_attr *strct)
 {
 	strct->i++;
 	if (strct->flag_dol[strct->i_flag_dol] == 0)
 		expanded_token_counter(strct, c);
 	else
 	{
-		while (c[strct->i] != '"' && c[strct->i] != ' ' && c[strct->i] != '$' && c[strct->i])
+		while (c[strct->i] != '"' && c[strct->i] != ' '
+			&& c[strct->i] != '$' && c[strct->i])
 			strct->i++;
 		strct->save_y_mtx_envp[strct->i_flag_dol] = -1;
 	}
 	strct->i_flag_dol++;
 }
 
-void exp_print_counter_error(t_attr *strct)
-{
-	strct->mem_space = nsize(strct->value);
-	strct->i += 2;
-	strct->i_flag_dol++;
-}
-
-void no_quotes_strlen(char *c, t_attr *strct)
+void	no_quotes_strlen(char *c, t_attr *strct)
 {
 	while (c[strct->i] && c[strct->i] != ' ')
 	{
@@ -49,16 +43,16 @@ void no_quotes_strlen(char *c, t_attr *strct)
 			ft_double_dollar(strct);
 		else if (c[strct->i] == '$' && c[strct->i + 1] == '?')
 			exp_print_counter_error(strct);
-		else if (c[strct->i] == '$' && c[strct->i + 1] != ' ' && c[strct->i + 1])
+		else if (c[strct->i] == '$' && c[strct->i + 1] != ' '
+			&& c[strct->i + 1])
 		{
 			strct->i++;
 			if (strct->flag_dol[strct->i_flag_dol] == 0)
 				expanded_token_counter(strct, c);
 			else
-			{
-				while (c[strct->i] != '"' && c[strct->i] != ' ' && c[strct->i] != '$' && c[strct->i])
+				while (c[strct->i] != '"' && c[strct->i] != ' '
+					&& c[strct->i] != '$' && c[strct->i])
 					strct->i++;
-			}
 			strct->i_flag_dol++;
 		}
 		else
@@ -69,7 +63,7 @@ void no_quotes_strlen(char *c, t_attr *strct)
 	}
 }
 
-void double_quotes_strlen(char *c, t_attr *strct)
+void	double_quotes_strlen(char *c, t_attr *strct)
 {
 	strct->i++;
 	while (c[strct->i] != '"')
@@ -78,7 +72,8 @@ void double_quotes_strlen(char *c, t_attr *strct)
 			ft_double_dollar(strct);
 		else if (c[strct->i] == '$' && c[strct->i + 1] == '?')
 			exp_print_counter_error(strct);
-		else if (c[strct->i] == '$' && c[strct->i + 1] != ' ' && c[strct->i + 1] && c[strct->i + 1] != '"')
+		else if (c[strct->i] == '$' && c[strct->i + 1] != ' '
+			&& c[strct->i + 1] && c[strct->i + 1] != '"')
 			double_quotes_strlen2(c, strct);
 		else
 		{
@@ -88,16 +83,16 @@ void double_quotes_strlen(char *c, t_attr *strct)
 	}
 }
 
-int custom_strlen(char *c, int num, t_attr *strct)
+int	custom_strlen(char *c, int num, t_attr *strct)
 {
-	int save_$;
+	int	save_dol;
 
-	save_$ = 0;
+	save_dol = 0;
 	strct->mem_space = 0;
 	strct->i = 0;
 	if (!c)
 		return (0);
-	save_$ = strct->i_flag_dol;
+	save_dol = strct->i_flag_dol;
 	if (num == 0)
 		no_quotes_strlen(c, strct);
 	if (num == 1)
@@ -111,6 +106,6 @@ int custom_strlen(char *c, int num, t_attr *strct)
 	}
 	if (num == 2)
 		double_quotes_strlen(c, strct);
-	strct->i_flag_dol = save_$;
+	strct->i_flag_dol = save_dol;
 	return (strct->mem_space);
 }

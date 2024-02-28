@@ -60,3 +60,10 @@ void	custom_itoa(int c, t_attr *strct)
 	free(tmp);
 	return ;
 }
+
+void	exp_print_counter_error(t_attr *strct)
+{
+	strct->mem_space = nsize(strct->value);
+	strct->i += 2;
+	strct->i_flag_dol++;
+}

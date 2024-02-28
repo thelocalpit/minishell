@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int nl_error(t_attr *strct)
+int	nl_error(t_attr *strct)
 {
 	printf("syntax error near unexpected token 'newline'\n");
 	strct->value = 2;

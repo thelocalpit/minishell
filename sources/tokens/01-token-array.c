@@ -110,4 +110,3 @@ void	build_array(char *c, t_attr *strc)
 		j++;
 	}
 }
-

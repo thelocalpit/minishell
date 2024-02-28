@@ -25,7 +25,6 @@ int	builtin_exec(t_attr *strc)
 		else if (ft_strncmp(strc->array2[0], "exit\0", 5) == 0)
 		{
 			custom_exit(strc);
-			// ft_exit();
 			return (0);
 		}
 		else if (ft_strncmp(strc->array2[0], "cd\0", 3) == 0)
@@ -64,8 +63,5 @@ int	child_command(t_attr *strc)
 	else if (ft_strncmp(strc->array2[0], "echo\0", 5) == 0)
 		return (ft_echo(strc->array2));
 	else
-	{
-		// printf("entro qui quando faccio minishell\n");
 		return (do_execve(strc));
-	}
 }

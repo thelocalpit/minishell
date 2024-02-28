@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int next_chars_check(char *c, t_attr *strc)
+int	next_chars_check(char *c, t_attr *strc)
 {
 	if (ft_is_space(c) == 0)
 		return (nl_error(strc));
@@ -20,22 +20,21 @@ int next_chars_check(char *c, t_attr *strc)
 		return (0);
 }
 
-int begin_error_2(char *c, t_attr *strc)
+int	begin_error_2(char *c, t_attr *strc)
 {
-	int j;
+	int	j;
+
 	j = 0;
 	while (!(*c > 32 && *c < 127))
 		c++;
 	if (c[j] == '>' || c[j] == '<')
 	{
-		if ((c[j] == '>' && c[j + 1] == '>') || (c[j] == '<' && c[j + 1] == '<'))
+		if ((c[j] == '>' && c[j + 1] == '>')
+			|| (c[j] == '<' && c[j + 1] == '<'))
 		{
 			c += 2;
 			if (next_chars_check(c, strc))
-			{
-				// printf("sono qui1\n");
 				return (1);
-			}
 		}
 		else
 		{

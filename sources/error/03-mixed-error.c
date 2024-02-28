@@ -38,8 +38,7 @@ int	char_2nd_check_03(char *c, int j, char b, t_attr *strct)
 	return (0);
 }
 
-
-int spaces_check(char *src, int *j, t_attr *strct)
+int	spaces_check(char *src, int *j, t_attr *strct)
 {
 	while (src[*j] == ' ' && src[*j] != '\0')
 	{

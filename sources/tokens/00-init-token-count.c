@@ -49,10 +49,10 @@ int	special_token_process(t_attr *strc, char *c, int j)
 		return (++j);
 }
 
-int tokens_counter(char *c, t_attr *strc)
+int	tokens_counter(char *c, t_attr *strc)
 {
-	int 	j;
-	int		n;
+	int	j;
+	int	n;
 
 	if (!c)
 		return (0);

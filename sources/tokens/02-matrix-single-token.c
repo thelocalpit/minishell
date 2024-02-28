@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-void build_cmd_matrix(char *c, t_attr *strct)
+void	build_cmd_matrix(char *c, t_attr *strct)
 {
 	strct->i_flag_dol = 0;
 	strct->x2 = 0;
@@ -20,7 +20,7 @@ void build_cmd_matrix(char *c, t_attr *strct)
 	strct->array2 = malloc((strct->words_counter + 1) * sizeof(char *));
 	strct->array2[strct->words_counter] = NULL;
 	if (!strct->array2)
-		return;
+		return ;
 	while (strct->y2 < strct->words_counter)
 	{
 		strct->x2 = 0;
@@ -37,14 +37,14 @@ void build_cmd_matrix(char *c, t_attr *strct)
 	if (strct->i_flag_dol > 0)
 	{
 		free(strct->flag_dol);
-		free(strct->save_y_mtx_envp); // DA RISOLVERE
+		free(strct->save_y_mtx_envp);
 	}
 }
 
-char *cmd_token(char *c, t_attr *strct)
+char	*cmd_token(char *c, t_attr *strct)
 {
-	int j;
-	int n;
+	int	j;
+	int	n;
 
 	j = 0;
 	if (c[j] == '"')
@@ -70,11 +70,10 @@ char *cmd_token(char *c, t_attr *strct)
 	}
 }
 
-void cmd_matrix(char *c, t_attr *strct)
+void	cmd_matrix(char *c, t_attr *strct)
 {
 	if (!c)
 		return ;
 	counter_words(c, strct);
 	build_cmd_matrix(c, strct);
 }
-

@@ -20,7 +20,8 @@ int	negative_return(t_attr *strct)
 
 int	check_readline(char *src, t_attr *strct)
 {
-	if (end_error(src, '>', strct) || end_error(src, '<', strct) || end_error(src, '|', strct))
+	if (end_error(src, '>', strct) || end_error(src, '<', strct)
+		|| end_error(src, '|', strct))
 		return (negative_return(strct));
 	else if (begin_error_2(src, strct))
 		return (negative_return(strct));

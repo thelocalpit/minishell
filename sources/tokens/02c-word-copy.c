@@ -19,7 +19,7 @@
 	nel caso lo sia, calcoliamo la lunghezza del nome della variabile
 	e ritorniamo il suo valore con copy_expanded_str.
 	Se non è da espandere facciamo un normale copia. */
-int double_quotes_copy(char *c, int j, t_attr *strct, int name_var_len)
+int	double_quotes_copy(char *c, int j, t_attr *strct, int name_var_len)
 {
 	while (c[j] != '"')
 	{
@@ -53,7 +53,7 @@ int double_quotes_copy(char *c, int j, t_attr *strct, int name_var_len)
 	return (j);
 }
 
-int no_quotes_copy(char *c, int j, t_attr *strct, int name_var_len)
+int	no_quotes_copy(char *c, int j, t_attr *strct, int name_var_len)
 {
 	while (c[j] != ' ' && c[j])
 	{
@@ -81,13 +81,14 @@ int no_quotes_copy(char *c, int j, t_attr *strct, int name_var_len)
 	}
 	return (j);
 }
+
 /* questa funzione calcola lo spazio di ciascuna str della matrice array2
 	con ft_strlen_custom -> alloca la memoria -> a seconda della flag
 	chiamiamo la funzione di copy. */
-char *write_word(char *c, t_attr *strct, int num, int i)
+char	*write_word(char *c, t_attr *strct, int num, int i)
 {
-	int n;
-	int name_var_len;
+	int	n;
+	int	name_var_len;
 
 	name_var_len = 0;
 	n = custom_strlen(c, num, strct);

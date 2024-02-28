@@ -28,8 +28,7 @@ int	var_update(char *src, t_list *list, int n)
 				clone->content = var_no_quote_on_content(src);
 				return (1);
 			}
-			clone2 = ft_strjoin(clone->content,
-				src + var_name_length(src) + 2);
+			clone2 = ft_strjoin(clone->content, src + var_name_length(src) + 2);
 			free(clone->content);
 			clone->content = var_no_quote_on_content(clone2);
 			free(clone2);

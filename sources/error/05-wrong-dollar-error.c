@@ -12,9 +12,9 @@
 
 #include "../../includes/minishell.h"
 
-int dollar_error_00(char *c, int j, t_attr *strct)
+int	dollar_error_00(char *c, int j, t_attr *strct)
 {
-	if (c[j + 1] == '$') // controllo $$
+	if (c[j + 1] == '$')
 	{
 		strct->flag_dol[strct->i_flag_dol++] = -1;
 		strct->flag_dol[strct->i_flag_dol] = -1;
@@ -30,16 +30,16 @@ int dollar_error_00(char *c, int j, t_attr *strct)
 	return (j);
 }
 
-int dollar_error_01(char *c, t_attr *strct)
+int	dollar_error_01(char *c, t_attr *strct)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	if (dollar_sign_counter(c, strct) != 0)
 	{
 		strct->save_y_mtx_envp = malloc(sizeof(int) * strct->num_dol);
 		strct->flag_dol = malloc(sizeof(int) * strct->num_dol);
-		while(j < strct->num_dol)
+		while (j < strct->num_dol)
 			strct->flag_dol[j++] = 0;
 		if (!strct->flag_dol && !strct->save_y_mtx_envp)
 			return (1);
@@ -48,9 +48,9 @@ int dollar_error_01(char *c, t_attr *strct)
 	return (0);
 }
 
-int dollar_error(char *c, t_attr *strct)
+int	dollar_error(char *c, t_attr *strct)
 {
-	int j;
+	int	j;
 
 	if (dollar_error_01(c, strct))
 		return (1);
