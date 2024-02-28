@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:36:25 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/28 14:47:12 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:31:50 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	do_redirect(t_attr *att)
 	else if (att->i_readfile != 0)
 		att->y = att->i_readfile + 1;
 	if (att->split_array[att->y] && att->split_array[att->y + 1])
-		next_step_sub(att);
+		sub_next_step(att);
 	if (att->write_pipe && att->read_pipe)
 		att->pipe_index_num++;
 	if (att->write_pipe)

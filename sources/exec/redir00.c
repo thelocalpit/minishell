@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:36:44 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/28 13:36:45 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:31:50 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	check_redirections(t_attr *att)
 		att->redir = 0;
 		att->read_files = 0;
 		att->heredoc = 0;
-		next_step_sub(att);
+		sub_next_step(att);
 		if (att->redir)
 		{
 			redir(att);

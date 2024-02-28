@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/28 14:48:03 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:39:51 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,11 +333,9 @@ int		ft_exit_02(t_attr *att);
 
 // parser.c
 
-void	reset_flags(t_attr *att);
-void	next_step_sub2(t_attr *att);
-void	next_step_sub(t_attr *att);
+void	sub_next_step(t_attr *att);
 int		check_next_step(t_attr *att);
-void	red_index(t_attr *att);
+void	redirect_index(t_attr *att);
 
 // Executer folder
 

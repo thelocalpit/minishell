@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:37:03 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/28 13:37:04 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:39:51 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	reset_flag2(t_attr *att)
 void	frist_redir(t_attr *att)
 {
 	att->y = att->y - 1;
-	next_step_sub(att);
-	red_index(att);
+	sub_next_step(att);
+	redirect_index(att);
 	att->first_redir = 1;
 	att->y = att->y + 1;
 }
