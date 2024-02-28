@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/28 10:40:18 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/02/28 13:30:59 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,13 @@ BOLD			:= \033[1;1m
 #MINISHELL
 NAME = minishell
 SRC =	sources/minishell.c \
-		sources/utilities/signals.c \
-		sources/utilities/signals2.c \
-		sources/utilities/prompt.c \
-		sources/utilities/00_utils.c \
-		sources/utilities/01_utils.c \
-		sources/utilities/02_utils.c \
-		sources/utilities/03_utils.c \
+		sources/utils/signals00.c \
+		sources/utils/signals01.c \
+		sources/utils/prompt00.c \
+		sources/utils/utils00.c \
+		sources/utils/utils01.c \
+		sources/utils/utils02.c \
+		sources/utils/utils03.c \
 		sources/tokens/00-init-token-count.c \
 		sources/tokens/01_token_in_array.c \
 		sources/tokens/02_single_token_matrix.c \
