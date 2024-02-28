@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/28 09:55:24 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/02/28 10:40:18 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ BOLD			:= \033[1;1m
 NAME = minishell
 SRC =	sources/minishell.c \
 		sources/utilities/signals.c \
+		sources/utilities/signals2.c \
 		sources/utilities/prompt.c \
 		sources/utilities/00_utils.c \
 		sources/utilities/01_utils.c \

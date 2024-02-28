@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/28 09:55:04 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:40:55 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,10 +206,11 @@ void	ft_itoa_custom(int n, t_attr *att);
 char	*prompt(void);
 
 // signals.c
-void	signal_set(void);
-void	set_signal_child(void);
-void	signal_set_avoid(void);
-void	signal_heredoc_handler(void);
+void	set_signal(void);
+void	set_child_signal(void);
+void	interrupt_handler(int signumber);
+void	set_signal_avoid(void);
+void	handler_signal_heredoc(void);
 
 // 00_utils.c
 int		ft_strcmp(const char *str1, const char *str2);

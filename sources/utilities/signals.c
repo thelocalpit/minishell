@@ -6,97 +6,97 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:30:06 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/21 11:08:52 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:40:31 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* la seguente funzione è necessaria per gestire il segnale CTRL+C
-	se il sig passato in funzione è SIGINT, allora andiamo a capo, sostituiamo
-	la riga con una vuota.
-	muovo il cursore su una nuova linea.
-	faccio un redisplay del prompt
-*/
-
-
 #include "../../includes/minishell.h"
-#include <signal.h>
 
 extern int	g_sig_val;
 
-void	handle_interrupt(int signum)
+/**
+ * @brief Function to handle child process signals.
+ *
+ * This function is called when a signal is received by the child process.
+ * It updates the global variable g_sig_val with the received signal number.
+ *
+ * @param signum The signal number received by the child process.
+ */
+void	check_child(int signum)
 {
 	g_sig_val = signum;
+}
+
+/**
+ * @brief Handles the interrupt signal.
+ *
+ * This function is called when an interrupt signal (SIGINT) is received.
+ * It updates the global variable g_sig_val with the received signal number,
+ * prints a newline character, resets the readline library, clears the current
+ * input line, and redisplays the prompt.
+ *
+ * @param signumber The signal number.
+ */
+void	interrupt_handler(int signumber)
+{
+	g_sig_val = signumber;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line ("", 0);
 	rl_redisplay();
 }
 
-void	check_child(int signum)
+/**
+ * @brief Signal handler for heredoc.
+ *
+ * This function is called when a signal is received while processing heredoc.
+ * It handles SIGINT and SIGQUIT signals by unlinking the ".heredoc" file and
+ * exiting the program.
+ *
+ * @param signumber The signal number.
+ */
+void	handler_heredoc(int signumber)
 {
-	g_sig_val = signum;
-}
-void	signal_set(void)
-{
-	struct sigaction	new_action;
-
-	new_action.sa_handler = handle_interrupt;
-	sigemptyset(&new_action.sa_mask);
-	new_action.sa_flags = 0;
-	sigaction(SIGINT, &new_action, NULL);
-	new_action.sa_handler = SIG_IGN;
-	sigemptyset(&new_action.sa_mask);
-	sigaction(SIGQUIT, &new_action, NULL);
-}
-
-void	set_signal_child(void)
-{
-	struct sigaction	new_action;
-
-	new_action.sa_handler = SIG_DFL;
-	sigemptyset(&new_action.sa_mask);
-	new_action.sa_flags = 0;
-	sigaction(SIGINT, &new_action, NULL);
-	new_action.sa_handler = SIG_DFL;
-	sigemptyset(&new_action.sa_mask);
-	sigaction(SIGQUIT, &new_action, NULL);
-}
-
-void	signal_set_avoid(void)
-{
-	struct sigaction	new_action;
-
-	new_action.sa_handler = check_child;
-	sigemptyset(&new_action.sa_mask);
-	new_action.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &new_action, NULL);
-}
-
-void	heredoc_handler(int signum)
-{
-	if (signum == SIGINT)
+	if (signumber == SIGINT)
 	{
 		unlink(".heredoc");
 		exit(130);
 	}
-	else if (signum == SIGQUIT)
+	else if (signumber == SIGQUIT)
 	{
 		unlink(".heredoc");
 		exit(0);
 	}
 }
 
-void	signal_heredoc_handler(void)
+/**
+ * @brief Sets up signal handlers for heredoc processing.
+ *  The SIGINT and SIGQUIT signals will be handled by the handler_heredoc
+ *  function.
+ */
+void	handler_signal_heredoc(void)
 {
-	struct sigaction new_action;
+	struct sigaction	action;
 
-	new_action.sa_handler = heredoc_handler;
-	sigemptyset(&new_action.sa_mask);
-	new_action.sa_flags = 0;
-	sigaction(SIGINT, &new_action, NULL);
-	new_action.sa_handler = heredoc_handler;
-	sigemptyset(&new_action.sa_mask);
-	sigaction(SIGQUIT, &new_action, NULL);
-
+	action.sa_handler = handler_heredoc;
+	sigemptyset(&action.sa_mask);
+	action.sa_flags = 0;
+	sigaction(SIGINT, &action, NULL);
+	action.sa_handler = handler_heredoc;
+	sigemptyset(&action.sa_mask);
+	sigaction(SIGQUIT, &action, NULL);
 }
 
+/**
+ * @brief Sets up the signal handler to avoid interruption by SIGINT.
+ * The signal handler is set to call the function check_child.
+ */
+void	set_signal_avoid(void)
+{
+	struct sigaction	action;
+
+	action.sa_handler = check_child;
+	sigemptyset(&action.sa_mask);
+	action.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &action, NULL);
+}

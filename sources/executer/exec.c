@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:50:45 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/23 12:16:27 by asacchin         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:14:21 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	do_redirect(t_attr *att)
  */
 void	if_child(t_attr *att)
 {
-	set_signal_child();
+	set_child_signal();
 	if (!att->skip)
 		do_redirect(att);
 	if (!att->skip)
@@ -135,10 +135,10 @@ int	exec(t_attr *att)
 		return (ft_putstr_fd("fork failed", 2), 1);
 	if (att->pid == 0)
 		if_child(att);
-	signal_set_avoid();
+	set_signal_avoid();
 	waitpid(att->pid, &att->value, 0);
 	att->value = WEXITSTATUS(att->value);
-	signal_set();
+	set_signal();
 	if (g_sig_val == SIGINT)
 	{
 		printf("\n");
