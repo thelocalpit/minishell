@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02a_itoa_custom.c                                  :+:      :+:    :+:   */
+/*   02a-custom-itoa.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,51 +12,51 @@
 
 #include "../../includes/minishell.h"
 
-int	ft_intsize(int n)
+int	ft_intsize(int i)
 {
-	int	counter;
+	int	number;
 
-	counter = 0;
-	if (n <= 0)
-		counter++;
-	while (n != 0)
+	number = 0;
+	if (i <= 0)
+		number++;
+	while (i != 0)
 	{
-		counter++;
-		n = n / 10;
+		number++;
+		i = i / 10;
 	}
-	return (counter);
+	return (number);
 }
 
-int	ft_ispositive(int n)
+int	ft_ispositive(int i)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	if (i < 0)
+		return (-i);
+	return (i);
 }
 
-void	ft_itoa_custom(int n, t_attr *att)
+void	ft_itoa_custom(int c, t_attr *strct)
 {
-	char	*str;
-	int		i;
+	char	*tmp;
+	int		j;
 
-	i = ft_intsize(n);
-	str = malloc(sizeof(char) * (i + 1));
-	if (!str)
+	j = ft_intsize(c);
+	tmp = malloc(sizeof(char) * (j + 1));
+	if (!tmp)
 		return ;
-	str[i] = '\0';
-	if (n < 0)
-		str[0] = '-';
-	else if (n == 0)
-		str[0] = '0';
-	while (n != 0)
+	tmp[j] = '\0';
+	if (c < 0)
+		tmp[0] = '-';
+	else if (c == 0)
+		tmp[0] = '0';
+	while (c != 0)
 	{
-		i--;
-		str[i] = ft_ispositive(n % 10) + '0';
-		n = n / 10;
+		j--;
+		tmp[j] = ft_ispositive(c % 10) + '0';
+		c = c / 10;
 	}
-	i = 0;
-	while (str[i])
-		att->array2[att->y2][att->x2++] = str[i++];
-	free(str);
+	j = 0;
+	while (tmp[j])
+		strct->array2[strct->y2][strct->x2++] = tmp[j++];
+	free(tmp);
 	return ;
 }

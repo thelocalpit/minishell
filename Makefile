@@ -38,13 +38,13 @@ SRC =	sources/minishell.c \
 		sources/utilities/02_utils.c \
 		sources/utilities/03_utils.c \
 		sources/tokens/00-init-token-count.c \
-		sources/tokens/01_token_in_array.c \
-		sources/tokens/02_single_token_matrix.c \
-		sources/tokens/02a_itoa_custom.c \
-		sources/tokens/02b_ft_strlen_custom.c \
-		sources/tokens/02c_copy_word.c \
-		sources/tokens/02d_copy_word_02.c \
-		sources/tokens/03_count_words.c \
+		sources/tokens/01-token-array.c \
+		sources/tokens/02-matrix-single-token.c \
+		sources/tokens/02a-custom-itoa.c \
+		sources/tokens/02b-custom-ft-strlen.c \
+		sources/tokens/02c-word-copy.c \
+		sources/tokens/02d-word-copy-2.c \
+		sources/tokens/03-words-count.c \
 		sources/tokens/04_expander.c \
 		sources/initialize/init.c \
 		sources/error/00-check-readline.c \
