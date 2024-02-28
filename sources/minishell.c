@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/28 10:34:41 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:16:55 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av, char **envp)
 	rl_clear_history();
 	set_signal();
 	att.i_flag_dol = 0;
-	init_parameters(&att);
+	init_attr(&att);
 	// questo è l'init del env per il momento fatto cosi, poi va sistemato dove volete voi
 	// e va sostituito ovunque, per il momento lo aggiungo come parametro in piu dove
 	// serve a me e ricordiamoci di freearlo (Marco)
@@ -59,7 +59,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			att.value = 130;
 		}
-		reinit_parameters(&att, envp);
+		reinit_params(&att);
 		//start_env(envp, &att);
 
 		if (s && ft_is_space(s))

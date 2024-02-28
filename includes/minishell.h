@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/28 10:40:55 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:17:36 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,8 @@ char	*ft_substr(const char *s, unsigned int start, size_t len);
 //---------------------------------------------------------------------
 
 // init_folder
-void	init_parameters(t_attr *att);
-void	init_attributes(t_attr *att);
-void	reinit_parameters(t_attr *att, char **envp);
+void	init_attr(t_attr *att);
+void	reinit_params(t_attr *att);
 
 //---------------------------------------------------------------------
 
