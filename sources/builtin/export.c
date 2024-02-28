@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/22 18:37:27 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:32:56 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	basic_export(t_attr *att)
 {
 	t_list	*export;
 	t_list	*temp;
-	char	*varName;
+	char	*var_name;
 
 	export = sort_list(att->env_list);
 	while (export)
@@ -34,11 +34,11 @@ int	basic_export(t_attr *att)
 			printf("declare -x %s\n", export->content);
 		else
 		{
-			varName = get_variable_name(export->content);
+			var_name = get_variable_name(export->content);
 			printf("declare -x %s=\"%s\"\n",
-				varName,
+				var_name,
 				get_variable_content(export->content));
-				free(varName);
+			free(var_name);
 		}
 		temp = export;
 		export = export->next;
@@ -71,7 +71,44 @@ void	check_duplicate(t_attr *att, char *content)
 		}
 		list = list->next;
 	}
-	ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_quote_on_content(content)));
+	ft_lstadd_back(&(att->env_list),
+		ft_lstnew(var_no_quote_on_content(content)));
+}
+
+/**
+ * Adds a variable to the environment list with the given content.
+ * If the variable already exists, it updates the content based on the append
+ * flag.
+ *
+ * @param content The variable to add/update in the format "name=value".
+ * @param att The attribute structure containing the environment list.
+ * @param env_list The current environment list.
+ * @param append Flag indicating whether to append the content or replace it.
+ * @return 0 on success, -1 on failure.
+ */
+int	add_on_env_2(char *content, t_attr *att, t_list *env_list, int append)
+{
+	if (ft_strchr(content, '+') && ft_strchr(content, '+')[1] == '=')
+		append = 1;
+	while (env_list)
+	{
+		if (ft_strncmp(content, (char *)env_list->content,
+				var_name_length(content)) == 0)
+		{
+			if (append)
+				return (env_list->content = ft_strjoin(env_list->content,
+						get_variable_content(content)), 0);
+			return (env_list->content = var_no_quote_on_content(content), 0);
+		}
+		env_list = env_list->next;
+	}
+	if (append)
+		ft_lstadd_back(&(att->env_list),
+			ft_lstnew(var_no_quote_on_content(content)));
+	else
+		ft_lstadd_back(&(att->env_list),
+			ft_lstnew(var_no_quote_on_content(content)));
+	return (0);
 }
 
 /**
@@ -92,48 +129,27 @@ int	add_on_env(char *arg, t_attr *att)
 	env_list = att->env_list;
 	local_list = att->local_list;
 	content = arg;
-
 	if (ft_strchr(arg, '=') == NULL)
 	{
 		while (local_list)
 		{
-			if (ft_strncmp(arg, (char *)local_list->content, var_name_length(arg)) == 0)
+			if (ft_strncmp(arg, (char *)local_list->content,
+					var_name_length(arg)) == 0)
 			{
 				content = local_list->content;
 				break ;
 			}
 			local_list = local_list->next;
 		}
-		if (!local_list)
-			return (printf("ERROR: La variabile richiesta non esiste nelle locali\n"), 1);
 	}
-	/*la funzione strchr se trova il carattere richiesto ritorna una stringa da quel punto,
-		quindi mi chiedo se il carattere successivo sia '=' e se si appendo il contenuto della
-		var a quello gia esistente
-	*/
-	if (ft_strchr(content, '+') && ft_strchr(content, '+')[1] == '=')
-		append = 1;
-	while (env_list)
-	{
-		if (ft_strncmp(content, (char *)env_list->content, var_name_length(content)) == 0)
-		{
-			if (append)
-				return (env_list->content = ft_strjoin(env_list->content, get_variable_content(content)), 0);
-			return (env_list->content = var_no_quote_on_content(content), 0);
-		}
-		env_list = env_list->next;
-	}
-	if (append)
-		ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_quote_on_content(content)));
-	else
-		ft_lstadd_back(&(att->env_list), ft_lstnew(var_no_quote_on_content(content)));
-	return (0);
-
+	if (!local_list)
+		return (1);
+	return (add_on_env_2(content, att, env_list, append));
 }
 
 /**
- * export -p -> print all the env variables in the format "declare -x VAR" sorted
- * export VAR -> add the variable VAR to the env variables
+ * export -p -> print all the env variables in the format "declare -x VAR"
+ * sorted export VAR -> add the variable VAR to the env variables
  *
  * @param {char **} args: the array of arguments
  * @param {t_attr *} att: the struct of attributes
