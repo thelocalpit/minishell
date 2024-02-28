@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:12:26 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/20 12:07:06 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 09:35:50 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,15 @@ int tokens_counter(char *c, t_attr *strc)
 	{
 		if (c[j] != ' ' && c[j] != '|' && c[j] != '<' && c[j] != '>')
 		{
-			strc->num_tokenc++;
+			strc->num_tokens++;
 			while (j <= n && (c[j] != '|' && c[j] != '<' && c[j] != '>'))
 			{
-				ig (c[j] == '\'' || c[j] == '"')
+				if (c[j] == '\'' || c[j] == '"')
 					j = s_d_quotes(c, j);
 				j++;
 			}
 		}
-		ig (c[j] == ' ')
+		if (c[j] == ' ')
 			j++;
 		else
 			j = special_token_process(strc, c, j);

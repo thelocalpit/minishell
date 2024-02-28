@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   begin-error-2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:12:15 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/23 12:02:18 by asacchin         ###   ########.fr       */
+/*   Updated: 2024/02/28 09:36:21 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int next_chars_check(char *c, t_attr *strc)
 {
-	if (ft_is_space(s) == 0)
+	if (ft_is_space(c) == 0)
 		return (nl_error(strc));
 	else
 		return (0);
