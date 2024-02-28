@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/28 12:16:55 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:48:03 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ int	main(int ac, char **av, char **envp)
 				if (att.local_list != NULL)
 					add_index_local_list(&att);
 				// command(&att);
-				free_array2(att.array2, &att);
+				free_matrix2(att.array2, &att);
 				if (!att.split_array[att.y + 1])
 					break ;
 				att.y += 2;
 			}
-			free_array(att.split_array);
+			free_matrix(att.split_array);
 			if (att.pipes_num != 0)
-				ft_delete_matrix(att.pipes_fd);
+				delete_matrix(att.pipes_fd);
 			free(s);
 		}
 	}

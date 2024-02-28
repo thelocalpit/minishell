@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unsetexit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 13:31:40 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/23 12:12:49 by asacchin         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:48:03 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ int	ft_exit_02(t_attr *strc)
 
 void	exit_free(t_attr *strc)
 {
-	free_array2(strc->array2, strc);
-	free_array(strc->split_array);
+	free_matrix2(strc->array2, strc);
+	free_matrix(strc->split_array);
 	free_local_list(strc);
 	free_env_list(strc);
 	if (strc->pipes_num != 0)
-		ft_delete_matrix(strc->pipes_fd);
+		delete_matrix(strc->pipes_fd);
 }
 
 void	custom_exit(t_attr *strc)

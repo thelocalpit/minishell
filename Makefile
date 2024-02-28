@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/28 13:36:01 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/02/28 14:43:56 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRC =	sources/minishell.c \
 		sources/error/05-wrong-dollar-error.c \
 		sources/error/05b-wrong-dollar-error.c \
 		sources/error/06-wrong-dollar-2.c \
-		sources/free/00_free.c \
+		sources/free/free00.c \
 		sources/builtin/env-echo-pwd-cd.c \
 		sources/builtin/builtin_exec.c \
 		sources/builtin/export.c \

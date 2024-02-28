@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:36:38 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/28 13:36:39 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:47:12 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int	heredoc(t_attr *att)
 
 	eof = ft_split(att->split_array[att->y + 2], ' ');
 	if (heredoc_read(att, eof[0]))
-		return (free_array(eof), 1);
+		return (free_matrix(eof), 1);
 	close(att->red_fd);
-	free_array(eof);
+	free_matrix(eof);
 	if (att->i_readfile != att->y + 1)
 	{
 		return (0);
