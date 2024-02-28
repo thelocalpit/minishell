@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/28 13:30:59 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/02/28 13:36:01 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,12 +64,12 @@ SRC =	sources/minishell.c \
 		sources/builtin/export.c \
 		sources/builtin/var.c \
 		sources/builtin/unsetexit.c \
-		sources/executer/ecxeve.c \
-		sources/executer/exec.c \
-		sources/executer/pipe.c \
-		sources/executer/read_file.c \
-		sources/executer/redir.c \
-		sources/executer/redirections.c \
+		sources/exec/ecxeve00.c \
+		sources/exec/exec00.c \
+		sources/exec/pipe00.c \
+		sources/exec/read_file00.c \
+		sources/exec/redir00.c \
+		sources/exec/redirections00.c \
 		sources/parser/parser.c \
 		sources/libft/ft_atoi.c \
 		sources/libft/ft_calloc.c \
