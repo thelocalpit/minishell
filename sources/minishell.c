@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:33:28 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/22 18:45:47 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 09:45:31 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,14 @@ int	main(int ac, char **av, char **envp)
 		if (s == NULL)
 		{
 			rl_clear_history();
-			break;
+			write(1, "exit\n", 5);
+			exit(0);
+			return (1);
 		}
 		g_sig_val = 0;
 		if (g_sig_val == SIGINT)
 		{
 			att.value = 130;
-		}
-		//printf("%d\n", g_sig_val);
-		//printf("%d\n", g_sig_val);
-		if (s == NULL)
-		{
-			exit(5);
-			return(0);
 		}
 		reinit_parameters(&att, envp);
 		//start_env(envp, &att);
