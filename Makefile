@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/28 10:40:18 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/02/28 14:43:56 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,13 @@ BOLD			:= \033[1;1m
 #MINISHELL
 NAME = minishell
 SRC =	sources/minishell.c \
-		sources/utilities/signals.c \
-		sources/utilities/signals2.c \
-		sources/utilities/prompt.c \
-		sources/utilities/00_utils.c \
-		sources/utilities/01_utils.c \
-		sources/utilities/02_utils.c \
-		sources/utilities/03_utils.c \
+		sources/utils/signals00.c \
+		sources/utils/signals01.c \
+		sources/utils/prompt00.c \
+		sources/utils/utils00.c \
+		sources/utils/utils01.c \
+		sources/utils/utils02.c \
+		sources/utils/utils03.c \
 		sources/tokens/00-init-token-count.c \
 		sources/tokens/01-token-array.c \
 		sources/tokens/02-matrix-single-token.c \
@@ -58,18 +58,18 @@ SRC =	sources/minishell.c \
 		sources/error/05-wrong-dollar-error.c \
 		sources/error/05b-wrong-dollar-error.c \
 		sources/error/06-wrong-dollar-2.c \
-		sources/free/00_free.c \
+		sources/free/free00.c \
 		sources/builtin/env-echo-pwd-cd.c \
 		sources/builtin/builtin_exec.c \
 		sources/builtin/export.c \
 		sources/builtin/var.c \
 		sources/builtin/unsetexit.c \
-		sources/executer/ecxeve.c \
-		sources/executer/exec.c \
-		sources/executer/pipe.c \
-		sources/executer/read_file.c \
-		sources/executer/redir.c \
-		sources/executer/redirections.c \
+		sources/exec/ecxeve00.c \
+		sources/exec/exec00.c \
+		sources/exec/pipe00.c \
+		sources/exec/read_file00.c \
+		sources/exec/redir00.c \
+		sources/exec/redirections00.c \
 		sources/parser/parser.c \
 		sources/libft/ft_atoi.c \
 		sources/libft/ft_calloc.c \

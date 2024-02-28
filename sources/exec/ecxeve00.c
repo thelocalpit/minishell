@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ecxeve.c                                           :+:      :+:    :+:   */
+/*   ecxeve00.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 10:49:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/21 10:57:42 by mcoppola         ###   ########.fr       */
+/*   Created: 2024/02/28 13:36:13 by mcoppola          #+#    #+#             */
+/*   Updated: 2024/02/28 14:47:12 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	binary_executer(t_attr *att)
 	while (paths[++c])
 	{
 		if (ft_ecxev(paths[c], att->array2, att->env) == 0)
-			return (free_array(paths), 0);
+			return (free_matrix(paths), 0);
 	}
-	return (free_array(paths), 127);
+	return (free_matrix(paths), 127);
 }

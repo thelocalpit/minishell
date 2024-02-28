@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec00.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 10:50:45 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/28 10:14:21 by mcoppola         ###   ########.fr       */
+/*   Created: 2024/02/28 13:36:25 by mcoppola          #+#    #+#             */
+/*   Updated: 2024/02/28 14:47:12 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	do_execve(t_attr *att)
 	}
 	else
 		att->value = binary_executer(att);
-	return (free_array(att->env), att->value);
+	return (free_matrix(att->env), att->value);
 }
 
 /**
@@ -115,7 +115,7 @@ void	if_child(t_attr *att)
 		do_redirect(att);
 	if (!att->skip)
 		att->value = child_command(att);
-	free_array(att->paths);
+	free_matrix(att->paths);
 	exit(att->value);
 }
 
@@ -150,5 +150,5 @@ int	exec(t_attr *att)
 	if (att->read_pipe)
 		att->pipe_index_num++;
 	close_pipeline(att);
-	return (free_array(att->paths), att->value);
+	return (free_matrix(att->paths), att->value);
 }

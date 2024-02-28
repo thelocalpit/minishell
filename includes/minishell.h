@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/28 12:17:36 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:48:03 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,9 +287,9 @@ int		dollar_sign_counter(char *c, t_attr *strc);
 
 // 00_free.c
 
-void	free_array2(char **tokens, t_attr *att);
-void	free_array(char **arr);
-void	ft_delete_matrix(void *matrix);
+void	free_matrix2(char **tokens, t_attr *att);
+void	free_matrix(char **arr);
+void	delete_matrix(void *matrix);
 void	free_mx_envp(t_attr *att);
 void	free_local_list(t_attr *att);
 void	free_env_list(t_attr *att);
