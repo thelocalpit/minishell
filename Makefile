@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+         #
+#    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/23 12:33:13 by asacchin         ###   ########.fr        #
+#    Updated: 2024/02/28 09:55:24 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ NAME = minishell
 SRC =	sources/minishell.c \
 		sources/utilities/signals.c \
 		sources/utilities/prompt.c \
-		sources/utilities/debugg.c \
 		sources/utilities/00_utils.c \
 		sources/utilities/01_utils.c \
 		sources/utilities/02_utils.c \

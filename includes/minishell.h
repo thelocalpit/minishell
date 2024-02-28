@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:12:38 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/23 12:22:50 by asacchin         ###   ########.fr       */
+/*   Updated: 2024/02/28 09:55:04 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,11 +210,6 @@ void	signal_set(void);
 void	set_signal_child(void);
 void	signal_set_avoid(void);
 void	signal_heredoc_handler(void);
-
-// debugg.c
-void	ft_print_array(char **array);
-void	printlist(t_attr *att);
-void	printvar(t_list *var);
 
 // 00_utils.c
 int		ft_strcmp(const char *str1, const char *str2);
