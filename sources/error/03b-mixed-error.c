@@ -91,34 +91,34 @@ int	extra_char_check(char *src, int j, t_attr *strct)
 	return (0);
 }
 
-int	extra_char_check(char *src, int j, t_attr *strct)
-{
-	char	str;
-	char	str1;
-	char	str2;
+// int	extra_char_check(char *src, int j, t_attr *strct)
+// {
+// 	char	str;
+// 	char	str1;
+// 	char	str2;
 
-	if (src[j + 1] == '>' || src[j + 1] == '<')
-	{
-		if (src[j + 2])
-			j += 2;
-		else
-		{
-			return (nl_error(strct));
-		}
-		str = src[j - 2];
-		str1 = src[j - 1];
-		str2 = src[j];
-		if (str == '<' && str1 == '<' && str2 == '<')
-			return (not_required(strct));
-		else if ((str == '>' && str1 == '>') || (str == '<' && str1 == '<'))
-		{
-			if (str2 == '>')
-				return (gt_error(strct));
-			else if (str2 == '<')
-				return (lt_error(strct));
-			else if (str2 == '|')
-				return (pipe_error(strct));
-		}
-	}
-	return (0);
-}
+// 	if (src[j + 1] == '>' || src[j + 1] == '<')
+// 	{
+// 		if (src[j + 2])
+// 			j += 2;
+// 		else
+// 		{
+// 			return (nl_error(strct));
+// 		}
+// 		str = src[j - 2];
+// 		str1 = src[j - 1];
+// 		str2 = src[j];
+// 		if (str == '<' && str1 == '<' && str2 == '<')
+// 			return (not_required(strct));
+// 		else if ((str == '>' && str1 == '>') || (str == '<' && str1 == '<'))
+// 		{
+// 			if (str2 == '>')
+// 				return (gt_error(strct));
+// 			else if (str2 == '<')
+// 				return (lt_error(strct));
+// 			else if (str2 == '|')
+// 				return (pipe_error(strct));
+// 		}
+// 	}
+// 	return (0);
+// }

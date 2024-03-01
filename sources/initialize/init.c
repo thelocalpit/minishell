@@ -46,7 +46,7 @@ void	reinit_params(t_attr *att)
 	att->x2 = 0;
 	att->check_exp = NULL;
 	att->i_readfile = 0;
-	att->x_mtx_envp = 0;
+	att->xmnvp = 0;
 	att->first_redir = 0;
 	att->pipe_index_num = 0;
 	att->x = 0;

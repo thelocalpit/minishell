@@ -12,6 +12,18 @@
 
 #include "../../includes/minishell.h"
 
+void	double_quotes_utils2(int j, t_attr *strct)
+{
+	strct->array2[strct->y2][strct->x2++] = '"';
+	j += 2;
+}
+
+void	double_quotes_utils(char *c, int j)
+{
+	while (c[j] != '"' && c[j] != ' ' && c[j] != '$' && c[j])
+		j++;
+}
+
 /* questa funzione si occupa delle "".
 	copy_g_value copia l'errore del global value.
 	se c'è da espandere, facciamo riferimento alla flag_dol che ci dice
@@ -36,17 +48,11 @@ int	double_quotes_copy(char *c, int j, t_attr *strct, int name_var_len)
 				expanded_str_clone(strct, name_var_len);
 			}
 			else
-			{
-				while (c[j] != '"' && c[j] != ' ' && c[j] != '$' && c[j])
-					j++;
-			}
+				double_quotes_utils(c, j);
 			strct->i_flag_dol++;
 		}
 		else if (c[j] == '\\' && c[j + 1] == '"')
-		{
-			strct->array2[strct->y2][strct->x2++] = '"';
-			j += 2;
-		}
+			double_quotes_utils2(j, strct);
 		else
 			strct->array2[strct->y2][strct->x2++] = c[j++];
 	}

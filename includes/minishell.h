@@ -93,7 +93,7 @@ typedef struct s_attr
 	int		i_redir;
 	int		first_redir;
 	int		read_pipe;
-	int		x_mtx_envp;
+	int		xmnvp;
 	int		skip;
 	int		y_mtx_envp;
 	int		read_files;

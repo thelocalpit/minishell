@@ -22,10 +22,10 @@ void	expanded_token_counter_list(t_attr *strct)
 		if (!ft_strncmp(strct->check_exp,
 				strct->local_list->content, strct->len_call_exp))
 		{
-			while (strct->local_list->content[strct->x_mtx_envp])
+			while (strct->local_list->content[strct->xmnvp])
 			{
 				strct->mem_space++;
-				strct->x_mtx_envp++;
+				strct->xmnvp++;
 			}
 			free(strct->check_exp);
 			strct->save_y_mtx_envp[strct->i_flag_dol]
@@ -43,33 +43,31 @@ void	expanded_token_counter_list(t_attr *strct)
 	potevo scriverla meglio? SI.
 	Funziona? SI.
 	la riscriverò? COL CAZZO IMPANATO CON LE PATATE. */
-void	expanded_str_clone(t_attr *strct, int name_var_len)
+void	expanded_str_clone(t_attr *st, int name_var_len)
 {
 	t_list	*tmp;
 
-	if (strct->list_flag == 0)
+	if (st->list_flag == 0)
 	{
-		tmp = strct->env_list;
+		tmp = st->env_list;
 		while (tmp && tmp->dol_flag
-			!= strct->save_y_mtx_envp[strct->i_flag_dol])
+			!= st->save_y_mtx_envp[st->i_flag_dol])
 			tmp = tmp->next;
-		strct->x_mtx_envp = name_var_len + 1;
-		while (tmp && tmp->content[strct->x_mtx_envp])
-			strct->array2[strct->y2][strct->x2++]
-				= tmp->content[strct->x_mtx_envp++];
+		st->xmnvp = name_var_len + 1;
+		while (tmp && tmp->content[st->xmnvp])
+			st->array2[st->y2][st->x2++]
+				= tmp->content[st->xmnvp++];
 		return ;
 	}
 	else
 	{
-		tmp = strct->local_list;
-		while (tmp && tmp->dol_flag
-			!= strct->save_y_mtx_envp[strct->i_flag_dol])
+		tmp = st->local_list;
+		while (tmp && tmp->dol_flag != st->save_y_mtx_envp[st->i_flag_dol])
 			tmp = tmp->next;
-		strct->x_mtx_envp = name_var_len + 1;
-		while (tmp && tmp->content[strct->x_mtx_envp])
-			strct->array2[strct->y2][strct->x2++]
-				= tmp->content[strct->x_mtx_envp++];
-		strct->list_flag = 0;
+		st->xmnvp = name_var_len + 1;
+		while (tmp && tmp->content[st->xmnvp])
+			st->array2[st->y2][st->x2++] = tmp->content[st->xmnvp++];
+		st->list_flag = 0;
 		return ;
 	}
 }
@@ -83,10 +81,10 @@ int	expanded_token_counter2(t_attr *strct)
 	{
 		if (!ft_strncmp(strct->check_exp, tmp->content, strct->len_call_exp))
 		{
-			while (tmp->content[strct->x_mtx_envp])
+			while (tmp->content[strct->xmnvp])
 			{
 				strct->mem_space++;
-				strct->x_mtx_envp++;
+				strct->xmnvp++;
 			}
 			free(strct->check_exp);
 			strct->save_y_mtx_envp[strct->i_flag_dol] = tmp->dol_flag;
@@ -123,7 +121,7 @@ void	expanded_token_counter(t_attr *strct, char *c)
 	strct->check_exp[i] = '=';
 	strct->check_exp[i + 1] = '\0';
 	strct->y_mtx_envp = 0;
-	strct->x_mtx_envp = strct->len_call_exp;
+	strct->xmnvp = strct->len_call_exp;
 	if (expanded_token_counter2(strct) == -1)
 	{
 		strct->list_flag = 1;

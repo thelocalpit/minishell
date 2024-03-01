@@ -29,7 +29,7 @@ void	dollar_error_2_b(char *envp_check, int *n, int *c, t_attr *strc)
 	envp_check[*n + 1] = '\0';
 	c += 1;
 	strc->y_mtx_envp = 0;
-	strc->x_mtx_envp = *c;
+	strc->xmnvp = *c;
 }
 
 int	dollar_error_2(char *c, int a, t_attr *strc)
