@@ -10,7 +10,7 @@
 *.ko
 *.obj
 *.elf
-minishell
+minihell
 
 # Linker output
 *.ilk

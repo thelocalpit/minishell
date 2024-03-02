@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/02/28 15:08:54 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/03/02 11:15:05 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ WHITE			=	\e[00m
 RED				:= \033[1;31m
 BOLD			:= \033[1;1m
 
-#MINISHELL
-NAME = minishell
+#MINIHELL
+NAME = minihell
 SRC =	sources/minishell.c \
 		sources/utils/signals00.c \
 		sources/utils/signals01.c \
