@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/02/28 16:32:56 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:35:18 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,28 +151,34 @@ int	add_on_env(char *arg, t_attr *att)
  * export -p -> print all the env variables in the format "declare -x VAR"
  * sorted export VAR -> add the variable VAR to the env variables
  *
- * @param {char **} args: the array of arguments
+ * @param {char **} arguments: the array of arguments
  * @param {t_attr *} att: the struct of attributes
  * @return {int} 0 if success, 1 if error
 */
-int	ft_export(char **args, t_attr *att)
+int	ft_export(char **arguments, t_attr *att)
 {
-	int	i;
+	int	c;
 
-	i = 0;
-	while (args[i])
-		i++;
-	if (i == 1)
+	c = 0;
+	while (arguments[c])
+	{
+		c = c + 1;
+	}
+	if (c == 1)
 		return (basic_export(att));
 	else
 	{
-		args++;
-		while (*args)
+		arguments = arguments + 1;
+		while (*arguments)
 		{
-			if (!add_on_env(*args, att))
-				args++;
+			if (add_on_env(*arguments, att) == 0)
+			{
+				arguments++;
+			}
 			else
+			{
 				return (1);
+			}
 		}
 	}
 	return (0);
