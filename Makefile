@@ -6,7 +6,7 @@
 #    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/03/02 11:15:05 by mcoppola         ###   ########.fr        #
+#    Updated: 2024/03/04 16:19:38 by mcoppola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(RLFLAG) -o $(NAME)
-	echo "Everything Done!"
+	@echo "Everything Done!"
 
 sani: re $(OBJ)
 	$(CSANI) $(CFLAGS) $(OBJ) $(RLFLAG) -o $(NAME)
