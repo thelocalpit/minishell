@@ -6,7 +6,7 @@
 /*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:50:37 by mcoppola          #+#    #+#             */
-/*   Updated: 2024/03/04 16:35:18 by mcoppola         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:39:29 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,9 @@ int	add_on_env(char *arg, t_attr *att)
 			}
 			local_list = local_list->next;
 		}
+		if (!local_list)
+			return (1);
 	}
-	if (!local_list)
-		return (1);
 	return (add_on_env_2(content, att, env_list, append));
 }
 
