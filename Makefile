@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/21 18:09:28 by asacchin          #+#    #+#              #
-#    Updated: 2024/03/04 16:19:38 by mcoppola         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # BASIC
 CC = cc -g
 CSANI = cc -fsanitize=address
@@ -28,7 +16,7 @@ RED				:= \033[1;31m
 BOLD			:= \033[1;1m
 
 #MINIHELL
-NAME = minihell
+NAME = minishell
 SRC =	sources/minishell.c \
 		sources/utils/signals00.c \
 		sources/utils/signals01.c \
