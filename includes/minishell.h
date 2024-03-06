@@ -233,23 +233,23 @@ char	*var_no_quote_on_content(char *str);
 
 //---------------------------------------------------------------------
 
-//	error_folder
-// 00_verify_readline.c
+//	error
+// 00-check-readline.c
 
 int		check_readline(char *src, t_attr *strct);
 int		begin_error_2(char *s, t_attr *att);
 int		next_chars_check(char *c, t_attr *strc);
 int		return_negative(t_attr *att);
 
-// 01_error_quotes.c
+// 01-quotes-error.c
 int		quotes_counter(char *c);
 
-// 02_error_error_start_last.c
+// 02-last-start-error.c
 
 int		begin_error(char *c, t_attr *strct);
 int		end_error(char *c, char s, t_attr *strct);
 
-// 03_error_mixed.c
+// 03-mixed-error.c
 
 int		char_2nd_check_02(char *c, int j, char b, t_attr *strct);
 int		char_2nd_check_03(char *c, int j, char b, t_attr *strct);
@@ -257,13 +257,13 @@ int		spaces_check(char *src, int *j, t_attr *strct);
 int		check_2nd_char(char *s, int i, t_attr *att);
 int		mixed_error_start(char *c, t_attr *strct);
 
-//03a_error_mixed.c
+//03b-mixed-error.c
 
 int		scroll(char *c, int j);
 int		extra_char_check(char *c, int j, t_attr *strct);
 int		next_arg_check(char *c, int j, t_attr *strct);
 
-// 04_error_messages.c
+// 04-messages-error.c
 
 int		not_required(t_attr *strct);
 int		pipe_error(t_attr *strct);
@@ -271,12 +271,12 @@ int		gt_error(t_attr *strct);
 int		lt_error(t_attr *strct);
 int		nl_error(t_attr *strct);
 
-// 04a_error_messages.c
+// 04b-messages-error.c
 int		error_exit(char *c, t_attr *strct);
 void	reader_file_error(t_attr *strct, char *src);
 void	not_found_command(char *src);
 
-// 05_error_dollar.c
+// 05-wrong-dollar.c
 
 int		dollar_error(char *c, t_attr *strct);
 int		dollar_error_2(char *c, int a, t_attr *strc);
@@ -307,7 +307,7 @@ int		check_builtin(t_attr *strc);
 int		ft_enviorment(t_attr *strc);
 int		ft_echo(char **str);
 int		ft_pwd(t_attr *strc);
-int		ft_cd(char **args);
+int		ft_cd(char **args, t_attr *strc);
 
 // var.c
 
@@ -328,8 +328,6 @@ void	node_remove(t_list **env_list, char *str);
 
 void	custom_exit(t_attr *strc);
 int		ft_exit_02(t_attr *att);
-
-// parser folder
 
 // parser.c
 

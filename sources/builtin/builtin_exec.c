@@ -28,7 +28,7 @@ int	builtin_exec(t_attr *strc)
 			return (0);
 		}
 		else if (ft_strncmp(strc->array2[0], "cd\0", 3) == 0)
-			return (ft_cd(strc->array2));
+			return (ft_cd(strc->array2, strc));
 		else if (ft_strchr(strc->array2[0], '=') != NULL
 			&& ((strc->array2[0][0] >= 65 && strc->array2[0][0] <= 90)
 			|| (strc->array2[0][0] >= 97 && strc->array2[0][0] <= 122))

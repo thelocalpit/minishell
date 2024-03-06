@@ -66,9 +66,28 @@ int	ft_echo(char **str)
 	return (0);
 }
 
-int	ft_cd(char **str)
+void	change_current_dir(t_attr *strc, char *content)
+{
+	t_list	*buf;
+
+	buf = strc->env_list;
+	while (buf)
+	{
+		if (!ft_strncmp("PWD=", buf->content, 4))
+		{
+			free(buf->content);
+			buf->content = ft_strjoin("PWD=", content);
+			break ;
+		}
+		buf = buf->next;
+	}
+}
+
+
+int	ft_cd(char **str, t_attr *strc)
 {
 	char	*env;
+	char	cwd[1000];
 
 	if (str[1] == NULL || str[1][0] == '~')
 	{
@@ -81,5 +100,6 @@ int	ft_cd(char **str)
 		printf("\n");
 		return (1);
 	}
+	change_current_dir(strc, getcwd(cwd, sizeof(cwd)));
 	return (0);
 }
