@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env-echo-pwd-cd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asacchin <asacchin@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: mcoppola <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 13:32:16 by asacchin          #+#    #+#             */
-/*   Updated: 2024/02/22 13:32:19 by asacchin         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:21:35 by mcoppola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	change_current_dir(t_attr *strc, char *content)
 		buf = buf->next;
 	}
 }
-
 
 int	ft_cd(char **str, t_attr *strc)
 {
